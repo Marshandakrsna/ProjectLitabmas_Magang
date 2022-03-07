@@ -1,0 +1,302 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using silppm_v1e2.Entity;
+using System.Net.Mail;
+using OfficeOpenXml;
+using System.IO;
+
+namespace silppm_v1e2.UI
+{
+    public partial class adminListPenelitian : System.Web.UI.Page
+    {
+        private string tmpusername ; 
+        private DataSet dataset = new DataSet();
+        private UserDAO user = new UserDAO();
+        private ProposalDAO prop = new ProposalDAO();
+        private DataTable dtTahun = new DataTable();
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                if (Session["userdata"] != null)
+                {
+                    UserEntity ue = Session["userdata"] as UserEntity;
+
+                    tmpusername = ue.Username;
+                    dataset.Clear();
+                    dataset = prop.getHistoryExec();
+                    if (dataset.Tables[0].Rows.Count > 0)
+                    {
+                        gvPenelitian.DataSource = dataset.Tables[0];
+                        gvPenelitian.DataBind();
+                        gvPenelitian0.DataSource = dataset.Tables[0];
+                        gvPenelitian0.DataBind();
+
+                        btn_download.Visible = true;
+                    }
+                    else
+                    {
+                        btn_download.Visible = false;
+                        gvPenelitian.Visible = false;
+                    }
+                    DataTable dtTahun = prop.getTahunAkademik();
+
+                    DropDownList1.DataSource = dtTahun;
+                    DropDownList1.DataValueField = "ID_TAHUN_AKADEMIK";
+                    DropDownList1.DataTextField = "TAHUN_AKADEMIK";
+                    DropDownList1.DataBind();
+                    DropDownList1.Items.Insert(0, new ListItem("Tampilkan Semua", "-1"));
+
+                    DropDownList1_SelectedIndexChanged(sender, e);
+
+
+                    DataSet dsReviewer = new UserDAO().getUserRoleAssessor();
+                    ddRev1.DataSource = dsReviewer.Tables[0];
+                    ddRev1.DataValueField ="NPP";
+                    ddRev1.DataTextField = "NAMA";
+                    ddRev1.DataBind();
+                    ddRev1.Items.Insert(0, new ListItem("Pilih", "-1"));
+
+                    ddRev2.DataSource = dsReviewer.Tables[0];
+                    ddRev2.DataValueField = "NPP";
+                    ddRev2.DataTextField = "NAMA";
+                    ddRev2.DataBind();
+                    ddRev2.Items.Insert(0, new ListItem("Pilih", "-1"));
+                }
+                else
+                {
+                    Response.Redirect("LoginExpired.aspx");
+                }
+                ModalPopupExtender1.Hide();
+            }
+        }
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dataset.Clear();
+            dataset = prop.getPenelitianAll(DropDownList1.SelectedValue.ToString(), txtNppDosen.Text.Trim());
+            if (dataset.Tables[0].Rows.Count > 0)
+            {
+                gvPenelitian.Visible = true;
+                Session["dataPenelitian"] = dataset.Tables[0];
+                gvPenelitian.DataSource = dataset.Tables[0];
+                gvPenelitian.DataBind();
+                gvPenelitian0.DataSource = dataset.Tables[0];
+                gvPenelitian0.DataBind();
+                btn_download.Visible = true;
+            }
+            else
+            {
+                gvPenelitian.Visible = false;
+                btn_download.Visible = false;
+            }
+        }
+
+        protected void gvPenelitian_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+         
+        protected void gvPenelitian_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int id = Convert.ToInt32(e.CommandArgument);
+            if (e.CommandName == "Pilih")
+            {
+                Response.Redirect("adminPenelitian.aspx?ID=" + id + "");
+                //DataTable dt = (DataTable)Session["dataPenelitian"];
+                //btnMunculReview_Click(sender, e);
+                //DataRow[] dr = dt.Select("ID_PROPOSAL=" + id);
+                //txtDosen.Text = dr[0]["nama"].ToString();
+                //txtJudul.Text = dr[0]["JUDUL"].ToString();
+                //lblIdProp.Text = id.ToString();
+            } else if (e.CommandName == "Lihat Proposal")
+            {
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.ContentType = "application/pdf";
+                byte[] temp = prop.getPropsalPenelitian( id.ToString());
+                if (temp != null)
+                {
+                    Response.BinaryWrite(temp);
+                    Response.End();
+                }
+                else
+                    return;
+            }else if (e.CommandName == "Pengesahan")
+            {
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.ContentType = "application/pdf";
+                byte[] temp = prop.getPengesahanPenelitian(id.ToString());
+                if (temp != null)
+                {
+                    Response.BinaryWrite(temp);
+                    Response.End();
+                }
+                else
+                    return;
+            }
+        }
+
+        protected void btnBatalKeg_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtender1.Hide();
+        }
+        protected void btnMunculReview_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtender1.Show();
+        }
+
+        protected void BtnSimpan_Click(object sender, EventArgs e)
+        {
+            if (ddRev1.SelectedValue.ToString() != ddRev2.SelectedValue.ToString())
+            {
+                prop.setReviewPenelitian(ddRev1.SelectedValue.ToString(),
+                    ddRev2.SelectedValue.ToString(),
+                    lblIdProp.Text);
+                KirimEmailStaffKeReviewer(ddRev1.SelectedValue.ToString());
+                KirimEmailStaffKeReviewer(ddRev2.SelectedValue.ToString());
+                DropDownList1_SelectedIndexChanged(sender, e);
+                ModalPopupExtender1.Hide();
+            }
+            else {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+                          "alert('Gagal!, Reviewer tidak boleh sama');", true);
+            }
+        }
+
+        public void KirimEmailStaffKeReviewer(string npp)
+        {
+
+            string email = user.getEmailByNPP(npp);
+            string judul = txtJudul.Text;
+            //string password = alumniMgr.getPassByUser(username);
+
+            MailMessage mail = new MailMessage();
+            mail.To.Add(email);
+            mail.From = new MailAddress(Email.emailAccount);
+            mail.Subject = "[Pemberitahuan] Permohonan Review Proposal :" + judul + "";
+            string Body = @"Anda diminta untuk melakukan review terhadap proposal penelitian dengan judul :"
+                + "<br/>Judul : " + judul
+                + ".<br/>silahkan kunjungi halaman SILPPM dan buka pada panel Review Proposal.<br/> Terimakasih.";
+            mail.Body = Body;
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = Email.emailHost;
+            smtp.Port = Convert.ToInt32(Email.emailPort);
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential(Email.emailAccount, Email.emailPassword);
+            smtp.EnableSsl = false;
+
+            try
+            {
+                smtp.Send(mail);
+            }
+            catch (System.Net.Mail.SmtpFailedRecipientsException recExc)
+            {
+                for (int recipient = 0; recipient < recExc.InnerExceptions.Length - 1; recipient++)
+                {
+                    System.Net.Mail.SmtpStatusCode statusCode;
+                    //Each InnerException is an System.Net.Mail.SmtpFailed RecipientException
+                    statusCode = recExc.InnerExceptions[recipient].StatusCode;
+
+                    if ((statusCode == System.Net.Mail.SmtpStatusCode.MailboxBusy) || (statusCode == System.Net.Mail.SmtpStatusCode.MailboxUnavailable))
+                    {
+                        //Log this to event log: recExc.InnerExceptions[recipient].FailedRecipient
+                        System.Threading.Thread.Sleep(5000);
+                        smtp.Send(mail);
+                    }
+                    else
+                    {
+                        //Log error to event log.
+                        //recExc.InnerExceptions[recipient].StatusCode or use statusCode
+                    }
+
+                }
+            }
+            //General SMTP execptions
+            catch (System.Net.Mail.SmtpException)
+            {
+                //Log error to event log using StatusCode information in
+                //smtpExc.StatusCode
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+                          "alert('Gagal Mengirim Email! Periksa Koneksi Internet Anda!');", true);
+                // System.Windows.Forms.MessageBox.Show("", "Gagal", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+
+            }
+            catch (Exception)
+            {
+                //Log error to event log.
+            }
+
+        }
+
+        protected void gvPenelitian_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvPenelitian.PageIndex = e.NewPageIndex;
+            gvPenelitian.DataSource = (DataTable)Session["dataPenelitian"];
+            gvPenelitian.DataBind();
+        }
+
+        protected void btn_download_Click(object sender, EventArgs e)
+        {
+            ExportExcel_Click(sender, e);
+        }
+        protected void ExportExcel_Click(object sender, EventArgs e)
+        {
+
+            using (ExcelPackage pck = new ExcelPackage())
+            {
+                for (int p = 0; p < gvPenelitian0.PageCount; p++)
+                {
+                    gvPenelitian0.PageIndex = p;
+                    gvPenelitian0.DataSource = (DataTable)Session["dataPenelitian"];
+                    gvPenelitian0.DataBind();
+                    DataTable dt = new DataTable();
+                    foreach (DataControlField col in gvPenelitian0.Columns)
+                    {
+                        string namaHeader = col.HeaderText;
+                        dt.Columns.Add(namaHeader);
+
+                    }
+                    foreach (GridViewRow row in gvPenelitian0.Rows)
+                    {
+                        DataRow dr = dt.NewRow();
+                        for (int j = 0; j < gvPenelitian0.Columns.Count; j++)
+                        {
+                            if (j > 3)
+                                dr[j] = row.Cells[j].Text.Replace("&nbsp;", "0");
+                            else
+                                dr[j] = row.Cells[j].Text.Replace("&nbsp;", "");
+                        }
+
+                        dt.Rows.Add(dr);
+                    }
+                    int pg = p + 1;
+                    ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Page " + pg);
+                    ws.Cells["A1"].LoadFromDataTable((DataTable)dt, true);
+                    ws.Protection.IsProtected = true; //--------Protect whole sheet
+                    ws.Column(3).Style.Locked = false;
+                }
+                //Write it back to the client
+                string nama_file = "penelitian.xlsx";
+
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;  filename=" + nama_file);
+                Response.BinaryWrite(pck.GetAsByteArray());
+                Response.Flush();
+                Response.End();
+            }
+        }
+
+    }
+}

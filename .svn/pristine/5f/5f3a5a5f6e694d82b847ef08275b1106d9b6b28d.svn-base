@@ -1,0 +1,175 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Homev3_vertical_menu.Master.cs" Inherits="silppm_v1e2.Homev3_vertical_menu" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Sistem Informasi Lembaga Penelitian dan Pengabdian Masyarakat UAJY</title>
+    <meta content="All" name="Robots">
+    <link href="~/Styles/style_biru.css" type="text/css" rel="stylesheet">
+    <link href="Styles/StylePopUp.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/gridviewstyle/YahooGridView.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style2 {
+            font-size: medium;
+        }
+    </style>
+    <%--<asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/StylePopUp.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/gridviewstyle/YahooGridView.css" rel="stylesheet" type="text/css" />
+    <link type="text/css" href="Styles/menu.css" rel="stylesheet" />
+    <script type="text/javascript" src="Styles/jquery.js"></script>
+    <script type="text/javascript" src="Styles/menu.js"></script>
+    <style type="text/css">
+        div#menu
+        {
+            width: 100%;
+            background: transparent url(../Styles/images/header_bg.gif) repeat-x 0 0;
+        }
+        div#copyright
+        {
+            display: none;
+        }
+    </style>--%>
+</head>
+<body text="#000000">
+<form id="Form1" runat="server">
+        <div align="left">
+            <!-- START HEADER HERE -->
+            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                    <tr>
+                        <td bgcolor="#0b86c3">
+                            <img src="images/left-head.png" height="64px" width="647px" /></img>
+                        </td>
+                        <td width="100%" bgcolor="#0b86c3" align="right">
+                            <div align="right">
+                                <img src="images/right-side.jpg"></img>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="tray" class="box">
+               <%-- <p class="f-left box">
+                </p>--%>
+            </div>
+            <!-- END HEADER HERE -->
+            <!-- PAGE CONTENT -->
+            <table border="0" cellpadding="3" cellspacing="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td background="../Styles/images/bgr.gif" valign="top" width="140">
+                            <!-- START SIDEBAR -->
+
+                            <div class="Menu_Items"> 
+                             <asp:Menu ID="menuBar" runat="server" Orientation="Vertical" Width="100%" MaximumDynamicDisplayLevels="10">
+                                <StaticMenuStyle CssClass="sf-menu sf-vertical" />
+                            </asp:Menu>
+                        </div>
+                        <br />
+                        <!-- END LOGIN FORM -->
+                    </td>
+                    <td valign="top" width="100%">
+                        <img alt="" src="../Styles/images/spacer.gif" height="1" border="0" width="100%" />
+                        <div id="content" class="box">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
+                        </div>
+                    </td>
+                    <td valign="top">
+                        <img alt="" src="../Styles/images/spacer.gif" height="1" border="0" width="1">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- ENDING OF PAGE BODY -->
+        </div>
+    <!-- footer banner start -->
+        <div id="footer-banner">
+        </div>
+        <!-- footer banner end -->
+        <!-- credit start -->
+        <div id="credit">
+            <div class="wrap">
+                <br />
+                <!-- design by johanksi -->
+                <div class="clear">
+                </div>
+            </div>
+        </div> 
+        <!-- credit start -->
+    </form>
+</body>
+</html>
+
+<%--    <form id="Form1" runat="server">
+    <div align="left">
+        <!-- START HEADER HERE -->
+        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td bgcolor="#0b86c3">
+                        <img src="../Styles/images/logo.jpg" alt="" />
+                    </td>
+                    <td width="100%" bgcolor="#0b86c3" align="right">
+                        <div align="right">
+                            <img src="../Styles/images/right-side.jpg"></img>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="tray" class="box">
+            <p class="f-left box">
+            </p>
+        </div>
+        <!-- END HEADER HERE -->
+        <!-- PAGE CONTENT -->
+        <table border="0" cellpadding="3" cellspacing="0" width="100%">
+            <tbody>
+                <tr>
+                    <td background="../Styles/images/bgr.gif" valign="top" width="140">
+                        <!-- START SIDEBAR -->
+                        <div class="Menu_Items">
+                            <asp:Menu ID="menuBar" runat="server" Orientation="Vertical" Width="100%" MaximumDynamicDisplayLevels="10">
+                                <StaticMenuStyle CssClass="sf-menu sf-vertical" />
+                            </asp:Menu>
+                        </div>
+                        <br />
+                        <!-- END LOGIN FORM -->
+                    </td>
+                    <td valign="top" width="100%">
+                        <img alt="" src="../Styles/images/spacer.gif" height="1" border="0" width="100%" />
+                        <div id="content" class="box">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
+                        </div>
+                    </td>
+                    <td valign="top">
+                        <img alt="" src="../Styles/images/spacer.gif" height="1" border="0" width="1">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- ENDING OF PAGE BODY -->
+    </div>
+    <!-- footer banner start -->
+    <div id="footer-banner">
+    </div>
+    <!-- footer banner end -->
+    <!-- credit start -->
+    <div id="credit">
+        <div class="wrap">
+            <br />
+            <!-- design by johanksi -->
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+    <!-- credit start -->
+    </form>
+--%>
+</body>
+</html>

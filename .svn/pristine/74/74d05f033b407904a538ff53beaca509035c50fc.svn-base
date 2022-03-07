@@ -1,0 +1,1527 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SIATMAXModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SIATMAXModelStoreContainer">
+          <EntitySet Name="DTL_RAB_PENELITIAN" EntityType="SIATMAXModel.Store.DTL_RAB_PENELITIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="DTL_RAB_PENGABDIAN" EntityType="SIATMAXModel.Store.DTL_RAB_PENGABDIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="REF_KATEGORI" EntityType="SIATMAXModel.Store.REF_KATEGORI" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="REF_PENGELUARAN_RAB" EntityType="SIATMAXModel.Store.REF_PENGELUARAN_RAB" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="REF_ROAD_MAP_PENELITIAN" EntityType="SIATMAXModel.Store.REF_ROAD_MAP_PENELITIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="REF_ROAD_MAP_PENGABDIAN" EntityType="SIATMAXModel.Store.REF_ROAD_MAP_PENGABDIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="REF_SCHEDULE" EntityType="SIATMAXModel.Store.REF_SCHEDULE" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="REF_SKIM" EntityType="SIATMAXModel.Store.REF_SKIM" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="REF_STATUS_PENELITIAN_PENGABDIAN" EntityType="SIATMAXModel.Store.REF_STATUS_PENELITIAN_PENGABDIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="REF_TEMA_UNIVERSITAS" EntityType="SIATMAXModel.Store.REF_TEMA_UNIVERSITAS" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_FEEDBACK_PENELITIAN" EntityType="SIATMAXModel.Store.TBL_FEEDBACK_PENELITIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_FEEDBACK_PENGABDIAN" EntityType="SIATMAXModel.Store.TBL_FEEDBACK_PENGABDIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_LAP_MONEV_PENELITIAN" EntityType="SIATMAXModel.Store.TBL_LAP_MONEV_PENELITIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_LAP_MONEV_PENGABDIAN" EntityType="SIATMAXModel.Store.TBL_LAP_MONEV_PENGABDIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_MAPPING_PENELITIAN" EntityType="SIATMAXModel.Store.TBL_MAPPING_PENELITIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_MAPPING_PENGABDIAN" EntityType="SIATMAXModel.Store.TBL_MAPPING_PENGABDIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_NILAI_REVIEW_PENELITIAN" EntityType="SIATMAXModel.Store.TBL_NILAI_REVIEW_PENELITIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_NILAI_REVIEW_PENGABDIAN" EntityType="SIATMAXModel.Store.TBL_NILAI_REVIEW_PENGABDIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_PENELITIAN" EntityType="SIATMAXModel.Store.TBL_PENELITIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_PENELITIAN_LOLOS" EntityType="SIATMAXModel.Store.TBL_PENELITIAN_LOLOS" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_PENGABDIAN" EntityType="SIATMAXModel.Store.TBL_PENGABDIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_PENGABDIAN_LOLOS" EntityType="SIATMAXModel.Store.TBL_PENGABDIAN_LOLOS" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_PERPANJANGAN_PENELITIAN" EntityType="SIATMAXModel.Store.TBL_PERPANJANGAN_PENELITIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_PERPANJANGAN_PENGABDIAN" EntityType="SIATMAXModel.Store.TBL_PERPANJANGAN_PENGABDIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_PERSONIL_PENELITIAN" EntityType="SIATMAXModel.Store.TBL_PERSONIL_PENELITIAN" store:Type="Tables" Schema="silppm" />
+          <EntitySet Name="TBL_RAB_PENELITIAN" EntityType="SIATMAXModel.Store.TBL_RAB_PENELITIAN" store:Type="Tables" Schema="silppm" />
+          <AssociationSet Name="FK_DTL_RAB_PENELITIAN_REF" Association="SIATMAXModel.Store.FK_DTL_RAB_PENELITIAN_REF">
+            <End Role="TBL_RAB_PENELITIAN" EntitySet="TBL_RAB_PENELITIAN" />
+            <End Role="DTL_RAB_PENELITIAN" EntitySet="DTL_RAB_PENELITIAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RAB_PENELITIAN_REF" Association="SIATMAXModel.Store.FK_RAB_PENELITIAN_REF">
+            <End Role="REF_PENGELUARAN_RAB" EntitySet="REF_PENGELUARAN_RAB" />
+            <End Role="TBL_RAB_PENELITIAN" EntitySet="TBL_RAB_PENELITIAN" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="DTL_RAB_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_DTL_RAB_PENELITIAN" />
+          </Key>
+          <Property Name="ID_DTL_RAB_PENELITIAN" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_RAB_PENELITIAN" Type="int" />
+          <Property Name="JUMLAH_DANA" Type="money" />
+          <Property Name="JUMLAH" Type="int" />
+          <Property Name="SATUAN" Type="varchar" MaxLength="25" />
+          <Property Name="HARGA_SATUAN" Type="money" />
+          <Property Name="KETERANGAN" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="DTL_RAB_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_DTL_RAB_PENGABDIAN" />
+          </Key>
+          <Property Name="ID_DTL_RAB_PENGABDIAN" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_RAB_PENGABDIAN" Type="int" />
+          <Property Name="JUMLAH_DANA" Type="money" />
+          <Property Name="JUMLAH" Type="int" />
+          <Property Name="SATUAN" Type="varchar" MaxLength="25" />
+          <Property Name="HARGA_SATUAN" Type="money" />
+          <Property Name="KETERANGAN" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="REF_KATEGORI">
+          <Key>
+            <PropertyRef Name="ID_KATEGORI" />
+          </Key>
+          <Property Name="ID_KATEGORI" Type="int" Nullable="false" />
+          <Property Name="KATEGORI" Type="varchar" MaxLength="50" />
+          <Property Name="DETAIL_PELAKU" Type="varchar" MaxLength="50" />
+          <Property Name="DETAIL_BEBAN_SKS" Type="varchar" MaxLength="50" />
+          <Property Name="DESKRIPSI" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="REF_PENGELUARAN_RAB">
+          <Key>
+            <PropertyRef Name="ID_PENGELUARAN_RAB" />
+          </Key>
+          <Property Name="ID_PENGELUARAN_RAB" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="KATEGORI" Type="varchar" MaxLength="50" />
+          <Property Name="DESKRIPSI" Type="varchar" MaxLength="150" />
+          <Property Name="MIN_PCT" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="MAX_PCT" Type="decimal" Precision="4" Scale="2" />
+        </EntityType>
+        <EntityType Name="REF_ROAD_MAP_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_ROAD_MAP_PENELITIAN" />
+            <PropertyRef Name="ID_UNIT_AKADEMIK" />
+          </Key>
+          <Property Name="ID_ROAD_MAP_PENELITIAN" Type="int" Nullable="false" />
+          <Property Name="ID_UNIT_AKADEMIK" Type="int" Nullable="false" />
+          <Property Name="DESKRIPSI" Type="varchar" MaxLength="500" />
+          <Property Name="IS_DELETED" Type="bit" />
+        </EntityType>
+        <EntityType Name="REF_ROAD_MAP_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_ROAD_MAP_PENGABDIAN" />
+            <PropertyRef Name="ID_UNIT_AKADEMIK" />
+          </Key>
+          <Property Name="ID_ROAD_MAP_PENGABDIAN" Type="int" Nullable="false" />
+          <Property Name="ID_UNIT_AKADEMIK" Type="int" Nullable="false" />
+          <Property Name="DESKRIPSI" Type="varchar" MaxLength="500" />
+          <Property Name="IS_DELETED" Type="bit" />
+        </EntityType>
+        <EntityType Name="REF_SCHEDULE">
+          <Key>
+            <PropertyRef Name="ID_SCHEDULE" />
+          </Key>
+          <Property Name="ID_SCHEDULE" Type="int" Nullable="false" />
+          <Property Name="AWAL" Type="datetime" />
+          <Property Name="AKHIR" Type="datetime" />
+          <Property Name="ID_TAHUN_ANGGARAN" Type="int" />
+          <Property Name="IS_LOCKED" Type="bit" />
+        </EntityType>
+        <EntityType Name="REF_SKIM">
+          <Key>
+            <PropertyRef Name="ID_SKIM" />
+          </Key>
+          <Property Name="ID_SKIM" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="KATEGORI" Type="varchar" MaxLength="50" />
+          <Property Name="DESKRIPSI" Type="varchar" MaxLength="150" />
+          <Property Name="MAX_PAGU" Type="money" />
+        </EntityType>
+        <EntityType Name="REF_STATUS_PENELITIAN_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_STATUS_PENELITIAN" />
+          </Key>
+          <Property Name="ID_STATUS_PENELITIAN" Type="int" Nullable="false" />
+          <Property Name="DESKRIPSI" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="REF_TEMA_UNIVERSITAS">
+          <Key>
+            <PropertyRef Name="ID_TEMA_UNIVERSITAS" />
+          </Key>
+          <Property Name="ID_TEMA_UNIVERSITAS" Type="int" Nullable="false" />
+          <Property Name="KATEGORI" Type="varchar" MaxLength="50" />
+          <Property Name="DESKRIPSI" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="TBL_FEEDBACK_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_FEEDBACK" />
+          </Key>
+          <Property Name="ID_FEEDBACK" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" />
+          <Property Name="NPP" Type="nvarchar" MaxLength="10" />
+          <Property Name="FEEDBACK" Type="varchar" MaxLength="500" />
+          <Property Name="TANGGAL" Type="datetime" />
+          <Property Name="STATUS" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_FEEDBACK_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_FEEDBACK" />
+          </Key>
+          <Property Name="ID_FEEDBACK" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" />
+          <Property Name="NPP" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="FEEDBACK" Type="varchar" MaxLength="500" />
+          <Property Name="TANGGAL" Type="datetime" />
+          <Property Name="STATUS" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_LAP_MONEV_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_MONEV" />
+          </Key>
+          <Property Name="ID_MONEV" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" />
+          <Property Name="NPP" Type="nvarchar" MaxLength="10" />
+          <Property Name="NO_UPDATE" Type="int" />
+          <Property Name="TANGGAL_UPLOAD" Type="datetime" />
+          <Property Name="KETERANGAN" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TBL_LAP_MONEV_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_MONEV" />
+          </Key>
+          <Property Name="ID_MONEV" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" />
+          <Property Name="NPP" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="NO_UPDATE" Type="int" Nullable="false" />
+          <Property Name="TANGGAL_UPLOAD" Type="datetime" />
+          <Property Name="KETERANGAN" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TBL_MAPPING_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_PROPOSAL" />
+            <PropertyRef Name="NPP" />
+          </Key>
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" />
+          <Property Name="NPP" Type="nvarchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TBL_MAPPING_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_PROPOSAL" />
+            <PropertyRef Name="NPP" />
+          </Key>
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" />
+          <Property Name="NPP" Type="nvarchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TBL_NILAI_REVIEW_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_NILAI_REVIEW" />
+          </Key>
+          <Property Name="ID_NILAI_REVIEW" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="ID_REVIEWER" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="COUNT_REVISI" Type="int" Nullable="false" />
+          <Property Name="N1_FIELD1" Type="float" />
+          <Property Name="N1_FIELD2" Type="float" />
+          <Property Name="N1_FIELD3" Type="float" />
+          <Property Name="N1_FIELD4" Type="float" />
+          <Property Name="N1_FIELD5" Type="float" />
+          <Property Name="N1_FIELD6" Type="float" />
+          <Property Name="N1_FIELD7" Type="float" />
+          <Property Name="N1_JUSTIFIKASI1" Type="varchar(max)" />
+          <Property Name="N1_JUSTIFIKASI2" Type="varchar(max)" />
+          <Property Name="N1_JUSTIFIKASI3" Type="varchar(max)" />
+          <Property Name="N1_JUSTIFIKASI4" Type="varchar(max)" />
+          <Property Name="N1_JUSTIFIKASI5" Type="varchar(max)" />
+          <Property Name="N1_JUSTIFIKASI6" Type="varchar(max)" />
+          <Property Name="N1_JUSTIFIKASI7" Type="varchar(max)" />
+          <Property Name="DANA_REKOMENDASI" Type="int" />
+          <Property Name="DANA_SETUJU" Type="int" />
+        </EntityType>
+        <EntityType Name="TBL_NILAI_REVIEW_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_NILAI_REVIEW" />
+          </Key>
+          <Property Name="ID_NILAI_REVIEW" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" />
+          <Property Name="ID_REVIEWER" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="COUNT_REVISI" Type="int" Nullable="false" />
+          <Property Name="SKOR1" Type="int" />
+          <Property Name="SKOR2" Type="int" />
+          <Property Name="SKOR3" Type="int" />
+          <Property Name="SKOR4" Type="int" />
+          <Property Name="SKOR5" Type="int" />
+          <Property Name="SKOR6" Type="int" />
+          <Property Name="JUSTIFIKASI1" Type="varchar" MaxLength="500" />
+          <Property Name="JUSTIFIKASI2" Type="varchar" MaxLength="500" />
+          <Property Name="JUSTIFIKASI3" Type="varchar" MaxLength="500" />
+          <Property Name="JUSTIFIKASI4" Type="varchar" MaxLength="500" />
+          <Property Name="JUSTIFIKASI5" Type="varchar" MaxLength="500" />
+          <Property Name="JUSTIFIKASI6" Type="varchar" MaxLength="500" />
+          <Property Name="CATATAN1" Type="varchar" MaxLength="500" />
+          <Property Name="CATATAN2" Type="varchar" MaxLength="500" />
+          <Property Name="CATATAN3" Type="varchar" MaxLength="500" />
+          <Property Name="CATATAN4" Type="varchar" MaxLength="500" />
+          <Property Name="CATATAN5" Type="varchar" MaxLength="500" />
+          <Property Name="KESIMPULAN" Type="varchar" MaxLength="500" />
+          <Property Name="ANGGARAN" Type="int" />
+          <Property Name="ANGGARAN_HURUF" Type="varchar" MaxLength="500" />
+          <Property Name="KEUNIKAN" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="TBL_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_PROPOSAL" />
+          </Key>
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_TAHUN_ANGGARAN" Type="int" Nullable="false" />
+          <Property Name="NO_SEMESTER" Type="int" />
+          <Property Name="ID_KATEGORI" Type="int" Nullable="false" />
+          <Property Name="ID_ROAD_MAP_PENELITIAN" Type="int" />
+          <Property Name="ID_SKIM" Type="int" />
+          <Property Name="ID_TEMA_UNIVERSITAS" Type="int" />
+          <Property Name="ID_STATUS_PENELITIAN" Type="int" />
+          <Property Name="JENIS" Type="varchar" MaxLength="50" />
+          <Property Name="JUDUL" Type="varchar" MaxLength="500" />
+          <Property Name="LOKASI" Type="varchar" MaxLength="500" />
+          <Property Name="NPP" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="NPP1" Type="nvarchar" MaxLength="10" />
+          <Property Name="NPP2" Type="nvarchar" MaxLength="10" />
+          <Property Name="AWAL" Type="date" />
+          <Property Name="AKHIR" Type="date" />
+          <Property Name="IS_CHECKED" Type="bit" Nullable="false" />
+          <Property Name="NPP_REVIEWER" Type="nvarchar" MaxLength="10" />
+          <Property Name="REVIEWER1" Type="nvarchar" MaxLength="10" />
+          <Property Name="REVIEWER2" Type="nvarchar" MaxLength="10" />
+          <Property Name="BEBAN_SKS" Type="int" />
+          <Property Name="BEBAN_SKS_ANGGOTA" Type="int" />
+          <Property Name="DANA_USUL" Type="money" />
+          <Property Name="DANA_PRIBADI" Type="money" />
+          <Property Name="DANA_EKSTERNAL" Type="money" />
+          <Property Name="DANA_KERJASAMA" Type="money" />
+          <Property Name="DANA_UAJY" Type="money" />
+          <Property Name="DANA_SETUJU" Type="money" />
+          <Property Name="DOKUMEN" Type="varbinary(max)" />
+          <Property Name="LEMBAR_PENGESAHAN" Type="varbinary(max)" />
+          <Property Name="KEYWORD" Type="varchar" MaxLength="50" />
+          <Property Name="JARAK_KAMPUS_KM" Type="float" />
+          <Property Name="JARAK_KAMPUS_JAM" Type="int" />
+          <Property Name="OUTCOME" Type="varchar" MaxLength="500" />
+          <Property Name="LONGITUDE" Type="varchar" MaxLength="50" />
+          <Property Name="LATITUDE" Type="varchar" MaxLength="50" />
+          <Property Name="IS_SETUJU_PRODI" Type="bit" />
+          <Property Name="IS_SETUJU_DEKAN" Type="bit" />
+          <Property Name="IS_SETUJU_LPPM" Type="bit" />
+          <Property Name="IS_DROPPED" Type="bit" />
+          <Property Name="INSERT_DATE" Type="datetime" />
+          <Property Name="IP_ADDRESS" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="USER_ID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_PENELITIAN_LOLOS">
+          <Key>
+            <PropertyRef Name="ID_PROPOSAL" />
+          </Key>
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" />
+          <Property Name="NPP" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="JENIS" Type="varchar" MaxLength="50" />
+          <Property Name="ID_TAHUN_ANGGARAN" Type="int" Nullable="false" />
+          <Property Name="IS_CHECKED" Type="bit" Nullable="false" />
+          <Property Name="REVIEWER1" Type="nvarchar" MaxLength="10" />
+          <Property Name="REVIEWER2" Type="nvarchar" MaxLength="10" />
+          <Property Name="JUDUL" Type="varchar" MaxLength="500" />
+          <Property Name="ID_KATEGORI" Type="int" Nullable="false" />
+          <Property Name="LOKASI" Type="varchar" MaxLength="500" />
+          <Property Name="BEBAN_SKS" Type="int" />
+          <Property Name="ID_STATUS_PENELITIAN" Type="int" />
+          <Property Name="DANA_USUL" Type="money" />
+          <Property Name="AWAL" Type="date" />
+          <Property Name="AKHIR" Type="date" />
+          <Property Name="DOKUMEN" Type="varbinary(max)" />
+          <Property Name="IS_DROPPED" Type="bit" />
+          <Property Name="KEYWORD" Type="varchar" MaxLength="50" />
+          <Property Name="JARAK_KAMPUS_KM" Type="float" />
+          <Property Name="JARAK_KAMPUS_JAM" Type="int" />
+          <Property Name="ID_ROAD_MAP_PENELITIAN" Type="int" />
+          <Property Name="OUTCOME" Type="varchar" MaxLength="500" />
+          <Property Name="DANA_PRIBADI" Type="money" />
+          <Property Name="LONGITUDE" Type="varchar" MaxLength="50" />
+          <Property Name="LATITUDE" Type="varchar" MaxLength="50" />
+          <Property Name="NPP1" Type="nvarchar" MaxLength="10" />
+          <Property Name="NPP2" Type="nvarchar" MaxLength="10" />
+          <Property Name="IS_SETUJU_PRODI" Type="bit" />
+          <Property Name="IS_SETUJU_DEKAN" Type="bit" />
+          <Property Name="BEBAN_SKS_ANGGOTA" Type="int" />
+          <Property Name="IS_SETUJU_LPPM" Type="bit" />
+          <Property Name="NPP_REVIEWER" Type="nvarchar" MaxLength="10" />
+          <Property Name="DANA_SETUJU" Type="money" />
+          <Property Name="PAJAK" Type="float" />
+          <Property Name="DANA_REKOMEN" Type="money" />
+          <Property Name="LAPORAN" Type="varbinary(max)" />
+          <Property Name="IS_SETUJU_PUSTAKAWAN" Type="bit" />
+          <Property Name="IS_SELESAI" Type="bit" />
+          <Property Name="LAPORAN1" Type="varbinary(max)" />
+          <Property Name="INSERT_DATE" Type="datetime" />
+          <Property Name="IP_ADDRESS" Type="varchar" MaxLength="30" />
+          <Property Name="USER_ID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_PROPOSAL" />
+          </Key>
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" />
+          <Property Name="NPP" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="ID_SUMBER" Type="int" Nullable="false" />
+          <Property Name="ID_TAHUN_ANGGARAN" Type="int" Nullable="false" />
+          <Property Name="REVIEWER1" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="REVIEWER2" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="JUDUL_KEGIATAN" Type="varchar" MaxLength="500" />
+          <Property Name="LANDASAN_PENELITIAN" Type="varchar" MaxLength="500" />
+          <Property Name="JENIS_PENGABDIAN" Type="varchar" MaxLength="50" />
+          <Property Name="ANGGOTA1" Type="nvarchar" MaxLength="10" />
+          <Property Name="ANGGOTA1_KEAHLIAN" Type="varchar" MaxLength="500" />
+          <Property Name="ANGGOTA2" Type="nvarchar" MaxLength="10" />
+          <Property Name="ANGGOTA2_KEAHLIAN" Type="varchar" MaxLength="500" />
+          <Property Name="MITRA" Type="varchar" MaxLength="150" />
+          <Property Name="MITRA_KEAHLIAN" Type="varchar" MaxLength="500" />
+          <Property Name="LOKASI" Type="varchar" MaxLength="500" />
+          <Property Name="JARAK_PT_LOKASI" Type="float" />
+          <Property Name="OUTPUT" Type="varchar" MaxLength="500" />
+          <Property Name="OUTCOME" Type="varchar" MaxLength="500" />
+          <Property Name="AWAL" Type="date" />
+          <Property Name="AKHIR" Type="date" />
+          <Property Name="SASARAN" Type="varchar" MaxLength="500" />
+          <Property Name="SKS_KETUA" Type="int" />
+          <Property Name="SKS_ANGGOTA" Type="int" />
+          <Property Name="ID_ROAD_MAP" Type="int" />
+          <Property Name="DANA_UAJY" Type="money" />
+          <Property Name="DANA_PRIBADI" Type="money" />
+          <Property Name="DOKUMEN" Type="varbinary(max)" />
+          <Property Name="IS_DROPPED" Type="bit" />
+          <Property Name="ID_STATUS" Type="int" />
+          <Property Name="IS_CHECKED" Type="bit" />
+          <Property Name="IS_SETUJU_PRODI" Type="bit" />
+          <Property Name="IS_SETUJU_DEKAN" Type="bit" />
+          <Property Name="IS_SETUJU_LPPM" Type="bit" />
+          <Property Name="NPP_REVIEWER" Type="nvarchar" MaxLength="10" />
+          <Property Name="DANA_SETUJU" Type="money" />
+          <Property Name="INSERT_DATE" Type="datetime" />
+          <Property Name="IP_ADDRESS" Type="varchar" MaxLength="30" />
+          <Property Name="USER_ID" Type="varchar" MaxLength="50" />
+          <Property Name="ID_SKIM" Type="int" />
+          <Property Name="ID_TEMA_UNIVERSITAS" Type="int" />
+        </EntityType>
+        <EntityType Name="TBL_PENGABDIAN_LOLOS">
+          <Key>
+            <PropertyRef Name="ID_PROPOSAL" />
+          </Key>
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" />
+          <Property Name="NPP" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="ID_SUMBER" Type="int" Nullable="false" />
+          <Property Name="ID_TAHUN_ANGGARAN" Type="int" Nullable="false" />
+          <Property Name="REVIEWER1" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="REVIEWER2" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="JUDUL_KEGIATAN" Type="varchar" MaxLength="500" />
+          <Property Name="LANDASAN_PENELITIAN" Type="varchar" MaxLength="500" />
+          <Property Name="JENIS_PENGABDIAN" Type="varchar" MaxLength="50" />
+          <Property Name="ANGGOTA1" Type="nvarchar" MaxLength="10" />
+          <Property Name="ANGGOTA1_KEAHLIAN" Type="varchar" MaxLength="500" />
+          <Property Name="ANGGOTA2" Type="nvarchar" MaxLength="10" />
+          <Property Name="ANGGOTA2_KEAHLIAN" Type="varchar" MaxLength="500" />
+          <Property Name="MITRA" Type="varchar" MaxLength="150" />
+          <Property Name="MITRA_KEAHLIAN" Type="varchar" MaxLength="500" />
+          <Property Name="LOKASI" Type="varchar" MaxLength="500" />
+          <Property Name="JARAK_PT_LOKASI" Type="float" />
+          <Property Name="OUTPUT" Type="varchar" MaxLength="500" />
+          <Property Name="OUTCOME" Type="varchar" MaxLength="500" />
+          <Property Name="AWAL" Type="date" />
+          <Property Name="AKHIR" Type="date" />
+          <Property Name="SASARAN" Type="varchar" MaxLength="500" />
+          <Property Name="SKS_KETUA" Type="int" />
+          <Property Name="SKS_ANGGOTA" Type="int" />
+          <Property Name="ID_ROAD_MAP" Type="int" />
+          <Property Name="DANA_UAJY" Type="int" />
+          <Property Name="DANA_PRIBADI" Type="int" />
+          <Property Name="DOKUMEN" Type="varbinary(max)" />
+          <Property Name="IS_DROPPED" Type="bit" />
+          <Property Name="ID_STATUS" Type="int" />
+          <Property Name="IS_CHECKED" Type="bit" />
+          <Property Name="IS_SETUJU_PRODI" Type="bit" />
+          <Property Name="IS_SETUJU_DEKAN" Type="bit" />
+          <Property Name="IS_SETUJU_LPPM" Type="bit" />
+          <Property Name="NPP_REVIEWER" Type="nvarchar" MaxLength="10" />
+          <Property Name="DANA_SETUJU" Type="money" />
+          <Property Name="DANA_REKOMEN" Type="money" />
+          <Property Name="LAPORAN1" Type="varbinary(max)" />
+          <Property Name="LAPORAN" Type="varbinary(max)" />
+          <Property Name="IS_SETUJU_PUSTAKAWAN" Type="bit" />
+          <Property Name="INSERT_DATE" Type="datetime" />
+          <Property Name="IP_ADDRESS" Type="varchar" MaxLength="30" />
+          <Property Name="USER_ID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_PERPANJANGAN_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_PERPANJANGAN" />
+          </Key>
+          <Property Name="ID_PERPANJANGAN" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" />
+          <Property Name="KE" Type="int" Nullable="false" />
+          <Property Name="TGL_MULAI_PERPANJANG" Type="date" />
+          <Property Name="TGL_SELESAI_PERPANJANG" Type="date" />
+          <Property Name="INSERT_DATE" Type="datetime" />
+          <Property Name="IP_ADDRESS" Type="varchar" MaxLength="30" />
+          <Property Name="USER_ID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_PERPANJANGAN_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_PERPANJANGAN" />
+          </Key>
+          <Property Name="ID_PERPANJANGAN" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" />
+          <Property Name="KE" Type="int" />
+          <Property Name="TGL_MULAI_PERPANJANG" Type="datetime" />
+          <Property Name="TGL_SELESAI_PERPANJANG" Type="datetime" />
+          <Property Name="INSERT_DATE" Type="datetime" />
+          <Property Name="IP_ADDRESS" Type="varchar" MaxLength="30" />
+          <Property Name="USER_ID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_PERSONIL_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_PERSONIL_PENELITIAN" />
+          </Key>
+          <Property Name="ID_PERSONIL_PENELITIAN" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NPP" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="NAMA_LENGKAP_GELAR" Type="varchar" MaxLength="100" />
+          <Property Name="TEMPAT_LAHIR" Type="varchar" MaxLength="50" />
+          <Property Name="TGL_LAHIR" Type="datetime" />
+          <Property Name="JNS_KEL" Type="char" MaxLength="1" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="ID_REF_FUNGSIONAL" Type="int" />
+          <Property Name="ID_UNIT" Type="int" />
+          <Property Name="ID_UNIT_AKADEMIK" Type="int" />
+          <Property Name="ID_REF_GOLONGAN" Type="char" MaxLength="10" />
+          <Property Name="ID_REF_JBTN_AKADEMIK" Type="int" />
+          <Property Name="NO_TELPON_RUMAH" Type="varchar" MaxLength="15" />
+          <Property Name="NO_TELPON_HP" Type="varchar" MaxLength="15" />
+          <Property Name="WARGANEGARA" Type="varchar" MaxLength="50" />
+          <Property Name="NPWP" Type="varchar" MaxLength="25" />
+          <Property Name="NIP_PNS" Type="char" MaxLength="15" />
+          <Property Name="NIDN" Type="char" MaxLength="15" />
+          <Property Name="ALAMAT_KOTA" Type="varchar" MaxLength="100" />
+          <Property Name="ALAMAT" Type="varchar" MaxLength="100" />
+          <Property Name="ALAMAT_PROVINSI" Type="varchar" MaxLength="50" />
+          <Property Name="ALAMAT_KODEPOS" Type="varchar" MaxLength="10" />
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" />
+          <Property Name="INSTITUSI_ASAL" Type="varchar" MaxLength="100" />
+          <Property Name="BIDANG_KEAHLIAN_PENELITIAN" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_RAB_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_RAB_PENELITIAN" />
+          </Key>
+          <Property Name="ID_RAB_PENELITIAN" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="int" Nullable="false" />
+          <Property Name="ID_PENGELUARAN_RAB" Type="int" Nullable="false" />
+          <Property Name="JUMLAH_DANA" Type="money" Nullable="false" />
+          <Property Name="PERSENTASE" Type="decimal" Precision="4" Scale="2" />
+        </EntityType>
+        <Association Name="FK_DTL_RAB_PENELITIAN_REF">
+          <End Role="TBL_RAB_PENELITIAN" Type="SIATMAXModel.Store.TBL_RAB_PENELITIAN" Multiplicity="0..1" />
+          <End Role="DTL_RAB_PENELITIAN" Type="SIATMAXModel.Store.DTL_RAB_PENELITIAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_RAB_PENELITIAN">
+              <PropertyRef Name="ID_RAB_PENELITIAN" />
+            </Principal>
+            <Dependent Role="DTL_RAB_PENELITIAN">
+              <PropertyRef Name="ID_RAB_PENELITIAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RAB_PENELITIAN_REF">
+          <End Role="REF_PENGELUARAN_RAB" Type="SIATMAXModel.Store.REF_PENGELUARAN_RAB" Multiplicity="1" />
+          <End Role="TBL_RAB_PENELITIAN" Type="SIATMAXModel.Store.TBL_RAB_PENELITIAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REF_PENGELUARAN_RAB">
+              <PropertyRef Name="ID_PENGELUARAN_RAB" />
+            </Principal>
+            <Dependent Role="TBL_RAB_PENELITIAN">
+              <PropertyRef Name="ID_PENGELUARAN_RAB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SIATMAXModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="SIATMAXEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DTL_RAB_PENELITIAN" EntityType="SIATMAXModel.DTL_RAB_PENELITIAN" />
+          <EntitySet Name="REF_KATEGORI" EntityType="SIATMAXModel.REF_KATEGORI" />
+          <EntitySet Name="REF_PENGELUARAN_RAB" EntityType="SIATMAXModel.REF_PENGELUARAN_RAB" />
+          <EntitySet Name="REF_ROAD_MAP_PENELITIAN" EntityType="SIATMAXModel.REF_ROAD_MAP_PENELITIAN" />
+          <EntitySet Name="REF_ROAD_MAP_PENGABDIAN" EntityType="SIATMAXModel.REF_ROAD_MAP_PENGABDIAN" />
+          <EntitySet Name="REF_SCHEDULE" EntityType="SIATMAXModel.REF_SCHEDULE" />
+          <EntitySet Name="REF_SKIM" EntityType="SIATMAXModel.REF_SKIM" />
+          <EntitySet Name="REF_STATUS_PENELITIAN_PENGABDIAN" EntityType="SIATMAXModel.REF_STATUS_PENELITIAN_PENGABDIAN" />
+          <EntitySet Name="REF_TEMA_UNIVERSITAS" EntityType="SIATMAXModel.REF_TEMA_UNIVERSITAS" />
+          <EntitySet Name="TBL_FEEDBACK_PENELITIAN" EntityType="SIATMAXModel.TBL_FEEDBACK_PENELITIAN" />
+          <EntitySet Name="TBL_FEEDBACK_PENGABDIAN" EntityType="SIATMAXModel.TBL_FEEDBACK_PENGABDIAN" />
+          <EntitySet Name="TBL_LAP_MONEV_PENELITIAN" EntityType="SIATMAXModel.TBL_LAP_MONEV_PENELITIAN" />
+          <EntitySet Name="TBL_LAP_MONEV_PENGABDIAN" EntityType="SIATMAXModel.TBL_LAP_MONEV_PENGABDIAN" />
+          <EntitySet Name="TBL_MAPPING_PENELITIAN" EntityType="SIATMAXModel.TBL_MAPPING_PENELITIAN" />
+          <EntitySet Name="TBL_MAPPING_PENGABDIAN" EntityType="SIATMAXModel.TBL_MAPPING_PENGABDIAN" />
+          <EntitySet Name="TBL_NILAI_REVIEW_PENELITIAN" EntityType="SIATMAXModel.TBL_NILAI_REVIEW_PENELITIAN" />
+          <EntitySet Name="TBL_NILAI_REVIEW_PENGABDIAN" EntityType="SIATMAXModel.TBL_NILAI_REVIEW_PENGABDIAN" />
+          <EntitySet Name="TBL_PENELITIAN" EntityType="SIATMAXModel.TBL_PENELITIAN" />
+          <EntitySet Name="TBL_PENELITIAN_LOLOS" EntityType="SIATMAXModel.TBL_PENELITIAN_LOLOS" />
+          <EntitySet Name="TBL_PENGABDIAN" EntityType="SIATMAXModel.TBL_PENGABDIAN" />
+          <EntitySet Name="TBL_PENGABDIAN_LOLOS" EntityType="SIATMAXModel.TBL_PENGABDIAN_LOLOS" />
+          <EntitySet Name="TBL_PERPANJANGAN_PENELITIAN" EntityType="SIATMAXModel.TBL_PERPANJANGAN_PENELITIAN" />
+          <EntitySet Name="TBL_PERPANJANGAN_PENGABDIAN" EntityType="SIATMAXModel.TBL_PERPANJANGAN_PENGABDIAN" />
+          <EntitySet Name="TBL_PERSONIL_PENELITIAN" EntityType="SIATMAXModel.TBL_PERSONIL_PENELITIAN" />
+          <EntitySet Name="TBL_RAB_PENELITIAN" EntityType="SIATMAXModel.TBL_RAB_PENELITIAN" />
+          <AssociationSet Name="FK_DTL_RAB_PENELITIAN_REF" Association="SIATMAXModel.FK_DTL_RAB_PENELITIAN_REF">
+            <End Role="TBL_RAB_PENELITIAN" EntitySet="TBL_RAB_PENELITIAN" />
+            <End Role="DTL_RAB_PENELITIAN" EntitySet="DTL_RAB_PENELITIAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RAB_PENELITIAN_REF" Association="SIATMAXModel.FK_RAB_PENELITIAN_REF">
+            <End Role="REF_PENGELUARAN_RAB" EntitySet="REF_PENGELUARAN_RAB" />
+            <End Role="TBL_RAB_PENELITIAN" EntitySet="TBL_RAB_PENELITIAN" />
+          </AssociationSet>
+          <EntitySet Name="DTL_RAB_PENGABDIAN" EntityType="SIATMAXModel.DTL_RAB_PENGABDIAN" />
+        </EntityContainer>
+        <EntityType Name="DTL_RAB_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_DTL_RAB_PENELITIAN" />
+          </Key>
+          <Property Name="ID_DTL_RAB_PENELITIAN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_RAB_PENELITIAN" Type="Int32" />
+          <Property Name="JUMLAH_DANA" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="JUMLAH" Type="Int32" />
+          <Property Name="SATUAN" Type="String" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="HARGA_SATUAN" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="TBL_RAB_PENELITIAN" Relationship="SIATMAXModel.FK_DTL_RAB_PENELITIAN_REF" FromRole="DTL_RAB_PENELITIAN" ToRole="TBL_RAB_PENELITIAN" />
+          <Property Type="String" Name="KETERANGAN" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="REF_KATEGORI">
+          <Key>
+            <PropertyRef Name="ID_KATEGORI" />
+          </Key>
+          <Property Name="ID_KATEGORI" Type="Int32" Nullable="false" />
+          <Property Name="KATEGORI" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DETAIL_PELAKU" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DETAIL_BEBAN_SKS" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DESKRIPSI" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="REF_PENGELUARAN_RAB">
+          <Key>
+            <PropertyRef Name="ID_PENGELUARAN_RAB" />
+          </Key>
+          <Property Name="ID_PENGELUARAN_RAB" Type="Int32" Nullable="false" />
+          <Property Name="KATEGORI" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DESKRIPSI" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="MIN_PCT" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="MAX_PCT" Type="Decimal" Precision="4" Scale="2" />
+          <NavigationProperty Name="TBL_RAB_PENELITIAN" Relationship="SIATMAXModel.FK_RAB_PENELITIAN_REF" FromRole="REF_PENGELUARAN_RAB" ToRole="TBL_RAB_PENELITIAN" />
+        </EntityType>
+        <EntityType Name="REF_ROAD_MAP_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_ROAD_MAP_PENELITIAN" />
+            <PropertyRef Name="ID_UNIT_AKADEMIK" />
+          </Key>
+          <Property Name="ID_ROAD_MAP_PENELITIAN" Type="Int32" Nullable="false" />
+          <Property Name="ID_UNIT_AKADEMIK" Type="Int32" Nullable="false" />
+          <Property Name="DESKRIPSI" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="IS_DELETED" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="REF_ROAD_MAP_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_ROAD_MAP_PENGABDIAN" />
+            <PropertyRef Name="ID_UNIT_AKADEMIK" />
+          </Key>
+          <Property Name="ID_ROAD_MAP_PENGABDIAN" Type="Int32" Nullable="false" />
+          <Property Name="ID_UNIT_AKADEMIK" Type="Int32" Nullable="false" />
+          <Property Name="DESKRIPSI" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="IS_DELETED" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="REF_SCHEDULE">
+          <Key>
+            <PropertyRef Name="ID_SCHEDULE" />
+          </Key>
+          <Property Name="ID_SCHEDULE" Type="Int32" Nullable="false" />
+          <Property Name="AWAL" Type="DateTime" />
+          <Property Name="AKHIR" Type="DateTime" />
+          <Property Name="ID_TAHUN_ANGGARAN" Type="Int32" />
+          <Property Name="IS_LOCKED" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="REF_SKIM">
+          <Key>
+            <PropertyRef Name="ID_SKIM" />
+          </Key>
+          <Property Name="ID_SKIM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KATEGORI" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DESKRIPSI" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Type="Decimal" Name="MAX_PAGU" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="REF_STATUS_PENELITIAN_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_STATUS_PENELITIAN" />
+          </Key>
+          <Property Name="ID_STATUS_PENELITIAN" Type="Int32" Nullable="false" />
+          <Property Name="DESKRIPSI" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="REF_TEMA_UNIVERSITAS">
+          <Key>
+            <PropertyRef Name="ID_TEMA_UNIVERSITAS" />
+          </Key>
+          <Property Name="ID_TEMA_UNIVERSITAS" Type="Int32" Nullable="false" />
+          <Property Name="KATEGORI" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DESKRIPSI" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBL_FEEDBACK_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_FEEDBACK" />
+          </Key>
+          <Property Name="ID_FEEDBACK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" />
+          <Property Name="NPP" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="FEEDBACK" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="TANGGAL" Type="DateTime" />
+          <Property Name="STATUS" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBL_FEEDBACK_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_FEEDBACK" />
+          </Key>
+          <Property Name="ID_FEEDBACK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" />
+          <Property Name="NPP" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="FEEDBACK" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="TANGGAL" Type="DateTime" />
+          <Property Name="STATUS" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBL_LAP_MONEV_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_MONEV" />
+          </Key>
+          <Property Name="ID_MONEV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" />
+          <Property Name="NPP" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="NO_UPDATE" Type="Int32" />
+          <Property Name="TANGGAL_UPLOAD" Type="DateTime" />
+          <Property Name="KETERANGAN" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBL_LAP_MONEV_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_MONEV" />
+          </Key>
+          <Property Name="ID_MONEV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" />
+          <Property Name="NPP" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="NO_UPDATE" Type="Int32" Nullable="false" />
+          <Property Name="TANGGAL_UPLOAD" Type="DateTime" />
+          <Property Name="KETERANGAN" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBL_MAPPING_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_PROPOSAL" />
+            <PropertyRef Name="NPP" />
+          </Key>
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" />
+          <Property Name="NPP" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBL_MAPPING_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_PROPOSAL" />
+            <PropertyRef Name="NPP" />
+          </Key>
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" />
+          <Property Name="NPP" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBL_NILAI_REVIEW_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_NILAI_REVIEW" />
+          </Key>
+          <Property Name="ID_NILAI_REVIEW" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="ID_REVIEWER" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="COUNT_REVISI" Type="Int32" Nullable="false" />
+          <Property Name="N1_FIELD1" Type="Double" />
+          <Property Name="N1_FIELD2" Type="Double" />
+          <Property Name="N1_FIELD3" Type="Double" />
+          <Property Name="N1_FIELD4" Type="Double" />
+          <Property Name="N1_FIELD5" Type="Double" />
+          <Property Name="N1_FIELD6" Type="Double" />
+          <Property Name="N1_FIELD7" Type="Double" />
+          <Property Name="N1_JUSTIFIKASI1" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="N1_JUSTIFIKASI2" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="N1_JUSTIFIKASI3" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="N1_JUSTIFIKASI4" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="N1_JUSTIFIKASI5" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="N1_JUSTIFIKASI6" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="N1_JUSTIFIKASI7" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="DANA_REKOMENDASI" Type="Int32" />
+          <Property Name="DANA_SETUJU" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TBL_NILAI_REVIEW_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_NILAI_REVIEW" />
+          </Key>
+          <Property Name="ID_NILAI_REVIEW" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" />
+          <Property Name="ID_REVIEWER" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="COUNT_REVISI" Type="Int32" Nullable="false" />
+          <Property Name="SKOR1" Type="Int32" />
+          <Property Name="SKOR2" Type="Int32" />
+          <Property Name="SKOR3" Type="Int32" />
+          <Property Name="SKOR4" Type="Int32" />
+          <Property Name="SKOR5" Type="Int32" />
+          <Property Name="SKOR6" Type="Int32" />
+          <Property Name="JUSTIFIKASI1" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="JUSTIFIKASI2" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="JUSTIFIKASI3" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="JUSTIFIKASI4" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="JUSTIFIKASI5" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="JUSTIFIKASI6" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="CATATAN1" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="CATATAN2" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="CATATAN3" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="CATATAN4" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="CATATAN5" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="KESIMPULAN" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="ANGGARAN" Type="Int32" />
+          <Property Name="ANGGARAN_HURUF" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="KEUNIKAN" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBL_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_PROPOSAL" />
+          </Key>
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_KATEGORI" Type="Int32" Nullable="false" />
+          <Property Name="ID_TAHUN_ANGGARAN" Type="Int32" Nullable="false" />
+          <Property Name="NO_SEMESTER" Type="Int32" />
+          <Property Name="ID_ROAD_MAP_PENELITIAN" Type="Int32" />
+          <Property Name="ID_SKIM" Type="Int32" />
+          <Property Name="JENIS" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="JUDUL" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="LOKASI" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="NPP" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="NPP1" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="NPP2" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="AWAL" Type="DateTime" />
+          <Property Name="AKHIR" Type="DateTime" />
+          <Property Name="IS_CHECKED" Type="Boolean" Nullable="false" />
+          <Property Name="REVIEWER1" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="REVIEWER2" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="BEBAN_SKS" Type="Int32" />
+          <Property Name="ID_STATUS_PENELITIAN" Type="Int32" />
+          <Property Name="DANA_USUL" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DANA_PRIBADI" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DANA_EKSTERNAL" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DANA_KERJASAMA" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DANA_UAJY" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DOKUMEN" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="LEMBAR_PENGESAHAN" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IS_DROPPED" Type="Boolean" />
+          <Property Name="KEYWORD" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="JARAK_KAMPUS_KM" Type="Double" />
+          <Property Name="JARAK_KAMPUS_JAM" Type="Int32" />
+          <Property Name="OUTCOME" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="LONGITUDE" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LATITUDE" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="IS_SETUJU_PRODI" Type="Boolean" />
+          <Property Name="IS_SETUJU_DEKAN" Type="Boolean" />
+          <Property Name="BEBAN_SKS_ANGGOTA" Type="Int32" />
+          <Property Name="IS_SETUJU_LPPM" Type="Boolean" />
+          <Property Name="NPP_REVIEWER" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="DANA_SETUJU" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="INSERT_DATE" Type="DateTime" />
+          <Property Name="IP_ADDRESS" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="USER_ID" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="ID_TEMA_UNIVERSITAS" />
+        </EntityType>
+        <EntityType Name="TBL_PENELITIAN_LOLOS">
+          <Key>
+            <PropertyRef Name="ID_PROPOSAL" />
+          </Key>
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" />
+          <Property Name="NPP" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="JENIS" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ID_TAHUN_ANGGARAN" Type="Int32" Nullable="false" />
+          <Property Name="IS_CHECKED" Type="Boolean" Nullable="false" />
+          <Property Name="REVIEWER1" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="REVIEWER2" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="JUDUL" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="ID_KATEGORI" Type="Int32" Nullable="false" />
+          <Property Name="LOKASI" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="BEBAN_SKS" Type="Int32" />
+          <Property Name="ID_STATUS_PENELITIAN" Type="Int32" />
+          <Property Name="DANA_USUL" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AWAL" Type="DateTime" />
+          <Property Name="AKHIR" Type="DateTime" />
+          <Property Name="DOKUMEN" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IS_DROPPED" Type="Boolean" />
+          <Property Name="KEYWORD" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="JARAK_KAMPUS_KM" Type="Double" />
+          <Property Name="JARAK_KAMPUS_JAM" Type="Int32" />
+          <Property Name="ID_ROAD_MAP_PENELITIAN" Type="Int32" />
+          <Property Name="OUTCOME" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="DANA_PRIBADI" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LONGITUDE" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LATITUDE" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="NPP1" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="NPP2" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="IS_SETUJU_PRODI" Type="Boolean" />
+          <Property Name="IS_SETUJU_DEKAN" Type="Boolean" />
+          <Property Name="BEBAN_SKS_ANGGOTA" Type="Int32" />
+          <Property Name="IS_SETUJU_LPPM" Type="Boolean" />
+          <Property Name="NPP_REVIEWER" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="DANA_SETUJU" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PAJAK" Type="Double" />
+          <Property Name="DANA_REKOMEN" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LAPORAN" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IS_SETUJU_PUSTAKAWAN" Type="Boolean" />
+          <Property Name="IS_SELESAI" Type="Boolean" />
+          <Property Name="LAPORAN1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="INSERT_DATE" Type="DateTime" />
+          <Property Name="IP_ADDRESS" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="USER_ID" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBL_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_PROPOSAL" />
+          </Key>
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" />
+          <Property Name="NPP" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="ID_SUMBER" Type="Int32" Nullable="false" />
+          <Property Name="ID_TAHUN_ANGGARAN" Type="Int32" Nullable="false" />
+          <Property Name="REVIEWER1" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="REVIEWER2" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="JUDUL_KEGIATAN" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="LANDASAN_PENELITIAN" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="JENIS_PENGABDIAN" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ANGGOTA1" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="ANGGOTA1_KEAHLIAN" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="ANGGOTA2" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="ANGGOTA2_KEAHLIAN" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="MITRA" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="MITRA_KEAHLIAN" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="LOKASI" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="JARAK_PT_LOKASI" Type="Double" />
+          <Property Name="OUTPUT" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="OUTCOME" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="AWAL" Type="DateTime" />
+          <Property Name="AKHIR" Type="DateTime" />
+          <Property Name="SASARAN" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="SKS_KETUA" Type="Int32" />
+          <Property Name="SKS_ANGGOTA" Type="Int32" />
+          <Property Name="ID_ROAD_MAP" Type="Int32" />
+          <Property Name="DANA_UAJY" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DANA_PRIBADI" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DOKUMEN" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IS_DROPPED" Type="Boolean" />
+          <Property Name="ID_STATUS" Type="Int32" />
+          <Property Name="IS_CHECKED" Type="Boolean" />
+          <Property Name="IS_SETUJU_PRODI" Type="Boolean" />
+          <Property Name="IS_SETUJU_DEKAN" Type="Boolean" />
+          <Property Name="IS_SETUJU_LPPM" Type="Boolean" />
+          <Property Name="NPP_REVIEWER" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="DANA_SETUJU" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="INSERT_DATE" Type="DateTime" />
+          <Property Name="IP_ADDRESS" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="USER_ID" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="ID_SKIM" />
+          <Property Type="Int32" Name="ID_TEMA_UNIVERSITAS" />
+        </EntityType>
+        <EntityType Name="TBL_PENGABDIAN_LOLOS">
+          <Key>
+            <PropertyRef Name="ID_PROPOSAL" />
+          </Key>
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" />
+          <Property Name="NPP" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="ID_SUMBER" Type="Int32" Nullable="false" />
+          <Property Name="ID_TAHUN_ANGGARAN" Type="Int32" Nullable="false" />
+          <Property Name="REVIEWER1" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="REVIEWER2" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="JUDUL_KEGIATAN" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="LANDASAN_PENELITIAN" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="JENIS_PENGABDIAN" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ANGGOTA1" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="ANGGOTA1_KEAHLIAN" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="ANGGOTA2" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="ANGGOTA2_KEAHLIAN" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="MITRA" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="MITRA_KEAHLIAN" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="LOKASI" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="JARAK_PT_LOKASI" Type="Double" />
+          <Property Name="OUTPUT" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="OUTCOME" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="AWAL" Type="DateTime" />
+          <Property Name="AKHIR" Type="DateTime" />
+          <Property Name="SASARAN" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="SKS_KETUA" Type="Int32" />
+          <Property Name="SKS_ANGGOTA" Type="Int32" />
+          <Property Name="ID_ROAD_MAP" Type="Int32" />
+          <Property Name="DANA_UAJY" Type="Int32" />
+          <Property Name="DANA_PRIBADI" Type="Int32" />
+          <Property Name="DOKUMEN" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IS_DROPPED" Type="Boolean" />
+          <Property Name="ID_STATUS" Type="Int32" />
+          <Property Name="IS_CHECKED" Type="Boolean" />
+          <Property Name="IS_SETUJU_PRODI" Type="Boolean" />
+          <Property Name="IS_SETUJU_DEKAN" Type="Boolean" />
+          <Property Name="IS_SETUJU_LPPM" Type="Boolean" />
+          <Property Name="NPP_REVIEWER" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="DANA_SETUJU" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DANA_REKOMEN" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LAPORAN1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="LAPORAN" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IS_SETUJU_PUSTAKAWAN" Type="Boolean" />
+          <Property Name="INSERT_DATE" Type="DateTime" />
+          <Property Name="IP_ADDRESS" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="USER_ID" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBL_PERPANJANGAN_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_PERPANJANGAN" />
+          </Key>
+          <Property Name="ID_PERPANJANGAN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" />
+          <Property Name="KE" Type="Int32" Nullable="false" />
+          <Property Name="TGL_MULAI_PERPANJANG" Type="DateTime" />
+          <Property Name="TGL_SELESAI_PERPANJANG" Type="DateTime" />
+          <Property Name="INSERT_DATE" Type="DateTime" />
+          <Property Name="IP_ADDRESS" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="USER_ID" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBL_PERPANJANGAN_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_PERPANJANGAN" />
+          </Key>
+          <Property Name="ID_PERPANJANGAN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" />
+          <Property Name="KE" Type="Int32" />
+          <Property Name="TGL_MULAI_PERPANJANG" Type="DateTime" />
+          <Property Name="TGL_SELESAI_PERPANJANG" Type="DateTime" />
+          <Property Name="INSERT_DATE" Type="DateTime" />
+          <Property Name="IP_ADDRESS" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="USER_ID" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBL_PERSONIL_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_PERSONIL_PENELITIAN" />
+          </Key>
+          <Property Name="ID_PERSONIL_PENELITIAN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NPP" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="NAMA_LENGKAP_GELAR" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="TEMPAT_LAHIR" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="TGL_LAHIR" Type="DateTime" />
+          <Property Name="JNS_KEL" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ID_REF_FUNGSIONAL" Type="Int32" />
+          <Property Name="ID_UNIT" Type="Int32" />
+          <Property Name="ID_UNIT_AKADEMIK" Type="Int32" />
+          <Property Name="ID_REF_GOLONGAN" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="ID_REF_JBTN_AKADEMIK" Type="Int32" />
+          <Property Name="NO_TELPON_RUMAH" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="NO_TELPON_HP" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="WARGANEGARA" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="NPWP" Type="String" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="NIP_PNS" Type="String" MaxLength="15" Unicode="false" FixedLength="true" />
+          <Property Name="NIDN" Type="String" MaxLength="15" Unicode="false" FixedLength="true" />
+          <Property Name="ALAMAT_KOTA" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="ALAMAT" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="ALAMAT_PROVINSI" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ALAMAT_KODEPOS" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" />
+          <Property Name="INSTITUSI_ASAL" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="BIDANG_KEAHLIAN_PENELITIAN" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBL_RAB_PENELITIAN">
+          <Key>
+            <PropertyRef Name="ID_RAB_PENELITIAN" />
+          </Key>
+          <Property Name="ID_RAB_PENELITIAN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROPOSAL" Type="Int32" Nullable="false" />
+          <Property Name="ID_PENGELUARAN_RAB" Type="Int32" Nullable="false" />
+          <Property Name="JUMLAH_DANA" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="PERSENTASE" Type="Decimal" Precision="4" Scale="2" />
+          <NavigationProperty Name="DTL_RAB_PENELITIAN" Relationship="SIATMAXModel.FK_DTL_RAB_PENELITIAN_REF" FromRole="TBL_RAB_PENELITIAN" ToRole="DTL_RAB_PENELITIAN" />
+          <NavigationProperty Name="REF_PENGELUARAN_RAB" Relationship="SIATMAXModel.FK_RAB_PENELITIAN_REF" FromRole="TBL_RAB_PENELITIAN" ToRole="REF_PENGELUARAN_RAB" />
+        </EntityType>
+        <Association Name="FK_DTL_RAB_PENELITIAN_REF">
+          <End Role="TBL_RAB_PENELITIAN" Type="SIATMAXModel.TBL_RAB_PENELITIAN" Multiplicity="0..1" />
+          <End Role="DTL_RAB_PENELITIAN" Type="SIATMAXModel.DTL_RAB_PENELITIAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_RAB_PENELITIAN">
+              <PropertyRef Name="ID_RAB_PENELITIAN" />
+            </Principal>
+            <Dependent Role="DTL_RAB_PENELITIAN">
+              <PropertyRef Name="ID_RAB_PENELITIAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RAB_PENELITIAN_REF">
+          <End Role="REF_PENGELUARAN_RAB" Type="SIATMAXModel.REF_PENGELUARAN_RAB" Multiplicity="1" />
+          <End Role="TBL_RAB_PENELITIAN" Type="SIATMAXModel.TBL_RAB_PENELITIAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REF_PENGELUARAN_RAB">
+              <PropertyRef Name="ID_PENGELUARAN_RAB" />
+            </Principal>
+            <Dependent Role="TBL_RAB_PENELITIAN">
+              <PropertyRef Name="ID_PENGELUARAN_RAB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DTL_RAB_PENGABDIAN">
+          <Key>
+            <PropertyRef Name="ID_DTL_RAB_PENGABDIAN" />
+          </Key>
+          <Property Type="Int32" Name="ID_DTL_RAB_PENGABDIAN" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ID_RAB_PENGABDIAN" />
+          <Property Type="Decimal" Name="JUMLAH_DANA" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="JUMLAH" />
+          <Property Type="String" Name="SATUAN" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="HARGA_SATUAN" Precision="19" Scale="4" />
+          <Property Type="String" Name="KETERANGAN" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SIATMAXModelStoreContainer" CdmEntityContainer="SIATMAXEntities">
+          <EntitySetMapping Name="DTL_RAB_PENELITIAN"><EntityTypeMapping TypeName="SIATMAXModel.DTL_RAB_PENELITIAN"><MappingFragment StoreEntitySet="DTL_RAB_PENELITIAN">
+            <ScalarProperty Name="KETERANGAN" ColumnName="KETERANGAN" />
+                <ScalarProperty Name="ID_DTL_RAB_PENELITIAN" ColumnName="ID_DTL_RAB_PENELITIAN" />
+            <ScalarProperty Name="ID_RAB_PENELITIAN" ColumnName="ID_RAB_PENELITIAN" />
+            <ScalarProperty Name="JUMLAH_DANA" ColumnName="JUMLAH_DANA" />
+            <ScalarProperty Name="JUMLAH" ColumnName="JUMLAH" />
+            <ScalarProperty Name="SATUAN" ColumnName="SATUAN" />
+            <ScalarProperty Name="HARGA_SATUAN" ColumnName="HARGA_SATUAN" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="REF_KATEGORI"><EntityTypeMapping TypeName="SIATMAXModel.REF_KATEGORI"><MappingFragment StoreEntitySet="REF_KATEGORI">
+            <ScalarProperty Name="ID_KATEGORI" ColumnName="ID_KATEGORI" />
+            <ScalarProperty Name="KATEGORI" ColumnName="KATEGORI" />
+            <ScalarProperty Name="DETAIL_PELAKU" ColumnName="DETAIL_PELAKU" />
+            <ScalarProperty Name="DETAIL_BEBAN_SKS" ColumnName="DETAIL_BEBAN_SKS" />
+            <ScalarProperty Name="DESKRIPSI" ColumnName="DESKRIPSI" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="REF_PENGELUARAN_RAB"><EntityTypeMapping TypeName="SIATMAXModel.REF_PENGELUARAN_RAB"><MappingFragment StoreEntitySet="REF_PENGELUARAN_RAB">
+            <ScalarProperty Name="ID_PENGELUARAN_RAB" ColumnName="ID_PENGELUARAN_RAB" />
+            <ScalarProperty Name="KATEGORI" ColumnName="KATEGORI" />
+            <ScalarProperty Name="DESKRIPSI" ColumnName="DESKRIPSI" />
+            <ScalarProperty Name="MIN_PCT" ColumnName="MIN_PCT" />
+            <ScalarProperty Name="MAX_PCT" ColumnName="MAX_PCT" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="REF_ROAD_MAP_PENELITIAN"><EntityTypeMapping TypeName="SIATMAXModel.REF_ROAD_MAP_PENELITIAN"><MappingFragment StoreEntitySet="REF_ROAD_MAP_PENELITIAN">
+            <ScalarProperty Name="ID_ROAD_MAP_PENELITIAN" ColumnName="ID_ROAD_MAP_PENELITIAN" />
+            <ScalarProperty Name="ID_UNIT_AKADEMIK" ColumnName="ID_UNIT_AKADEMIK" />
+            <ScalarProperty Name="DESKRIPSI" ColumnName="DESKRIPSI" />
+            <ScalarProperty Name="IS_DELETED" ColumnName="IS_DELETED" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="REF_ROAD_MAP_PENGABDIAN"><EntityTypeMapping TypeName="SIATMAXModel.REF_ROAD_MAP_PENGABDIAN"><MappingFragment StoreEntitySet="REF_ROAD_MAP_PENGABDIAN">
+            <ScalarProperty Name="ID_ROAD_MAP_PENGABDIAN" ColumnName="ID_ROAD_MAP_PENGABDIAN" />
+            <ScalarProperty Name="ID_UNIT_AKADEMIK" ColumnName="ID_UNIT_AKADEMIK" />
+            <ScalarProperty Name="DESKRIPSI" ColumnName="DESKRIPSI" />
+            <ScalarProperty Name="IS_DELETED" ColumnName="IS_DELETED" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="REF_SCHEDULE"><EntityTypeMapping TypeName="SIATMAXModel.REF_SCHEDULE"><MappingFragment StoreEntitySet="REF_SCHEDULE">
+            <ScalarProperty Name="ID_SCHEDULE" ColumnName="ID_SCHEDULE" />
+            <ScalarProperty Name="AWAL" ColumnName="AWAL" />
+            <ScalarProperty Name="AKHIR" ColumnName="AKHIR" />
+            <ScalarProperty Name="ID_TAHUN_ANGGARAN" ColumnName="ID_TAHUN_ANGGARAN" />
+            <ScalarProperty Name="IS_LOCKED" ColumnName="IS_LOCKED" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="REF_SKIM"><EntityTypeMapping TypeName="SIATMAXModel.REF_SKIM"><MappingFragment StoreEntitySet="REF_SKIM">
+            <ScalarProperty Name="MAX_PAGU" ColumnName="MAX_PAGU" />
+                <ScalarProperty Name="ID_SKIM" ColumnName="ID_SKIM" />
+            <ScalarProperty Name="KATEGORI" ColumnName="KATEGORI" />
+            <ScalarProperty Name="DESKRIPSI" ColumnName="DESKRIPSI" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="REF_STATUS_PENELITIAN_PENGABDIAN"><EntityTypeMapping TypeName="SIATMAXModel.REF_STATUS_PENELITIAN_PENGABDIAN"><MappingFragment StoreEntitySet="REF_STATUS_PENELITIAN_PENGABDIAN">
+            <ScalarProperty Name="ID_STATUS_PENELITIAN" ColumnName="ID_STATUS_PENELITIAN" />
+            <ScalarProperty Name="DESKRIPSI" ColumnName="DESKRIPSI" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="REF_TEMA_UNIVERSITAS"><EntityTypeMapping TypeName="SIATMAXModel.REF_TEMA_UNIVERSITAS"><MappingFragment StoreEntitySet="REF_TEMA_UNIVERSITAS">
+            <ScalarProperty Name="ID_TEMA_UNIVERSITAS" ColumnName="ID_TEMA_UNIVERSITAS" />
+            <ScalarProperty Name="KATEGORI" ColumnName="KATEGORI" />
+            <ScalarProperty Name="DESKRIPSI" ColumnName="DESKRIPSI" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_FEEDBACK_PENELITIAN"><EntityTypeMapping TypeName="SIATMAXModel.TBL_FEEDBACK_PENELITIAN"><MappingFragment StoreEntitySet="TBL_FEEDBACK_PENELITIAN">
+            <ScalarProperty Name="ID_FEEDBACK" ColumnName="ID_FEEDBACK" />
+            <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="NPP" ColumnName="NPP" />
+            <ScalarProperty Name="FEEDBACK" ColumnName="FEEDBACK" />
+            <ScalarProperty Name="TANGGAL" ColumnName="TANGGAL" />
+            <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_FEEDBACK_PENGABDIAN"><EntityTypeMapping TypeName="SIATMAXModel.TBL_FEEDBACK_PENGABDIAN"><MappingFragment StoreEntitySet="TBL_FEEDBACK_PENGABDIAN">
+            <ScalarProperty Name="ID_FEEDBACK" ColumnName="ID_FEEDBACK" />
+            <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="NPP" ColumnName="NPP" />
+            <ScalarProperty Name="FEEDBACK" ColumnName="FEEDBACK" />
+            <ScalarProperty Name="TANGGAL" ColumnName="TANGGAL" />
+            <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_LAP_MONEV_PENELITIAN"><EntityTypeMapping TypeName="SIATMAXModel.TBL_LAP_MONEV_PENELITIAN"><MappingFragment StoreEntitySet="TBL_LAP_MONEV_PENELITIAN">
+            <ScalarProperty Name="ID_MONEV" ColumnName="ID_MONEV" />
+            <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="NPP" ColumnName="NPP" />
+            <ScalarProperty Name="NO_UPDATE" ColumnName="NO_UPDATE" />
+            <ScalarProperty Name="TANGGAL_UPLOAD" ColumnName="TANGGAL_UPLOAD" />
+            <ScalarProperty Name="KETERANGAN" ColumnName="KETERANGAN" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_LAP_MONEV_PENGABDIAN"><EntityTypeMapping TypeName="SIATMAXModel.TBL_LAP_MONEV_PENGABDIAN"><MappingFragment StoreEntitySet="TBL_LAP_MONEV_PENGABDIAN">
+            <ScalarProperty Name="ID_MONEV" ColumnName="ID_MONEV" />
+            <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="NPP" ColumnName="NPP" />
+            <ScalarProperty Name="NO_UPDATE" ColumnName="NO_UPDATE" />
+            <ScalarProperty Name="TANGGAL_UPLOAD" ColumnName="TANGGAL_UPLOAD" />
+            <ScalarProperty Name="KETERANGAN" ColumnName="KETERANGAN" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_MAPPING_PENELITIAN"><EntityTypeMapping TypeName="SIATMAXModel.TBL_MAPPING_PENELITIAN"><MappingFragment StoreEntitySet="TBL_MAPPING_PENELITIAN">
+            <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="NPP" ColumnName="NPP" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_MAPPING_PENGABDIAN"><EntityTypeMapping TypeName="SIATMAXModel.TBL_MAPPING_PENGABDIAN"><MappingFragment StoreEntitySet="TBL_MAPPING_PENGABDIAN">
+            <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="NPP" ColumnName="NPP" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_NILAI_REVIEW_PENELITIAN"><EntityTypeMapping TypeName="SIATMAXModel.TBL_NILAI_REVIEW_PENELITIAN"><MappingFragment StoreEntitySet="TBL_NILAI_REVIEW_PENELITIAN">
+            <ScalarProperty Name="ID_NILAI_REVIEW" ColumnName="ID_NILAI_REVIEW" />
+            <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="ID_REVIEWER" ColumnName="ID_REVIEWER" />
+            <ScalarProperty Name="COUNT_REVISI" ColumnName="COUNT_REVISI" />
+            <ScalarProperty Name="N1_FIELD1" ColumnName="N1_FIELD1" />
+            <ScalarProperty Name="N1_FIELD2" ColumnName="N1_FIELD2" />
+            <ScalarProperty Name="N1_FIELD3" ColumnName="N1_FIELD3" />
+            <ScalarProperty Name="N1_FIELD4" ColumnName="N1_FIELD4" />
+            <ScalarProperty Name="N1_FIELD5" ColumnName="N1_FIELD5" />
+            <ScalarProperty Name="N1_FIELD6" ColumnName="N1_FIELD6" />
+            <ScalarProperty Name="N1_FIELD7" ColumnName="N1_FIELD7" />
+            <ScalarProperty Name="N1_JUSTIFIKASI1" ColumnName="N1_JUSTIFIKASI1" />
+            <ScalarProperty Name="N1_JUSTIFIKASI2" ColumnName="N1_JUSTIFIKASI2" />
+            <ScalarProperty Name="N1_JUSTIFIKASI3" ColumnName="N1_JUSTIFIKASI3" />
+            <ScalarProperty Name="N1_JUSTIFIKASI4" ColumnName="N1_JUSTIFIKASI4" />
+            <ScalarProperty Name="N1_JUSTIFIKASI5" ColumnName="N1_JUSTIFIKASI5" />
+            <ScalarProperty Name="N1_JUSTIFIKASI6" ColumnName="N1_JUSTIFIKASI6" />
+            <ScalarProperty Name="N1_JUSTIFIKASI7" ColumnName="N1_JUSTIFIKASI7" />
+            <ScalarProperty Name="DANA_REKOMENDASI" ColumnName="DANA_REKOMENDASI" />
+            <ScalarProperty Name="DANA_SETUJU" ColumnName="DANA_SETUJU" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_NILAI_REVIEW_PENGABDIAN"><EntityTypeMapping TypeName="SIATMAXModel.TBL_NILAI_REVIEW_PENGABDIAN"><MappingFragment StoreEntitySet="TBL_NILAI_REVIEW_PENGABDIAN">
+            <ScalarProperty Name="ID_NILAI_REVIEW" ColumnName="ID_NILAI_REVIEW" />
+            <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="ID_REVIEWER" ColumnName="ID_REVIEWER" />
+            <ScalarProperty Name="COUNT_REVISI" ColumnName="COUNT_REVISI" />
+            <ScalarProperty Name="SKOR1" ColumnName="SKOR1" />
+            <ScalarProperty Name="SKOR2" ColumnName="SKOR2" />
+            <ScalarProperty Name="SKOR3" ColumnName="SKOR3" />
+            <ScalarProperty Name="SKOR4" ColumnName="SKOR4" />
+            <ScalarProperty Name="SKOR5" ColumnName="SKOR5" />
+            <ScalarProperty Name="SKOR6" ColumnName="SKOR6" />
+            <ScalarProperty Name="JUSTIFIKASI1" ColumnName="JUSTIFIKASI1" />
+            <ScalarProperty Name="JUSTIFIKASI2" ColumnName="JUSTIFIKASI2" />
+            <ScalarProperty Name="JUSTIFIKASI3" ColumnName="JUSTIFIKASI3" />
+            <ScalarProperty Name="JUSTIFIKASI4" ColumnName="JUSTIFIKASI4" />
+            <ScalarProperty Name="JUSTIFIKASI5" ColumnName="JUSTIFIKASI5" />
+            <ScalarProperty Name="JUSTIFIKASI6" ColumnName="JUSTIFIKASI6" />
+            <ScalarProperty Name="CATATAN1" ColumnName="CATATAN1" />
+            <ScalarProperty Name="CATATAN2" ColumnName="CATATAN2" />
+            <ScalarProperty Name="CATATAN3" ColumnName="CATATAN3" />
+            <ScalarProperty Name="CATATAN4" ColumnName="CATATAN4" />
+            <ScalarProperty Name="CATATAN5" ColumnName="CATATAN5" />
+            <ScalarProperty Name="KESIMPULAN" ColumnName="KESIMPULAN" />
+            <ScalarProperty Name="ANGGARAN" ColumnName="ANGGARAN" />
+            <ScalarProperty Name="ANGGARAN_HURUF" ColumnName="ANGGARAN_HURUF" />
+            <ScalarProperty Name="KEUNIKAN" ColumnName="KEUNIKAN" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_PENELITIAN"><EntityTypeMapping TypeName="SIATMAXModel.TBL_PENELITIAN"><MappingFragment StoreEntitySet="TBL_PENELITIAN">
+            <ScalarProperty Name="ID_TEMA_UNIVERSITAS" ColumnName="ID_TEMA_UNIVERSITAS" />
+                <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="ID_KATEGORI" ColumnName="ID_KATEGORI" />
+            <ScalarProperty Name="ID_TAHUN_ANGGARAN" ColumnName="ID_TAHUN_ANGGARAN" />
+            <ScalarProperty Name="NO_SEMESTER" ColumnName="NO_SEMESTER" />
+            <ScalarProperty Name="ID_ROAD_MAP_PENELITIAN" ColumnName="ID_ROAD_MAP_PENELITIAN" />
+            <ScalarProperty Name="ID_SKIM" ColumnName="ID_SKIM" />
+            <ScalarProperty Name="JENIS" ColumnName="JENIS" />
+            <ScalarProperty Name="JUDUL" ColumnName="JUDUL" />
+            <ScalarProperty Name="LOKASI" ColumnName="LOKASI" />
+            <ScalarProperty Name="NPP" ColumnName="NPP" />
+            <ScalarProperty Name="NPP1" ColumnName="NPP1" />
+            <ScalarProperty Name="NPP2" ColumnName="NPP2" />
+            <ScalarProperty Name="AWAL" ColumnName="AWAL" />
+            <ScalarProperty Name="AKHIR" ColumnName="AKHIR" />
+            <ScalarProperty Name="IS_CHECKED" ColumnName="IS_CHECKED" />
+            <ScalarProperty Name="REVIEWER1" ColumnName="REVIEWER1" />
+            <ScalarProperty Name="REVIEWER2" ColumnName="REVIEWER2" />
+            <ScalarProperty Name="BEBAN_SKS" ColumnName="BEBAN_SKS" />
+            <ScalarProperty Name="ID_STATUS_PENELITIAN" ColumnName="ID_STATUS_PENELITIAN" />
+            <ScalarProperty Name="DANA_USUL" ColumnName="DANA_USUL" />
+            <ScalarProperty Name="DANA_PRIBADI" ColumnName="DANA_PRIBADI" />
+            <ScalarProperty Name="DANA_EKSTERNAL" ColumnName="DANA_EKSTERNAL" />
+            <ScalarProperty Name="DANA_KERJASAMA" ColumnName="DANA_KERJASAMA" />
+            <ScalarProperty Name="DANA_UAJY" ColumnName="DANA_UAJY" />
+            <ScalarProperty Name="DOKUMEN" ColumnName="DOKUMEN" />
+            <ScalarProperty Name="LEMBAR_PENGESAHAN" ColumnName="LEMBAR_PENGESAHAN" />
+            <ScalarProperty Name="IS_DROPPED" ColumnName="IS_DROPPED" />
+            <ScalarProperty Name="KEYWORD" ColumnName="KEYWORD" />
+            <ScalarProperty Name="JARAK_KAMPUS_KM" ColumnName="JARAK_KAMPUS_KM" />
+            <ScalarProperty Name="JARAK_KAMPUS_JAM" ColumnName="JARAK_KAMPUS_JAM" />
+            <ScalarProperty Name="OUTCOME" ColumnName="OUTCOME" />
+            <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
+            <ScalarProperty Name="LATITUDE" ColumnName="LATITUDE" />
+            <ScalarProperty Name="IS_SETUJU_PRODI" ColumnName="IS_SETUJU_PRODI" />
+            <ScalarProperty Name="IS_SETUJU_DEKAN" ColumnName="IS_SETUJU_DEKAN" />
+            <ScalarProperty Name="BEBAN_SKS_ANGGOTA" ColumnName="BEBAN_SKS_ANGGOTA" />
+            <ScalarProperty Name="IS_SETUJU_LPPM" ColumnName="IS_SETUJU_LPPM" />
+            <ScalarProperty Name="NPP_REVIEWER" ColumnName="NPP_REVIEWER" />
+            <ScalarProperty Name="DANA_SETUJU" ColumnName="DANA_SETUJU" />
+            <ScalarProperty Name="INSERT_DATE" ColumnName="INSERT_DATE" />
+            <ScalarProperty Name="IP_ADDRESS" ColumnName="IP_ADDRESS" />
+            <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_PENELITIAN_LOLOS"><EntityTypeMapping TypeName="SIATMAXModel.TBL_PENELITIAN_LOLOS"><MappingFragment StoreEntitySet="TBL_PENELITIAN_LOLOS">
+            <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="NPP" ColumnName="NPP" />
+            <ScalarProperty Name="JENIS" ColumnName="JENIS" />
+            <ScalarProperty Name="ID_TAHUN_ANGGARAN" ColumnName="ID_TAHUN_ANGGARAN" />
+            <ScalarProperty Name="IS_CHECKED" ColumnName="IS_CHECKED" />
+            <ScalarProperty Name="REVIEWER1" ColumnName="REVIEWER1" />
+            <ScalarProperty Name="REVIEWER2" ColumnName="REVIEWER2" />
+            <ScalarProperty Name="JUDUL" ColumnName="JUDUL" />
+            <ScalarProperty Name="ID_KATEGORI" ColumnName="ID_KATEGORI" />
+            <ScalarProperty Name="LOKASI" ColumnName="LOKASI" />
+            <ScalarProperty Name="BEBAN_SKS" ColumnName="BEBAN_SKS" />
+            <ScalarProperty Name="ID_STATUS_PENELITIAN" ColumnName="ID_STATUS_PENELITIAN" />
+            <ScalarProperty Name="DANA_USUL" ColumnName="DANA_USUL" />
+            <ScalarProperty Name="AWAL" ColumnName="AWAL" />
+            <ScalarProperty Name="AKHIR" ColumnName="AKHIR" />
+            <ScalarProperty Name="DOKUMEN" ColumnName="DOKUMEN" />
+            <ScalarProperty Name="IS_DROPPED" ColumnName="IS_DROPPED" />
+            <ScalarProperty Name="KEYWORD" ColumnName="KEYWORD" />
+            <ScalarProperty Name="JARAK_KAMPUS_KM" ColumnName="JARAK_KAMPUS_KM" />
+            <ScalarProperty Name="JARAK_KAMPUS_JAM" ColumnName="JARAK_KAMPUS_JAM" />
+            <ScalarProperty Name="ID_ROAD_MAP_PENELITIAN" ColumnName="ID_ROAD_MAP_PENELITIAN" />
+            <ScalarProperty Name="OUTCOME" ColumnName="OUTCOME" />
+            <ScalarProperty Name="DANA_PRIBADI" ColumnName="DANA_PRIBADI" />
+            <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
+            <ScalarProperty Name="LATITUDE" ColumnName="LATITUDE" />
+            <ScalarProperty Name="NPP1" ColumnName="NPP1" />
+            <ScalarProperty Name="NPP2" ColumnName="NPP2" />
+            <ScalarProperty Name="IS_SETUJU_PRODI" ColumnName="IS_SETUJU_PRODI" />
+            <ScalarProperty Name="IS_SETUJU_DEKAN" ColumnName="IS_SETUJU_DEKAN" />
+            <ScalarProperty Name="BEBAN_SKS_ANGGOTA" ColumnName="BEBAN_SKS_ANGGOTA" />
+            <ScalarProperty Name="IS_SETUJU_LPPM" ColumnName="IS_SETUJU_LPPM" />
+            <ScalarProperty Name="NPP_REVIEWER" ColumnName="NPP_REVIEWER" />
+            <ScalarProperty Name="DANA_SETUJU" ColumnName="DANA_SETUJU" />
+            <ScalarProperty Name="PAJAK" ColumnName="PAJAK" />
+            <ScalarProperty Name="DANA_REKOMEN" ColumnName="DANA_REKOMEN" />
+            <ScalarProperty Name="LAPORAN" ColumnName="LAPORAN" />
+            <ScalarProperty Name="IS_SETUJU_PUSTAKAWAN" ColumnName="IS_SETUJU_PUSTAKAWAN" />
+            <ScalarProperty Name="IS_SELESAI" ColumnName="IS_SELESAI" />
+            <ScalarProperty Name="LAPORAN1" ColumnName="LAPORAN1" />
+            <ScalarProperty Name="INSERT_DATE" ColumnName="INSERT_DATE" />
+            <ScalarProperty Name="IP_ADDRESS" ColumnName="IP_ADDRESS" />
+            <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_PENGABDIAN"><EntityTypeMapping TypeName="SIATMAXModel.TBL_PENGABDIAN"><MappingFragment StoreEntitySet="TBL_PENGABDIAN">
+            <ScalarProperty Name="ID_TEMA_UNIVERSITAS" ColumnName="ID_TEMA_UNIVERSITAS" />
+                <ScalarProperty Name="ID_SKIM" ColumnName="ID_SKIM" />
+                <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="NPP" ColumnName="NPP" />
+            <ScalarProperty Name="ID_SUMBER" ColumnName="ID_SUMBER" />
+            <ScalarProperty Name="ID_TAHUN_ANGGARAN" ColumnName="ID_TAHUN_ANGGARAN" />
+            <ScalarProperty Name="REVIEWER1" ColumnName="REVIEWER1" />
+            <ScalarProperty Name="REVIEWER2" ColumnName="REVIEWER2" />
+            <ScalarProperty Name="JUDUL_KEGIATAN" ColumnName="JUDUL_KEGIATAN" />
+            <ScalarProperty Name="LANDASAN_PENELITIAN" ColumnName="LANDASAN_PENELITIAN" />
+            <ScalarProperty Name="JENIS_PENGABDIAN" ColumnName="JENIS_PENGABDIAN" />
+            <ScalarProperty Name="ANGGOTA1" ColumnName="ANGGOTA1" />
+            <ScalarProperty Name="ANGGOTA1_KEAHLIAN" ColumnName="ANGGOTA1_KEAHLIAN" />
+            <ScalarProperty Name="ANGGOTA2" ColumnName="ANGGOTA2" />
+            <ScalarProperty Name="ANGGOTA2_KEAHLIAN" ColumnName="ANGGOTA2_KEAHLIAN" />
+            <ScalarProperty Name="MITRA" ColumnName="MITRA" />
+            <ScalarProperty Name="MITRA_KEAHLIAN" ColumnName="MITRA_KEAHLIAN" />
+            <ScalarProperty Name="LOKASI" ColumnName="LOKASI" />
+            <ScalarProperty Name="JARAK_PT_LOKASI" ColumnName="JARAK_PT_LOKASI" />
+            <ScalarProperty Name="OUTPUT" ColumnName="OUTPUT" />
+            <ScalarProperty Name="OUTCOME" ColumnName="OUTCOME" />
+            <ScalarProperty Name="AWAL" ColumnName="AWAL" />
+            <ScalarProperty Name="AKHIR" ColumnName="AKHIR" />
+            <ScalarProperty Name="SASARAN" ColumnName="SASARAN" />
+            <ScalarProperty Name="SKS_KETUA" ColumnName="SKS_KETUA" />
+            <ScalarProperty Name="SKS_ANGGOTA" ColumnName="SKS_ANGGOTA" />
+            <ScalarProperty Name="ID_ROAD_MAP" ColumnName="ID_ROAD_MAP" />
+            <ScalarProperty Name="DANA_UAJY" ColumnName="DANA_UAJY" />
+            <ScalarProperty Name="DANA_PRIBADI" ColumnName="DANA_PRIBADI" />
+            <ScalarProperty Name="DOKUMEN" ColumnName="DOKUMEN" />
+            <ScalarProperty Name="IS_DROPPED" ColumnName="IS_DROPPED" />
+            <ScalarProperty Name="ID_STATUS" ColumnName="ID_STATUS" />
+            <ScalarProperty Name="IS_CHECKED" ColumnName="IS_CHECKED" />
+            <ScalarProperty Name="IS_SETUJU_PRODI" ColumnName="IS_SETUJU_PRODI" />
+            <ScalarProperty Name="IS_SETUJU_DEKAN" ColumnName="IS_SETUJU_DEKAN" />
+            <ScalarProperty Name="IS_SETUJU_LPPM" ColumnName="IS_SETUJU_LPPM" />
+            <ScalarProperty Name="NPP_REVIEWER" ColumnName="NPP_REVIEWER" />
+            <ScalarProperty Name="DANA_SETUJU" ColumnName="DANA_SETUJU" />
+            <ScalarProperty Name="INSERT_DATE" ColumnName="INSERT_DATE" />
+            <ScalarProperty Name="IP_ADDRESS" ColumnName="IP_ADDRESS" />
+            <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_PENGABDIAN_LOLOS"><EntityTypeMapping TypeName="SIATMAXModel.TBL_PENGABDIAN_LOLOS"><MappingFragment StoreEntitySet="TBL_PENGABDIAN_LOLOS">
+            <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="NPP" ColumnName="NPP" />
+            <ScalarProperty Name="ID_SUMBER" ColumnName="ID_SUMBER" />
+            <ScalarProperty Name="ID_TAHUN_ANGGARAN" ColumnName="ID_TAHUN_ANGGARAN" />
+            <ScalarProperty Name="REVIEWER1" ColumnName="REVIEWER1" />
+            <ScalarProperty Name="REVIEWER2" ColumnName="REVIEWER2" />
+            <ScalarProperty Name="JUDUL_KEGIATAN" ColumnName="JUDUL_KEGIATAN" />
+            <ScalarProperty Name="LANDASAN_PENELITIAN" ColumnName="LANDASAN_PENELITIAN" />
+            <ScalarProperty Name="JENIS_PENGABDIAN" ColumnName="JENIS_PENGABDIAN" />
+            <ScalarProperty Name="ANGGOTA1" ColumnName="ANGGOTA1" />
+            <ScalarProperty Name="ANGGOTA1_KEAHLIAN" ColumnName="ANGGOTA1_KEAHLIAN" />
+            <ScalarProperty Name="ANGGOTA2" ColumnName="ANGGOTA2" />
+            <ScalarProperty Name="ANGGOTA2_KEAHLIAN" ColumnName="ANGGOTA2_KEAHLIAN" />
+            <ScalarProperty Name="MITRA" ColumnName="MITRA" />
+            <ScalarProperty Name="MITRA_KEAHLIAN" ColumnName="MITRA_KEAHLIAN" />
+            <ScalarProperty Name="LOKASI" ColumnName="LOKASI" />
+            <ScalarProperty Name="JARAK_PT_LOKASI" ColumnName="JARAK_PT_LOKASI" />
+            <ScalarProperty Name="OUTPUT" ColumnName="OUTPUT" />
+            <ScalarProperty Name="OUTCOME" ColumnName="OUTCOME" />
+            <ScalarProperty Name="AWAL" ColumnName="AWAL" />
+            <ScalarProperty Name="AKHIR" ColumnName="AKHIR" />
+            <ScalarProperty Name="SASARAN" ColumnName="SASARAN" />
+            <ScalarProperty Name="SKS_KETUA" ColumnName="SKS_KETUA" />
+            <ScalarProperty Name="SKS_ANGGOTA" ColumnName="SKS_ANGGOTA" />
+            <ScalarProperty Name="ID_ROAD_MAP" ColumnName="ID_ROAD_MAP" />
+            <ScalarProperty Name="DANA_UAJY" ColumnName="DANA_UAJY" />
+            <ScalarProperty Name="DANA_PRIBADI" ColumnName="DANA_PRIBADI" />
+            <ScalarProperty Name="DOKUMEN" ColumnName="DOKUMEN" />
+            <ScalarProperty Name="IS_DROPPED" ColumnName="IS_DROPPED" />
+            <ScalarProperty Name="ID_STATUS" ColumnName="ID_STATUS" />
+            <ScalarProperty Name="IS_CHECKED" ColumnName="IS_CHECKED" />
+            <ScalarProperty Name="IS_SETUJU_PRODI" ColumnName="IS_SETUJU_PRODI" />
+            <ScalarProperty Name="IS_SETUJU_DEKAN" ColumnName="IS_SETUJU_DEKAN" />
+            <ScalarProperty Name="IS_SETUJU_LPPM" ColumnName="IS_SETUJU_LPPM" />
+            <ScalarProperty Name="NPP_REVIEWER" ColumnName="NPP_REVIEWER" />
+            <ScalarProperty Name="DANA_SETUJU" ColumnName="DANA_SETUJU" />
+            <ScalarProperty Name="DANA_REKOMEN" ColumnName="DANA_REKOMEN" />
+            <ScalarProperty Name="LAPORAN1" ColumnName="LAPORAN1" />
+            <ScalarProperty Name="LAPORAN" ColumnName="LAPORAN" />
+            <ScalarProperty Name="IS_SETUJU_PUSTAKAWAN" ColumnName="IS_SETUJU_PUSTAKAWAN" />
+            <ScalarProperty Name="INSERT_DATE" ColumnName="INSERT_DATE" />
+            <ScalarProperty Name="IP_ADDRESS" ColumnName="IP_ADDRESS" />
+            <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_PERPANJANGAN_PENELITIAN"><EntityTypeMapping TypeName="SIATMAXModel.TBL_PERPANJANGAN_PENELITIAN"><MappingFragment StoreEntitySet="TBL_PERPANJANGAN_PENELITIAN">
+            <ScalarProperty Name="ID_PERPANJANGAN" ColumnName="ID_PERPANJANGAN" />
+            <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="KE" ColumnName="KE" />
+            <ScalarProperty Name="TGL_MULAI_PERPANJANG" ColumnName="TGL_MULAI_PERPANJANG" />
+            <ScalarProperty Name="TGL_SELESAI_PERPANJANG" ColumnName="TGL_SELESAI_PERPANJANG" />
+            <ScalarProperty Name="INSERT_DATE" ColumnName="INSERT_DATE" />
+            <ScalarProperty Name="IP_ADDRESS" ColumnName="IP_ADDRESS" />
+            <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_PERPANJANGAN_PENGABDIAN"><EntityTypeMapping TypeName="SIATMAXModel.TBL_PERPANJANGAN_PENGABDIAN"><MappingFragment StoreEntitySet="TBL_PERPANJANGAN_PENGABDIAN">
+            <ScalarProperty Name="ID_PERPANJANGAN" ColumnName="ID_PERPANJANGAN" />
+            <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="KE" ColumnName="KE" />
+            <ScalarProperty Name="TGL_MULAI_PERPANJANG" ColumnName="TGL_MULAI_PERPANJANG" />
+            <ScalarProperty Name="TGL_SELESAI_PERPANJANG" ColumnName="TGL_SELESAI_PERPANJANG" />
+            <ScalarProperty Name="INSERT_DATE" ColumnName="INSERT_DATE" />
+            <ScalarProperty Name="IP_ADDRESS" ColumnName="IP_ADDRESS" />
+            <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_PERSONIL_PENELITIAN"><EntityTypeMapping TypeName="SIATMAXModel.TBL_PERSONIL_PENELITIAN"><MappingFragment StoreEntitySet="TBL_PERSONIL_PENELITIAN">
+            <ScalarProperty Name="ID_PERSONIL_PENELITIAN" ColumnName="ID_PERSONIL_PENELITIAN" />
+            <ScalarProperty Name="NPP" ColumnName="NPP" />
+            <ScalarProperty Name="NAMA_LENGKAP_GELAR" ColumnName="NAMA_LENGKAP_GELAR" />
+            <ScalarProperty Name="TEMPAT_LAHIR" ColumnName="TEMPAT_LAHIR" />
+            <ScalarProperty Name="TGL_LAHIR" ColumnName="TGL_LAHIR" />
+            <ScalarProperty Name="JNS_KEL" ColumnName="JNS_KEL" />
+            <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+            <ScalarProperty Name="ID_REF_FUNGSIONAL" ColumnName="ID_REF_FUNGSIONAL" />
+            <ScalarProperty Name="ID_UNIT" ColumnName="ID_UNIT" />
+            <ScalarProperty Name="ID_UNIT_AKADEMIK" ColumnName="ID_UNIT_AKADEMIK" />
+            <ScalarProperty Name="ID_REF_GOLONGAN" ColumnName="ID_REF_GOLONGAN" />
+            <ScalarProperty Name="ID_REF_JBTN_AKADEMIK" ColumnName="ID_REF_JBTN_AKADEMIK" />
+            <ScalarProperty Name="NO_TELPON_RUMAH" ColumnName="NO_TELPON_RUMAH" />
+            <ScalarProperty Name="NO_TELPON_HP" ColumnName="NO_TELPON_HP" />
+            <ScalarProperty Name="WARGANEGARA" ColumnName="WARGANEGARA" />
+            <ScalarProperty Name="NPWP" ColumnName="NPWP" />
+            <ScalarProperty Name="NIP_PNS" ColumnName="NIP_PNS" />
+            <ScalarProperty Name="NIDN" ColumnName="NIDN" />
+            <ScalarProperty Name="ALAMAT_KOTA" ColumnName="ALAMAT_KOTA" />
+            <ScalarProperty Name="ALAMAT" ColumnName="ALAMAT" />
+            <ScalarProperty Name="ALAMAT_PROVINSI" ColumnName="ALAMAT_PROVINSI" />
+            <ScalarProperty Name="ALAMAT_KODEPOS" ColumnName="ALAMAT_KODEPOS" />
+            <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="INSTITUSI_ASAL" ColumnName="INSTITUSI_ASAL" />
+            <ScalarProperty Name="BIDANG_KEAHLIAN_PENELITIAN" ColumnName="BIDANG_KEAHLIAN_PENELITIAN" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TBL_RAB_PENELITIAN"><EntityTypeMapping TypeName="SIATMAXModel.TBL_RAB_PENELITIAN"><MappingFragment StoreEntitySet="TBL_RAB_PENELITIAN">
+            <ScalarProperty Name="ID_RAB_PENELITIAN" ColumnName="ID_RAB_PENELITIAN" />
+            <ScalarProperty Name="ID_PROPOSAL" ColumnName="ID_PROPOSAL" />
+            <ScalarProperty Name="ID_PENGELUARAN_RAB" ColumnName="ID_PENGELUARAN_RAB" />
+            <ScalarProperty Name="JUMLAH_DANA" ColumnName="JUMLAH_DANA" />
+            <ScalarProperty Name="PERSENTASE" ColumnName="PERSENTASE" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="DTL_RAB_PENGABDIAN">
+            <EntityTypeMapping TypeName="SIATMAXModel.DTL_RAB_PENGABDIAN">
+              <MappingFragment StoreEntitySet="DTL_RAB_PENGABDIAN">
+                <ScalarProperty Name="KETERANGAN" ColumnName="KETERANGAN" />
+                <ScalarProperty Name="HARGA_SATUAN" ColumnName="HARGA_SATUAN" />
+                <ScalarProperty Name="SATUAN" ColumnName="SATUAN" />
+                <ScalarProperty Name="JUMLAH" ColumnName="JUMLAH" />
+                <ScalarProperty Name="JUMLAH_DANA" ColumnName="JUMLAH_DANA" />
+                <ScalarProperty Name="ID_RAB_PENGABDIAN" ColumnName="ID_RAB_PENGABDIAN" />
+                <ScalarProperty Name="ID_DTL_RAB_PENGABDIAN" ColumnName="ID_DTL_RAB_PENGABDIAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="SIATMAXModel.DTL_RAB_PENELITIAN" Width="1.5" PointX="5.25" PointY="0.875" Height="2.0853483072916665" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.REF_KATEGORI" Width="1.5" PointX="0.75" PointY="4.75" Height="1.7566536458333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.REF_PENGELUARAN_RAB" Width="1.5" PointX="0.75" PointY="1" Height="1.9210009765624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.REF_ROAD_MAP_PENELITIAN" Width="1.5" PointX="2.75" PointY="4.75" Height="1.5923063151041657" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.REF_ROAD_MAP_PENGABDIAN" Width="1.5" PointX="4.75" PointY="4.75" Height="1.5923063151041674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.REF_SCHEDULE" Width="1.5" PointX="6.75" PointY="4.75" Height="1.7566536458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.REF_SKIM" Width="1.5" PointX="7.75" PointY="0.75" Height="1.4279589843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.REF_STATUS_PENELITIAN_PENGABDIAN" Width="1.5" PointX="0.75" PointY="7.75" Height="1.2636116536458317" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.REF_TEMA_UNIVERSITAS" Width="1.5" PointX="2.75" PointY="7.75" Height="1.4279589843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_FEEDBACK_PENELITIAN" Width="1.5" PointX="4.75" PointY="7.75" Height="1.9210009765624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_FEEDBACK_PENGABDIAN" Width="1.5" PointX="6.75" PointY="7.75" Height="1.9210009765625031" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_LAP_MONEV_PENELITIAN" Width="1.5" PointX="8.75" PointY="3.75" Height="1.9210009765625031" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_LAP_MONEV_PENGABDIAN" Width="1.5" PointX="8.75" PointY="6.75" Height="1.9210009765625031" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_MAPPING_PENELITIAN" Width="1.5" PointX="9.75" PointY="0.75" Height="1.2636116536458388" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_MAPPING_PENGABDIAN" Width="1.5" PointX="8.75" PointY="9.75" Height="1.2636116536458388" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_NILAI_REVIEW_PENELITIAN" Width="1.5" PointX="0.75" PointY="10.75" Height="4.2218636067708388" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_NILAI_REVIEW_PENGABDIAN" Width="1.5" PointX="2.75" PointY="10.75" Height="5.0436002604166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_PENELITIAN" Width="1.5" PointX="10.75" PointY="3.75" Height="7.8375048828125031" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_PENELITIAN_LOLOS" Width="1.5" PointX="4.75" PointY="10.75" Height="7.8375048828125031" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_PENGABDIAN" Width="1.5" PointX="12.75" PointY="0.75" Height="7.3444628906250067" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_PENGABDIAN_LOLOS" Width="1.5" PointX="6.75" PointY="12.75" Height="8.0018522135416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_PERPANJANGAN_PENELITIAN" Width="1.5" PointX="8.75" PointY="12.75" Height="2.2496956380208282" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_PERPANJANGAN_PENGABDIAN" Width="1.5" PointX="12.75" PointY="9.75" Height="2.2496956380208246" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_PERSONIL_PENELITIAN" Width="1.5" PointX="10.75" PointY="12.75" Height="5.0436002604166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIATMAXModel.TBL_RAB_PENELITIAN" Width="1.5" PointX="3" PointY="0.875" Height="2.0853483072916674" IsExpanded="true" />
+        <AssociationConnector Association="SIATMAXModel.FK_DTL_RAB_PENELITIAN_REF" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="1.9176741536458333" />
+          <ConnectorPoint PointX="5.25" PointY="1.9176741536458333" />
+        </AssociationConnector>
+        <AssociationConnector Association="SIATMAXModel.FK_RAB_PENELITIAN_REF" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.9605004882812498" />
+          <ConnectorPoint PointX="3" PointY="1.9605004882812498" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SIATMAXModel.DTL_RAB_PENGABDIAN" Width="1.5" PointX="13.375" PointY="12.75" Height="2.0853483072916674" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

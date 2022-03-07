@@ -1,0 +1,47 @@
+﻿/*
+* Custom Style 
+* Created : 9 October 2012
+* Author : Efan
+* 
+* Modified : 9 October 2012
+* By : Efan
+*/
+
+button:hover, input:hover
+{
+    opacity: 0.6;
+}
+input, textarea, select
+{
+    font-family: Cantarell, "Droid Sans" ,Verdana,sans-serif;
+    background-color: #65A9D7;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid #3E779D;
+    padding: 5px;
+    font-weight: bold;
+    color: white;
+}
+.button
+{
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
+    -moz-box-shadow: 0 1px 0 rgba(255,255,255,0.15);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+    border: 1px solid #025A99;
+    color: white;
+    background-color: #0064CD;
+    background-size: 100%;
+    background-image: -webkit-linear-gradient(#2DADDC,#0271BF);
+    background-image: -moz-linear-gradient(#2DADDC,#0271BF);
+    background-image: -o-linear-gradient(#2DADDC,#0271BF);
+    background-image: linear-gradient(#2DADDC,#0271BF);
+}
+select
+{
+    height: 30px;
+}
+fieldset
+{
+    border-color: #65A9D7;
+}

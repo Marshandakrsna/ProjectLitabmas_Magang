@@ -1,0 +1,1232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7D2DFB4C-7C2A-4719-94C0-F82D7835C157}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>silppm_v1e2</RootNamespace>
+    <AssemblyName>silppm_v1e2</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=4.5.7.123, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="BasicFrame.WebControls.BasicDatePicker, Version=1.4.3.40829, Culture=neutral, PublicKeyToken=e1cce521aa9b4849, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="itextsharp, Version=5.4.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>miscellaneous\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Softlib.v4, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\Softlib.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.Services" />
+    <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Data.Services.Design" />
+    <Reference Include="System.Data.SqlXml" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="adminPenelitian.aspx" />
+    <Content Include="adminPengabdian.aspx" />
+    <Content Include="css\css1.css" />
+    <Content Include="css\templatemo_style.css" />
+    <Content Include="dll\AjaxControlToolkit.dll" />
+    <Content Include="dll\BasicFrame.WebControls.BasicDatePicker.dll" />
+    <Content Include="dll\itextsharp.dll" />
+    <Content Include="dll\Softlib.v4.dll" />
+    <Content Include="images\atma jaya.png" />
+    <Content Include="images\AtmaHitamPutih.png" />
+    <Content Include="images\bg.png" />
+    <Content Include="images\footer_akhir.jpg" />
+    <Content Include="images\header1.PNG" />
+    <Content Include="images\header_akhir.jpg" />
+    <Content Include="images\list1.png" />
+    <Content Include="images\templatemo_container_bg.jpg" />
+    <Content Include="images\templatemo_dot.gif" />
+    <Content Include="images\templatemo_gray.jpg" />
+    <Content Include="images\templatemo_h1.jpg" />
+    <Content Include="images\templatemo_header.jpg" />
+    <Content Include="images\templatemo_link_hover.jpg" />
+    <Content Include="LandingPage.aspx" />
+    <Content Include="LoginExpired.aspx" />
+    <Content Include="miscellaneous\itextsharp.dll" />
+    <Content Include="PortalDekan.aspx" />
+    <Content Include="PortalProdi.aspx" />
+    <Content Include="Styles\css\960_12_col.css" />
+    <Content Include="Styles\css\960_12_col_rtl.css" />
+    <Content Include="Styles\css\960_16_col.css" />
+    <Content Include="Styles\css\960_16_col_rtl.css" />
+    <Content Include="Styles\css\fonts\eras-webfont.svg" />
+    <Content Include="Styles\css\fonts\ErasMdBTMedium-demo.html" />
+    <Content Include="Styles\css\fonts\generator_config.txt" />
+    <Content Include="Styles\css\fonts\ModalDialogs.css" />
+    <Content Include="Styles\css\fonts\specimen_files\easytabs.js" />
+    <Content Include="Styles\css\fonts\specimen_files\eras-cleartype.png" />
+    <Content Include="Styles\css\fonts\specimen_files\grid_12-825-55-15.css" />
+    <Content Include="Styles\css\fonts\specimen_files\specimen_stylesheet.css" />
+    <Content Include="Styles\css\fonts\specimen_files\volter-cleartype.png" />
+    <Content Include="Styles\css\fonts\stylesheet.css" />
+    <Content Include="Styles\css\fonts\volter-webfont.svg" />
+    <Content Include="Styles\css\fonts\VolterGoldfishRegular-demo.html" />
+    <Content Include="Styles\css\megadropdown.css" />
+    <Content Include="Styles\css\ModalDialogs.css" />
+    <Content Include="Styles\css\style.css" />
+    <Content Include="Styles\CustomStyle.css" />
+    <Content Include="Styles\design.css" />
+    <Content Include="Styles\gridviewstyle\Images\FireworksNative\HeaderChrome.png" />
+    <Content Include="Styles\gridviewstyle\Images\FireworksNative\HeaderChromeBlack.png" />
+    <Content Include="Styles\gridviewstyle\Images\FireworksNative\HeaderGamer.png" />
+    <Content Include="Styles\gridviewstyle\Images\FireworksNative\HeaderGlassBlack.png" />
+    <Content Include="Styles\gridviewstyle\Images\FireworksNative\HeaderSoftGrey.png" />
+    <Content Include="Styles\gridviewstyle\Images\FireworksNative\HeaderWhiteChrome.png" />
+    <Content Include="Styles\gridviewstyle\Images\FireworksNative\PagerGamer.png" />
+    <Content Include="Styles\gridviewstyle\Images\HeaderChrome.jpg" />
+    <Content Include="Styles\gridviewstyle\Images\HeaderChromeBlack.jpg" />
+    <Content Include="Styles\gridviewstyle\Images\HeaderGamer.jpg" />
+    <Content Include="Styles\gridviewstyle\Images\HeaderGamer_Hover.jpg" />
+    <Content Include="Styles\gridviewstyle\Images\HeaderGamer_left.jpg" />
+    <Content Include="Styles\gridviewstyle\Images\HeaderGlassBlack.jpg" />
+    <Content Include="Styles\gridviewstyle\Images\HeaderSoftGrey.jpg" />
+    <Content Include="Styles\gridviewstyle\Images\HeaderWhiteChrome.jpg" />
+    <Content Include="Styles\gridviewstyle\Images\PagerGamer.jpg" />
+    <Content Include="Styles\gridviewstyle\Images\YahooSprite.gif" />
+    <Content Include="Styles\gridviewstyle\YahooGridView.css" />
+    <Content Include="Styles\images\arrow.gif" />
+    <Content Include="Styles\images\back.png" />
+    <Content Include="Styles\images\banner.jpg" />
+    <Content Include="Styles\images\bgr.gif" />
+    <Content Include="Styles\images\down.gif" />
+    <Content Include="Styles\images\footer.jpg" />
+    <Content Include="Styles\images\header.gif" />
+    <Content Include="Styles\images\header_active.gif" />
+    <Content Include="Styles\images\header_bg.gif" />
+    <Content Include="Styles\images\ico_del.gif" />
+    <Content Include="Styles\images\kampus2-gedung-thomas-aquinas-680x453.png" />
+    <Content Include="Styles\images\Logo_UAJY.jpg" />
+    <Content Include="Styles\images\overlay.png" />
+    <Content Include="Styles\images\pix.gif" />
+    <Content Include="Styles\images\pointer.gif" />
+    <Content Include="Styles\images\space.gif" />
+    <Content Include="Styles\images\spacer.gif" />
+    <Content Include="Styles\images\user1.gif" />
+    <Content Include="Styles\jquery.js" />
+    <Content Include="Styles\menu.css" />
+    <Content Include="Styles\menu.js" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Styles\StylePopUp.css" />
+    <Content Include="KelolaReviewer.aspx" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="WebForm1.aspx" />
+    <Content Include="HomePenelitian.aspx" />
+    <Content Include="HomePengabdian.aspx" />
+    <Content Include="Profile.aspx" />
+    <Content Include="EditPenelitian.aspx" />
+    <Content Include="InternalKel.aspx" />
+    <Content Include="internalSKS.aspx" />
+    <Content Include="internalSKSKel.aspx" />
+    <Content Include="Eksternal.aspx" />
+    <Content Include="EksternalKel.aspx" />
+    <Content Include="Kerjasama.aspx" />
+    <Content Include="RevPageHome.aspx" />
+    <Content Include="REVPenelitian.aspx" />
+    <Content Include="BerhasilRev.aspx" />
+    <Content Include="REVPengabdian.aspx" />
+    <Content Include="ErrorPageRev.aspx" />
+    <Content Include="BerhasilPenelitian.aspx" />
+    <Content Include="LihatProposal.aspx" />
+    <Content Include="ErrorPeriode.aspx" />
+    <Content Include="LaporPerkembangan.aspx" />
+    <Content Include="BerhasilTolak.aspx" />
+    <Content Include="AdminKelolaUser.aspx" />
+    <Content Include="AdminKelolaPeriode.aspx" />
+    <Content Include="ErorRevisi.aspx" />
+    <Content Include="BerhasilMintaRevisi.aspx" />
+    <Content Include="AdminListUpdatePenelitian.aspx" />
+    <Content Include="AdminPreviewUpdate.aspx" />
+    <Content Include="monevPenelitian.aspx" />
+    <Content Include="LaporanPenelitian.aspx" />
+    <Content Include="ErrorLaporan.aspx" />
+    <Content Include="ListRevPengabdian.aspx" />
+    <Content Include="LihatPengabdian.aspx" />
+    <Content Include="ErrorLihatReview.aspx" />
+    <Content Include="ProdiMonevPenelitian.aspx" />
+    <Content Include="ProdiHome.aspx" />
+    <Content Include="MonevPengabdian.aspx" />
+    <Content Include="LaporanPengabdian.aspx" />
+    <Content Include="PustakaHome.aspx" />
+    <Content Include="PustakaReviewLaporanPenelitian.aspx" />
+    <Content Include="PustakaApproval.aspx" />
+    <Content Include="PustakaBerhasilApprove.aspx" />
+    <Content Include="ListRevPenelitian.aspx" />
+    <Content Include="ProdiKelolaTemaPenelitian.aspx" />
+    <Content Include="DekanHome.aspx" />
+    <Content Include="KALPPMHome.aspx" />
+    <Content Include="DekanApprovalProposal.aspx" />
+    <Content Include="DekanListReview.aspx" />
+    <Content Include="ProdiListRevApproval.aspx" />
+    <Content Include="ProdiApproval.aspx" />
+    <Content Include="ProdiAddFeedBack.aspx" />
+    <Content Include="ProdiBerhasilUpdate.aspx" />
+    <Content Include="DekanBerhasilUpdate.aspx" />
+    <Content Include="DekanAddFeedBack.aspx" />
+    <Content Include="KALPPMListRevApproval.aspx" />
+    <Content Include="KALPPMApprovalProposal.aspx" />
+    <Content Include="KALPPMBerhasilUpdate.aspx" />
+    <Content Include="PenelitianSchedule.aspx" />
+    <Content Include="KALPPMLihatHasilReview.aspx" />
+    <Content Include="AdminListKelolaReview.aspx" />
+    <Content Include="adminKelolaReview.aspx" />
+    <Content Include="AdminListJadwalPrint.aspx" />
+    <Content Include="LaporanPenelitianTahap1.aspx" />
+    <Content Include="ErrorSekuensLaporan.aspx" />
+    <Content Include="PerpanjanganPenelitian.aspx" />
+    <Content Include="ProdiKelolaTemaPengabdian.aspx" />
+    <Content Include="ProdiListAppPengabdian.aspx" />
+    <Content Include="ProdiApprovalPengabdian.aspx" />
+    <Content Include="ProdiAddFeedBackPengabdian.aspx" />
+    <Content Include="DekanListReviewPengabdian.aspx" />
+    <Content Include="DekanApprovalProposalPengabdian.aspx" />
+    <Content Include="DekanAddFeedBackPengabdian.aspx" />
+    <Content Include="KALPPMListApprovalPengabdian.aspx" />
+    <Content Include="KALPPMApprovalPengabdian.aspx" />
+    <Content Include="AdminKelolaReviewPengabdian.aspx" />
+    <Content Include="ErrorSekuensLaporanFinal.aspx" />
+    <Content Include="PengabdianSchedule.aspx" />
+    <Content Include="LaporanPengabdianTahap1.aspx" />
+    <Content Include="pustakaReviewPengabdian.aspx" />
+    <Content Include="PustakaApprovalPengabdian.aspx" />
+    <Content Include="AdminDisplayHistory.aspx" />
+    <Content Include="DekanDisplayHistoryPenelitian.aspx" />
+    <Content Include="ProdiDIsplayHistoryPenelitian.aspx" />
+    <Content Include="ErrorPenelitianSelesai.aspx" />
+    <Content Include="ErrorTidakDapatPerpanjangan.aspx" />
+    <Content Include="KALPPMDisplayHistoryPenelitian.aspx" />
+    <Content Include="DekanLihatMonev.aspx" />
+    <Content Include="KALPPMaddFeedbackPenelitian.aspx" />
+    <Content Include="ErrorLaporanTahap1.aspx" />
+    <Content Include="ErrorLaporanPengabdian.aspx" />
+    <Content Include="ErrorLaporanTahap1Pengabdian.aspx" />
+    <Content Include="ProdiMonevPengabdian.aspx" />
+    <Content Include="DekanLihatMonevPengabdian.aspx" />
+    <Content Include="AdminListUpdatePengabdian.aspx" />
+    <Content Include="PerpanjangPengabdian.aspx" />
+    <Content Include="ProdiDIsplayHistoryPengabdian.aspx" />
+    <Content Include="DekanDisplayHistoryPengabdian.aspx" />
+    <Content Include="KALPPMDisplayHistoryPengabdian.aspx" />
+    <Content Include="AdminDisplayHistoryPengabdian.aspx" />
+    <Content Include="AdminListJadwaPrintPengabdian.aspx" />
+    <Content Include="EditPengabdian.aspx" />
+    <Content Include="KALPPMLihatHasilReviewPengabdian.aspx" />
+    <Content Include="KALPPMaddFeedbackPengabdian.aspx" />
+    <Content Include="WebForm103.aspx" />
+    <Content Include="WelcomeAdmin.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="adminPenelitian.aspx.cs">
+      <DependentUpon>adminPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminPenelitian.aspx.designer.cs">
+      <DependentUpon>adminPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminPengabdian.aspx.cs">
+      <DependentUpon>adminPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminPengabdian.aspx.designer.cs">
+      <DependentUpon>adminPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\DBKoneksi.cs" />
+    <Compile Include="Entity\DTL_RAB_PENELITIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\DTL_RAB_PENGABDIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Email.cs" />
+    <Compile Include="Entity\LembagaEntity.cs" />
+    <Compile Include="Entity\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PropPen.cs" />
+    <Compile Include="Entity\PropPengab.cs" />
+    <Compile Include="DAO\Connection.cs" />
+    <Compile Include="Entity\REF_KATEGORI.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\REF_PENGELUARAN_RAB.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\REF_ROAD_MAP_PENELITIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\REF_ROAD_MAP_PENGABDIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\REF_SCHEDULE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\REF_SKIM.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\REF_STATUS_PENELITIAN_PENGABDIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\REF_TEMA_UNIVERSITAS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_FEEDBACK_PENELITIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_FEEDBACK_PENGABDIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_LAP_MONEV_PENELITIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_LAP_MONEV_PENGABDIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_MAPPING_PENELITIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_MAPPING_PENGABDIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_NILAI_REVIEW_PENELITIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_NILAI_REVIEW_PENGABDIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_PENELITIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_PENELITIAN_LOLOS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_PENGABDIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_PENGABDIAN_LOLOS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_PERPANJANGAN_PENELITIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_PERPANJANGAN_PENGABDIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_PERSONIL_PENELITIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TBL_RAB_PENELITIAN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\UserEntity.cs" />
+    <Compile Include="Homev2.Master.cs">
+      <DependentUpon>Homev2.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Homev2.Master.designer.cs">
+      <DependentUpon>Homev2.Master</DependentUpon>
+    </Compile>
+    <Compile Include="LandingPage.aspx.cs">
+      <DependentUpon>LandingPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LandingPage.aspx.designer.cs">
+      <DependentUpon>LandingPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginExpired.aspx.cs">
+      <DependentUpon>LoginExpired.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginExpired.aspx.designer.cs">
+      <DependentUpon>LoginExpired.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PortalDekan.aspx.cs">
+      <DependentUpon>PortalDekan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PortalDekan.aspx.designer.cs">
+      <DependentUpon>PortalDekan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PortalProdi.aspx.cs">
+      <DependentUpon>PortalProdi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PortalProdi.aspx.designer.cs">
+      <DependentUpon>PortalProdi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DAO\ProposalDAO.cs" />
+    <Compile Include="DAO\ProposalPengabdianDAO.cs" />
+    <Compile Include="DAO\ReviewDAO.cs" />
+    <Compile Include="DAO\UserDAO.cs" />
+    <Compile Include="KelolaReviewer.aspx.cs">
+      <DependentUpon>KelolaReviewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KelolaReviewer.aspx.designer.cs">
+      <DependentUpon>KelolaReviewer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HomePenelitian.aspx.cs">
+      <DependentUpon>HomePenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HomePenelitian.aspx.designer.cs">
+      <DependentUpon>HomePenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HomePengabdian.aspx.cs">
+      <DependentUpon>HomePengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HomePengabdian.aspx.designer.cs">
+      <DependentUpon>HomePengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditPenelitian.aspx.cs">
+      <DependentUpon>EditPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditPenelitian.aspx.designer.cs">
+      <DependentUpon>EditPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InternalKel.aspx.cs">
+      <DependentUpon>InternalKel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InternalKel.aspx.designer.cs">
+      <DependentUpon>InternalKel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="internalSKS.aspx.cs">
+      <DependentUpon>internalSKS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="internalSKS.aspx.designer.cs">
+      <DependentUpon>internalSKS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="internalSKSKel.aspx.cs">
+      <DependentUpon>internalSKSKel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="internalSKSKel.aspx.designer.cs">
+      <DependentUpon>internalSKSKel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Eksternal.aspx.cs">
+      <DependentUpon>Eksternal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Eksternal.aspx.designer.cs">
+      <DependentUpon>Eksternal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EksternalKel.aspx.cs">
+      <DependentUpon>EksternalKel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EksternalKel.aspx.designer.cs">
+      <DependentUpon>EksternalKel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Kerjasama.aspx.cs">
+      <DependentUpon>Kerjasama.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Kerjasama.aspx.designer.cs">
+      <DependentUpon>Kerjasama.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RevPageHome.aspx.cs">
+      <DependentUpon>RevPageHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RevPageHome.aspx.designer.cs">
+      <DependentUpon>RevPageHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="REVPenelitian.aspx.cs">
+      <DependentUpon>REVPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="REVPenelitian.aspx.designer.cs">
+      <DependentUpon>REVPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BerhasilRev.aspx.cs">
+      <DependentUpon>BerhasilRev.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BerhasilRev.aspx.designer.cs">
+      <DependentUpon>BerhasilRev.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="REVPengabdian.aspx.cs">
+      <DependentUpon>REVPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="REVPengabdian.aspx.designer.cs">
+      <DependentUpon>REVPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPageRev.aspx.cs">
+      <DependentUpon>ErrorPageRev.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPageRev.aspx.designer.cs">
+      <DependentUpon>ErrorPageRev.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BerhasilPenelitian.aspx.cs">
+      <DependentUpon>BerhasilPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BerhasilPenelitian.aspx.designer.cs">
+      <DependentUpon>BerhasilPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LihatProposal.aspx.cs">
+      <DependentUpon>LihatProposal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LihatProposal.aspx.designer.cs">
+      <DependentUpon>LihatProposal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPeriode.aspx.cs">
+      <DependentUpon>ErrorPeriode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPeriode.aspx.designer.cs">
+      <DependentUpon>ErrorPeriode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LaporPerkembangan.aspx.cs">
+      <DependentUpon>LaporPerkembangan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LaporPerkembangan.aspx.designer.cs">
+      <DependentUpon>LaporPerkembangan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BerhasilTolak.aspx.cs">
+      <DependentUpon>BerhasilTolak.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BerhasilTolak.aspx.designer.cs">
+      <DependentUpon>BerhasilTolak.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminKelolaUser.aspx.cs">
+      <DependentUpon>AdminKelolaUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminKelolaUser.aspx.designer.cs">
+      <DependentUpon>AdminKelolaUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminKelolaPeriode.aspx.cs">
+      <DependentUpon>AdminKelolaPeriode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminKelolaPeriode.aspx.designer.cs">
+      <DependentUpon>AdminKelolaPeriode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErorRevisi.aspx.cs">
+      <DependentUpon>ErorRevisi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErorRevisi.aspx.designer.cs">
+      <DependentUpon>ErorRevisi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BerhasilMintaRevisi.aspx.cs">
+      <DependentUpon>BerhasilMintaRevisi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BerhasilMintaRevisi.aspx.designer.cs">
+      <DependentUpon>BerhasilMintaRevisi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminListUpdatePenelitian.aspx.cs">
+      <DependentUpon>AdminListUpdatePenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminListUpdatePenelitian.aspx.designer.cs">
+      <DependentUpon>AdminListUpdatePenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPreviewUpdate.aspx.cs">
+      <DependentUpon>AdminPreviewUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPreviewUpdate.aspx.designer.cs">
+      <DependentUpon>AdminPreviewUpdate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="monevPenelitian.aspx.cs">
+      <DependentUpon>monevPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="monevPenelitian.aspx.designer.cs">
+      <DependentUpon>monevPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LaporanPenelitian.aspx.cs">
+      <DependentUpon>LaporanPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LaporanPenelitian.aspx.designer.cs">
+      <DependentUpon>LaporanPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorLaporan.aspx.cs">
+      <DependentUpon>ErrorLaporan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorLaporan.aspx.designer.cs">
+      <DependentUpon>ErrorLaporan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListRevPengabdian.aspx.cs">
+      <DependentUpon>ListRevPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListRevPengabdian.aspx.designer.cs">
+      <DependentUpon>ListRevPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LihatPengabdian.aspx.cs">
+      <DependentUpon>LihatPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LihatPengabdian.aspx.designer.cs">
+      <DependentUpon>LihatPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorLihatReview.aspx.cs">
+      <DependentUpon>ErrorLihatReview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorLihatReview.aspx.designer.cs">
+      <DependentUpon>ErrorLihatReview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdiMonevPenelitian.aspx.cs">
+      <DependentUpon>ProdiMonevPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdiMonevPenelitian.aspx.designer.cs">
+      <DependentUpon>ProdiMonevPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdiHome.aspx.cs">
+      <DependentUpon>ProdiHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdiHome.aspx.designer.cs">
+      <DependentUpon>ProdiHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MonevPengabdian.aspx.cs">
+      <DependentUpon>MonevPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MonevPengabdian.aspx.designer.cs">
+      <DependentUpon>MonevPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LaporanPengabdian.aspx.cs">
+      <DependentUpon>LaporanPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LaporanPengabdian.aspx.designer.cs">
+      <DependentUpon>LaporanPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PustakaHome.aspx.cs">
+      <DependentUpon>PustakaHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PustakaHome.aspx.designer.cs">
+      <DependentUpon>PustakaHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PustakaReviewLaporanPenelitian.aspx.cs">
+      <DependentUpon>PustakaReviewLaporanPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PustakaReviewLaporanPenelitian.aspx.designer.cs">
+      <DependentUpon>PustakaReviewLaporanPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PustakaApproval.aspx.cs">
+      <DependentUpon>PustakaApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PustakaApproval.aspx.designer.cs">
+      <DependentUpon>PustakaApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PustakaBerhasilApprove.aspx.cs">
+      <DependentUpon>PustakaBerhasilApprove.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PustakaBerhasilApprove.aspx.designer.cs">
+      <DependentUpon>PustakaBerhasilApprove.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListRevPenelitian.aspx.cs">
+      <DependentUpon>ListRevPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListRevPenelitian.aspx.designer.cs">
+      <DependentUpon>ListRevPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdiKelolaTemaPenelitian.aspx.cs">
+      <DependentUpon>ProdiKelolaTemaPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdiKelolaTemaPenelitian.aspx.designer.cs">
+      <DependentUpon>ProdiKelolaTemaPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DekanHome.aspx.cs">
+      <DependentUpon>DekanHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DekanHome.aspx.designer.cs">
+      <DependentUpon>DekanHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KALPPMHome.aspx.cs">
+      <DependentUpon>KALPPMHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KALPPMHome.aspx.designer.cs">
+      <DependentUpon>KALPPMHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DekanApprovalProposal.aspx.cs">
+      <DependentUpon>DekanApprovalProposal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DekanApprovalProposal.aspx.designer.cs">
+      <DependentUpon>DekanApprovalProposal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DekanListReview.aspx.cs">
+      <DependentUpon>DekanListReview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DekanListReview.aspx.designer.cs">
+      <DependentUpon>DekanListReview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdiListRevApproval.aspx.cs">
+      <DependentUpon>ProdiListRevApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdiListRevApproval.aspx.designer.cs">
+      <DependentUpon>ProdiListRevApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdiApproval.aspx.cs">
+      <DependentUpon>ProdiApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdiApproval.aspx.designer.cs">
+      <DependentUpon>ProdiApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdiAddFeedBack.aspx.cs">
+      <DependentUpon>ProdiAddFeedBack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdiAddFeedBack.aspx.designer.cs">
+      <DependentUpon>ProdiAddFeedBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdiBerhasilUpdate.aspx.cs">
+      <DependentUpon>ProdiBerhasilUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdiBerhasilUpdate.aspx.designer.cs">
+      <DependentUpon>ProdiBerhasilUpdate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DekanBerhasilUpdate.aspx.cs">
+      <DependentUpon>DekanBerhasilUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DekanBerhasilUpdate.aspx.designer.cs">
+      <DependentUpon>DekanBerhasilUpdate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DekanAddFeedBack.aspx.cs">
+      <DependentUpon>DekanAddFeedBack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DekanAddFeedBack.aspx.designer.cs">
+      <DependentUpon>DekanAddFeedBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KALPPMListRevApproval.aspx.cs">
+      <DependentUpon>KALPPMListRevApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KALPPMListRevApproval.aspx.designer.cs">
+      <DependentUpon>KALPPMListRevApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KALPPMApprovalProposal.aspx.cs">
+      <DependentUpon>KALPPMApprovalProposal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KALPPMApprovalProposal.aspx.designer.cs">
+      <DependentUpon>KALPPMApprovalProposal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KALPPMBerhasilUpdate.aspx.cs">
+      <DependentUpon>KALPPMBerhasilUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KALPPMBerhasilUpdate.aspx.designer.cs">
+      <DependentUpon>KALPPMBerhasilUpdate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PenelitianSchedule.aspx.cs">
+      <DependentUpon>PenelitianSchedule.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PenelitianSchedule.aspx.designer.cs">
+      <DependentUpon>PenelitianSchedule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KALPPMLihatHasilReview.aspx.cs">
+      <DependentUpon>KALPPMLihatHasilReview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KALPPMLihatHasilReview.aspx.designer.cs">
+      <DependentUpon>KALPPMLihatHasilReview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminListKelolaReview.aspx.cs">
+      <DependentUpon>AdminListKelolaReview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminListKelolaReview.aspx.designer.cs">
+      <DependentUpon>AdminListKelolaReview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminKelolaReview.aspx.cs">
+      <DependentUpon>adminKelolaReview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminKelolaReview.aspx.designer.cs">
+      <DependentUpon>adminKelolaReview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminListJadwalPrint.aspx.cs">
+      <DependentUpon>AdminListJadwalPrint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminListJadwalPrint.aspx.designer.cs">
+      <DependentUpon>AdminListJadwalPrint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LaporanPenelitianTahap1.aspx.cs">
+      <DependentUpon>LaporanPenelitianTahap1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LaporanPenelitianTahap1.aspx.designer.cs">
+      <DependentUpon>LaporanPenelitianTahap1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorSekuensLaporan.aspx.cs">
+      <DependentUpon>ErrorSekuensLaporan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorSekuensLaporan.aspx.designer.cs">
+      <DependentUpon>ErrorSekuensLaporan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PerpanjanganPenelitian.aspx.cs">
+      <DependentUpon>PerpanjanganPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PerpanjanganPenelitian.aspx.designer.cs">
+      <DependentUpon>PerpanjanganPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdiKelolaTemaPengabdian.aspx.cs">
+      <DependentUpon>ProdiKelolaTemaPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdiKelolaTemaPengabdian.aspx.designer.cs">
+      <DependentUpon>ProdiKelolaTemaPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdiListAppPengabdian.aspx.cs">
+      <DependentUpon>ProdiListAppPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdiListAppPengabdian.aspx.designer.cs">
+      <DependentUpon>ProdiListAppPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdiApprovalPengabdian.aspx.cs">
+      <DependentUpon>ProdiApprovalPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdiApprovalPengabdian.aspx.designer.cs">
+      <DependentUpon>ProdiApprovalPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdiAddFeedBackPengabdian.aspx.cs">
+      <DependentUpon>ProdiAddFeedBackPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdiAddFeedBackPengabdian.aspx.designer.cs">
+      <DependentUpon>ProdiAddFeedBackPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DekanListReviewPengabdian.aspx.cs">
+      <DependentUpon>DekanListReviewPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DekanListReviewPengabdian.aspx.designer.cs">
+      <DependentUpon>DekanListReviewPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DekanApprovalProposalPengabdian.aspx.cs">
+      <DependentUpon>DekanApprovalProposalPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DekanApprovalProposalPengabdian.aspx.designer.cs">
+      <DependentUpon>DekanApprovalProposalPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DekanAddFeedBackPengabdian.aspx.cs">
+      <DependentUpon>DekanAddFeedBackPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DekanAddFeedBackPengabdian.aspx.designer.cs">
+      <DependentUpon>DekanAddFeedBackPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KALPPMListApprovalPengabdian.aspx.cs">
+      <DependentUpon>KALPPMListApprovalPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KALPPMListApprovalPengabdian.aspx.designer.cs">
+      <DependentUpon>KALPPMListApprovalPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KALPPMApprovalPengabdian.aspx.cs">
+      <DependentUpon>KALPPMApprovalPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KALPPMApprovalPengabdian.aspx.designer.cs">
+      <DependentUpon>KALPPMApprovalPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminKelolaReviewPengabdian.aspx.cs">
+      <DependentUpon>AdminKelolaReviewPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminKelolaReviewPengabdian.aspx.designer.cs">
+      <DependentUpon>AdminKelolaReviewPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorSekuensLaporanFinal.aspx.cs">
+      <DependentUpon>ErrorSekuensLaporanFinal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorSekuensLaporanFinal.aspx.designer.cs">
+      <DependentUpon>ErrorSekuensLaporanFinal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PengabdianSchedule.aspx.cs">
+      <DependentUpon>PengabdianSchedule.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PengabdianSchedule.aspx.designer.cs">
+      <DependentUpon>PengabdianSchedule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LaporanPengabdianTahap1.aspx.cs">
+      <DependentUpon>LaporanPengabdianTahap1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LaporanPengabdianTahap1.aspx.designer.cs">
+      <DependentUpon>LaporanPengabdianTahap1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pustakaReviewPengabdian.aspx.cs">
+      <DependentUpon>pustakaReviewPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pustakaReviewPengabdian.aspx.designer.cs">
+      <DependentUpon>pustakaReviewPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PustakaApprovalPengabdian.aspx.cs">
+      <DependentUpon>PustakaApprovalPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PustakaApprovalPengabdian.aspx.designer.cs">
+      <DependentUpon>PustakaApprovalPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDisplayHistory.aspx.cs">
+      <DependentUpon>AdminDisplayHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDisplayHistory.aspx.designer.cs">
+      <DependentUpon>AdminDisplayHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DekanDisplayHistoryPenelitian.aspx.cs">
+      <DependentUpon>DekanDisplayHistoryPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DekanDisplayHistoryPenelitian.aspx.designer.cs">
+      <DependentUpon>DekanDisplayHistoryPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdiDIsplayHistoryPenelitian.aspx.cs">
+      <DependentUpon>ProdiDIsplayHistoryPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdiDIsplayHistoryPenelitian.aspx.designer.cs">
+      <DependentUpon>ProdiDIsplayHistoryPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPenelitianSelesai.aspx.cs">
+      <DependentUpon>ErrorPenelitianSelesai.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPenelitianSelesai.aspx.designer.cs">
+      <DependentUpon>ErrorPenelitianSelesai.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorTidakDapatPerpanjangan.aspx.cs">
+      <DependentUpon>ErrorTidakDapatPerpanjangan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorTidakDapatPerpanjangan.aspx.designer.cs">
+      <DependentUpon>ErrorTidakDapatPerpanjangan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KALPPMDisplayHistoryPenelitian.aspx.cs">
+      <DependentUpon>KALPPMDisplayHistoryPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KALPPMDisplayHistoryPenelitian.aspx.designer.cs">
+      <DependentUpon>KALPPMDisplayHistoryPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DekanLihatMonev.aspx.cs">
+      <DependentUpon>DekanLihatMonev.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DekanLihatMonev.aspx.designer.cs">
+      <DependentUpon>DekanLihatMonev.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KALPPMaddFeedbackPenelitian.aspx.cs">
+      <DependentUpon>KALPPMaddFeedbackPenelitian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KALPPMaddFeedbackPenelitian.aspx.designer.cs">
+      <DependentUpon>KALPPMaddFeedbackPenelitian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorLaporanTahap1.aspx.cs">
+      <DependentUpon>ErrorLaporanTahap1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorLaporanTahap1.aspx.designer.cs">
+      <DependentUpon>ErrorLaporanTahap1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorLaporanPengabdian.aspx.cs">
+      <DependentUpon>ErrorLaporanPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorLaporanPengabdian.aspx.designer.cs">
+      <DependentUpon>ErrorLaporanPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorLaporanTahap1Pengabdian.aspx.cs">
+      <DependentUpon>ErrorLaporanTahap1Pengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorLaporanTahap1Pengabdian.aspx.designer.cs">
+      <DependentUpon>ErrorLaporanTahap1Pengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdiMonevPengabdian.aspx.cs">
+      <DependentUpon>ProdiMonevPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdiMonevPengabdian.aspx.designer.cs">
+      <DependentUpon>ProdiMonevPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DekanLihatMonevPengabdian.aspx.cs">
+      <DependentUpon>DekanLihatMonevPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DekanLihatMonevPengabdian.aspx.designer.cs">
+      <DependentUpon>DekanLihatMonevPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminListUpdatePengabdian.aspx.cs">
+      <DependentUpon>AdminListUpdatePengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminListUpdatePengabdian.aspx.designer.cs">
+      <DependentUpon>AdminListUpdatePengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PerpanjangPengabdian.aspx.cs">
+      <DependentUpon>PerpanjangPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PerpanjangPengabdian.aspx.designer.cs">
+      <DependentUpon>PerpanjangPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdiDIsplayHistoryPengabdian.aspx.cs">
+      <DependentUpon>ProdiDIsplayHistoryPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdiDIsplayHistoryPengabdian.aspx.designer.cs">
+      <DependentUpon>ProdiDIsplayHistoryPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DekanDisplayHistoryPengabdian.aspx.cs">
+      <DependentUpon>DekanDisplayHistoryPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DekanDisplayHistoryPengabdian.aspx.designer.cs">
+      <DependentUpon>DekanDisplayHistoryPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KALPPMDisplayHistoryPengabdian.aspx.cs">
+      <DependentUpon>KALPPMDisplayHistoryPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KALPPMDisplayHistoryPengabdian.aspx.designer.cs">
+      <DependentUpon>KALPPMDisplayHistoryPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDisplayHistoryPengabdian.aspx.cs">
+      <DependentUpon>AdminDisplayHistoryPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDisplayHistoryPengabdian.aspx.designer.cs">
+      <DependentUpon>AdminDisplayHistoryPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminListJadwaPrintPengabdian.aspx.cs">
+      <DependentUpon>AdminListJadwaPrintPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminListJadwaPrintPengabdian.aspx.designer.cs">
+      <DependentUpon>AdminListJadwaPrintPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditPengabdian.aspx.cs">
+      <DependentUpon>EditPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditPengabdian.aspx.designer.cs">
+      <DependentUpon>EditPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KALPPMLihatHasilReviewPengabdian.aspx.cs">
+      <DependentUpon>KALPPMLihatHasilReviewPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KALPPMLihatHasilReviewPengabdian.aspx.designer.cs">
+      <DependentUpon>KALPPMLihatHasilReviewPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KALPPMaddFeedbackPengabdian.aspx.cs">
+      <DependentUpon>KALPPMaddFeedbackPengabdian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KALPPMaddFeedbackPengabdian.aspx.designer.cs">
+      <DependentUpon>KALPPMaddFeedbackPengabdian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm103.aspx.cs">
+      <DependentUpon>WebForm103.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm103.aspx.designer.cs">
+      <DependentUpon>WebForm103.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WelcomeAdmin.aspx.cs">
+      <DependentUpon>WelcomeAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WelcomeAdmin.aspx.designer.cs">
+      <DependentUpon>WelcomeAdmin.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Homev2.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <EntityDeploy Include="Entity\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Entity\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Entity\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </None>
+    <None Include="Styles\css\fonts\eras-webfont.eot" />
+    <None Include="Styles\css\fonts\eras-webfont.ttf" />
+    <None Include="Styles\css\fonts\eras-webfont.woff" />
+    <None Include="Styles\css\fonts\volter-webfont.eot" />
+    <None Include="Styles\css\fonts\volter-webfont.ttf" />
+    <None Include="Styles\css\fonts\volter-webfont.woff" />
+    <None Include="Styles\css\volter.ttf" />
+    <None Include="Styles\gridviewstyle\Images\PhotoshopNative\YahooSprite.psd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UI\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58837</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

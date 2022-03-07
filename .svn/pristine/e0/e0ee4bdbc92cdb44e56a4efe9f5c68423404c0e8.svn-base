@@ -1,0 +1,879 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using silppm_v1e2.Entity;
+using System.Data;
+using System.Windows.Forms;
+using System.Net.Mail;
+
+namespace silppm_v1e2
+{
+    public partial class adminREVPenelitian : System.Web.UI.Page
+    {
+        private DataTable propDS = new DataTable();
+        private DataTable dtDana = new DataTable();
+        private string  index;//,tmpKeputusan;
+        private ProposalDAO prop = new ProposalDAO();
+        private UserDAO datauser = new UserDAO();
+        private ReviewDAO rev = new ReviewDAO();
+        private string tampungstatus,tampungidProposal,namareviewer;
+        private int flag;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (ScriptManager.GetCurrent(Page) == null)
+            {
+                Page.Form.Controls.AddAt(0, new ScriptManager());
+            }
+
+
+
+            if (Session["userdata"] != null)
+            {
+                
+            }
+            else
+            {
+                Response.Redirect("LoginExpired.aspx");
+            }
+
+        }
+
+        protected void txtNppReviewer_TextChanged(object sender, EventArgs e)
+        {
+            tampungidProposal = Request.QueryString["id"];
+            UserEntity ue = Session["userdata"] as UserEntity;
+
+            namareviewer = ue.NAMA;
+            propDS = prop.getAllDataProposal(txtNppReviewer.Text);
+            //lblPeriode.Text = prop.getNamaPeriodeByIDProposal(tampungidProposal);
+            lblJudul.Text = propDS.Rows[0][1].ToString();
+            //txtLokasi.Text = propDS.Tables[0].Rows[0][4].ToString();
+            lblWaktu.Text = propDS.Rows[0][6].ToString();
+            lblNama.Text = prop.getNamaDosenbyIDProposal_Penelitian(tampungidProposal);
+            double tmpdana = Convert.ToDouble(propDS.Rows[0][7].ToString());
+            Lbldanausulan.Text = string.Format("{0:##,###}", tmpdana);
+            txtBiayaRekomen.Text = tmpdana.ToString();
+            tampungstatus = prop.getStatusPenelitianByID(tampungidProposal);
+            //tmpusername = prop.getusernameByIDProposal(tampungidProposal);
+            lblFakDosen.Text = datauser.getFakultasByUsername(txtNppReviewer.Text);
+            lblProdDosen.Text = datauser.getjurusanByUsername(txtNppReviewer.Text);
+            lblJenisPenelitian.Text = prop.getJenisByID(tampungidProposal);
+            txtAngota2.Text = datauser.getNamaByNPP(prop.getIDREV1ByID(tampungidProposal));
+            txtAnggota3.Text = datauser.getNamaByNPP(prop.getIDREV2ByID(tampungidProposal));
+            //hdnUsername.Value = tmpusername;
+            hidden1.Value = tampungidProposal;
+            LbldanaSetuju.Text = string.Format("{0:##,###}", prop.getBiayaDisetujui(tampungidProposal));
+            double tmp = prop.getBiayaDisetujui(tampungidProposal), tmphasil, tmp5, dana70, dana30;
+            tmp5 = 0.05 * tmp;
+            lblPajak.Text = string.Format("{0:##,###}", tmp5);
+            tmphasil = tmp - tmp5;
+            dana70 = 0.7 * tmphasil;
+            dana30 = 0.3 * tmphasil;
+            lbl70.Text = string.Format("{0:##,###}", dana70);
+            lbl30.Text = string.Format("{0:##,###}", dana30);
+            txtSkor1_SelectedIndexChanged(sender, e);
+            txtSkor2_SelectedIndexChanged(sender, e);
+            txtSkor3_SelectedIndexChanged(sender, e);
+            txtSkor4_SelectedIndexChanged(sender, e);
+            txtSkor5_SelectedIndexChanged(sender, e);
+            txtSkor6_SelectedIndexChanged(sender, e);
+            txtSkor7_SelectedIndexChanged(sender, e);
+        }
+
+        protected void btnKonfirmasi_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void btnSimpan_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void btnbatal_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void txtBiayaSetuju_TextChanged(object sender, EventArgs e)
+        {
+            
+            
+        }
+
+       
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            Response.Clear();
+            Response.Buffer = true;
+            Response.Charset = "";
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.ContentType = "application/pdf";
+            byte[] temp = prop.getPropsalPenelitian(hidden1.Value);
+            if (temp != null)
+            {
+                Response.BinaryWrite(temp);
+                Response.End();
+            }
+            else
+                return;
+        }
+
+        private void masukkanNilai() {
+            
+        }
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            tampungstatus = prop.getStatusPenelitianByID(hidden1.Value);
+            double tmpSkor1, tmpSkor2, tmpSkor3, tmpSkor4, tmpSkor5, tmpSkor6, tmpSkor7;
+            int rek, set = Convert.ToInt32(prop.getBiayaDisetujui(tampungidProposal));
+            double.TryParse(Label1.Text, out tmpSkor1);
+            double.TryParse(Label2.Text, out tmpSkor2);
+            double.TryParse(Label3.Text, out tmpSkor3);
+            double.TryParse(Label4.Text, out tmpSkor4);
+            double.TryParse(Label5.Text, out tmpSkor5);
+            double.TryParse(Label6.Text, out tmpSkor6);
+            double.TryParse(Label7.Text, out tmpSkor7);
+            int.TryParse(txtBiayaRekomen.Text, out rek);
+
+            int ctrev = 0;
+            try
+            {
+                ctrev = rev.getMaxctRev(hidden1.Value, txtNppReviewer.Text);
+                ctrev += 1;
+            }
+            catch
+            {
+
+            }
+            if (rek > 0)
+            {
+                if (rev.addNilaiPenelitian(hidden1.Value, txtNppReviewer.Text, ctrev, tmpSkor1,
+                    tmpSkor2, tmpSkor3, tmpSkor4,tmpSkor5, tmpSkor6, tmpSkor7, txtJusti1.Text, txtJusti2.Text, 
+                    txtJusti3.Text, txtJusti4.Text, txtJusti5.Text, txtJusti6.Text, txtJusti7.Text, rek, set))
+                {
+                   DataTable dt = rev.getRekapNilai(hidden1.Value);
+                    if(dt.Rows.Count>0){
+                        string nilai =  dt.Rows[0]["nilai"].ToString();
+                        string jumlah = dt.Rows[0]["jumlah"].ToString();
+                        //jika jumlah bernilai 2 berarti semua reviewer sudah input nilai
+                        if (Int32.Parse(jumlah) == 2) {
+                            //jika nilai lebih besar sama dengan 490 diterima
+                            if (Int32.Parse(nilai) >= 490)
+                            {
+                                prop.UpdateStatusDiterima(hidden1.Value); 
+                                prop.addProposalLolos(hidden1.Value, Convert.ToInt32(txtBiayaRekomen.Text), 0, 0);
+                                              
+                                sendEmailDiterima();
+                                Response.Redirect("BerhasilRev.aspx");
+                            }
+                            else
+                            {
+                                int cek = 0;
+                                prop.updateStatusDITOLAK(cek,hidden1.Value);
+                                sendEmailDitolak();
+                                Response.Redirect("BerhasilRev.aspx");
+                            }
+                        }
+                    }
+
+                }
+            }
+            else {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+                          "alert('Biaya rekomendasi harus diisi!');", true);
+            }
+        }
+        public void sendEmailDiterima()
+        {
+            string email = datauser.getEmailbyIDenelitian(tampungidProposal);
+
+            string nama = datauser.getNamaByIDPenelitian(tampungidProposal);
+            string namaProdi = datauser.getNamaByNPP(txtNppReviewer.Text);
+            string judul = prop.getjudulByID(tampungidProposal);
+
+
+            MailMessage mail = new MailMessage();
+            mail.To.Add(email);
+            mail.From = new MailAddress(Email.emailAccount);
+            mail.Subject = "[Pemberitahuan] Selamat Proposal anda " + judul + " mendapatkan approval dari Assesor";
+
+            string Body = @"Selamat " + nama
+                + ",<br/> Proposal anda telah mendapatkan persetujuan dari Assessor &#40;" + namaProdi + "&#41;. <br/>"
+                + "<br/>Judul : " + judul
+                + "  <br/> Selanjutnya silahkan tunggu konfirmasi dari  KA LPPM untuk mendapatkan persetujuan dana.<br/> Terimakasih.";
+            mail.Body = Body;
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = Email.emailHost;
+            smtp.Port = Convert.ToInt32(Email.emailPort);
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential(Email.emailAccount, Email.emailPassword);
+            smtp.EnableSsl = false;
+
+            try
+            {
+                smtp.Send(mail);
+                KirimEmailKALPPM();
+            }
+            catch (System.Net.Mail.SmtpFailedRecipientsException recExc)
+            {
+                for (int recipient = 0; recipient < recExc.InnerExceptions.Length - 1; recipient++)
+                {
+                    System.Net.Mail.SmtpStatusCode statusCode;
+                    //Each InnerException is an System.Net.Mail.SmtpFailed RecipientException
+                    statusCode = recExc.InnerExceptions[recipient].StatusCode;
+
+                    if ((statusCode == System.Net.Mail.SmtpStatusCode.MailboxBusy) || (statusCode == System.Net.Mail.SmtpStatusCode.MailboxUnavailable))
+                    {
+                        //Log this to event log: recExc.InnerExceptions[recipient].FailedRecipient
+                        System.Threading.Thread.Sleep(5000);
+                        smtp.Send(mail);
+                        KirimEmailKALPPM();
+                    }
+                    else
+                    {
+                        //Log error to event log.
+                        //recExc.InnerExceptions[recipient].StatusCode or use statusCode
+                    }
+
+                }
+            }
+            //General SMTP execptions
+            catch (System.Net.Mail.SmtpException)
+            {
+                //Log error to event log using StatusCode information in
+                //smtpExc.StatusCode
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+               "alert('Gagal Mengirim Email! Periksa Koneksi Internet Anda!');", true);
+                // System.Windows.Forms.MessageBox.Show("", "Gagal", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+
+            }
+            catch (Exception)
+            {
+                //Log error to event log.
+            }
+            //Response.Redirect("BerhasilRev.aspx");
+        }
+        public void sendEmailDitolak()
+        {
+            string email = datauser.getEmailbyIDenelitian(tampungidProposal);
+
+            string nama = datauser.getNamaByIDPenelitian(tampungidProposal);
+            string namaProdi = datauser.getNamaByNPP(txtNppReviewer.Text);
+            string judul = prop.getjudulByID(tampungidProposal);
+            //string password = alumniMgr.getPassByUser(username);
+
+            MailMessage mail = new MailMessage();
+            mail.To.Add(email);
+            mail.From = new MailAddress(Email.emailAccount);
+            mail.Subject = "[Pemberitahuan] Konfirmasi Proposal anda " + judul + ". SILPPM ";
+
+            string Body = @"Maaf " + nama
+                + ",<br/> Proposal anda belum dapat melanjutkan ke proses selanjutnya dari hasil review Assessor &#40;" + namaProdi + "&#41;. <br/>"
+                + "<br/>Judul : " + judul
+                + "  <br/> <br/> Terimakasih.";
+            mail.Body = Body;
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = Email.emailHost;
+            smtp.Port = Convert.ToInt32(Email.emailPort);
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential(Email.emailAccount, Email.emailPassword);
+            smtp.EnableSsl = false;
+
+            try
+            {
+                smtp.Send(mail);
+            }
+            catch (System.Net.Mail.SmtpFailedRecipientsException recExc)
+            {
+                for (int recipient = 0; recipient < recExc.InnerExceptions.Length - 1; recipient++)
+                {
+                    System.Net.Mail.SmtpStatusCode statusCode;
+                    //Each InnerException is an System.Net.Mail.SmtpFailed RecipientException
+                    statusCode = recExc.InnerExceptions[recipient].StatusCode;
+
+                    if ((statusCode == System.Net.Mail.SmtpStatusCode.MailboxBusy) || (statusCode == System.Net.Mail.SmtpStatusCode.MailboxUnavailable))
+                    {
+                        //Log this to event log: recExc.InnerExceptions[recipient].FailedRecipient
+                        System.Threading.Thread.Sleep(5000);
+                        smtp.Send(mail);
+                    }
+                    else
+                    {
+                        //Log error to event log.
+                        //recExc.InnerExceptions[recipient].StatusCode or use statusCode
+                    }
+
+                }
+            }
+            //General SMTP execptions
+            catch (System.Net.Mail.SmtpException)
+            {
+                //Log error to event log using StatusCode information in
+                //smtpExc.StatusCode
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+              "alert('Gagal Mengirim Email! Periksa Koneksi Internet Anda!');", true);
+                // System.Windows.Forms.MessageBox.Show("", "Gagal", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+
+            }
+            catch (Exception)
+            {
+                //Log error to event log.
+            }
+        }
+        //protected void btnSave_Click(object sender, EventArgs e)
+        //{
+        //    tampungstatus = prop.getStatusPenelitianByID(hidden1.Value);
+        //    //string TmpNPPRev = prop.getNPPReviewerNama(namareviewer);
+        //    jumlah();
+        //    //if (tampungstatus == "Menunggu Review Assesor")
+        //    //{
+        //    //    //update ke review 2
+        //    //    if (prop.ReviewProposalPenelitian(hidden1.Value, tmpnppreviewer))
+        //    //    {   //insert detail penilaian ke db
+        //            double tmpSkor1, tmpSkor2, tmpSkor3, tmpSkor4, tmpSkor5, tmpSkor6, tmpSkor7;
+        //            int rek, set = Convert.ToInt32(prop.getBiayaDisetujui(tampungidProposal));
+        //            double.TryParse(Label1.Text, out tmpSkor1);
+        //            double.TryParse(Label2.Text, out tmpSkor2);
+        //            double.TryParse(Label3.Text, out tmpSkor3);
+        //            double.TryParse(Label4.Text, out tmpSkor4);
+        //            double.TryParse(Label5.Text, out tmpSkor5);
+        //            double.TryParse(Label6.Text, out tmpSkor6);
+        //            double.TryParse(Label7.Text, out tmpSkor7);
+        //            int.TryParse(txtBiayaRekomen.Text, out rek);
+
+        //            int ctrev = 0;
+        //            try
+        //            {
+        //                ctrev = rev.getMaxctRev(hidden1.Value, tmpnppreviewer);
+        //                ctrev += 1;
+        //            }
+        //            catch
+        //            {
+
+        //            }
+        //            if (rev.addNilaiPenelitian(hidden1.Value, tmpnppreviewer, ctrev, tmpSkor1,
+        //        tmpSkor2, tmpSkor3, tmpSkor4,
+        //        tmpSkor5, tmpSkor6, tmpSkor7, txtJusti1.Text, txtJusti2.Text, txtJusti3.Text, txtJusti4.Text, txtJusti5.Text, txtJusti6.Text, txtJusti7.Text, rek, set))
+        //            {
+        //                //if (Convert.ToInt32(Label8.Text) >= 490)
+        //                //    tmpKeputusan = "Ya";
+        //                //else tmpKeputusan = "Tidak";
+        //        //        if (tmpKeputusan == "Ya")
+        //        //        {
+        //        //            if (prop.ReviewProposalPenelitian(hidden1.Value, tmpnppreviewer))
+        //        //            {
+        //        //                string email = datauser.getEmailbyIDenelitian(tampungidProposal);
+
+        //        //                string nama = datauser.getNamaByIDPenelitian(tampungidProposal);
+        //        //                string namaProdi = datauser.getNamaByNPP(tmpnppreviewer);
+        //        //                string judul = prop.getjudulByID(tampungidProposal);
+
+
+        //        //                MailMessage mail = new MailMessage();
+        //        //                mail.To.Add(email);
+        //        //                mail.From = new MailAddress(Email.emailAccount);
+        //        //                mail.Subject = "[Pemberitahuan] Selamat Proposal anda " + judul + " mendapatkan approval dari Assesor";
+
+        //        //                string Body = @"Selamat " + nama
+        //        //                    + ",<br/> Proposal anda telah mendapatkan persetujuan dari Assessor &#40;" + namaProdi + "&#41;. <br/>"
+        //        //                    + "<br/>Judul : " + judul
+        //        //                    + "  <br/> Selanjutnya silahkan tunggu konfirmasi dari  KA LPPM untuk mendapatkan persetujuan dana.<br/> Terimakasih.";
+        //        //                mail.Body = Body;
+        //        //                mail.IsBodyHtml = true;
+        //        //                SmtpClient smtp = new SmtpClient();
+        //        //                smtp.Host = Email.emailHost;
+        //        //                smtp.Port = Convert.ToInt32(Email.emailPort);
+        //        //                smtp.UseDefaultCredentials = false;
+        //        //                smtp.Credentials = new System.Net.NetworkCredential(Email.emailAccount, Email.emailPassword);
+        //        //                smtp.EnableSsl = false;
+
+        //        //                try
+        //        //                {
+        //        //                    smtp.Send(mail);
+        //        //                    KirimEmailKALPPM();
+        //        //                    Response.Redirect("BerhasilRev.aspx");
+        //        //                }
+        //        //                catch (System.Net.Mail.SmtpFailedRecipientsException recExc)
+        //        //                {
+        //        //                    for (int recipient = 0; recipient < recExc.InnerExceptions.Length - 1; recipient++)
+        //        //                    {
+        //        //                        System.Net.Mail.SmtpStatusCode statusCode;
+        //        //                        //Each InnerException is an System.Net.Mail.SmtpFailed RecipientException
+        //        //                        statusCode = recExc.InnerExceptions[recipient].StatusCode;
+
+        //        //                        if ((statusCode == System.Net.Mail.SmtpStatusCode.MailboxBusy) || (statusCode == System.Net.Mail.SmtpStatusCode.MailboxUnavailable))
+        //        //                        {
+        //        //                            //Log this to event log: recExc.InnerExceptions[recipient].FailedRecipient
+        //        //                            System.Threading.Thread.Sleep(5000);
+        //        //                            smtp.Send(mail);
+        //        //                            KirimEmailKALPPM();
+        //        //                        }
+        //        //                        else
+        //        //                        {
+        //        //                            //Log error to event log.
+        //        //                            //recExc.InnerExceptions[recipient].StatusCode or use statusCode
+        //        //                        }
+
+        //        //                    }
+        //        //                }
+        //        //                //General SMTP execptions
+        //        //                catch (System.Net.Mail.SmtpException)
+        //        //                {
+        //        //                    //Log error to event log using StatusCode information in
+        //        //                    //smtpExc.StatusCode
+        //        //                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+        //        //                   "alert('Gagal Mengirim Email! Periksa Koneksi Internet Anda!');", true);
+        //        //                    // System.Windows.Forms.MessageBox.Show("", "Gagal", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+
+        //        //                }
+        //        //                catch (Exception)
+        //        //                {
+        //        //                    //Log error to event log.
+        //        //                }
+        //        //                //Response.Redirect("BerhasilRev.aspx");
+
+        //        //            }
+
+        //        //        }
+        //        //        else if (tmpKeputusan == "Revisi")
+        //        //        {
+        //        //            if (prop.UpdateStatusMenungguReview2(hidden1.Value))
+        //        //            {
+        //        //                Response.Redirect("BerhasilRev.aspx");
+        //        //            }
+
+        //        //        }
+        //        //        else if (tmpKeputusan == "Tidak")
+        //        //        {
+        //        //            int cek = 0;
+        //        //            if (prop.updateStatusDITOLAK(cek, hidden1.Value))
+        //        //            {
+        //        //                string email = datauser.getEmailbyIDenelitian(tampungidProposal);
+
+        //        //                string nama = datauser.getNamaByIDPenelitian(tampungidProposal);
+        //        //                string namaProdi = datauser.getNamaByNPP(tmpnppreviewer);
+        //        //                string judul = prop.getjudulByID(tampungidProposal);
+        //        //                //string password = alumniMgr.getPassByUser(username);
+
+        //        //                MailMessage mail = new MailMessage();
+        //        //                mail.To.Add(email);
+        //        //                mail.From = new MailAddress(Email.emailAccount);
+        //        //                mail.Subject = "[Pemberitahuan] Konfirmasi Proposal anda " + judul + ". SILPPM ";
+
+        //        //                string Body = @"Maaf " + nama
+        //        //                    + ",<br/> Proposal anda belum dapat melanjutkan ke proses selanjutnya dari hasil review Assessor &#40;" + namaProdi + "&#41;. <br/>"
+        //        //                    + "<br/>Judul : " + judul
+        //        //                    + "  <br/> <br/> Terimakasih.";
+        //        //                mail.Body = Body;
+        //        //                mail.IsBodyHtml = true;
+        //        //                SmtpClient smtp = new SmtpClient();
+        //        //                smtp.Host = Email.emailHost;
+        //        //                smtp.Port = Convert.ToInt32(Email.emailPort);
+        //        //                smtp.UseDefaultCredentials = false;
+        //        //                smtp.Credentials = new System.Net.NetworkCredential(Email.emailAccount, Email.emailPassword);
+        //        //                smtp.EnableSsl = false;
+
+        //        //                try
+        //        //                {
+        //        //                    smtp.Send(mail);
+        //        //                    Response.Redirect("BerhasilRev.aspx");
+        //        //                }
+        //        //                catch (System.Net.Mail.SmtpFailedRecipientsException recExc)
+        //        //                {
+        //        //                    for (int recipient = 0; recipient < recExc.InnerExceptions.Length - 1; recipient++)
+        //        //                    {
+        //        //                        System.Net.Mail.SmtpStatusCode statusCode;
+        //        //                        //Each InnerException is an System.Net.Mail.SmtpFailed RecipientException
+        //        //                        statusCode = recExc.InnerExceptions[recipient].StatusCode;
+
+        //        //                        if ((statusCode == System.Net.Mail.SmtpStatusCode.MailboxBusy) || (statusCode == System.Net.Mail.SmtpStatusCode.MailboxUnavailable))
+        //        //                        {
+        //        //                            //Log this to event log: recExc.InnerExceptions[recipient].FailedRecipient
+        //        //                            System.Threading.Thread.Sleep(5000);
+        //        //                            smtp.Send(mail);
+        //        //                        }
+        //        //                        else
+        //        //                        {
+        //        //                            //Log error to event log.
+        //        //                            //recExc.InnerExceptions[recipient].StatusCode or use statusCode
+        //        //                        }
+
+        //        //                    }
+        //        //                }
+        //        //                //General SMTP execptions
+        //        //                catch (System.Net.Mail.SmtpException)
+        //        //                {
+        //        //                    //Log error to event log using StatusCode information in
+        //        //                    //smtpExc.StatusCode
+        //        //                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+        //        //                  "alert('Gagal Mengirim Email! Periksa Koneksi Internet Anda!');", true);
+        //        //                    // System.Windows.Forms.MessageBox.Show("", "Gagal", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+
+        //        //                }
+        //        //                catch (Exception)
+        //        //                {
+        //        //                    //Log error to event log.
+        //        //                }
+        //        //            }
+        //        //            else
+        //        //            {
+        //        //                // MessageBox.Show("", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        //                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+        //        //                      "alert('gagal!');", true);
+        //        //            }
+        //        //        }
+
+
+
+        //        //    }
+        //        //    else
+        //        //    {
+        //        //        // MessageBox.Show("", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        //        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+        //        //                  "alert('Terjadi Kesalahan');", true);
+        //        //    }
+        //        //}
+        //        //else
+        //        //{
+        //        //    // MessageBox.Show("", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        //    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+        //        //                  "alert('Terjadi Kesalahan');", true);
+        //        //}
+        //    }
+        //    //else if (tampungstatus == "Menunggu Review 2")
+        //    //{
+        //    //    //pindah ke DB terima 
+        //    //    double pajak = 0.05 * Convert.ToInt32(LbldanaSetuju.Text);
+        //    //    if (prop.ReviewProposalPenelitian2(hidden1.Value, tmpnppreviewer))
+        //    //    {   //insert detail penilaian ke db
+
+        //    //        double tmpSkor1, tmpSkor2, tmpSkor3, tmpSkor4, tmpSkor5, tmpSkor6, tmpSkor7;
+        //    //        tmpSkor1 = Convert.ToInt32(txtSkor1.Text) * 0.2;
+        //    //        tmpSkor2 = Convert.ToInt32(txtSkor2.Text) * 0.1;
+        //    //        tmpSkor3 = Convert.ToInt32(txtSkor3.Text) * 0.1;
+        //    //        tmpSkor4 = Convert.ToInt32(txtSkor4.Text) * 0.1;
+        //    //        tmpSkor5 = Convert.ToInt32(txtSkor5.Text) * 0.2;
+        //    //        tmpSkor6 = Convert.ToInt32(txtSkor6.Text) * 0.1;
+        //    //        tmpSkor7 = Convert.ToInt32(txtSkor7.Text) * 0.2;
+        //    //        int ctrev = 0;
+        //    //        try
+        //    //        {
+        //    //            ctrev = rev.getMaxctRev(hidden1.Value, tmpnppreviewer);
+        //    //            ctrev += 1;
+        //    //        }
+        //    //        catch
+        //    //        {
+
+        //    //        }
+        //    //        if (rev.addNilaiPenelitian(hidden1.Value, tmpnppreviewer, ctrev, tmpSkor1,
+        //    //    tmpSkor2, tmpSkor3, tmpSkor4,
+        //    //    tmpSkor5, tmpSkor6, tmpSkor7, txtJusti1.Text, txtJusti2.Text, txtJusti3.Text, txtJusti4.Text, txtJusti5.Text, txtJusti6.Text, txtJusti7.Text, Convert.ToInt32(txtBiayaRekomen.Text), Convert.ToInt32(LbldanaSetuju.Text)))
+        //    //        {
+        //    //            if (tmpKeputusan == "Ya")
+        //    //            {
+        //    //                if (prop.ReviewProposalPenelitian(hidden1.Value, tmpnppreviewer))
+        //    //                {
+        //    //                    if (prop.addProposalLolos(hidden1.Value, Convert.ToInt32(txtBiayaRekomen.Text), 0, 0))
+        //    //                    {
+
+        //    //                        prop.HideProposal(hidden1.Value);
+
+        //    //                        if (prop.UpdateStatusDiterima(hidden1.Value))
+        //    //                        {
+        //    //                            string email = datauser.getEmailbyIDenelitian(tampungidProposal);
+
+        //    //                            string nama = datauser.getNamaByIDPenelitian(tampungidProposal);
+        //    //                            string namaProdi = datauser.getNamaByNPP(tmpnppreviewer);
+        //    //                            string judul = prop.getjudulByID(tampungidProposal);
+        //    //                            //string password = alumniMgr.getPassByUser(username);
+
+        //    //                            MailMessage mail = new MailMessage();
+        //    //                            mail.To.Add(email);
+        //    //                            mail.From = new MailAddress(Email.emailAccount);
+        //    //                            mail.Subject = "[Pemberitahuan] Selamat Proposal anda " + judul + " mendapatkan approval dari Prodi";
+
+        //    //                            string Body = @"Selamat " + nama
+        //    //                                + ",<br/> Proposal anda telah mendapatkan persetujuan dari Prodi &#40;" + namaProdi + "&#41;. <br/>"
+        //    //                                + "<br/>Judul : " + judul
+        //    //                                + "  <br/> Selanjutnya silahkan tunggu konfirmasi dari Dekan, Assessor dan KA LPPM.<br/> Terimakasih.";
+        //    //                            mail.Body = Body;
+        //    //                            mail.IsBodyHtml = true;
+        //    //                            SmtpClient smtp = new SmtpClient();
+        //    //                            smtp.Host = Email.emailHost;
+        //    //                            smtp.Port = Convert.ToInt32(Email.emailPort);
+        //    //                            smtp.UseDefaultCredentials = false;
+        //    //                            smtp.Credentials = new System.Net.NetworkCredential(Email.emailAccount, Email.emailPassword);
+        //    //                            smtp.EnableSsl = false;
+
+        //    //                            try
+        //    //                            {
+        //    //                                smtp.Send(mail);
+        //    //                                KirimEmailKALPPM();
+        //    //                                Response.Redirect("BerhasilRev.aspx");
+        //    //                            }
+        //    //                            catch (System.Net.Mail.SmtpFailedRecipientsException recExc)
+        //    //                            {
+        //    //                                for (int recipient = 0; recipient < recExc.InnerExceptions.Length - 1; recipient++)
+        //    //                                {
+        //    //                                    System.Net.Mail.SmtpStatusCode statusCode;
+        //    //                                    //Each InnerException is an System.Net.Mail.SmtpFailed RecipientException
+        //    //                                    statusCode = recExc.InnerExceptions[recipient].StatusCode;
+
+        //    //                                    if ((statusCode == System.Net.Mail.SmtpStatusCode.MailboxBusy) || (statusCode == System.Net.Mail.SmtpStatusCode.MailboxUnavailable))
+        //    //                                    {
+        //    //                                        //Log this to event log: recExc.InnerExceptions[recipient].FailedRecipient
+        //    //                                        System.Threading.Thread.Sleep(5000);
+        //    //                                        smtp.Send(mail);
+        //    //                                    }
+        //    //                                    else
+        //    //                                    {
+        //    //                                        //Log error to event log.
+        //    //                                        //recExc.InnerExceptions[recipient].StatusCode or use statusCode
+        //    //                                    }
+
+        //    //                                }
+        //    //                            }
+        //    //                            //General SMTP execptions
+        //    //                            catch (System.Net.Mail.SmtpException)
+        //    //                            {
+        //    //                                //Log error to event log using StatusCode information in
+        //    //                                //smtpExc.StatusCode
+        //    //                                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+        //    //                  "alert('Gagal Mengirim Email! Periksa Koneksi Internet Anda!');", true);
+        //    //                                // System.Windows.Forms.MessageBox.Show("", "Gagal", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+
+        //    //                            }
+        //    //                            catch (Exception)
+        //    //                            {
+        //    //                                //Log error to event log.
+        //    //                            }
+        //    //                            //Response.Redirect("BerhasilRev.aspx");
+        //    //                        }
+
+        //    //                        //update is drop, mauskin penilaian
+        //    //                    }
+        //    //                    else
+        //    //                    {
+        //    //                        //MessageBox.Show("", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    //                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+        //    //                      "alert('Terjadi Kesalahan');", true);
+        //    //                    }
+        //    //                }
+
+        //    //            }
+        //    //            else if (tmpKeputusan == "Revisi")
+        //    //            {
+        //    //                if (prop.UpdateStatusMenungguReview2(hidden1.Value))
+        //    //                {
+        //    //                    Response.Redirect("BerhasilRev.aspx");
+        //    //                }
+
+        //    //            }
+        //    //            else if (tmpKeputusan == "Tidak")
+        //    //            {
+        //    //                int cek = 0;
+        //    //                if (prop.updateStatusDITOLAK(cek, hidden1.Value))
+        //    //                {
+        //    //                    Response.Redirect("BerhasilRev.aspx");
+        //    //                }
+        //    //                else
+        //    //                {
+        //    //                    // MessageBox.Show("", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    //                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+        //    //                      "alert('gagal!');", true);
+        //    //                }
+        //    //            }
+
+        //    //        }
+        //    //        else
+        //    //        {
+        //    //            //MessageBox.Show("", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    //            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+        //    //                      "alert('Terjadi Kesalahan');", true);
+        //    //        }
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        MessageBox.Show("Terjadi Kesalahan", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    //    }
+
+        //    //}
+        //    //else
+        //    //{
+        //    //    // jika terjadi penolakan ato revisi
+        //    //    double pajak = 0.05 * prop.getDanaDisetujui(tampungidProposal);
+
+
+        //    //    double tmpSkor1, tmpSkor2, tmpSkor3, tmpSkor4, tmpSkor5, tmpSkor6, tmpSkor7;
+        //    //    tmpSkor1 = Convert.ToInt32(txtSkor1.Text) * 0.2;
+        //    //    tmpSkor2 = Convert.ToInt32(txtSkor2.Text) * 0.1;
+        //    //    tmpSkor3 = Convert.ToInt32(txtSkor3.Text) * 0.1;
+        //    //    tmpSkor4 = Convert.ToInt32(txtSkor4.Text) * 0.1;
+        //    //    tmpSkor5 = Convert.ToInt32(txtSkor5.Text) * 0.2;
+        //    //    tmpSkor6 = Convert.ToInt32(txtSkor6.Text) * 0.1;
+        //    //    tmpSkor7 = Convert.ToInt32(txtSkor7.Text) * 0.2;
+        //    //    int ctrev = 0;
+        //    //    try
+        //    //    {
+        //    //        ctrev = rev.getMaxctRev(hidden1.Value, tmpnppreviewer);
+        //    //        ctrev += 1;
+        //    //    }
+        //    //    catch
+        //    //    {
+
+        //    //    }
+        //    //    if (rev.addNilaiPenelitian(hidden1.Value, tmpnppreviewer, ctrev, tmpSkor1,
+        //    //tmpSkor2, tmpSkor3, tmpSkor4,
+        //    //tmpSkor5, tmpSkor6, tmpSkor7, txtJusti1.Text, txtJusti2.Text, txtJusti3.Text, txtJusti4.Text, txtJusti5.Text, txtJusti6.Text, txtJusti7.Text, Convert.ToInt32(txtBiayaRekomen.Text), Convert.ToInt32(prop.getDanaDisetujui(tampungidProposal))))
+        //    //    {
+
+        //    //        Response.Redirect("BerhasilRev.aspx");
+
+
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        // MessageBox.Show("", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    //        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+        //    //                  "alert('Terjadi Kesalahan');", true);
+        //    //    }
+        //    //}
+        //}
+
+        public void KirimEmailKALPPM()
+        {
+
+            string email = datauser.getEmailKALPPM();
+            string judul = prop.getjudulByID(tampungidProposal);
+            //string password = alumniMgr.getPassByUser(username);
+
+            MailMessage mail = new MailMessage();
+            mail.To.Add(email);
+            mail.From = new MailAddress(Email.emailAccount);
+            mail.Subject = "[Pemberitahuan] Anda memiliki Permohonan Pengajuan Proposal :" + judul + " Untuk di Disetujui";
+            string Body = @"Anda memiliki Permohonan proposal dengan judul :"
+                + "<br/>Judul : " + judul
+                + "  <br/>Untuk dapat melakukan persetujuan terhadap proposal penelitian ini, silahkan kunjungi halaman SILPPM dan buka pada panel Pengesahan.<br/> Terimakasih.";
+            mail.Body = Body;
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = Email.emailHost;
+            smtp.Port = Convert.ToInt32(Email.emailPort);
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential(Email.emailAccount, Email.emailPassword);
+            smtp.EnableSsl = false;
+
+            try
+            {
+                smtp.Send(mail);
+            }
+            catch (System.Net.Mail.SmtpFailedRecipientsException recExc)
+            {
+                for (int recipient = 0; recipient < recExc.InnerExceptions.Length - 1; recipient++)
+                {
+                    System.Net.Mail.SmtpStatusCode statusCode;
+                    //Each InnerException is an System.Net.Mail.SmtpFailed RecipientException
+                    statusCode = recExc.InnerExceptions[recipient].StatusCode;
+
+                    if ((statusCode == System.Net.Mail.SmtpStatusCode.MailboxBusy) || (statusCode == System.Net.Mail.SmtpStatusCode.MailboxUnavailable))
+                    {
+                        //Log this to event log: recExc.InnerExceptions[recipient].FailedRecipient
+                        System.Threading.Thread.Sleep(5000);
+                        smtp.Send(mail);
+                    }
+                    else
+                    {
+                        //Log error to event log.
+                        //recExc.InnerExceptions[recipient].StatusCode or use statusCode
+                    }
+
+                }
+            }
+            //General SMTP execptions
+            catch (System.Net.Mail.SmtpException)
+            {
+                //Log error to event log using StatusCode information in
+                //smtpExc.StatusCode
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+                          "alert('Gagal Mengirim Email! Periksa Koneksi Internet Anda!');", true);
+                // System.Windows.Forms.MessageBox.Show("", "Gagal", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+
+            }
+            catch (Exception)
+            {
+                //Log error to event log.
+            }
+
+        }
+
+        
+        protected void txtSkor1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int tmp= Convert.ToInt32(txtSkor1.SelectedValue) *20;
+            Label1.Text = tmp.ToString(); jumlah();
+        }
+
+        protected void txtSkor2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int tmp = Convert.ToInt32(txtSkor2.SelectedValue) * 10;
+            Label2.Text = tmp.ToString(); jumlah();
+        }
+        protected void txtSkor3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int tmp = Convert.ToInt32(txtSkor3.SelectedValue) * 10;
+            Label3.Text = tmp.ToString(); jumlah();
+        }
+        protected void txtSkor4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int tmp = Convert.ToInt32(txtSkor4.SelectedValue) * 10;
+            Label4.Text = tmp.ToString(); jumlah();
+        }
+        protected void txtSkor5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int tmp = Convert.ToInt32(txtSkor5.SelectedValue) * 20;
+            Label5.Text = tmp.ToString(); jumlah(); 
+        }
+        protected void txtSkor6_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int tmp = Convert.ToInt32(txtSkor6.SelectedValue) * 10;
+            Label6.Text = tmp.ToString();
+            jumlah();
+        }
+        protected void txtSkor7_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int tmp = Convert.ToInt32(txtSkor7.SelectedValue) * 20;
+            Label7.Text = tmp.ToString();
+            jumlah();
+            
+        }
+        private void jumlah() {
+            try
+            {
+                int tmp1,tmp2,tmp3,tmp4,tmp5,tmp6,tmp7;
+                try{tmp1 = Convert.ToInt32(Label1.Text);}
+                catch{tmp1=0;}
+                try{tmp2 = Convert.ToInt32(Label2.Text);}catch{tmp2=0;}
+                try{tmp3 = Convert.ToInt32(Label3.Text);}catch{tmp3=0;}
+                try{tmp4 = Convert.ToInt32(Label4.Text);}catch{tmp4=0;}
+                try{tmp5 = Convert.ToInt32(Label5.Text);}catch{tmp5=0;}
+                try { tmp6 = Convert.ToInt32(Label6.Text); }
+                catch { tmp6 = 0; }
+                try { tmp7 = Convert.ToInt32(Label7.Text); }
+                catch { tmp7 = 0; }
+                      
+                float hasil = tmp1 + tmp2 + tmp3 + tmp4 + tmp5 + tmp6 + tmp7;
+                Label8.Text = hasil.ToString();
+            }
+            catch { }
+        }
+
+       
+    }
+}

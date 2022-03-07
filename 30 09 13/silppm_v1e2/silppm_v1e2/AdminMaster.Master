@@ -1,0 +1,193 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminMaster.master.cs" Inherits="silppm_v1e2.AdminMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Sistem Informasi Lembaga Penelitian dan Pengabdian Masyarakat UAJY</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+<link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/StylePopUp.css" rel="stylesheet" type="text/css" />
+      <link href="Styles/gridviewstyle/YahooGridView.css" rel="stylesheet" type="text/css" />
+        <link type="text/css" href="Styles/menu.css" rel="stylesheet" />
+    <script type="text/javascript" src="Styles/jquery.js"></script>
+    <script type="text/javascript" src="Styles/menu.js"></script>
+    <style type="text/css">
+
+
+
+div#menu {
+   
+    width:100%;
+		
+}
+div#copyright { display: none; }
+    
+        .MenuBar
+        {
+                padding: 0 10px 0 10px;
+                background-color: #5B5C3A;
+                border-width: 1px;
+                border-style: solid;
+                border-color: #5f5f5f;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px; /*border-radius: 5px;*/
+                font: 12px calibri;
+                width: 935px;
+                margin: auto;
+                border-left: 0px solid #5B5C3A;
+                border-right: 0px solid #5B5C3A;
+                border-top: 2px solid #5B5C3A;
+                border-bottom: 2px solid #5B5C3A;
+                vertical-align: top;
+                border-spacing: 0px;
+                background-image: url( 'mainbk.png' );
+                background-repeat: repeat-x;
+                height: 20px;
+                font-weight: bold;
+        }
+
+        .StaticMenuItem
+        {
+                text-align: left;
+                border-width: 0;
+                font: small Raavi;
+                color: #FFFFFF;
+                text-decoration: none; /*text-shadow: #FFF 0 0 0;*/
+                text-transform: capitalize;
+                padding-right: 4px;
+                padding-left: 4px;
+                height: 20px;
+                font: 11px WST_Engl;
+                font-weight: bold;
+        }
+
+        .DynamicMenuItem
+        {
+                text-align: left;
+                border-width: 0;
+                  font: 11px WST_Engl;
+                color: #FFF;
+                text-decoration: none; /*text-shadow: #FFF 0 0 0;*/
+                background-color: #424542;
+                padding-right: 4px;
+                height: 20px;
+        }
+                padding-left: 4px;
+
+        .staticHover
+        {
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px; /*border-radius: 5px;*/
+                background-image: url( "MHovr.png" );
+                background-repeat: repeat-x;
+                text-align: left;
+                border-width: 0;
+                  font: 11px WST_Engl;
+                color: #FFF;
+                text-decoration: none; /*text-shadow: #FFF 0 0 0;*/
+                background-color: #424542;
+                padding-right: 4px;
+                padding-left: 4px;
+                height: 20px;
+                font-weight: bold;
+        }
+
+        .DynamicHover
+        {
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px; /*border-radius: 5px;*/
+                text-align: left;
+                border-width: 0;
+                   font: 11px WST_Engl;
+                color: #FFF;
+                text-decoration: none; /*text-shadow: #FFF 0 0 0;*/
+                background-color: #424542;
+                padding-right: 4px;
+                padding-left: 4px;
+                background-image: url( "MHovr.png" );
+                background-repeat: repeat-x;
+                height: 20px;
+        }
+    </style>
+    
+</head>
+<body>
+    <form id="form1" runat="server">
+
+    <div class="page">
+        <div class="header">
+            <div class="title">
+            </div>
+            <div class="loginDisplay">
+                 <img src="Styles/images/banner.jpg" alt="" border="0" style="width: 938px" />
+            </div>
+            <div class="clear hideSkiplink">
+                <%--<div id="menu">
+                <ul class="menu">
+        <li><a href="WelcomeAdmin.aspx" class="parent"><span>HOME</span></a>
+            
+        </li>
+         <li><a href="#" class="parent"><span>Pengelolaan</span></a>
+            <div><ul>
+               
+                <li><a href="#"><span>Kelola Periode Aktif Proposal</span></a>
+                 <div><ul>
+               
+                <li><a href="AdminKelolaPeriode.aspx"><span>INTERNAL</span></a></li>
+                <li><a href=""><span>EKSTERNAL</span></a></li>
+            </ul></div>
+                </li>
+                <li><a href="AdminListKelolaReview.aspx"><span>Kelola Review Proposal</span></a></li>
+                <li><a href="AdminKelolaUser.aspx"><span>Kelola Assesor/Reviewer</span></a></li>
+            </ul></div>
+        </li>
+         <li><a href="#" class="parent"><span>MONEV</span></a>
+            <div><ul>
+               
+                <li><a href="AdminListUpdatePenelitian.aspx"><span>MONEV PENELITIAN</span></a></li>
+                <li><a href=""><span>MONEV PENGABDIAN</span></a></li>
+            </ul></div>
+        </li>
+        <li><a href="#" class="parent"><span>VIEW HISTORY</span></a>
+            <div><ul>
+               
+                <li><a href="AdminDisplayHistory.aspx"><span>HISTORY PENELITIAN</span></a></li>
+                <li><a href=""><span>HISTORY PENGABDIAN</span></a></li>
+            </ul></div>
+        </li>
+        <li><a href="AdminListJadwalPrint.aspx" class="parent"><span>Cetak Jadwal dan Surat</span></a>
+            
+        </li>
+  <li><a href="LandingPage.aspx"><span>Log Out</span></a>
+            
+        </li>
+    </ul>
+    </div>--%>
+                    <asp:Menu ID="menuBar" runat="server" Orientation="Horizontal" Width="100%" 
+                    StaticEnableDefaultPopOutImage="False" CssClass="menu">
+                            
+                        </asp:Menu>
+    
+            
+
+            </div>
+        </div>
+        <div class="main">
+         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+            
+        
+        </asp:ContentPlaceHolder>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="footer">
+    </div>
+
+    
+    </form>
+</body>
+</html>

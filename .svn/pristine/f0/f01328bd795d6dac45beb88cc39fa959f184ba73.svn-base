@@ -1,0 +1,91 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using silppm_v1e2.Entity;
+
+namespace silppm_v1e2
+{
+    public partial class LandingPage : System.Web.UI.Page
+    {
+        private UserDAO userdao = new UserDAO();
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            Session.Remove("userdata");
+        }
+
+        protected void LoginButton_Click(object sender, EventArgs e)
+        {
+            bool validUser = false, validPass = false;
+
+            try
+            {
+                validUser = userdao.val_user_REV(UserName.Text, Password.Text);
+                if (validUser)
+                {
+                    validPass = userdao.val_pass_REV(UserName.Text, Password.Text);
+                }
+                else {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+                                          "alert('Username atau Password Salah!');", true);
+                }
+            }
+            catch { }
+
+            if (validPass)
+            {
+                string tmpnpp;
+                UserEntity loginfo = new UserEntity();
+                loginfo.NAMA = userdao.getNamaByUsername(UserName.Text);
+                //tmpnpp = userdao.getNPPByUsername(Login1.UserName); //buat login di simkanya
+                loginfo.Role = userdao.getRoleByUsername(UserName.Text); //sementara pake login username
+                loginfo.NPP = userdao.getNPPByUsername(UserName.Text);
+                loginfo.Username = UserName.Text;
+                if (Session["userdata"] == null)
+                {
+                    Session.Add("userdata", loginfo);
+                }
+                else {
+                    Session["userdata"] = loginfo;
+                }
+                if (loginfo.Role == "Dosen") {
+                    Response.Redirect("WebForm1.aspx");
+                }
+                else if (loginfo.Role == "Assesor")
+                {
+                    Response.Redirect("RevPageHome.aspx");
+                }
+                else if (loginfo.Role == "Admin")
+                {
+                    Response.Redirect("WelcomeAdmin.aspx");
+                }
+                else if (loginfo.Role == "Prodi")
+                {
+                    Response.Redirect("PortalProdi.aspx");
+                }
+                else if (loginfo.Role == "Pustakawan")
+                {
+                    Response.Redirect("PustakaHome.aspx");
+                }
+                else if (loginfo.Role == "Dekan")
+                {
+                    Response.Redirect("PortalDekan.aspx");
+                }
+                else if (loginfo.Role == "KALPPM")
+                {
+                    Response.Redirect("KALPPMHome.aspx");
+                }
+                
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+                                      "alert('Username atau Password Salah!');", true);
+            }
+        }
+
+        
+    }
+}

@@ -1,0 +1,78 @@
+﻿#MainContent_ModalPopupExtender1_backgroundElement, #MainContent_ModalPopupExtender2_backgroundElement, #MainContent_ModalPopupExtender3_backgroundElement, #MainContent_ModalPopupExtender4_backgroundElement, #MainContent_TabContainer1_TabPanel1_TabContainer2_TabPanel5_ModalPopupExtender1_backgroundElement, #MainContent_TabContainer1_TabPanel1_TabContainer2_TabPanel3_ModalPopupExtender3_backgroundElement, #MainContent_TabContainer1_TabPanel1_TabContainer2_TabPanel4_ModalPopupExtender4_backgroundElement, #MainContent_TabContainer1_TabPanel1_ModalPopupExtender5_backgroundElement, 
+
+#MainContent_TabContainer1_TabPanelEntry_ModalPopupExtender1_backgroundElement
+{
+    background: #666 url(images/overlay.png) 50% 50% repeat;
+    opacity: .50;
+    width: 1349px;
+    height: 1255px;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#MainContent_TabContainer1_TabPanelEntry_ModalPopupExtender2_backgroundElement
+{
+    background: #666 url(images/overlay.png) 50% 50% repeat;
+    opacity: .50;
+    width: 1349px;
+    height: 1255px;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#MainContent_TabContainer1_TabPanelEntry_ModalPopupExtender3_backgroundElement
+{
+    background: #666 url(images/overlay.png) 50% 50% repeat;
+    opacity: .50;
+    width: 1349px;
+    height: 1255px;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#MainContent_TabContainer1_TabPanelEntry_ModalPopupExtender4_backgroundElement
+{
+    background: #666 url(images/overlay.png) 50% 50% repeat;
+    opacity: .50;
+    width: 1349px;
+    height: 1255px;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#MainContent_TabContainer1_TabPanelEntry_ModalPopupExtender5_backgroundElement
+{
+    background: #666 url(images/overlay.png) 50% 50% repeat;
+    opacity: .50;
+    width: 1349px;
+    height: 1255px;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+
+.panelPopup
+{
+    border: 1px solid #DDD;
+    background-color: #EEE;
+    color: #333;
+    z-index: 1003;
+    position: relative;
+    display: block;
+    padding: 20px 20px 10px 20px;
+    -webkit-border-radius: 4px;
+}
+.btnPopup
+{
+    float: right;
+}
