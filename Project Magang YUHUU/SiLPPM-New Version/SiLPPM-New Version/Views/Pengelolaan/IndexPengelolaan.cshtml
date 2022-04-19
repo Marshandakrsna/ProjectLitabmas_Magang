@@ -1,0 +1,194 @@
+﻿@{ ViewData["Title"] = "Pengelolaan Assesor/Reviewer "; }
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/@@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!-- Data Table-->
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">*@
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Karla', sans-serif;
+        }
+
+
+        [aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {
+            display: none;
+        }
+
+        .table thead th {
+            vertical-align: middle;
+            align-content: center;
+            text-align: center;
+        }
+
+        .label {
+            color: white;
+            border-radius: 5px;
+            border-spacing: 20px;
+            padding: 5px;
+            margin-top: 50px;
+            margin-bottom: 60px;
+        }
+
+        .penelitianDiajukan {
+            background-color: chocolate;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .propoPenelitian {
+            background-color: darkcyan;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .propoPengabdian {
+            background-color: darkcyan;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .btn:active {
+            background-color: #ffe7ab;
+            transform: translateY(4px);
+        }
+
+        .btn:hover {
+            background-color: #ffe7ab;
+        }
+
+        .content-wrapper {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 10px;
+            min-height: 402px !important;
+        }
+
+        .title-card {
+            color: #FFFFFF;
+            background-color: #F2AA4C;
+            padding: 15px;
+            border-radius: 10px 10px 0px 0px;
+            min-width: inherit;
+        }
+
+        .blue-color {
+            background-color: #1d84C6 !important;
+        }
+
+        .green-color {
+            background-color: #1CB394 !important;
+        }
+
+        .td, th {
+            vertical-align: middle;
+        }
+
+        .td, .style8 {
+            width: 170px;
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="px-3 mt-3">
+        <div class="content-wrapper p-3">
+
+
+            <div class="card-header">
+
+                <a href="#" class="brand-link" style="background-color:lightblue">
+                    <img src="~/images/profile-user.png" alt="Profile" class="brand-image img-circle elevation-3" style="opacity: .8">
+
+                    <span style="color:black">
+                    Pengelolaan Assesor/Reviewer
+
+
+                    </span>
+
+
+
+                </a>
+            </div>
+
+            <div style="width: 100%; overflow-x: auto;" class="col">
+                <div class="card-body">
+                    <table id="tblData" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>SESUAIKAN</th>
+                                <th>NPP</th>
+                                <th>NAMA</th>
+                                <th>ROLE</th>
+                    
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.data)
+                            {
+
+                            <tr>
+                                <td>
+                                    <p style="font-weight:bold"><a href="UbahRolePengelolaan">Ubah Role User</a></p>
+
+
+                                </td>
+
+
+
+                                <td> @item.NPP</td>
+                                <td> @item.NAMA</td>
+                                <td>@item.DESKRIPSI</td>
+
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+
+
+
+    <script>
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });</script>
+
+
+    <script>
+            $('#tblData').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+
+            });</script>
+
+
+</body>
+</html>
