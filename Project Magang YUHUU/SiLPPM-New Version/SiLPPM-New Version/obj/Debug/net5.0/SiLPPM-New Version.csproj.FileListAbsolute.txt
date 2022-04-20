@@ -203,3 +203,208 @@ E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New V
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengabdian\IndexDaftar.cshtml.g.cs
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengelolaan\IndexPengelolaan.cshtml.g.cs
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengelolaan\UbahRolePengelolaan.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\appsettings.json
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\SiLPPM-New Version.StaticWebAssets.xml
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\SiLPPM-New Version.exe
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\SiLPPM-New Version.deps.json
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\SiLPPM-New Version.runtimeconfig.json
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\SiLPPM-New Version.runtimeconfig.dev.json
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\SiLPPM-New Version.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\SiLPPM-New Version.pdb
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\SiLPPM-New Version.Views.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\SiLPPM-New Version.Views.pdb
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Azure.Core.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Azure.Identity.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\ClosedXML.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Dapper.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\DocumentFormat.OpenXml.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\ExcelNumberFormat.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\GoogleMaps.LocationServices.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\GoogleMapsApi.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Humanizer.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\IP2Location.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.CodeAnalysis.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.CodeAnalysis.Razor.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.Identity.Client.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Assessment.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Assessment.Types.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.Data.Tools.Sql.BatchParser.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.ConnectionInfo.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Dmf.Common.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Dmf.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Management.Assessment.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Management.Collector.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Management.CollectorEnum.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Management.HadrData.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Management.HadrModel.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Management.RegisteredServers.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Management.Sdk.Sfc.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Management.SqlScriptPublish.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Management.XEvent.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Management.XEventDbScoped.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Management.XEventDbScopedEnum.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Management.XEventEnum.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.PolicyEnum.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.ServiceBrokerEnum.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Smo.Notebook.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.Smo.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.SmoExtended.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.SqlEnum.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.SqlWmiManagement.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.WmiEnum.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.RegSvrEnum.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.SqlServer.SqlClrProvider.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.VisualStudio.Web.CodeGeneration.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.VisualStudio.Web.CodeGeneration.Core.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\dotnet-aspnet-codegenerator-design.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Remotion.Linq.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\SQLConnection.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.CodeDom.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Composition.AttributedModel.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Composition.Convention.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Composition.Hosting.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Composition.Runtime.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Composition.TypedParts.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Data.OleDb.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Data.SqlClient.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Interactive.Async.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.IO.Packaging.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Management.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Memory.Data.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Runtime.Caching.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win-arm\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win-arm64\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win-arm64\native\sni.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win-x64\native\sni.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win-x86\native\sni.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Data.OleDb.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.0\System.Management.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.csproj.AssemblyReference.cache
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.AssemblyInfoInputs.cache
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.AssemblyInfo.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.csproj.CoreCompileInputs.cache
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.RazorAssemblyInfo.cache
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.RazorAssemblyInfo.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\scopedcss\bundle\SiLPPM-New Version.styles.css
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\staticwebassets\SiLPPM-New Version.StaticWebAssets.Manifest.cache
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.TagHelpers.input.cache
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.TagHelpers.output.cache
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.RazorCoreGenerate.cache
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\KelolaPenelitian\IndexPengelolaan.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\KelolaPenelitian\IndexReviewerPeneliti.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\IndexDaftar.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\IndexTambah.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\IndexTambahCV.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\IndexTambahPeneliti.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengabdian\IndexDaftar.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengelolaan\IndexPengelolaan.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengelolaan\UbahRolePengelolaan.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Profile\Index.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptPartial.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.RazorTargetAssemblyInfo.cache
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.RazorTargetAssemblyInfo.cs
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.Views.pdb
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.csproj.CopyComplete
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\refint\SiLPPM-New Version.dll
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.pdb
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.genruntimeconfig.cache
+C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\ref\SiLPPM-New Version.dll

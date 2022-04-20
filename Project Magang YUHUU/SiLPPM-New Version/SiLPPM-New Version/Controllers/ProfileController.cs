@@ -21,8 +21,12 @@ namespace SiLPPM_New_Version.Controllers
             myobj = new ExpandoObject();
             dao = new ProfileDAO();
         }
-        public IActionResult Index(string username)
+        public IActionResult Index()
         {
+
+            var username = User.Claims
+                       .Where(c => c.Type == "username")
+                           .Select(c => c.Value).SingleOrDefault();
 
             var data = dao.GetDataUser(username);
             myobj.data = data.data;

@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Kuliah\\SEMESTER 6\\Magang\\Project Magang YUHUU\\SiLPPM-New Version\\SiLPPM-New Version\\SiLPPM-New Version.csproj": {}
+    "C:\\Users\\ksi\\Source\\Repos\\Marshandakrsna\\ProjectLitabmas_Magang\\Project Magang YUHUU\\SiLPPM-New Version\\SiLPPM-New Version\\SiLPPM-New Version.csproj": {}
   },
   "projects": {
-    "E:\\Kuliah\\SEMESTER 6\\Magang\\Project Magang YUHUU\\SiLPPM-New Version\\SiLPPM-New Version\\SiLPPM-New Version.csproj": {
+    "C:\\Users\\ksi\\Source\\Repos\\Marshandakrsna\\ProjectLitabmas_Magang\\Project Magang YUHUU\\SiLPPM-New Version\\SiLPPM-New Version\\SiLPPM-New Version.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Kuliah\\SEMESTER 6\\Magang\\Project Magang YUHUU\\SiLPPM-New Version\\SiLPPM-New Version\\SiLPPM-New Version.csproj",
+        "projectUniqueName": "C:\\Users\\ksi\\Source\\Repos\\Marshandakrsna\\ProjectLitabmas_Magang\\Project Magang YUHUU\\SiLPPM-New Version\\SiLPPM-New Version\\SiLPPM-New Version.csproj",
         "projectName": "SiLPPM-New Version",
-        "projectPath": "E:\\Kuliah\\SEMESTER 6\\Magang\\Project Magang YUHUU\\SiLPPM-New Version\\SiLPPM-New Version\\SiLPPM-New Version.csproj",
-        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "E:\\Kuliah\\SEMESTER 6\\Magang\\Project Magang YUHUU\\SiLPPM-New Version\\SiLPPM-New Version\\obj\\",
+        "projectPath": "C:\\Users\\ksi\\Source\\Repos\\Marshandakrsna\\ProjectLitabmas_Magang\\Project Magang YUHUU\\SiLPPM-New Version\\SiLPPM-New Version\\SiLPPM-New Version.csproj",
+        "packagesPath": "C:\\Users\\ksi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ksi\\Source\\Repos\\Marshandakrsna\\ProjectLitabmas_Magang\\Project Magang YUHUU\\SiLPPM-New Version\\SiLPPM-New Version\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ksi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -111,7 +114,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
