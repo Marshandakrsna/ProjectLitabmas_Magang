@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'F:\Silppm\Silppm\silppm_v1e2\Entity\Model1.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\silppm_v1e2\Entity\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
