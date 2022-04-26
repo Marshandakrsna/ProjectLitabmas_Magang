@@ -1,4 +1,4 @@
-﻿@{ ViewData["Title"] = "Penelitian "; }
+﻿@{ ViewData["Title"] = "Tambah Publikasi "; }
 
 <!DOCTYPE html>
 
@@ -68,11 +68,13 @@
             border-radius: 10px 10px 0px 0px;
             min-width: inherit;
         }
+
         #content {
             background-color: #FFFFFF;
             background-image: url("https://www.transparenttextures.com/patterns/dimension.png");
             /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
         }
+
         .blue-color {
             background-color: #1d84C6 !important;
         }
@@ -93,6 +95,7 @@
         .td, th {
             vertical-align: middle;
         }
+
         table {
             border-collapse: collapse;
             width: 100%;
@@ -106,6 +109,7 @@
             border-right: 1px solid #696868;
             border-bottom: 1px solid #696868;
         }
+      
 
             td .style8 {
                 font-weight: bold;
@@ -114,7 +118,6 @@
         tr:hover {
             background-color: lemonchiffon;
         }
-     
     </style>
 </head>
 <body>
@@ -134,7 +137,7 @@
             </div> &nbsp;&nbsp;
 
             <hr />
-            <h4 class="head-title">Tambah CV</h4>
+            <h4 class="head-title">Tambah Publikasi</h4>
 
             <hr />
 
@@ -146,31 +149,22 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Tahun </th>
+                                  
                                     <th>Judul</th>
-                                    <th>Dana Pribadi </th>
-                                    <th>Dana Eksternal </th>
-                                    <th>Dana Kerjasama </th>
-                                    <th>Dana UAJY</th>
+                                    <th> Aksi</th>
+                               
                                 </tr>
                             </thead>
                             <tbody>
 
 
                                 <tr>
-                                    <td>
-                                        @Model.refpropo.TAHUN_AKADEMIK
-                                    </td>
+
                                     <td> @Model.refpropo.JUDUL</td>
+
                                     <td>
-                                        @Model.refpropo.DANA_PRIBADI
+                                        <p style="font-weight:bold"><a href="google.com">Prosiding Jurnal</a></p>
                                     </td>
-                    
-                                <td>      @Model.refpropo.DANA_EKSTERNAL </td>
-                                <td>
-                                    @Model.refpropo.DANA_KERJASAMA
-                                </td>
-                                    <td>@Model.refpropo.DANA_UAJY</td>
                                 </tr>
                             </tbody>
                         </table>

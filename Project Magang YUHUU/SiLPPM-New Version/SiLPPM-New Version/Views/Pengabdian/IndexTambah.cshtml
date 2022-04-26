@@ -1,4 +1,4 @@
-﻿@{ ViewData["Title"] = "Penelitian "; }
+﻿@{ ViewData["Title"] = "Tambah Pengabdian "; }
 
 <!DOCTYPE html>
 
@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="~/css/style2.css" />
     <!-- Data Table-->
     @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">*@
-<style>
-      
+    <style>
+
 
         body {
             font-family: 'Karla', sans-serif;
@@ -33,7 +33,7 @@
             font-size: large;
             letter-spacing: 1px;
         }
-   
+
 
         .title-card {
             color: #FFFFFF;
@@ -50,37 +50,38 @@
         .green-color {
             background-color: #1CB394 !important;
         }
-    .btn:active {
-        background-color: #ffe7ab;
-        transform: translateY(4px);
-    }
-    .btn:hover {
-        background-color: #ffe7ab;
-    }
+
+        .btn:active {
+            background-color: #ffe7ab;
+            transform: translateY(4px);
+        }
+
+        .btn:hover {
+            background-color: #ffe7ab;
+        }
 
         .td, th {
             vertical-align: middle;
         }
-</style>
+    </style>
 </head>
 <body>
 
 
-  
+
 
     <div class="px-3 mt-3">
         <div class="content-wrapper p-3">
 
             <div class="card-title">
                 <a href="IndexTambah" class="btn" style="background-color:burlywood">Data Penelitian</a>
-                <a href="IndexTambahPeneliti" class="btn" style="background-color:burlywood">Identitas Peneliti</a>
-                <a href="IndexTambahCV" class="btn " style="background-color:burlywood">CV- Pengalaman Penelitian</a>
-                <a href="IndexTambahPublikasi" class="btn" style="background-color:burlywood">Publikasi</a>
+                <a href="IndexIdentitasPengusul" class="btn" style="background-color:burlywood">Identitas Pengusul</a>
+                <a href="IndexRAB" class="btn " style="background-color:burlywood">RAB</a>
 
             </div> &nbsp;&nbsp;
 
             <hr />
-            <h4 class="head-title">Tambah Penelitian</h4>
+            <h4 class="head-title">Tambah Pengabdian</h4>
 
             <hr />
 
@@ -288,7 +289,61 @@
 
                         <hr />
 
-                
+                        <!--<div class="row">
+                        <div class="col-md-6 col-xs-12 d-flex justify-content-center">
+                            <div class="card-masaberlaku">
+                                <div class="title-masaberlaku">
+                                    <p>
+                                        <i class="mdi mdi-calendar mr-2" aria-hidden="true"> </i>
+                                        <b>MASA BERLAKU</b>
+                                    </p>
+                                </div>-->
+                        @*<div class="px-3 mb-4 mt-2">
+                                <label for="basic-addon3" class="form-label">Status</label>
+                                <select name="inputJenis" class="form-select" required>
+                                    <option selected disabled value="">Pilih status</option>
+                                    @foreach (var item in Model.getDropdownStatus)
+                                    {
+                                        <option value="@item.ID_STATUS_KERJASAMA">@item.STATUS_KERJASAMA</option>
+                                    }
+                                </select>
+                            </div>*@
+
+                        <!--<div class="px-3 mb-4">
+                                        <label for="basic-addon4" class="form-label">Tanggal Awal</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon4"><i class="mdi mdi-calendar-import small" aria-hidden="true"> </i></span>
+                                            <input type="date" class="form-control" aria-describedby="basic-addon4">
+                                        </div>
+                                    </div>
+
+                                    <div class="px-3 mb-4">
+                                        <label for="basic-addon5" class="form-label">Tanggal Akhir</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon5"><i class="mdi mdi-calendar-export small" aria-hidden="true"> </i></span>
+                                            <input type="date" class="form-control" aria-describedby="basic-addon5">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 d-flex justify-content-center">
+                                <div class="card-upload">
+                                    <div class="title-upload">
+                                        <p>
+                                            <i class="mdi mdi-file mr-2" aria-hidden="true"> </i>
+                                            <b>DOKUMEN</b>
+                                        </p>
+                                    </div>
+                                    <div class="px-3 mt-2 mb-3 upload-box">
+                                        <div class="form-group files">
+                                            <label>Upload File Dibawah </label>
+                                            <input type="file" class="form-control" multiple="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
                         <button class="btn btn-outline-primary" onclick="getDataFromTable">Simpan</button>
 
                         <div class="card-body">
@@ -307,7 +362,6 @@
 
                                     <tr>
                                         <td>
-                                            
                                         </td>
                                         <td></td>
                                         <td></td>

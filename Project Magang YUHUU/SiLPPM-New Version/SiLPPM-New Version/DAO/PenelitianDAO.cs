@@ -138,7 +138,7 @@ SELECT ID_TAHUN_AKADEMIK
                 }
             }
         }
-        public DBOutput GetRefJenisPenelitian()
+        public DBOutput GetRefJenis()
         {
             DBOutput output = new DBOutput();
             output.status = true;
@@ -169,7 +169,7 @@ SELECT ID_TAHUN_AKADEMIK
                 }
             }
         }
-        public DBOutput GetRefTemaPenelitian()
+        public DBOutput GetRefTema()
         {
             DBOutput output = new DBOutput();
             output.status = true;
@@ -201,7 +201,7 @@ SELECT ID_TAHUN_AKADEMIK
                 }
             }
         }
-        public DBOutput GetRefKategoriPenelitian()
+        public DBOutput GetRefKategori()
         {
             DBOutput output = new DBOutput();
             output.status = true;
@@ -263,6 +263,44 @@ SELECT ID_TAHUN_AKADEMIK
                 }
             }
         }
+        public DBOutput GetJabatanAkaByUsername(string username)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+
+                    string query = @"SELECT simka.MST_KARYAWAN.NPP, simka.MST_KARYAWAN.NAMA,  
+                      simka.REF_JABATAN_AKADEMIK.DESKRIPSI, MST_UNIT_1.NAMA_UNIT AS FAKULTAS FROM         
+                      siatmax.MST_UNIT AS MST_UNIT_1 RIGHT OUTER JOIN
+                      siatmax.MST_UNIT ON MST_UNIT_1.ID_UNIT = siatmax.MST_UNIT.MST_ID_UNIT RIGHT OUTER JOIN
+                      simka.REF_JABATAN_AKADEMIK RIGHT OUTER JOIN
+                      simka.MST_KARYAWAN ON simka.REF_JABATAN_AKADEMIK.ID_REF_JBTN_AKADEMIK = simka.MST_KARYAWAN.ID_REF_JBTN_AKADEMIK ON 
+                      simka.MST_KARYAWAN.ID_UNIT_AKADEMIK = siatmax.MST_UNIT.ID_UNIT LEFT OUTER JOIN
+                      simka.REF_GOLONGAN ON simka.MST_KARYAWAN.ID_REF_GOLONGAN = simka.REF_GOLONGAN.ID_REF_GOLONGAN 
+WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST_KARYAWAN.USERNAME =@username";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { username = username });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
         public DBOutput GetListPenelitian()
         {
             DBOutput output = new DBOutput();
@@ -281,7 +319,7 @@ SELECT ID_TAHUN_AKADEMIK
                     siatmax.MST_UNIT ON simka.MST_KARYAWAN.ID_UNIT = siatmax.MST_UNIT.ID_UNIT INNER JOIN
                     siatmax.MST_UNIT AS MST_UNIT_1 ON simka.MST_KARYAWAN.ID_UNIT_AKADEMIK = MST_UNIT_1.ID_UNIT INNER JOIN
                     siatmax.TBL_TAHUN_AKADEMIK ON silppm.TBL_PENELITIAN.ID_TAHUN_ANGGARAN = siatmax.TBL_TAHUN_AKADEMIK.ID_TAHUN_AKADEMIK
-                    where 1 = 1";
+                    where 1 = 1 ";
 
                     var data = conn.Query<dynamic>(query).ToList();
 

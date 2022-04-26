@@ -15,25 +15,62 @@
     <!-- Data Table-->
     @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">*@
     <style>
+        .button {
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            margin-top:20px;
+            margin-left:90px;
+            border-radius:20px;
+        }
 
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
 
+            .button1:hover {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+        .penelitiID {
+            background-color:lightsteelblue;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
         body {
             font-family: 'Karla', sans-serif;
         }
-
         .content-wrapper {
-            border-radius: 15px;
-            box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
             transition: 0.3s;
             border-radius: 10px;
             min-height: 402px !important;
+            background-color: #ffffff;
+            background-repeat: no-repeat;
+            background-position: right top;
         }
 
-        .radio-checkbox {
-            font-size: large;
-            letter-spacing: 1px;
+        .label {
+            color: white;
+            border-radius: 5px;
+            border-spacing: 20px;
+            padding: 5px;
+            margin-top: 50px;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size:20px;
+          color:darkslategray
         }
-
 
         .title-card {
             color: #FFFFFF;
@@ -43,6 +80,13 @@
             min-width: inherit;
         }
 
+        .radio-checkbox {
+            font-size: large;
+            letter-spacing: 1px;
+        }
+
+
+   
         .blue-color {
             background-color: #1d84C6 !important;
         }
@@ -60,8 +104,21 @@
             background-color: #ffe7ab;
         }
 
-        .td, th {
-            vertical-align: middle;
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+         td .style8{
+            font-weight:bold;
+        }
+        tr:hover {
+            background-color:lemonchiffon;
         }
     </style>
 </head>
@@ -82,143 +139,101 @@
             </div> &nbsp;&nbsp;
 
             <hr />
-            <h4 class="head-title">Identitas Peneliti</h4>
+            <span class="label penelitiID">Ketua Peneliti :</span>
 
             <hr />
 
-            <div class="pb-3 mt-3">
+            <div class="px-3 mt-3" id="sidebar">
+                <div class="content-wrapper p-3" id="content">
 
-                <div>
+                    <br>
+                    <div style="width: 100%; overflow-x: auto;" class="col">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td class="style8">
+                                        NPP
+                                    </td>
+                                    <td>
+                                        @Model.data.NPP
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="style8">
+                                        Nama
+                                    </td>
+                                    <td>
+                                        @Model.data.NAMA_LENGKAP_GELAR
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="style8">
+                                        Jabatan Fungsional
+                                    </td>
+                                    <td>
+                                        @Model.data2.DESKRIPSI
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="style8">
+                                        Pangkat/Golongan
+                                    </td>
+                                    <td>
+                                        @Model.data6.DESKRIPSI/@Model.data3.ID_REF_GOLONGAN
+                                    </td>
+                                </tr>
 
-                    <div class="px-3 pb-2">
+                                <tr>
+                                    <td class="style8">
+                                        NPP/NIDN
+                                    </td>
+                                    <td>
 
-                        @Html.AntiForgeryToken()
+                                        @Model.data.NPP / @Model.data.NIDN
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="style8">
+                                        Unit/Fakultas/Jurusan
+                                    </td>
+                                    <td>
+                                        @Model.data4.NAMA_UNIT/@Model.data5.NAMA_UNIT
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="style8">
+                                        Alamat
+                                    </td>
+                                    <td>
+                                        @Model.data.ALAMAT
+                                    </td>
+                                </tr>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">NPP</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
-                                       <input class="npppeneliti"placeholder="NPP " type="text" style="width:710px"/>
-                                    </div>
-                                </div>
+                                <tr>
+                                    <td class="style8">
+                                        No. Telp/Faks
+                                    </td>
+                                    <td>
+                                        @Model.data.NO_TELPON_HP
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="style8">
+                                        Email
+                                    </td>
+                                    <td>
+                                        @Model.data.EMAIL_INSTITUSI
+                                    </td>
+                                </tr>
 
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Nama</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
-                                        <input class="namapeneliti" placeholder="Nama " type="text" style="width:710px" />
-
-                                    </div>
-                                </div>
-
-                                <div class="mb-4">
-                                    <label for="basic-addon2" class="form-label">Jabatan Fungsional</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon2"><i class="mdi mdi-pencil small" aria-hidden="true"> </i></span>
-                                        <input class="jabatanfungsional" placeholder="Jabatan Fungsional" type="text" style="width:710px" />
-
-                                    </div>
-                                </div>
-                                <div class="mb-4 ">
-                                    <label for="basic-addon1" class="form-label">Pangkat/Golongan</label>
-
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon2"><i class="mdi mdi-pencil small" aria-hidden="true"> </i></span>
-                                        <select style="width:710px">
-                                            <option hidden style="color:lightgrey">Pilih Pangkat/Golongan</option>
-                                            @foreach (var item in Model.refjenis)
-                                            {
-                                                <option value="@item.ID_REF_GOLONGAN"> @item.DESKRIPSI</option>
-
-                                            }
-                                        </select>
-                                    </div>
-
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">NPP/NIDN</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                        <input class="nppnidnPeneliti" placeholder="NPP/NIDN " type="text" style="width:710px" />
-
-                                    </div>
-                                </div>
-                              
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label for="basic-addon3" class="form-label">Unit/Fakultas/Jurusan</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-home small" aria-hidden="true"> </i></span>
-                                        <input class="unitPeneliti" placeholder="Unit " type="text" style="width:710px" />
-
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Alamat</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar-range small" aria-hidden="true"> </i></span>
-                                        <input type="text" class="form-control" placeholder="Alamat"aria-describedby="basic-addon1" >
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">No.Telp/Faks</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                        <input class="telppeneliti" placeholder="No.Telepon/Faks" type="tel" style="width:710px" />
-
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Email</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                        <input class="emailpeneliti" placeholder="Email " type="email" style="width:710px" />
-
-                                    </div>
-                                </div>
-                              
-                            </div>
-                        </div>
-
-                        <hr />
-
-                
-                        <button class="btn btn-outline-primary" onclick="getDataFromTable">Simpan</button>
-
-                        <div class="card-body">
-                            <table id="datatable" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Aksi</th>
-                                        <th>Jenis Event</th>
-                                        <th>Judul Event</th>
-                                        <th>Tgl Event</th>
-                                        <th>Teknologi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-
-                                    <tr>
-                                        <td>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+            <button class="button button1">Tambah Proposal</button>
 
         </div>
 

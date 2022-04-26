@@ -5,6 +5,7 @@ using SiLPPM_New_Version.DAO;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
+using SiLPPM_New_Version.Models;
 
 namespace SiLPPM_New_Version.Controllers
 {
@@ -29,27 +30,27 @@ namespace SiLPPM_New_Version.Controllers
 
         public IActionResult UbahRolePengelolaan(string npp)
         {
-   
+          
             var data = dao.GetDetailPengelolaan(npp);
-   
+      
             myobj.data = data.data;
             return View(myobj);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult UbahRolePengelolaan()
+        public IActionResult UbahRolePengelolaan(UbahRole obj)
         {
-            var cek = dao.UbahRole(myobj);
+            var cek = dao.UbahRole(obj);
             if (cek.status == true)
             {
                 TempData["suc"] = "Berhasil merubah data ";
             }
             else
             {
-                TempData["err"] = "Gagal menambahkan data event, " + cek.pesan;
+                TempData["err"] = "Gagal menambahkan data Role, " + cek.pesan;
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("IndexPengelolaan");
         }
 
     }
