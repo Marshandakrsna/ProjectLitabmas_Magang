@@ -32,16 +32,21 @@ namespace SiLPPM_New_Version.Controllers
         {
           
             var data = dao.GetDetailPengelolaan(npp);
-      
+            var data3 = dao.GetPengelolaanRole();
+            var data2 = dao.GetPengelolaanRole2();
             myobj.data = data.data;
+            myobj.data2 = data2.data;
+            myobj.data3 = data3.data;
+
             return View(myobj);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult UbahRolePengelolaan(UbahRole obj)
+        public IActionResult UbahRolePengelolaan(string role,string npp)
         {
-            var cek = dao.UbahRole(obj);
+            
+            var cek = dao.UbahRole(role,npp);
             if (cek.status == true)
             {
                 TempData["suc"] = "Berhasil merubah data ";

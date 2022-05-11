@@ -111,7 +111,7 @@
                     <img src="~/images/profile-user.png" alt="Profile" class="brand-image img-circle elevation-3" style="opacity: .8">
 
                     <span style="color:black">
-                      Daftar Penelitian
+                        Daftar Penelitian
 
 
                     </span>
@@ -123,54 +123,54 @@
 
             <div style="width: 100%; overflow-x: auto;" class="col">
                 <div class="card-body">
-                    <table id="tblData" class="table table-bordered table-striped">
+                    <table id="tblDataDaftarPenelitian" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>AKSI</th>
-                                <th>REVIEWER</th>
-                                <th>DISPLAY</th>
-                                <th>NAMA</th>
-                                <th>NPP</th>
-                                <th>FAKULTAS</th>
-                                <th>PRODI</th>
-                                <th>JUDUL</th>
-                                <th>STATUS</th>
+                                <th class="text-center">AKSI</th>
+                                <th class="text-center">REVIEWER</th>
+                                <th class="text-center">DISPLAY</th>
+                                <th class="text-center">NAMA</th>
+                                <th class="text-center">NPP</th>
+                                <th class="text-center">FAKULTAS</th>
+                                <th class="text-center">PRODI</th>
+                                <th class="text-center">JUDUL</th>
+                                <th class="text-center">STATUS</th>
 
-                                <th>PERIODE</th>
-                                <th>DANA</th>
+                                <th class="text-center">PERIODE</th>
+                                <th class="text-center">DANA</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model.data)
                             {
 
-                            <tr>
-                                <td>
-                                    <p style="font-weight:bold"><a href="google.com">Edit</a></p>
+                                <tr>
+                                    <td>
+                                        <p style="font-weight:bold"><a href="google.com">Edit</a></p>
 
 
-                                </td>
-                                <td>
-                                    <p style="font-weight:bold"><a href="google.com">Set Reviewer</a></p>
+                                    </td>
+                                    <td>
+                                        <p style="font-weight:bold"><a href="google.com">Set Reviewer</a></p>
 
 
-                                </td>
-                                <td>
-                                    <p style="font-weight:bold"><a href="google.com">Proposal Pengesahan</a></p>
+                                    </td>
+                                    <td>
+                                        <p style="font-weight:bold"><a href="google.com">Proposal Pengesahan</a></p>
 
 
-                                </td>
+                                    </td>
 
-                                <td> @item.NAMA</td>
-                                <td> @item.NPP</td>
-                                <td>@item.FAK</td>
+                                    <td> @item.NAMA</td>
+                                    <td> @item.NPP</td>
+                                    <td>@item.FAK</td>
 
-                                <td>@item.PRODI</td>
-                                <td>@item.JUDUL</td>
-                                <td>@item.DESKRIPSI</td>
-                                <td>@item.TAHUN_AKADEMIK</td>
-                                <td>@item.DANA_SETUJU</td>
-                            </tr>
+                                    <td>@item.PRODI</td>
+                                    <td>@item.JUDUL</td>
+                                    <td>@item.DESKRIPSI</td>
+                                    <td>@item.TAHUN_AKADEMIK</td>
+                                    <td>@item.DANA_SETUJU</td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -187,27 +187,31 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 
+    @section Scripts{
+    
+        <script>
+            var tblDataDaftarPenelitian;
+            refreshTabelDaftarPenelitian();
+         
 
 
-    <script>
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });</script>
+            function refreshTabelDaftarPenelitian() {
+                tblDataDaftarPenelitian = $("#tblDataDaftarPenelitian").DataTable({
+                    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+            
+                }).buttons().container().appendTo('#tblDataDaftarPenelitian_wrapper .col-md-6:eq(0)');
+            }
 
 
-    <script>
-            $('#tblData').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-
-            });</script>
-
+        </script>
+    }
 
 </body>
 </html>

@@ -28,14 +28,14 @@
     <div class="page-wrapper">
         @if (TempData["err_message"] != null)
         {
-<script>
-            Swal.fire({
-                title: 'SiLPPM said : ',
-                text: "@TempData["err_message"].ToString()",
-                confirmButtonColor: '#f2aa4c',
-                confirmButtonText: 'Close'
-            })
-</script>}
+            <script>
+                        Swal.fire({
+                            title: 'SiLPPM said : ',
+                            text: "@TempData["err_message"].ToString()",
+                            confirmButtonColor: '#f2aa4c',
+                            confirmButtonText: 'Close'
+                        })
+            </script>}
         <!-- Card Wrapper -->
         <div class="d-flex justify-content-center align-items-center card-wrapper">
             <!-- Card Login -->

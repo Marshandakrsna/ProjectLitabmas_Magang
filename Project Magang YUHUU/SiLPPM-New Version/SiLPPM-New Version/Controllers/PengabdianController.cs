@@ -13,11 +13,13 @@ namespace SiLPPM_New_Version.Controllers
     {
         PengabdianDAO dao;
         PenelitianDAO mydao;
+        ProfileDAO myprofile;
         dynamic myobj;
         public PengabdianController()
         {
             myobj = new ExpandoObject();
             dao= new PengabdianDAO();
+            myprofile = new ProfileDAO();
             mydao = new PenelitianDAO();
         }
         public IActionResult IndexDaftar()
@@ -48,5 +50,48 @@ namespace SiLPPM_New_Version.Controllers
             myobj.refjenis7 = refjenis7.data;
             return View(myobj);
         }
+        public IActionResult IndexIdentitasPengusul()
+        {
+            var username = User.Claims
+          .Where(c => c.Type == "username")
+              .Select(c => c.Value).SingleOrDefault();
+
+            // IDENTITAS PENELITI
+            var data = myprofile.GetDataUser(username);
+            var data2 = myprofile.GetPangkatByUsername(username);
+            var data3 = myprofile.GetGolonganByUsername(username);
+            var data4 = myprofile.GetFakByUsername(username);
+            var data5 = myprofile.GetJurusanByUsername(username);
+
+            
+
+            //PEMANGGILAN IDENTITAS PENELITI
+            myobj.data = data.data;
+            myobj.data2 = data2.data;
+            myobj.data3 = data3.data;
+            myobj.data4 = data4.data;
+            myobj.data5 = data5.data;
+
+            return View(myobj);
+        }
+
+        public IActionResult IndexRAB()
+        {
+            var username = User.Claims
+                       .Where(c => c.Type == "username")
+                           .Select(c => c.Value).SingleOrDefault();
+
+
+            var refpropo = myprofile.GetListPenelitianByUsername(username);
+            var refpropo2 = myprofile.GetListPengabdianByUsername(username);
+
+
+            myobj.refpropo = refpropo.data;
+            myobj.refpropo2 = refpropo2.data;
+            return View(myobj);
+        }
+
+
+
     }
 }

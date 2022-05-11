@@ -116,6 +116,46 @@ namespace SiLPPM_New_Version.Controllers
 
         }
 
+        public IActionResult AddProsiding(string npp, int id_proposal, string judul, int id_level_seminar, string nama_jurnal, string issn, string doi)
+        {
+            var username = User.Claims
+                       .Where(c => c.Type == "username")
+                           .Select(c => c.Value).SingleOrDefault();
+            var data = penelitianDAO.GetHistoryProsiding();
+            myobj.data = data.data;
+
+            var cek = penelitianDAO.AddPublikasi(npp, id_proposal, judul, id_level_seminar, nama_jurnal, issn, doi,username);
+            if (cek.status)
+            {
+                TempData["suc"] = "Berhasil menambahkan data";
+            }
+            else
+            {
+                TempData["err"] = "Gagal menambahkan data";
+            }
+            return View(myobj);
+        }
+
+        public IActionResult AddJurnal(string npp, int id_proposal, string judul, int id_level_jurnal, string nama_seminar, string issn, string doi)
+        {
+            var username = User.Claims
+                       .Where(c => c.Type == "username")
+                           .Select(c => c.Value).SingleOrDefault();
+            var data = penelitianDAO.GetHistoryJurnal();
+            myobj.data = data.data;
+
+            var cek = penelitianDAO.AddJurnal(npp, id_proposal, judul, id_level_jurnal, nama_seminar, issn, doi, username);
+            if (cek.status)
+            {
+                TempData["suc"] = "Berhasil menambahkan data";
+            }
+            else
+            {
+                TempData["err"] = "Gagal menambahkan data";
+            }
+            return View(myobj);
+        }
+
 
     }
 }

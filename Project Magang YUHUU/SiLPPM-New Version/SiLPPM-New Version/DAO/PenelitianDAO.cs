@@ -340,5 +340,131 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                 }
             }
         }
+
+        //INSERT DATA PROSIDING PENELITIAN
+        public DBOutput AddPublikasi(string npp, int id_proposal,string judul, int id_level_seminar,string nama_jurnal, string issn, string doi, string username)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"INSERT INTO [silppm].[TBL_PUBLIKASI_SEMINAR]
+                           ([ID_PROPOSAL],[JUDUL],[ID_LEVEL_SEMINAR],[NAMA_JURNAL],[ISSN],[DOI])
+                            VALUES( @ID_PROPOSAL, @JUDUL,@ID_LEVEL_SEMINAR,@NAMA_JURNAL,@ISSN,@DOI)";
+                    var param = new { NPP = npp, ID_PROPOSAL = id_proposal, JUDUL = judul, ID_LEVEL_SEMINAR= id_level_seminar, NAMA_JURNAL = nama_jurnal, ISSN= issn, DOI= doi };
+
+                    output.data = conn.Query<int>(query, param).Single();
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput AddJurnal(string npp, int id_proposal, string judul, int id_level_jurnal, string nama_seminar, string issn, string doi, string username)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"INSERT INTO [silppm].[TBL_PUBLIKASI_JURNAL]
+                           ([ID_PROPOSAL],[JUDUL],[ID_LEVEL_JURNAL],[NAMA_SEMINAR],[ISSN],[DOI])
+                            VALUES( @ID_PROPOSAL, @JUDUL,@ID_LEVEL_JURNAL,@NAMA_SEMINAR,@ISSN,@DOI)";
+                    var param = new { NPP = npp, ID_PROPOSAL = id_proposal, JUDUL = judul, ID_LEVEL_SEMINAR = id_level_jurnal, NAMA_JURNAL = nama_seminar, ISSN = issn, DOI = doi };
+
+                    output.data = conn.Query<int>(query, param).Single();
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetHistoryProsiding()
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+
+                    string query = @"select ps.ID_OUTCOME_PROSIDING,ps.JUDUL,r.LEVEL,ps.NAMA_JURNAL,ps.NAMA_JURNAL,ps.DOI,ps.ISSN from silppm.TBL_PUBLIKASI_SEMINAR ps  join silppm.TBL_PENELITIAN p on p.ID_PROPOSAL=ps.ID_PROPOSAL join silppm.REF_LEVEL_SEMINAR r on ps.ID_LEVEL_SEMINAR=r.ID_LEVEL_SEMINAR ";
+
+
+                    var data = conn.Query<dynamic>(query).ToList();
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetHistoryJurnal()
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+
+                    string query = @"select j.ID_OUTCOME_PUBLIKASI,j.JUDUL,r.LEVEL,j.NAMA_SEMINAR,j.DOI,j.ISSN from silppm.TBL_PUBLIKASI_JURNAL j  join silppm.TBL_PENELITIAN p on p.ID_PROPOSAL=J.ID_PROPOSAL join silppm.REF_LEVEL_JURNAL r on j.ID_LEVEL_JURNAL=r.ID_LEVEL_JURNAL ";
+
+
+
+                    var data = conn.Query<dynamic>(query).ToList();
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
     }
 }

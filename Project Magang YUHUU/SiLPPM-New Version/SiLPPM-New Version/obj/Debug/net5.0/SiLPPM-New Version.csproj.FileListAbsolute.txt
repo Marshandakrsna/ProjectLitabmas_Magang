@@ -413,3 +413,12 @@ C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang Y
 C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.genruntimeconfig.cache
 C:\Users\ksi\Source\Repos\Marshandakrsna\ProjectLitabmas_Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\ref\SiLPPM-New Version.dll
 >>>>>>> af6d8e6338853ecd527b453e58aff4b27531bd8f
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengabdian\IndexIdentitasPengusul.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengabdian\IndexRAB.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\TambahPublikasi.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\AddProsiding.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\AddJurnal.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\EPPlus.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\EPPlus.Interfaces.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\EPPlus.System.Drawing.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.IO.RecyclableMemoryStream.dll

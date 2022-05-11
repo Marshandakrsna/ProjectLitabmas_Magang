@@ -1,4 +1,4 @@
-﻿@{ ViewData["Title"] = "Tambah Publikasi "; }
+﻿@{ ViewData["Title"] = "Identitas Pengusul "; }
 
 <!DOCTYPE html>
 
@@ -42,24 +42,40 @@
                 color: white;
             }
 
+        .penelitiID {
+            background-color: darksalmon;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
         body {
             font-family: 'Karla', sans-serif;
         }
 
         .content-wrapper {
-            border-radius: 15px;
-            box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
             transition: 0.3s;
             border-radius: 10px;
-            min-height: 250px !important;
-            background-color: #628fad;
+            min-height: 402px !important;
+            background-color: #ffffff;
+            background-repeat: no-repeat;
+            background-position: right top;
         }
 
-        .radio-checkbox {
-            font-size: large;
-            letter-spacing: 1px;
+        .label {
+            color: white;
+            border-radius: 5px;
+            border-spacing: 20px;
+            padding: 5px;
+            margin-top: 50px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 20px;
+            color: darkslategray
         }
-
 
         .title-card {
             color: #FFFFFF;
@@ -69,11 +85,12 @@
             min-width: inherit;
         }
 
-        #content {
-            background-color: #FFFFFF;
-            background-image: url("https://www.transparenttextures.com/patterns/dimension.png");
-            /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+        .radio-checkbox {
+            font-size: large;
+            letter-spacing: 1px;
         }
+
+
 
         .blue-color {
             background-color: #1d84C6 !important;
@@ -92,10 +109,6 @@
             background-color: #ffe7ab;
         }
 
-        .td, th {
-            vertical-align: middle;
-        }
-
         table {
             border-collapse: collapse;
             width: 100%;
@@ -104,12 +117,8 @@
         th, td {
             padding: 8px;
             text-align: left;
-            border-top: 1px solid #696868;
-            border-left: solid #696868;
-            border-right: 1px solid #696868;
-            border-bottom: 1px solid #696868;
+            border-bottom: 1px solid #ddd;
         }
-      
 
             td .style8 {
                 font-weight: bold;
@@ -118,6 +127,15 @@
         tr:hover {
             background-color: lemonchiffon;
         }
+        .penelitiID {
+            background-color: darksalmon;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
     </style>
 </head>
 <body>
@@ -128,50 +146,69 @@
     <div class="px-3 mt-3">
         <div class="content-wrapper p-3">
 
+
             <div class="card-title">
                 <a href="IndexTambah" class="btn" style="background-color:burlywood">Data Penelitian</a>
-                <a href="IndexTambahPeneliti" class="btn" style="background-color:burlywood">Identitas Peneliti</a>
-                <a href="IndexTambahCV" class="btn " style="background-color:burlywood">CV- Pengalaman Penelitian</a>
-                <a href="IndexTambahPublikasi" class="btn" style="background-color:burlywood">Publikasi</a>
+                <a href="IndexIdentitasPengusul" class="btn" style="background-color:burlywood">Identitas Pengusul</a>
+                <a href="IndexRAB" class="btn " style="background-color:burlywood">RAB</a>
 
             </div> &nbsp;&nbsp;
 
             <hr />
-            <h4 class="head-title">Tambah Publikasi</h4>
 
-            <hr />
+
 
             <div class="px-3 mt-3" id="sidebar">
                 <div class="content-wrapper p-3" id="content">
 
                     <br>
+                    <span class="label penelitiID"> DATA RAB</span>
                     <div style="width: 100%; overflow-x: auto;" class="col">
                         <table>
                             <thead>
                                 <tr>
-                                  
-                                    <th>Judul</th>
-                                    <th> Aksi</th>
-                               
-                                </tr>
-                            </thead>
-                            <tbody>
 
-
-                                <tr>
-
-                                    <td> @Model.refpropo.JUDUL</td>
-
+                                    <td class="style8">
+                                        Dana UAJY
+                                    </td>
                                     <td>
-                                        <p style="font-weight:bold"><a href="AddProsiding">Prosiding</a></p><p style="font-weight:bold"><a href="AddJurnal">Jurnal</a></p>
+                                        @Model.refpropo.DANA_UAJY
                                     </td>
                                 </tr>
-                            </tbody>
+                                <tr>
+                                    <td class="style8">
+                                        Dana Pribadi
+                                    </td>
+                                    <td>
+                                        @Model.refpropo.DANA_PRIBADI
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="style8">
+                                        Dana Eksternal
+                                    </td>
+                                    <td>
+
+                                        @Model.refpropo.DANA_EKSTERNAL
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="style8">
+                                        Dana Kerjasama
+                                    </td>
+                                    <td>
+                                        @Model.refpropo.DANA_KERJASAMA
+                                    </td>
+                                </tr>
+
+                            </thead>
+
+
                         </table>
                     </div>
                 </div>
             </div>
-            <button class="button button1">Tambah Proposal</button>
+
 
         </div>
 
