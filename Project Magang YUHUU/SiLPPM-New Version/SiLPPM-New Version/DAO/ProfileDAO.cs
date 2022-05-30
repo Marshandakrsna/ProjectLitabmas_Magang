@@ -252,6 +252,38 @@ FROM         siatmax.MST_UNIT INNER JOIN
                 }
             }
         }
+        public DBOutput GetFeedbackProdi(int id_proposal)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"select* from silppm.TBL_FEEDBACK_PENELITIAN f join[siatmax].[TBL_USER_ROLE] s on s.NPP=f.NPP join siatmax.REF_ROLE r on r.ID_ROLE=s.ID_ROLE 
+                    where s.ID_SISTEM_INFORMASI= 4 and r.DESKRIPSI= 'Prodi' and f.ID_PROPOSAL = @id_proposal";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_proposal = id_proposal });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
+
     }
 
 }

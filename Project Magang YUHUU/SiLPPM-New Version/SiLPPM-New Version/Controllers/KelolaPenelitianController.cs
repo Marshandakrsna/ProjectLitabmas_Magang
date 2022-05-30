@@ -19,7 +19,9 @@ namespace SiLPPM_New_Version.Controllers
         }
         public IActionResult IndexPengelolaan()
         {
+            var reviewer = dao.GetRefGetReviewer();
             var data= dao.GetPenelitianSetReviewer();
+            myobj.reviewer = reviewer.data;
             myobj.data = data.data;
             return View(myobj);
         }

@@ -109,12 +109,30 @@
                     <img src="~/images/profile-user.png" alt="Profile" class="brand-image img-circle elevation-3" style="opacity: .8">
 
                     <span style="color:black">
-                    Pengelolaan Assesor/Reviewer
+                        Pengelolaan Assesor/Reviewer
 
                     </span>
 
                 </a>
             </div>
+            @if (TempData["succ"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color:green">
+                    <strong>@TempData["succ"].ToString()</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+            @if (TempData["err"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>@TempData["err"].ToString()</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
 
             <div style="width: 100%; overflow-x: auto;" class="col">
                 <div class="card-body">
@@ -125,25 +143,24 @@
                                 <th>NPP</th>
                                 <th>NAMA</th>
                                 <th>ROLE</th>
-                    
+
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model.data)
                             {
 
-                            <tr>
-                                <td>
-                                    <p style="font-weight:bold"><a href="UbahRolePengelolaan?npp=@item.NPP">Ubah Role User</a></p>
+                                <tr>
+                                    <td>
+                                        <p style="font-weight:bold"><a href="UbahRolePengelolaan?npp=@item.NPP">Ubah Role User</a></p>
 
-                                </td>
+                                    </td>
 
-                               
-                                <td> @item.NPP</td>
-                                <td> @item.NAMA</td>
-                                <td>@item.DESKRIPSI</td>
+                                    <td> @item.NPP</td>
+                                    <td> @item.NAMA</td>
+                                    <td>@item.DESKRIPSI</td>
 
-                            </tr>
+                                </tr>
                             }
                         </tbody>
                     </table>

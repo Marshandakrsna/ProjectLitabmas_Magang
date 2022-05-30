@@ -52,14 +52,28 @@
             margin-top: 50px;
             margin-bottom: 20px;
         }
-    .btn:active {
-        background-color: #ffe7ab;
-        transform: translateY(4px);
-    }
+        .btn:active {
+            background-color: #ffe7ab;
+            transform: translateY(4px);
+        }
 
-    .btn:hover {
-        background-color: #ffe7ab;
-    }
+        .btn:hover {
+            background-color: #ffe7ab;
+        }
+
+        .style1 {
+            background-color: #fafafa;
+            border: 0;
+            box-shadow: 0 0 4px rgba(0,0,0,0.3);
+            transition: .3s box-shadow;
+            margin-bottom: 15px;
+            height: 40px;
+            width: 400px;
+        }
+
+        .style1:hover {
+            box-shadow: 0 0 4px rgba(0,0,0,0.5);
+        }
 
         .content-wrapper {
             border-radius: 10px;
@@ -96,60 +110,30 @@
     </style>
 </head>
 <body>
-
-
     <div class="px-3 mt-3">
         <div class="content-wrapper p-3">
-            @*<div class="card-header">
-
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-
-            </div>
-            <h3 class="card-title">
-                <a href="#" class="brand-link" style="background-color:lightblue">
-                    <img src="~/images/profile-user.png" alt="Profile" class="brand-image img-circle elevation-3" style="opacity: .8">
-                    <span style="color:black">Kelola Penelitian</span>
-
-                </a>
-                <a href="IndexPengelolaan" class="btn" style="background-color:burlywood">Kelola Reviewer Penelitian</a>
-                <a href="IndexReviewerPeneliti" class="btn" style="background-color:burlywood">Reviewer Penelitian</a>
-
-            </h3>
-
-        </div>*@
 
             <div class="card-header">
-              
+
                 <a href="#" class="brand-link" style="background-color:lightblue">
                     <img src="~/images/profile-user.png" alt="Profile" class="brand-image img-circle elevation-3" style="opacity: .8">
-                  
-                    <span style="color:black" >
+
+                    <span style="color:black">
                         Kelola Reviewer Penelitian
-                      
-
                     </span>
-           
-
 
                 </a>
             </div>
-                       <a class="card-link" data-toggle="collapse" href="#menuone" aria-expanded="false" aria-controls="menuone" style="float:right; margin-right:40px">
-                            <span class="collapsed"><i class="fa fa-plus"></i></span>
-                            <span class="expanded"><i class="fa fa-minus"></i></span>
-
-                        </a>
-
-
+            <a class="card-link" data-toggle="collapse" href="#menuone" aria-expanded="false" aria-controls="menuone" style="float:right; margin-right:40px">
+                <span class="collapsed"><i class="fa fa-plus"></i></span>
+                <span class="expanded"><i class="fa fa-minus"></i></span>
+            </a>
             <div id="menuone" class="collapse">
                 <div class="card-body" style="margin-left:10px">
                     <a href="IndexPengelolaan" class="btn" style="background-color:sandybrown">Kelola Reviewer Penelitian</a>
                     <a href="IndexReviewerPeneliti" class="btn" style="background-color:sandybrown">Reviewer Penelitian</a>
                 </div>
             </div>
-
             <div style="width: 100%; overflow-x: auto;" class="col">
                 <div class="card-body">
                     <table id="tblData" class="table table-bordered table-striped">
@@ -167,58 +151,151 @@
                         <tbody>
                             @foreach (var item in Model.data)
                             {
-
                                 <tr>
                                     <td>
-                                        <p style="font-weight:bold"><a href="google.com">Pilih</a></p>
-
-
+                                        <p style="font-weight:bold;color:royalblue; " onclick="showDetailProposal(@item.ID_PROPOSAL)">Pilih</p>
                                     </td>
-
                                     <td> @item.NAMA</td>
                                     <td>@item.FAK</td>
-
                                     <td>@item.PRODI</td>
                                     <td>@item.JUDUL</td>
                                     <td>@item.DESKRIPSI</td>
                                     <td>@item.TAHUN_AKADEMIK</td>
                                 </tr>
                             }
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
-
             </div>
-
-
         </div>
+    </div>
+
+    <!-- Modal Dialog 1 -->
+    <div class="modal fade" id="DetailKelolaProposal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:antiquewhite">
+                    <h5 class="modal-title" style="color:black; font-family:'Trebuchet MS';font-display:swap; transition:cubic-bezier()"> <i class="fas fa-clipboard"></i>&nbsp; Detail Kelola Reviewer Penelitian</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <hr style="border:dashed; border-color:aliceblue" />
+                <form class="formDetailKelolaReviewer" method="post" asp-action="addKelolaReviewer" asp-controller="KelolaPenelitian" enctype="multipart/form-data" novalidate>
+                    @Html.AntiForgeryToken()
+
+                    <div class="modal-body">
+                        <input type="hidden" class="form-control" id="NPP" name="npp" value="" required>
+                        <input type="hidden" class="form-control" id="ID_PROPOSAL" name="ID_PROPOSAL" value="" required>
+
+                        <div class="mb-4">
+                            <div class="input-group">
+                                <label>
+                                    Judul
+                                    <input id="judulProposal" name="judulProposal" type="text" class="style1" style="margin-left:70px" />
+                                </label>
+
+                            </div>
+
+                            <div class="input-group">
+                                <label>
+                                    Nama Dosen
+                                    <input type="text" id="namaDosen" name="namaDosen" class="style1" style="margin-left:15px" />
+                                </label>
+
+                            </div>
+
+
+                            <div class="input-group">
+                                <label>
+                                    Reviewer 1
+                                    <select class="style1" id="nppReviewer1" name="nppReviewer1" style="margin-left:30px">
+                                        <option hidden style="color:lightgrey; ">Pilih Reviewer 1</option>
+                                        @foreach (var item in Model.reviewer)
+                                        {
+                                            <option value="@item.npp"> @item.NAMA_LENGKAP_GELAR</option>
+
+                                        }
+                                    </select>
+                                </label>
+
+                            </div>
+                            <div class="input-group">
+                                <label>
+                                    Reviewer 2
+                                    <select class="style1" id="nppReviewer2" name="nppReviewer2" style="margin-left:30px" onclick="getNamaReviewer(this.value)" required>
+                                        <option hidden style="color:lightgrey; ">Pilih Reviewer 2</option>
+                                        @foreach (var item in Model.reviewer)
+                                        {
+                                            <option value="@item.npp"> @item.NAMA_LENGKAP_GELAR</option>
+
+                                        }
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
-        
+        </div>
+    </div>
+    <!-- Modal Dialog 1 End-->
 
-        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });</script>
 
 
+    <script>
+        $('#tblData').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
 
-        <script>
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });</script>
+        });
 
+        function showDetailProposal(id) {
+            $('#DetailKelolaProposal').modal('show');
+            //$('#DetailRencanaPengadaanAset').modal('hide');
 
-        <script>
-            $('#tblData').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+            //$.ajax({
+            //    url: "/PengelolaanInvestasi/ajaxGetDetailRencanaKhususInvestasi",
+            //    type: "POST",
+            //    data: { "id": id },
+            //    dataType: "json",
+            //    success: function (result) {
+            //        var dtlRencanaKhususInvestasi = result.data;
+            //        var str = '';
 
-            });</script>
+            //        for (var i = 0; i < dtlRencanaKhususInvestasi.length; i++) {
+            //            if (dtlRencanaKhususInvestasi[i].ID_DTL_RKA == null) {
+            //                str += '<tr> <td>' + dtlRencanaKhususInvestasi[i].NAMA_KEGIATAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].BULAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].VOLUME + '</td> <td>' + dtlRencanaKhususInvestasi[i].SATUAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].HARGA_SATUAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].SUBTOTAL + '</td> <td> <button onClick="addDetailRencanaPengadaanAset(' + dtlRencanaKhususInvestasi[i].DTL_RKA + ')" type="button" class="btn btn-secondary btn-block btn-sm"><i class="fa fa-plus"></i></button> </td> </tr>';
+            //            } else {
+            //                str += '<tr> <td>' + dtlRencanaKhususInvestasi[i].NAMA_KEGIATAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].BULAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].VOLUME + '</td> <td>' + dtlRencanaKhususInvestasi[i].SATUAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].HARGA_SATUAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].SUBTOTAL + '</td> <td> <button onClick="updateDetailRencanaPengadaanAset(' + dtlRencanaKhususInvestasi[i].DTL_RKA + ')" type="button" class="btn btn-success btn-block btn-sm"> <i class="fa fa-edit"></i></button> </td> </tr>';
+            //            }
+            //        }
+
+            //        tabelDetailRencanaKhususInvestasi.destroy();
+            //        $("#tbodyDetailRencanaKhususInvestasi").html(str);
+            //        refreshTabelDetailRencanaKhususInvestasi();
+            //    }
+            //})
+        }
+
+    </script>
 
 
 </body>

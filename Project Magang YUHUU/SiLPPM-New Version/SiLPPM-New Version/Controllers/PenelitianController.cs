@@ -23,7 +23,7 @@ namespace SiLPPM_New_Version.Controllers
         public IActionResult IndexTambah()
         {
      
-            //TAMBAH PENELITI
+            //TAMBAH PENELITIAN
             var refjenis = penelitianDAO.GetRefSkim();
             var refjenis2= penelitianDAO.GetRefTahunAka();
             var refjenis3 = penelitianDAO.GetRefSemester();
@@ -31,8 +31,10 @@ namespace SiLPPM_New_Version.Controllers
             var refjenis5 = penelitianDAO.GetRefJenis();
             var refjenis6= penelitianDAO.GetRefTema();
             var refjenis7 = penelitianDAO.GetRefKategori();
+            var refOutcome = penelitianDAO.GetOutcome();
+
        
-            //PEMANGGILAN TAMBAH PENELITI
+            //PEMANGGILAN TAMBAH PENELITIAN
             myobj.refjenis = refjenis.data;
             myobj.refjenis2 = refjenis2.data;
             myobj.refjenis3= refjenis3.data;
@@ -40,6 +42,7 @@ namespace SiLPPM_New_Version.Controllers
             myobj.refjenis5 = refjenis5.data;
             myobj.refjenis6 = refjenis6.data;
             myobj.refjenis7 = refjenis7.data;
+            myobj.refOutcome= refOutcome.data;
           
             return View(myobj);
            
@@ -98,10 +101,12 @@ namespace SiLPPM_New_Version.Controllers
 
             var refpropo = myprofile.GetListPenelitianByUsername(username);
             var refpropo2 = myprofile.GetListPengabdianByUsername(username);
+            var dataProsiding = penelitianDAO.GetListPenelitian();
 
 
             myobj.refpropo = refpropo.data;
             myobj.refpropo2 = refpropo2.data;
+            myobj.dataprosiding = dataProsiding.data;
             return View(myobj);
 
         }
@@ -116,46 +121,84 @@ namespace SiLPPM_New_Version.Controllers
 
         }
 
+        //INPUT DATA PROSIDING
+        public IActionResult AddProsiding()
+        {
+            var username = User.Claims
+                     .Where(c => c.Type == "username")
+                         .Select(c => c.Value).SingleOrDefault();
+
+            var data = penelitianDAO.GetHistoryProsiding();
+            var refpropo = myprofile.GetListPenelitianByUsername(username);
+            var dataLevel = penelitianDAO.GetRefLevelSeminar();
+            myobj.data = data.data;
+            myobj.dataLevel = dataLevel.data;
+            myobj.refpropo = refpropo.data;
+            return View(myobj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddProsiding(string npp, int id_proposal, string judul, int id_level_seminar, string nama_jurnal, string issn, string doi)
         {
-            var username = User.Claims
-                       .Where(c => c.Type == "username")
-                           .Select(c => c.Value).SingleOrDefault();
-            var data = penelitianDAO.GetHistoryProsiding();
-            myobj.data = data.data;
+           
 
-            var cek = penelitianDAO.AddPublikasi(npp, id_proposal, judul, id_level_seminar, nama_jurnal, issn, doi,username);
+            var cek = penelitianDAO.AddPublikasi(npp, id_proposal, judul, id_level_seminar, nama_jurnal, issn, doi);
             if (cek.status)
             {
-                TempData["suc"] = "Berhasil menambahkan data";
+                TempData["succ"] = "Berhasil menambahkan data";
             }
             else
             {
-                TempData["err"] = "Gagal menambahkan data";
+                TempData["err"] = "Gagal menambahkan data, " +cek.pesan; 
             }
-            return View(myobj);
+            return RedirectToAction("AddProsiding", "Penelitian");
         }
 
-        public IActionResult AddJurnal(string npp, int id_proposal, string judul, int id_level_jurnal, string nama_seminar, string issn, string doi)
+        //INPUT DATA JURNAL PENELITIAN
+        public IActionResult AddJurnal()
         {
             var username = User.Claims
-                       .Where(c => c.Type == "username")
-                           .Select(c => c.Value).SingleOrDefault();
-            var data = penelitianDAO.GetHistoryJurnal();
-            myobj.data = data.data;
+                    .Where(c => c.Type == "username")
+                        .Select(c => c.Value).SingleOrDefault();
 
-            var cek = penelitianDAO.AddJurnal(npp, id_proposal, judul, id_level_jurnal, nama_seminar, issn, doi, username);
-            if (cek.status)
-            {
-                TempData["suc"] = "Berhasil menambahkan data";
-            }
-            else
-            {
-                TempData["err"] = "Gagal menambahkan data";
-            }
+            var data = penelitianDAO.GetHistoryJurnal();
+            var dataLevel = penelitianDAO.GetRefLevelJurnal();
+            var refpropo2 = myprofile.GetListPenelitianByUsername(username);
+            myobj.refpropo2 = refpropo2.data;
+            myobj.data = data.data;
+            myobj.dataLevel = dataLevel.data;
             return View(myobj);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddJurnal(string npp, int id_proposal, string judul, int id_level_jurnal, string nama_seminar, string issn, string doi)
+        {
+           
+            var cek = penelitianDAO.AddJurnal(npp, id_proposal, judul, id_level_jurnal, nama_seminar, issn, doi);
+            if (cek.status)
+            {
+                TempData["succ"] = "Berhasil menambahkan data";
+            }
+            else
+            {
+                TempData["err"] = "Gagal menambahkan data" + cek.pesan;
+            }
+            return RedirectToAction("AddJurnal", "Penelitian");
+        }
 
+
+       
+        public JsonResult ConfirmDeleteProsiding(int id_outcome_prosiding)
+        {
+            var cek = penelitianDAO.DeleteProsiding(id_outcome_prosiding);
+            return Json(cek);
+        }
+        public JsonResult ConfirmDeleteJurnal(int id_outcome_publikasi)
+        {
+            var cek = penelitianDAO.DeleteJurnal(id_outcome_publikasi);
+            return Json(cek);
+        }
     }
 }

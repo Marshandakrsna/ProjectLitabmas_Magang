@@ -71,8 +71,6 @@
 
         #content {
             background-color: #FFFFFF;
-            background-image: url("https://www.transparenttextures.com/patterns/dimension.png");
-            /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
         }
 
         .blue-color {
@@ -147,7 +145,7 @@
                     <br>
                     <div style="width: 100%; overflow-x: auto;" class="col">
                         <table>
-                            <thead>
+                            <thead class="text-center">
                                 <tr>
                                   
                                     <th>Judul</th>
@@ -162,8 +160,11 @@
 
                                     <td> @Model.refpropo.JUDUL</td>
 
-                                    <td>
-                                        <p style="font-weight:bold"><a href="AddProsiding">Prosiding</a></p><p style="font-weight:bold"><a href="AddJurnal">Jurnal</a></p>
+                                    <td class="text-center">
+                                        @*<i class="fas fa-sign-out-alt fa-lg nav-icon" style="color:firebrick; font-size:larger"></i><strong style="color:firebrick"> LOGOUT </strong>*@
+                                        <i class="mdi mdi-eye" style="color:firebrick; font-size:larger" title="Lihat Prosiding"><a style=" color: chocolate; font-weight:bolder" href="AddProsiding?id_proposal=@Model.refpropo.ID_PROPOSAL">Prosiding</a></i> &nbsp;
+                                        <i class="mdi mdi-eye" style="font-size: larger; color: #007bff" title="Lihat Jurnal"> <a style="font-weight:bolder" href="AddJurnal?id_proposal=@Model.refpropo2.ID_PROPOSAL">Jurnal</a></i>
+      
                                     </td>
                                 </tr>
                             </tbody>

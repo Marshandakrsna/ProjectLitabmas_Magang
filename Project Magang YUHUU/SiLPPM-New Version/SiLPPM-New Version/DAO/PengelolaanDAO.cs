@@ -104,7 +104,7 @@ and u.ID_SISTEM_INFORMASI=8 and u.IS_ACTIVE='1')  and k.npp=@npp order by r.DESK
                 }
             }
         }
-        public DBOutput UbahRole(string role, string npp)
+        public DBOutput UbahRole( string npp, int id_role)
         {
             DBOutput output = new DBOutput();
             output.status = true;
@@ -112,10 +112,9 @@ and u.ID_SISTEM_INFORMASI=8 and u.IS_ACTIVE='1')  and k.npp=@npp order by r.DESK
             {
                 try
                 {
-                    string query = @"update siatmax.TBL_USER_ROLE set ID_ROLE = @role where NPP = @npp and ID_SISTEM_INFORMASI=8";
+                    string query = @"update siatmax.TBL_USER_ROLE set ID_ROLE = @id_role where NPP = @npp and ID_SISTEM_INFORMASI=8";
 
-                    //output.data = conn.Execute(query, obj);
-                    var param = new { ID_ROLE = role , NPP=npp};
+                    var param = new {  npp=npp, id_role = id_role };
                     conn.Execute(query, param);
                     return output;
                 }
@@ -140,7 +139,7 @@ and u.ID_SISTEM_INFORMASI=8 and u.IS_ACTIVE='1')  and k.npp=@npp order by r.DESK
             {
                 try
                 {
-                    string query = @"select distinct r.DESKRIPSI from simka.MST_KARYAWAN k join siatmax.TBL_USER_ROLE u 
+                    string query = @"select distinct  r.ID_ROLE,r.DESKRIPSI  from simka.MST_KARYAWAN k join siatmax.TBL_USER_ROLE u 
 on u.NPP=k.NPP join siatmax.REF_ROLE r on r.ID_ROLE=u.ID_ROLE where ( r.DESKRIPSI= 'Dosen' and u.ID_SISTEM_INFORMASI=8  or r.DESKRIPSI='Assesor' 
 and u.ID_SISTEM_INFORMASI=8 and u.IS_ACTIVE='1')  order by r.DESKRIPSI";
 

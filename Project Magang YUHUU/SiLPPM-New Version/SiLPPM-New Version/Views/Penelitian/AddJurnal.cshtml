@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="~/css/style2.css" />
     <style>
 
-
         body {
             font-family: 'Karla', sans-serif;
         }
@@ -26,11 +25,32 @@
             min-height: 402px !important;
         }
 
+        .alert {
+            padding: 20px;
+            color: white;
+            opacity: 1;
+            transition: opacity 0.6s;
+            margin-bottom: 15px;
+        }
+
         .radio-checkbox {
             font-size: large;
             letter-spacing: 1px;
         }
 
+        .fa-trash {
+            background-color: white;
+            border: solid 2px red;
+            color: red;
+            padding: 10px 10px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .fa-trash:hover {
+                background-color: beige;
+            }
 
         .title-card {
             color: #FFFFFF;
@@ -53,10 +73,6 @@
             transform: translateY(4px);
         }
 
-        .btn:hover {
-            background-color: #ffe7ab;
-        }
-
         .td, th {
             vertical-align: middle;
         }
@@ -67,18 +83,34 @@
     <div class="px-3 mt-3">
         <div class="content-wrapper p-3">
 
-
-
-            <h4 class="head-title">Add Prosiding</h4>
+            <h4 class="head-title">Add Jurnal</h4>
 
             <hr />
+            @if (TempData["succ"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color:green">
+                    <strong><i class='fas fa-bell' style='font-size:22px; color:floralwhite'></i>&nbsp;@TempData["succ"].ToString()</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="color:white">&times;</span>
+                    </button>
+                </div>
+            }
+            @if (TempData["err"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><i class='fas fa-exclamation-triangle' style='font-size:22px; color:floralwhite'></i>&nbsp;@TempData["err"].ToString()</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="color:white">&times;</span>
+                    </button>
+                </div>
+            }
 
             <div class="pb-3 mt-3">
 
                 <div>
 
                     <div class="px-3 pb-2">
-                        <form method="post" asp-action="AddProsiding" asp-controller="Penelitian">
+                        <form method="post" asp-action="AddJurnal" asp-controller="Penelitian" enctype="multipart/form-data">
 
                             @Html.AntiForgeryToken()
 
@@ -86,10 +118,15 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-4">
+                                        <div class="input-group">
+                                            <input type="hidden" autocomplete="off" class="form-control" name="id_proposal" id="id_proposal" value="@Model.refpropo2.ID_PROPOSAL" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Judul Penelitian</label>
                                         <div class="input-group">
 
-                                            <input type="text" autocomplete="off" class="form-control" name="tgl" id="txttgl" />
+                                            <input type="text" autocomplete="off" class="form-control" name="judul" id="judul" required />
 
                                         </div>
                                     </div>
@@ -98,19 +135,21 @@
                                         <label for="basic-addon1" class="form-label">Level Seminar/Prosiding</label>
                                         <div class="input-group">
 
+                                            <select name="id_level_jurnal" id="id_level_jurnal" style="width:750px; height:35px" required>
+                                                <option hidden style="color:lightgrey">Pilih Jenis Level</option>
+                                                @foreach (var item in Model.dataLevel)
+                                                {
+                                                    <option value="@item.ID_LEVEL_JURNAL"> @item.LEVEL</option>
 
-
-                                            <input name="role" id="txtrole" type="text" autocomplete="off" class="form-control" />
+                                                }
+                                            </select>
 
                                         </div>
                                     </div>
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Nama Seminar</label>
                                         <div class="input-group">
-
-
-
-                                            <input name="role" id="txtrole" type="text" autocomplete="off" class="form-control" />
+                                            <input name="nama_seminar" id="nama_seminar" type="text" autocomplete="off" class="form-control" required />
 
                                         </div>
                                     </div>
@@ -118,40 +157,26 @@
                                         <label for="basic-addon1" class="form-label">ISSN/ISBN</label>
                                         <div class="input-group">
 
-
-
-                                            <input name="role" id="txtrole" type="text" autocomplete="off" class="form-control" />
+                                            <input name="issn" id="issn" type="text" autocomplete="off" class="form-control" required />
 
                                         </div>
                                     </div>
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">DOI</label>
                                         <div class="input-group">
-
-
-
-                                            <input name="role" id="txtrole" type="text" autocomplete="off" class="form-control" />
+                                            <input name="doi" id="doi" type="text" autocomplete="off" class="form-control" required />
 
                                         </div>
                                     </div>
 
                                     <hr />
-                                    @*<div class="row">
-                                            <div class="col-3">
-                                                <button asp-action="AddProsiding" type="submit" class="btn btn-success">Simpan Prosiding</button>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <div class="col-3">
-                                                <button asp-action="AddProsiding" type="submit" class="btn btn-success">Simpan Prosiding</button>
-                                            </div>
-                                        </div>*@
+
+
                                     <div class="btn">
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                        <button type="button" class="btn btn-default">Close</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btn btn-default">Reset</button>
 
                                     </div>
-
 
                                 </div>
                             </div>
@@ -179,20 +204,89 @@
                                         <td>@item.LEVEL</td>
                                         <td>@item.NAMA_SEMINAR</td>
                                         <td>@item.DOI</td>
-
                                         <td>@item.ISBN</td>
-                                        <td> <p style="font-weight:bold"><a href="hapus">hapus</a></p></td>
+                                        <td>
+                                            <button type="submit" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Delete Jurnal" onclick="togModalDelete(@item.ID_OUTCOME_PUBLIKASI)" id="deleteButton_">
+                                                <i class="mdi mdi-delete" aria-hidden="true"> </i>
+                                            </button>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    @*Modal Delete*@
+    <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Hapus Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah anda yakin ingin menghapus data ini?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" onclick="confirmDelete()" class="btn btn-danger">Hapus</button>
                 </div>
             </div>
         </div>
     </div>
 
 </body>
-
 </html>
+
+<script>
+    var tempIdDelete;
+    var id_outcome_publikasi;
+
+    function closeModal() {
+        $('#modalDelete').modal('hide');
+    }
+    function togModalDelete(id) {
+        //console.log(id)
+        id_outcome_publikasi = id;
+        this.tempIdDelete = id;
+        $('#modalDelete').modal('show');
+    }
+    function confirmDelete() {
+        var self = this;
+        console.log(id_outcome_publikasi);
+        var prosiding = $('#deleteButton_' + this.tempIdDelete);
+        var myTable = $('#datatable').DataTable();
+
+        $.ajax({
+            type: "POST",
+            url: "/Penelitian/ConfirmDeleteJurnal?id_outcome_publikasi=" + id_outcome_publikasi,
+            data: ({ id_outcome_publikasi: id_outcome_publikasi}),
+            success: function (data) {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Data berhasil dihapus!',
+                    confirmButtonText: 'Tutup',
+                })
+
+                closeModal();
+                window.location.reload();
+
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'SiLPPM said: ',
+                    text: 'Data gagal dihapus!',
+                })
+                window.location.reload();
+            }
+        });
+    }
+
+</script>

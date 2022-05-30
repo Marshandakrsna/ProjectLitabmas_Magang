@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace SiLPPM_New_Version.Models
 {
@@ -40,6 +41,7 @@ namespace SiLPPM_New_Version.Models
             }
         }
 
+        [Required(ErrorMessage = "Please enter name")]
         public string NAMA
         {
             get
@@ -52,6 +54,7 @@ namespace SiLPPM_New_Version.Models
                 nama = value;
             }
         }
+        [Required(ErrorMessage = "Please enter Username")]
         public string Username
         {
             get
@@ -64,6 +67,7 @@ namespace SiLPPM_New_Version.Models
                 username = value;
             }
         }
+        [Required(ErrorMessage = "Please enter password")]
         public string Password
         {
             get

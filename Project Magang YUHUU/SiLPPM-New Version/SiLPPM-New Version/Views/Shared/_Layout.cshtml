@@ -62,7 +62,7 @@
 </head>
 <body class="hold-transition sidebar-collapse sidebar-mini text-m">
 
-   
+
 
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-white navbar-light text-sm bg-transparent">
@@ -74,7 +74,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a style="cursor: pointer;" onclick="doLogout()" class="nav-link">
-                        <i class="fas fa-sign-out-alt nav-icon"></i><strong> LOGOUT </strong>
+                        <i class="fas fa-sign-out-alt fa-lg nav-icon" style="color:firebrick; font-size:larger"></i><strong style="color:firebrick"> LOGOUT </strong>
                     </a>
                 </li>
             </ul>
@@ -96,7 +96,7 @@
                         <img src="/Assets/dist/img/user-1.png" class="img-circle elevation-2" alt="Gambar Pengguna">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-size: 12px;">| @nama </font></font></a>
+                        <a href="~/Profile/Index" class="d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-size: 12px;">| @nama </font></font></a>
                     </div>
                 </div>
 
@@ -298,6 +298,21 @@
     <script src="~/Assets/dist/js/adminlte.min.js"></script>
     @*Scrollbar*@
     <link rel="stylesheet" href="~/Assets/dist/css/adminlte.min.css">
+    <!-- DataTables  & Plugins -->
+    <script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/lib/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/lib/datatables-select/js/dataTables.select.min.js"></script>
+    <script src="~/lib/jszip/jszip.min.js"></script>
+    <script src="~/lib/pdfmake/pdfmake.min.js"></script>
+    <script src="~/lib/pdfmake/vfs_fonts.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

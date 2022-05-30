@@ -79,18 +79,20 @@
                 <div>
 
                     <div class="px-3 pb-2">
-                        <form method="post" asp-action="UbahRolePengelolaan" asp-controller="Pengelolaan">
+                        <form method="post" asp-action="UbahRolePengelolaan" asp-controller="Pengelolaan" enctype="multipart/form-data">
 
                             @Html.AntiForgeryToken()
 
 
                             <div class="row">
                                 <div class="col-md-6">
+                                    <label for="basic-addon1" class="form-label">NPP</label>
+                                    <input type="text" class="form-control" id="npp" name="npp" value="@Model.data.NPP" required>
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Nama</label>
                                         <div class="input-group">
 
-                                            <input type="text" autocomplete="off" class="form-control" name="tgl" id="txttgl" value="@Model.data.NAMA" disabled/>
+                                            <input type="text" autocomplete="off" class="form-control" value="@Model.data.NAMA" disabled />
 
                                         </div>
                                     </div>
@@ -99,10 +101,10 @@
                                         <label for="basic-addon1" class="form-label">Role</label>
                                         <div class="input-group">
 
-                                            <select style="width: 750px; height: 33px;">
+                                            <select name="id_role" id="id_role" style="width: 750px; height: 33px;">
                                                 @foreach (var item in Model.data2)
                                                 {
-                                                    <option value="@item.DESKRIPSI"> @item.DESKRIPSI</option>
+                                                    <option value="@item.ID_ROLE"> @item.DESKRIPSI</option>
 
                                                 }
                                             </select>
@@ -113,7 +115,7 @@
                                     <hr />
                                     <div class="row">
                                         <div class="col-3">
-                                            <button asp-action="UbahRolePengelolaan" type="submit" class="btn btn-success">Simpan</button>
+                                            <button type="submit" class="btn btn-success">Simpan</button>
                                         </div>
                                     </div>
                                 </div>

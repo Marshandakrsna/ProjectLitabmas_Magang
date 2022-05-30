@@ -91,28 +91,22 @@
 
                     <span style="color:black">
                         Daftar Pengabdian
-
-
                     </span>
-
-
 
                 </a>
             </div>
 
             <div style="width: 100%; overflow-x: auto;" class="col">
                 <div class="card-body">
-                    <table id="tblData" class="table table-bordered table-striped">
+                    <table id="tblDataDaftarPengabdian" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>AKSI</th>
-                     
                                 <th>NAMA</th>
                                 <th>FAKULTAS</th>
                                 <th>PRODI</th>
                                 <th>JUDUL</th>
                                 <th>STATUS</th>
-
                                 <th>PERIODE</th>
                                 <th>DANA</th>
                             </tr>
@@ -120,18 +114,14 @@
                         <tbody>
                             @foreach (var item in Model.data)
                             {
-
                                 <tr>
                                     <td>
                                         <p style="font-weight:bold"><a href="google.com">Edit</a></p>
 
-
                                     </td>
-                               
 
                                     <td> @item.NAMA</td>
                                     <td>@item.FAK</td>
-
                                     <td>@item.PRODI</td>
                                     <td>@item.JUDUL</td>
                                     <td>@item.DESKRIPSI</td>
@@ -154,27 +144,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 
+    @section Scripts{
+
+        <script>
+            var tblDataDaftarPengabdian;
+            refreshTabelDaftarPengabdian();
+
+            function refreshTabelDaftarPengabdian() {
+                tblDataDaftarPengabdian = $("#tblDataDaftarPengabdian").DataTable({
+                    "buttons": ["csv", "excel", "pdf", "print"],
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                }).buttons().container().appendTo('#tblDataDaftarPengabdian_wrapper .col-md-6:eq(0)');
+            }
 
 
-    <script>
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });</script>
-
-
-    <script>
-            $('#tblData').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-
-            });</script>
-
-
+        </script>
+    }
 </body>
 </html>

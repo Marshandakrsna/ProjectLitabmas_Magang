@@ -147,8 +147,8 @@ SELECT ID_TAHUN_AKADEMIK
                 try
                 {
                     string query = @"SELECT ID_JENIS_PENELITIAN
-      ,JENIS_PENELITIAN
-  FROM PORTAL_DOSEN.silppm.REF_JENIS_PENELITIAN";
+                      ,JENIS_PENELITIAN
+                  FROM PORTAL_DOSEN.silppm.REF_JENIS_PENELITIAN";
 
                     var data = conn.Query<dynamic>(query).ToList();
 
@@ -342,7 +342,7 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
         }
 
         //INSERT DATA PROSIDING PENELITIAN
-        public DBOutput AddPublikasi(string npp, int id_proposal,string judul, int id_level_seminar,string nama_jurnal, string issn, string doi, string username)
+        public DBOutput AddPublikasi(string npp, int id_proposal,string judul, int id_level_seminar,string nama_jurnal, string issn, string doi)
         {
             DBOutput output = new DBOutput();
             output.status = true;
@@ -352,12 +352,13 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                 {
                     string query = @"INSERT INTO [silppm].[TBL_PUBLIKASI_SEMINAR]
                            ([ID_PROPOSAL],[JUDUL],[ID_LEVEL_SEMINAR],[NAMA_JURNAL],[ISSN],[DOI])
-                            VALUES( @ID_PROPOSAL, @JUDUL,@ID_LEVEL_SEMINAR,@NAMA_JURNAL,@ISSN,@DOI)";
-                    var param = new { NPP = npp, ID_PROPOSAL = id_proposal, JUDUL = judul, ID_LEVEL_SEMINAR= id_level_seminar, NAMA_JURNAL = nama_jurnal, ISSN= issn, DOI= doi };
+                            VALUES( @id_proposal, @judul,@id_level_seminar,@nama_jurnal,@issn,@doi)";
+                    var param = new { npp= npp, id_proposal = id_proposal, judul = judul, id_level_seminar= id_level_seminar, nama_jurnal= nama_jurnal, issn= issn, doi= doi };
 
-                    output.data = conn.Query<int>(query, param).Single();
+                    conn.Execute(query, param);
 
                     return output;
+                  
                 }
                 catch (Exception ex)
                 {
@@ -372,7 +373,7 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                 }
             }
         }
-        public DBOutput AddJurnal(string npp, int id_proposal, string judul, int id_level_jurnal, string nama_seminar, string issn, string doi, string username)
+        public DBOutput AddJurnal(string npp, int id_proposal, string judul, int id_level_jurnal, string nama_seminar, string issn, string doi)
         {
             DBOutput output = new DBOutput();
             output.status = true;
@@ -382,10 +383,11 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                 {
                     string query = @"INSERT INTO [silppm].[TBL_PUBLIKASI_JURNAL]
                            ([ID_PROPOSAL],[JUDUL],[ID_LEVEL_JURNAL],[NAMA_SEMINAR],[ISSN],[DOI])
-                            VALUES( @ID_PROPOSAL, @JUDUL,@ID_LEVEL_JURNAL,@NAMA_SEMINAR,@ISSN,@DOI)";
-                    var param = new { NPP = npp, ID_PROPOSAL = id_proposal, JUDUL = judul, ID_LEVEL_SEMINAR = id_level_jurnal, NAMA_JURNAL = nama_seminar, ISSN = issn, DOI = doi };
+                            VALUES( @id_proposal, @judul,@id_level_jurnal,@nama_seminar,@issn,@doi)";
+                    var param = new { npp = npp, id_proposal = id_proposal, judul = judul, id_level_jurnal = id_level_jurnal, nama_seminar = nama_seminar, issn= issn, doi = doi };
 
-                    output.data = conn.Query<int>(query, param).Single();
+
+                    conn.Execute(query, param);
 
                     return output;
                 }
@@ -411,7 +413,7 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                 try
                 {
 
-                    string query = @"select ps.ID_OUTCOME_PROSIDING,ps.JUDUL,r.LEVEL,ps.NAMA_JURNAL,ps.NAMA_JURNAL,ps.DOI,ps.ISSN from silppm.TBL_PUBLIKASI_SEMINAR ps  join silppm.TBL_PENELITIAN p on p.ID_PROPOSAL=ps.ID_PROPOSAL join silppm.REF_LEVEL_SEMINAR r on ps.ID_LEVEL_SEMINAR=r.ID_LEVEL_SEMINAR ";
+                    string query = @"select ps.ID_OUTCOME_PROSIDING, ps.ID_PROPOSAL,ps.JUDUL,r.ID_LEVEL_SEMINAR,r.LEVEL,ps.NAMA_JURNAL,ps.DOI,ps.ISSN from silppm.TBL_PUBLIKASI_SEMINAR ps  join silppm.TBL_PENELITIAN p on p.ID_PROPOSAL=ps.ID_PROPOSAL join silppm.REF_LEVEL_SEMINAR r on ps.ID_LEVEL_SEMINAR=r.ID_LEVEL_SEMINAR ";
 
 
                     var data = conn.Query<dynamic>(query).ToList();
@@ -433,6 +435,7 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                 }
             }
         }
+
         public DBOutput GetHistoryJurnal()
         {
             DBOutput output = new DBOutput();
@@ -442,9 +445,7 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                 try
                 {
 
-                    string query = @"select j.ID_OUTCOME_PUBLIKASI,j.JUDUL,r.LEVEL,j.NAMA_SEMINAR,j.DOI,j.ISSN from silppm.TBL_PUBLIKASI_JURNAL j  join silppm.TBL_PENELITIAN p on p.ID_PROPOSAL=J.ID_PROPOSAL join silppm.REF_LEVEL_JURNAL r on j.ID_LEVEL_JURNAL=r.ID_LEVEL_JURNAL ";
-
-
+                    string query = @"select j.ID_OUTCOME_PUBLIKASI,j.ID_PROPOSAL,j.JUDUL,r.ID_LEVEL_JURNAL,r.LEVEL,j.NAMA_SEMINAR,j.DOI,j.ISSN from silppm.TBL_PUBLIKASI_JURNAL j  join silppm.TBL_PENELITIAN p on p.ID_PROPOSAL=J.ID_PROPOSAL join silppm.REF_LEVEL_JURNAL r on j.ID_LEVEL_JURNAL=r.ID_LEVEL_JURNAL";
 
                     var data = conn.Query<dynamic>(query).ToList();
 
@@ -465,6 +466,394 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                 }
             }
         }
+
+        public DBOutput GetRefLevelSeminar()
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"
+SELECT  [ID_LEVEL_SEMINAR]
+      ,[LEVEL]
+  FROM [PORTAL_DOSEN].[silppm].[REF_LEVEL_SEMINAR]";
+
+                    var data = conn.Query<dynamic>(query).ToList();
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetRefLevelJurnal()
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"
+SELECT [ID_LEVEL_JURNAL]
+      ,[LEVEL]
+  FROM [PORTAL_DOSEN].[silppm].[REF_LEVEL_JURNAL]";
+
+                    var data = conn.Query<dynamic>(query).ToList();
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetRefLevelSeminarByID(int Id)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT  [ID_LEVEL_SEMINAR]
+      ,[LEVEL]
+  FROM [PORTAL_DOSEN].[silppm].[REF_LEVEL_SEMINAR] where ID_LEVEL_SEMINAR = @Id;";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { Id= Id });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput DeleteProsiding(int id_outcome_prosiding)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"DELETE FROM [silppm].[TBL_PUBLIKASI_SEMINAR] WHERE [ID_OUTCOME_PROSIDING]=@id_outcome_prosiding";
+
+                    //var param = new { id_outcome_prosiding = id_outcome_prosiding };
+
+                    //// Tampung hasil qxecute ke output
+
+                    //conn.Execute(query, param);
+                    //return output;
+                    var param = new { id_outcome_prosiding=id_outcome_prosiding };
+                   
+                    
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, param);
+
+                    output.data = data;
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
+        public DBOutput DeleteJurnal(int id_outcome_publikasi)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"DELETE FROM [silppm].[TBL_PUBLIKASI_JURNAL] WHERE [ID_OUTCOME_PUBLIKASI]=@id_outcome_publikasi";
+
+                    var param = new { id_outcome_publikasi = id_outcome_publikasi};
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, param);
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
+        public DBOutput GetHistoryProsidingByID(int id_outcome_prosiding)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+
+                    string query = @"select ps.ID_OUTCOME_PROSIDING, ps.ID_PROPOSAL, ps.JUDUL,r.ID_LEVEL_SEMINAR,r.LEVEL,ps.NAMA_JURNAL,ps.DOI,ps.ISSN from silppm.TBL_PUBLIKASI_SEMINAR ps  join silppm.TBL_PENELITIAN p on p.ID_PROPOSAL=ps.ID_PROPOSAL 
+join silppm.REF_LEVEL_SEMINAR r on ps.ID_LEVEL_SEMINAR=r.ID_LEVEL_SEMINAR where ps.ID_OUTCOME_PROSIDING = @id_outcome_prosiding";
+
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_outcome_prosiding = id_outcome_prosiding });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetHistoryJurnalByID(int id_outcome_publikasi)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"select j.ID_OUTCOME_PUBLIKASI,j.ID_PROPOSAL,j.JUDUL,r.ID_LEVEL_JURNAL,r.LEVEL,j.NAMA_SEMINAR,j.DOI,j.ISSN from silppm.TBL_PUBLIKASI_JURNAL j 
+                                    join silppm.TBL_PENELITIAN p on p.ID_PROPOSAL = J.ID_PROPOSAL join silppm.REF_LEVEL_JURNAL r on j.ID_LEVEL_JURNAL = r.ID_LEVEL_JURNAL Where j.ID_OUTCOME_PUBLIKASI = @id_outcome_publikasi";
+
+
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_outcome_publikasi = id_outcome_publikasi});
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput CekSetujuProdi(int id_proposal)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"select IS_SETUJU_PRODI from silppm.TBL_PENELITIAN where id_proposal = @id_proposal";
+
+
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_proposal= id_proposal });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput CekSetujuDekan(int id_proposal)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"select IS_SETUJU_DEKAN from silppm.TBL_PENELITIAN where id_proposal = @id_proposal";
+
+
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_proposal = id_proposal });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput CekSetujuLPPM(int id_proposal)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"select IS_SETUJU_LPPM from silppm.TBL_PENELITIAN where id_proposal = @id_proposal";
+
+
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_proposal = id_proposal });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
+        public DBOutput GetKriteriaPenilaian()
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+
+                    string query = @"SELECT  [ID_KRITERIA_PENILAIAN],[KRITERIA],[BOBOT],[IS_DELETED] 
+                    FROM [PORTAL_DOSEN].[silppm].[REF_KRITERIA_PENILAIAN_PENELITIAN] Where IS_DELETED =0;";
+
+                    var data = conn.Query<dynamic>(query).ToList();
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
+        //untuk HAKI
+        public DBOutput GetOutcome()
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT  ID_OUTCOME, ID_JENIS_OUTCOME, DESKRIPSI
+                    FROM silppm.REF_OUTCOME WHERE  IS_DELETED='false'";
+
+                    var data = conn.Query<dynamic>(query).ToList();
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+      
 
     }
 }

@@ -154,8 +154,16 @@
                                 <div class="mb-4">
                                     <label for="basic-addon1" class="form-label">Outcome</label>
                                     <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                        <input type="text" class="form-control" placeholder="Outcome" aria-label="Nomor Barcode" aria-describedby="basic-addon1" id="noBarcode" onchange="autofillTabel()">
+                                        <span class="input-group-text" id="basic-addon2"><i class="mdi mdi-pencil small" aria-hidden="true"> </i></span>
+                                        <select style="width:710px">
+                                            <option hidden style="color:lightgrey">Pilih Outcome </option>
+                                            @foreach (var item in Model.refOutcome)
+                                            {
+                                                <option value="@item.ID_OUTCOME"> @item.DESKRIPSI</option>
+
+                                            }
+                                        </select>
+
                                     </div>
                                 </div>
                                 <div class="mb-4">

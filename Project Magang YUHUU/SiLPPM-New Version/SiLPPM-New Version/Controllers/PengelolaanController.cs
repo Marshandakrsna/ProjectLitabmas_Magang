@@ -43,13 +43,12 @@ namespace SiLPPM_New_Version.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult UbahRolePengelolaan(string role,string npp)
+        public IActionResult UbahRolePengelolaan(string npp, int id_role)
         {
-            
-            var cek = dao.UbahRole(role,npp);
+            var cek = dao.UbahRole(npp, id_role);
             if (cek.status == true)
             {
-                TempData["suc"] = "Berhasil merubah data ";
+                TempData["succ"] = "Berhasil merubah data ";
             }
             else
             {
