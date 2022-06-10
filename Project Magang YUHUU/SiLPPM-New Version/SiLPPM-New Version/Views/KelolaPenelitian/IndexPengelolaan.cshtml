@@ -21,11 +21,12 @@
         [aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {
             display: none;
         }
-    .table thead th {
-        vertical-align: middle;
-        align-content: center;
-        text-align: center;
-    }
+        .table thead th {
+            vertical-align: middle;
+            align-content: center;
+            text-align: center;
+        }
+
         .label {
             color: white;
             border-radius: 5px;
@@ -34,7 +35,14 @@
             margin-top: 50px;
             margin-bottom: 60px;
         }
-
+        .modal-header {
+            border-radius: 41px;
+        }
+        .modal-dialog {
+            transform: scale(1.15);
+            transition: transform 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946), opacity 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+            border-radius:10px;
+        }
         .penelitianDiajukan {
             background-color: chocolate;
             margin-top: 50px;
@@ -68,7 +76,7 @@
             transition: .3s box-shadow;
             margin-bottom: 15px;
             height: 40px;
-            width: 400px;
+            width: 450px;
         }
 
         .style1:hover {
@@ -134,6 +142,24 @@
                     <a href="IndexReviewerPeneliti" class="btn" style="background-color:sandybrown">Reviewer Penelitian</a>
                 </div>
             </div>
+            @if (TempData["succ"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color:green">
+                    <strong>@TempData["succ"].ToString()</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+            @if (TempData["err"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>@TempData["err"].ToString()</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
             <div style="width: 100%; overflow-x: auto;" class="col">
                 <div class="card-body">
                     <table id="tblData" class="table table-bordered table-striped">
@@ -153,7 +179,7 @@
                             {
                                 <tr>
                                     <td>
-                                        <p style="font-weight:bold;color:royalblue; " onclick="showDetailProposal(@item.ID_PROPOSAL)">Pilih</p>
+                                        <p style="font-weight:bold;color:royalblue; cursor:pointer" onclick="addDetailProposal(@item.ID_PROPOSAL)">Pilih</p>
                                     </td>
                                     <td> @item.NAMA</td>
                                     <td>@item.FAK</td>
@@ -176,58 +202,55 @@
             <div class="modal-content">
                 <div class="modal-header" style="background-color:antiquewhite">
                     <h5 class="modal-title" style="color:black; font-family:'Trebuchet MS';font-display:swap; transition:cubic-bezier()"> <i class="fas fa-clipboard"></i>&nbsp; Detail Kelola Reviewer Penelitian</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    @*<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>*@
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <hr style="border:dashed; border-color:aliceblue" />
                 <form class="formDetailKelolaReviewer" method="post" asp-action="addKelolaReviewer" asp-controller="KelolaPenelitian" enctype="multipart/form-data" novalidate>
                     @Html.AntiForgeryToken()
 
                     <div class="modal-body">
-                        <input type="hidden" class="form-control" id="NPP" name="npp" value="" required>
-                        <input type="hidden" class="form-control" id="ID_PROPOSAL" name="ID_PROPOSAL" value="" required>
+                        <input type="hidden" class="form-control" id="id_proposal" name="id_proposal" value="" required>
 
                         <div class="mb-4">
-                            <div class="input-group">
+                            <div class="form-group">
                                 <label>
                                     Judul
-                                    <input id="judulProposal" name="judulProposal" type="text" class="style1" style="margin-left:70px" />
+                                    <input id="judulProposal"  name="judulProposal" type="text" class="style1" style="margin-left:70px; word-wrap:break-word" disabled/>
                                 </label>
 
                             </div>
 
-                            <div class="input-group">
+                            <div class="form-group">
                                 <label>
                                     Nama Dosen
-                                    <input type="text" id="namaDosen" name="namaDosen" class="style1" style="margin-left:15px" />
+                                    <input type="text" id="namaDosen" name="namaDosen" class="style1" style="margin-left:15px" disabled/>
                                 </label>
 
                             </div>
-
-
-                            <div class="input-group">
+                            <div class="form-group">
                                 <label>
                                     Reviewer 1
-                                    <select class="style1" id="nppReviewer1" name="nppReviewer1" style="margin-left:30px">
+                                    <select class="style1" id="reviewer1" name="reviewer1" style="margin-left:30px" required>
                                         <option hidden style="color:lightgrey; ">Pilih Reviewer 1</option>
                                         @foreach (var item in Model.reviewer)
                                         {
-                                            <option value="@item.npp"> @item.NAMA_LENGKAP_GELAR</option>
+                                            <option value="@item.NPP"> @item.NAMA_LENGKAP_GELAR</option>
 
                                         }
                                     </select>
                                 </label>
-
                             </div>
-                            <div class="input-group">
+                            <div class="form-group">
                                 <label>
                                     Reviewer 2
-                                    <select class="style1" id="nppReviewer2" name="nppReviewer2" style="margin-left:30px" onclick="getNamaReviewer(this.value)" required>
+                                    <select class="style1" id="reviewer2" name="reviewer2" style="margin-left:30px"  required>
                                         <option hidden style="color:lightgrey; ">Pilih Reviewer 2</option>
                                         @foreach (var item in Model.reviewer)
                                         {
-                                            <option value="@item.npp"> @item.NAMA_LENGKAP_GELAR</option>
+                                            <option value="@item.NPP"> @item.NAMA_LENGKAP_GELAR</option>
 
                                         }
                                     </select>
@@ -236,7 +259,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="button" id="closeModal"  class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="btnAddKelolaReviewer" class="btn btn-primary" data-dismiss="modal"></button>
+
                     </div>
                 </form>
             </div>
@@ -256,6 +281,8 @@
 
 
     <script>
+        var id_proposal;
+        var tempIdProposal;
         $('#tblData').DataTable({
             "paging": true,
             "lengthChange": true,
@@ -267,33 +294,57 @@
 
         });
 
-        function showDetailProposal(id) {
+        $('#DetailKelolaProposal').on('hidden.bs.modal', function () {
+            $('#DetailKelolaProposal').modal('hide');
+
+            var forms = document.getElementsByClassName('formDetailKelolaReviewer');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.classList.remove('was-validated');
+            });
+        });
+
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('formDetailKelolaReviewer');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+
+       
+        function addDetailProposal(id_proposal) {
+           
+            id_proposal = id_proposal;
+            this.tempIdProposal = id_proposal;
             $('#DetailKelolaProposal').modal('show');
-            //$('#DetailRencanaPengadaanAset').modal('hide');
 
-            //$.ajax({
-            //    url: "/PengelolaanInvestasi/ajaxGetDetailRencanaKhususInvestasi",
-            //    type: "POST",
-            //    data: { "id": id },
-            //    dataType: "json",
-            //    success: function (result) {
-            //        var dtlRencanaKhususInvestasi = result.data;
-            //        var str = '';
+            $('#btnAddKelolaReviewer').html('Tambah');
+            $('#id_proposal').val(id_proposal); //bisa masuk
+            $('#judulProposal').val(judulProposal);
 
-            //        for (var i = 0; i < dtlRencanaKhususInvestasi.length; i++) {
-            //            if (dtlRencanaKhususInvestasi[i].ID_DTL_RKA == null) {
-            //                str += '<tr> <td>' + dtlRencanaKhususInvestasi[i].NAMA_KEGIATAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].BULAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].VOLUME + '</td> <td>' + dtlRencanaKhususInvestasi[i].SATUAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].HARGA_SATUAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].SUBTOTAL + '</td> <td> <button onClick="addDetailRencanaPengadaanAset(' + dtlRencanaKhususInvestasi[i].DTL_RKA + ')" type="button" class="btn btn-secondary btn-block btn-sm"><i class="fa fa-plus"></i></button> </td> </tr>';
-            //            } else {
-            //                str += '<tr> <td>' + dtlRencanaKhususInvestasi[i].NAMA_KEGIATAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].BULAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].VOLUME + '</td> <td>' + dtlRencanaKhususInvestasi[i].SATUAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].HARGA_SATUAN + '</td> <td>' + dtlRencanaKhususInvestasi[i].SUBTOTAL + '</td> <td> <button onClick="updateDetailRencanaPengadaanAset(' + dtlRencanaKhususInvestasi[i].DTL_RKA + ')" type="button" class="btn btn-success btn-block btn-sm"> <i class="fa fa-edit"></i></button> </td> </tr>';
-            //            }
-            //        }
-
-            //        tabelDetailRencanaKhususInvestasi.destroy();
-            //        $("#tbodyDetailRencanaKhususInvestasi").html(str);
-            //        refreshTabelDetailRencanaKhususInvestasi();
-            //    }
-            //})
+            $.ajax({
+                url: "/KelolaPenelitian/ajaxGetDetailKelolaReviewer?id_proposal="+id_proposal,
+                type: "POST",
+                data: { id_proposal: id_proposal },
+                dataType: "json",
+                success: function (result) {
+                    var data = result.data;
+                    
+                    $('#id_proposal').val();
+                    $('#npp').val(data.NPP);
+                    $('#namaDosen').val(data.NAMA);
+                    $('#judulProposal').val(data.JUDUL);
+     
+                }
+            })
+          
         }
+      
 
     </script>
 

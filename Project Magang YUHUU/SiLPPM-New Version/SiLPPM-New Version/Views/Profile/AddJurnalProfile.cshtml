@@ -48,9 +48,9 @@
             cursor: pointer;
         }
 
-            .fa-trash:hover {
-                background-color: beige;
-            }
+        .fa-trash:hover {
+            background-color: beige;
+        }
 
         .title-card {
             color: #FFFFFF;
@@ -69,7 +69,7 @@
         }
 
         .btn:active {
-            background-color: #ffe7ab;
+           
             transform: translateY(4px);
         }
 
@@ -83,7 +83,7 @@
     <div class="px-3 mt-3">
         <div class="content-wrapper p-3">
 
-            <h4 class="head-title">Add Jurnal</h4>
+            <h4 class="head-title"><i class="fas fa-plus-circle" style="margin-right: 20px;"></i> Add Jurnal</h4>
 
             <hr />
             @if (TempData["succ"] != null)
@@ -116,13 +116,13 @@
 
 
                             <div class="row">
-                                <div class="col-md-6">
+                             
                                     <div class="mb-4">
                                         <div class="input-group">
                                             <input type="hidden" autocomplete="off" class="form-control" name="id_proposal" id="id_proposal" value="@Model.refpropo2.ID_PROPOSAL" />
                                         </div>
                                     </div>
-                                    <div class="mb-4">
+                                    <div class="col">
                                         <label for="basic-addon1" class="form-label">Judul Penelitian</label>
                                         <div class="input-group">
 
@@ -131,7 +131,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-4">
+                                    <div class="col mb-4">
                                         <label for="basic-addon1" class="form-label">Level Seminar/Prosiding</label>
                                         <div class="input-group">
 
@@ -147,13 +147,13 @@
                                         </div>
                                     </div>
                                     <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Nama Jurnal</label>
+                                        <label for="basic-addon1" class="form-label">Nama Seminar</label>
                                         <div class="input-group">
                                             <input name="nama_seminar" id="nama_seminar" type="text" autocomplete="off" class="form-control" required />
 
                                         </div>
                                     </div>
-                                    <div class="mb-4">
+                                    <div class="col">
                                         <label for="basic-addon1" class="form-label">ISSN/ISBN</label>
                                         <div class="input-group">
 
@@ -161,25 +161,25 @@
 
                                         </div>
                                     </div>
-                                    <div class="mb-4">
+                                    <div class="col mb-4">
                                         <label for="basic-addon1" class="form-label">DOI</label>
                                         <div class="input-group">
                                             <input name="doi" id="doi" type="text" autocomplete="off" class="form-control" required />
 
                                         </div>
                                     </div>
-
+                                    <br /> <br />
                                     <hr />
 
 
-                                    <div class="btn">
+                                    <div class="btn " style="text-align:start">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <button type="reset" class="btn btn-default">Reset</button>
 
                                     </div>
 
                                 </div>
-                            </div>
+                           
                         </form>
                     </div>
                     <div class="card-body">
@@ -189,7 +189,7 @@
 
                                     <th>Judul Publikasi</th>
                                     <th>Level Jurnal</th>
-                                    <th>Nama Jurnal</th>
+                                    <th>Nama Seminar</th>
                                     <th>DOI</th>
                                     <th>ISBN</th>
                                     <th>Aksi</th>

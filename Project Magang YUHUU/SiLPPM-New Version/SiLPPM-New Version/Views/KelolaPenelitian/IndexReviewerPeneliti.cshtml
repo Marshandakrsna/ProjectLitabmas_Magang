@@ -126,14 +126,10 @@
 
                 <a href="#" class="brand-link" style="background-color:lightblue">
                     <img src="~/images/profile-user.png" alt="Profile" class="brand-image img-circle elevation-3" style="opacity: .8">
-
                     <span style="color:black">
                    Reviewer Penelitian
 
                     </span>
-
-
-
                 </a>
             </div>
             <a class="card-link" data-toggle="collapse" href="#menuone" aria-expanded="false" aria-controls="menuone" style="float:right; margin-right:40px">
@@ -156,7 +152,7 @@
                         <thead>
                             <tr>
                                 <th>INPUT NILAI</th>
-                                <th>NAMA</th>
+                                <th>NAMA DOSEN</th>
                                 <th>FAKULTAS</th>
                                 <th>PRODI</th>
                                 <th>JUDUL</th>
@@ -170,23 +166,23 @@
                             @foreach (var item in Model.data)
                             {
 
-                            <tr>
-                                <td>
-                                    <p style="font-weight:bold"><a href="google.com">Reviewer 1</a></p>
-                                    <p style="font-weight:bold"><a href="google.com">Reviewer 2</a></p>
+                                <tr>
+                                    <td>
+                                        <p style="font-weight:bold"><a href="AdminRevPenelitian?id_proposal=@item.ID_PROPOSAL&npp=@item.REVIEWER1">Reviewer 1</a></p>
+                                        <p style="font-weight:bold"><a href="AdminRevPenelitian?id_proposal=@item.ID_PROPOSAL&npp=@item.REVIEWER2">Reviewer 2</a></p>
 
-                                </td>
+                                    </td>
 
-                                <td> @item.NAMA</td>
-                                <td>@item.FAK</td>
+                                    <td> @item.NAMA</td>
+                                    <td>@item.FAK</td>
 
-                                <td>@item.PRODI</td>
-                                <td>@item.JUDUL</td>
-                                <td>@item.DESKRIPSI</td>
-                                <td>@item.TAHUN_AKADEMIK</td>
-                                <td>@item.REVIEWER1</td>
-                                <td>@item.REVIEWER2</td>
-                            </tr>
+                                    <td>@item.PRODI</td>
+                                    <td>@item.JUDUL</td>
+                                    <td>@item.DESKRIPSI</td>
+                                    <td>@item.TAHUN_AKADEMIK</td>
+                                    <td>@item.REVIEWER1</td>
+                                    <td>@item.REVIEWER2</td>
+                                </tr>
                             }
                         </tbody>
                     </table>

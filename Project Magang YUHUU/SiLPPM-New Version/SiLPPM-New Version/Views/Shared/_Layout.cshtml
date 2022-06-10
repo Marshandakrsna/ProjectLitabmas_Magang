@@ -1,7 +1,10 @@
 ﻿@{ var role = User.Claims
                       .Where(c => c.Type == "role")
                           .Select(c => c.Value).SingleOrDefault();
-
+     var id_proposal = User.Claims
+                      .Where(c => c.Type == "id_proposal")
+                          .Select(c => c.Value).ToString();
+    
     var nama = User.Claims
         .Where(c => c.Type == "nama_lengkap")
             .Select(c => c.Value).SingleOrDefault();
@@ -46,12 +49,16 @@
         body {
             font-family: 'Karla', sans-serif;
         }
-
-        .sidebar-dark-primary {
-            background-color: #30318B !important;
-            
+        .brand {
+            background-color: #001038;
+            background-image: url("https://www.transparenttextures.com/patterns/black-thread.png");
         }
 
+        .sidebar-dark-primary {
+            background-color: #001038 !important;
+            background-image: url("https://www.transparenttextures.com/patterns/black-twill.png");
+        }
+     
        
 
         .user-panel, .brand-link {
@@ -80,10 +87,9 @@
             </ul>
         </nav>
 
-        @*test*@
         <aside style="min-height: 100vh; height: 100%;" class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="#" class="brand-link">
+            <a href="#" class="brand brand-link">
                 <img src="~/images/logo_atma.png" alt="Logo UAJY" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light"><font style="vertical-align: inherit; color:antiquewhite">SiLPPM UAJY</font></span>
             </a>
@@ -144,7 +150,6 @@
                                     </a>
                                 </li>
 
-
                             </ul>
                         </li>
 
@@ -169,12 +174,12 @@
                                         <p>Pengesahan Proposal </p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                @*<li class="nav-item">
                                     <a asp-action="IndexLihat" asp-controller="Pengabdian" class="nav-link">
                                         <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
                                         <p>Lihat Monev Pengabdian</p>
                                     </a>
-                                </li>
+                                </li>*@
                                 <li class="nav-item">
                                     <a asp-action="IndexInput" asp-controller="Pengabdian" class="nav-link">
                                         <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>

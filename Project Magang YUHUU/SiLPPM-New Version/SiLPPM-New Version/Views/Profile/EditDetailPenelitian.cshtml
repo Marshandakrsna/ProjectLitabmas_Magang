@@ -1,0 +1,608 @@
+﻿@{ ViewData["Title"] = "Lihat Detail Proposal Penelitian "; }
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="~/css/mapStyle.css" />
+    <script src="~/js/mapJavaScript.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/style2.css" />
+    <!-- Data Table-->
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">*@
+    <style>
+        .button {
+            border: none;
+            color: white;
+            padding: 7px 14px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-left: 90px;
+            border-radius: 20px;
+        }
+
+        .style1 {
+            background-color: #fafafa;
+            border: 0;
+            box-shadow: 0 0 4px rgba(0,0,0,0.3);
+            transition: .3s box-shadow;
+            margin-bottom: 10px;
+            height: 30px;
+            width: 450px;
+        }
+
+            .style1:hover {
+                box-shadow: 0 0 4px rgba(0,0,0,0.5);
+            }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #261ad9;
+        }
+
+            .button1:hover {
+                background-color: #3b4efc;
+                color: white;
+            }
+
+
+        .button2 {
+            background-color: white;
+            color: black;
+            border: 2px solid #F2AA4C;
+        }
+
+            .button2:hover {
+                background-color: #f5b35e;
+                color: white;
+            }
+
+        .button3 {
+            background-color: white;
+            color: black;
+            border: 2px solid #14b34b;
+        }
+
+            .button3:hover {
+                background-color: #46d076;
+                color: white;
+            }
+
+        body {
+            font-family: 'Karla', sans-serif;
+        }
+
+        .content-wrapper {
+            border-radius: 15px;
+            box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 10px;
+            min-height: 190px !important;
+            background-color: transparent;
+        }
+
+        .radio-checkbox {
+            font-size: large;
+            letter-spacing: 1px;
+        }
+
+
+        .title-card {
+            color: #FFFFFF;
+            background-color: #F2AA4C;
+            padding: 15px;
+            border-radius: 10px 10px 0px 0px;
+            min-width: inherit;
+        }
+
+        .blue-color {
+            background-color: #1d84C6 !important;
+        }
+
+        .green-color {
+            background-color: #1CB394 !important;
+        }
+
+        .btn:active {
+            background-color: #ffe7ab;
+            transform: translateY(4px);
+        }
+
+        .btn:hover {
+            background-color: #ffe7ab;
+        }
+
+        .td, th {
+            vertical-align: middle;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px ridge #ddd;
+        }
+
+            td .style8 {
+                font-weight: bold;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="px-3 mt-3">
+        <div class="content-wrapper p-3">
+            <span style=" background-color:aliceblue; font-weight:bolder; margin-bottom: 20px;"><i class="fas fa-edit" style="margin-right: 20px;"></i> DETAIL PROPOSAL PENELITIAN</span>
+            <hr />
+
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-data-tab" data-toggle="tab" href="#nav-data" role="tab" aria-controls="nav-data" aria-selected="true">Data Penelitian</a>
+                    <a class="nav-item nav-link" id="nav-identitas-tab" data-toggle="tab" href="#nav-identitas" role="tab" aria-controls="nav-identitas" aria-selected="false">Identitas Peneliti</a>
+                    <a class="nav-item nav-link" id="nav-cv-tab" data-toggle="tab" href="#nav-cv" role="tab" aria-controls="nav-cv" aria-selected="false">CV-Pengalaman Penelitian (5 Tahun terakhir)</a>
+                    <a class="nav-item nav-link" id="nav-publikasi-tab" data-toggle="tab" href="#nav-publikasi" role="tab" aria-controls="nav-publikasi" aria-selected="false">Publikasi</a>
+
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-data" role="tabpanel" aria-labelledby="nav-data-tab">
+
+                </div>
+                <div class="tab-pane fade" id="nav-identitas" role="tabpanel" aria-labelledby="nav-identitas-tab">
+                    <br />
+                    <div class="content-wrapper p-3" style="border:" id="content">
+
+                        <span style="  font-weight:bolder; margin-bottom: 20px;"><i class="fas fa-user" style="margin-right: 5px;"></i> KETUA PENELITI</span>
+                        <br>
+                        <div style="width: 100%; overflow-x: auto;" class="col">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td class="style8">
+                                            NPP
+                                        </td>
+                                        <td>
+                                            @Model.data.NPP
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style8">
+                                            Nama
+                                        </td>
+                                        <td>
+                                            @Model.data.NAMA_LENGKAP_GELAR
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style8">
+                                            Jabatan Fungsional
+                                        </td>
+                                        <td>
+                                            @Model.data2.DESKRIPSI
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style8">
+                                            Pangkat/Golongan
+                                        </td>
+                                        <td>
+                                            @Model.data6.DESKRIPSI/@Model.data3.ID_REF_GOLONGAN
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="style8">
+                                            NPP/NIDN
+                                        </td>
+                                        <td>
+
+                                            @Model.data.NPP / @Model.data.NIDN
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style8">
+                                            Unit/Fakultas/Jurusan
+                                        </td>
+                                        <td>
+                                            @Model.data4.NAMA_UNIT/@Model.data5.NAMA_UNIT
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style8">
+                                            Alamat
+                                        </td>
+                                        <td>
+                                            @Model.data.ALAMAT
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="style8">
+                                            No. Telp/Faks
+                                        </td>
+                                        <td>
+                                            @Model.data.NO_TELPON_HP
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style8">
+                                            Email
+                                        </td>
+                                        <td>
+                                            @Model.data.EMAIL_INSTITUSI
+                                        </td>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="content-wrapper p-3" style="border:" id="content">
+                        <br>
+                        <div style="width: 100%; overflow-x: auto;" class="col">
+                            <table id="datatable" class="table table-bordered table-striped text-center">
+                                <thead>
+                                    <tr>
+                                        <th>NPP</th>
+                                        <th>NAMA</th>
+                                        <th>INSTITUSI</th>
+                                        <th>KEAHLIAN</th>
+                                        <th>EMAIL</th>
+                                        <th>TELFON RUMAH</th>
+                                        <th>HP</th>
+                                        <th>ALAMAT</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody class="bodyIdentitas"></tbody>
+                            </table>
+                        </div>
+                        <button style="margin-left: 10px; margin-top: 40px;" class="button button2" onclick="addAnggotaUAJY(@Model.refpropo.ID_PROPOSAL)">Tambah Anggota UAJY</button>
+                        <button style="margin-left: 10px; margin-top: 40px;" class="button button3" onclick="addAnggotaNonUAJY(@Model.refpropo.ID_PROPOSAL)">Tambah Anggota Non UAJY</button>
+                        <button style="margin-left: 10px; margin-top: 40px;" class="button button1">Ubah Proposal</button>
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="nav-cv" role="tabpanel" aria-labelledby="nav-cv-tab">
+                    <br>
+                    <div class="content-wrapper p-3" id="content">
+                        <div style="width: 100%; overflow-x: auto; margin-top: 10px;" class="col">
+                            <table>
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Tahun </th>
+                                        <th>Judul</th>
+                                        <th>Dana Pribadi </th>
+                                        <th>Dana Eksternal </th>
+                                        <th>Dana Kerjasama </th>
+                                        <th>Dana UAJY</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Model.refpropo.TAHUN_AKADEMIK
+                                        </td>
+                                        <td> @Model.refpropo.JUDUL</td>
+                                        <td>
+                                            @Model.refpropo.DANA_PRIBADI
+                                        </td>
+
+                                        <td>      @Model.refpropo.DANA_EKSTERNAL </td>
+                                        <td>
+                                            @Model.refpropo.DANA_KERJASAMA
+                                        </td>
+                                        <td>@Model.refpropo.DANA_UAJY</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <button style="margin-left: 10px; margin-top: 40px;" class="button button1">Ubah Proposal</button>
+                    </div>
+
+
+                </div>
+
+                <div class="tab-pane fade" id="nav-publikasi" role="tabpanel" aria-labelledby="nav-publikasi-tab">
+                    <br>
+                    <div class="content-wrapper p-3" id="content">
+                        <div style="width: 100%; overflow-x: auto; margin-top: 10px" class="col">
+                            <table>
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>Judul</th>
+                                        <th> Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> @Model.refpropo.JUDUL</td>
+                                        <td class="text-center">
+                                            <a class="btn btn-success" href="AddProsidingProfile?id_proposal=@Model.refpropo.ID_PROPOSAL" role="button" style="font-weight:bold">Prosiding</a>
+                                            <a class="btn btn-warning" href="AddJurnalProfile?id_proposal=@Model.refpropo2.ID_PROPOSAL" role="button" style="font-weight:bold">Jurnal</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<!-- Modal Dialog 1 -->
+<div class="modal fade" id="TambahAnggotaNonUAJY" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:antiquewhite">
+                <h5 class="modal-title" style="color:black; font-family:'Trebuchet MS';font-display:swap; transition:cubic-bezier()"> <i class="fas fa-clipboard"></i>&nbsp; Tambah Anggota Non UAJY</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <br />
+            <form class="formTambahAnggotaNonUAJY" method="post" asp-action="addAnggPenelitianNonUAJY" asp-controller="Profile" enctype="multipart/form-data" novalidate>
+                @Html.AntiForgeryToken()
+
+                <div class="modal-body">
+                    <input type="hidden" class="form-control" id="id_proposal" name="id_proposal" value="" required>
+
+                    <div class="mb-4">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">NPP</label>
+                            <input id="npp" name="npp" type="text" class="style1" style=" word-wrap:break-word" required />
+
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                NIDN
+
+                            </label>
+                            <input type="text" id="nidn" name="nidn" class="style1" required />
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                NPWP
+
+                            </label>
+                            <input type="text" id="npwp" name="npwp" class="style1" required />
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                Nama
+
+                            </label>
+                            <input type="text" id="nama" name="nama" class="style1" required />
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                Jabatan Fungsional
+
+                            </label>
+                            <input type="text" id="jabatanFungsional" name="jabatanFungsional" class="style1" required />
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                Pangkat, Golongan
+
+                            </label>
+                            <input type="text" id="pangkat" name="pangkat" class="style1 col-md-3 " style="margin-right:30px" required />
+                            <input type="text" id="golongan" name="golongan" class="style1 col-md-3" required />
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                Bidang Keahlian
+
+                            </label>
+                            <input type="text" id="bidangKeahlian" name="bidangKeahlian" class="style1" required />
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                Unit/Fakultas
+                            </label>
+                            <input type="text" id="fakultas" name="fakultas" class="style1" required />
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                Jurusan/Prodi
+
+                            </label>
+                            <input type="text" id="prodi" name="prodi" class="style1" required />
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                Alamat
+                            </label>
+                            <input type="text" id="alamat" name="alamat" class="style1" required />
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                Kota
+
+                            </label>
+                            <input type="text" id="kota" name="kota" class="style1" required />
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                Provinsi
+
+                            </label>
+                            <input type="text" id="provinsi" name="provinsi" class="style1" required />
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                Kode Pos
+
+                            </label>
+                            <input type="text" id="kodePos" name="kodePos" class="style1" required />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                No.Telp
+
+                            </label>
+                            <input type="text" id="telepon" name="telepon" class="style1" required />
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                Email
+
+                            </label>
+                            <input type="email" id="email" name="email" class="style1" required />
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeModal" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id="btnAddAnggota" class="btn btn-primary" data-dismiss="modal"></button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal Dialog 1 End-->
+<!-- Modal Dialog 2 -->
+
+<!--<div class="modal fade" id="modalAnggotaUAJY">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color:black; font-family:'Trebuchet MS';font-display:swap; transition:cubic-bezier()"> <i class="fas fa-clipboard"></i>&nbsp; Tambah Anggota UAJY</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="col-md-12">-->
+                    <!-- data anggota -->
+                    <!--<table id="tableanggota" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pilih</th>
+                                <th>NPP</th>
+                                <th>Nama </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bodyanggota">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeModal" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+
+            </div>
+        </div>-->
+        <!-- /.modal-content -->
+    <!--</div>-->
+    <!-- /.modal-dialog -->
+<!--</div>-->
+<!-- /.modal -->
+<!-- Modal Dialog 2 End -->
+<!-- Modal Dialog 3 -->
+
+<div class="modal fade" id="modalSearch">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color:black; font-family:'Trebuchet MS';font-display:swap; transition:cubic-bezier()"> <i class="fas fa-clipboard"></i>&nbsp; Tambah Anggota UAJY</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="input-group">
+                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="button" class="btn btn-primary" onclick="getAnggotaUAJY()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeModal" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Modal Dialog 3 End -->
+
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    function addAnggotaNonUAJY(id_proposal) {
+
+        id_proposal = id_proposal;
+        this.tempIdProposal = id_proposal;
+        $('#TambahAnggotaNonUAJY').modal('show');
+
+        $('#btnAddAnggota').html('Tambah');
+        $('#id_proposal').val(id_proposal);
+    }
+    function addAnggotaUAJY(id_proposal) {
+
+        id_proposal = id_proposal;
+        this.tempIdProposal = id_proposal;
+        $('#modalSearch').modal('show');
+        $('#id_proposal').val(id_proposal);
+    }
+    $('#tableanggota').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+
+    });
+
+   
+</script>

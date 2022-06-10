@@ -42,6 +42,19 @@
             margin-top: 50px;
             margin-bottom: 20px;
         }
+        .style1 {
+            background-color: #fafafa;
+            border: 0;
+            box-shadow: 0 0 4px rgba(0,0,0,0.3);
+            transition: .3s box-shadow;
+            margin-bottom: 15px;
+            height: 40px;
+            width: 450px;
+        }
+
+        .style1:hover {
+            box-shadow: 0 0 4px rgba(0,0,0,0.5);
+        }
 
         .propoPenelitian {
             background-color: darkcyan;
@@ -151,12 +164,11 @@
 
                                     </td>
                                     <td>
-                                        <p style="font-weight:bold"><a href="google.com">Set Reviewer</a></p>
-
+                                        <p style="font-weight:bold;color:royalblue; cursor:pointer" onclick="addSetReviewer(@item.ID_PROPOSAL)">Set Reviewer</p>
 
                                     </td>
                                     <td>
-                                        <p style="font-weight:bold"><a href="google.com">Proposal Pengesahan</a></p>
+                                        <p style="font-weight:bold; color:royalblue;"><a href="google.com">Proposal Pengesahan</a></p>
 
 
                                     </td>
@@ -181,18 +193,86 @@
 
         </div>
     </div>
+    <!-- Modal Dialog 1 -->
+    <div class="modal fade" id="DetailSetReviewer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:darkgoldenrod">
+                    <h5 class="modal-title" style="color:white; font-family:'Trebuchet MS';font-display:swap; transition:cubic-bezier()"> <i class="fas fa-clipboard"></i>&nbsp; Set Reviewer Penelitian</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <hr style="border:dashed; border-color:aliceblue" />
+                <form class="formDetailKelolaReviewer" method="post" asp-action="addSetReviewer" asp-controller="Penelitian" enctype="multipart/form-data" novalidate>
+                    @Html.AntiForgeryToken()
 
+                    <div class="modal-body">
+                        <input type="hidden" class="form-control" id="id_proposal" name="id_proposal" value="" required>
+
+                        <div class="mb-4">
+                            <div class="form-group">
+                                <label>
+                                    Judul
+                                    <input id="judulProposal" name="judulProposal" type="text" class="style1" style="margin-left:70px; word-wrap:break-word" disabled />
+                                </label>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    Nama Dosen
+                                    <input type="text" id="namaDosen" name="namaDosen" class="style1" style="margin-left:15px" disabled  />
+                                </label>
+
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    Reviewer 1
+                                    <select class="style1" id="reviewer1" name="reviewer1" style="margin-left:30px" required>
+                                        <option hidden style="color:lightgrey; ">Pilih Reviewer 1</option>
+                                        @foreach (var item in Model.reviewer)
+                                        {
+                                            <option value="@item.NPP"> @item.NAMA_LENGKAP_GELAR</option>
+
+                                        }
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    Reviewer 2
+                                    <select class="style1" id="reviewer2" name="reviewer2" style="margin-left:30px" required>
+                                        <option hidden style="color:lightgrey; ">Pilih Reviewer 2</option>
+                                        @foreach (var item in Model.reviewer)
+                                        {
+                                            <option value="@item.NPP"> @item.NAMA_LENGKAP_GELAR</option>
+
+                                        }
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="closeModal" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="btnSetReviewer" class="btn btn-primary" data-dismiss="modal"></button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Dialog 1 End-->
 
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 
     @section Scripts{
-    
+
         <script>
             var tblDataDaftarPenelitian;
             refreshTabelDaftarPenelitian();
-         
+
 
 
             function refreshTabelDaftarPenelitian() {
@@ -205,8 +285,59 @@
                     "info": true,
                     "autoWidth": false,
                     "responsive": true,
-            
+
                 }).buttons().container().appendTo('#tblDataDaftarPenelitian_wrapper .col-md-6:eq(0)');
+            }
+
+            $('#DetailSetReviewer').on('hidden.bs.modal', function () {
+                $('#DetailSetReviewer').modal('hide');
+
+                var forms = document.getElementsByClassName('formDetailKelolaReviewer');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.classList.remove('was-validated');
+                });
+            });
+
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('formDetailKelolaReviewer');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+
+
+            function addSetReviewer(id_proposal) {
+
+                id_proposal = id_proposal;
+                this.tempIdProposal = id_proposal;
+                $('#DetailSetReviewer').modal('show');
+
+                $('#btnSetReviewer').html('Tambah');
+                $('#id_proposal').val(id_proposal); //bisa masuk
+                $('#judulProposal').val(judulProposal);
+
+                $.ajax({
+                    url: "/Penelitian/ajaxGetReviewer?id_proposal=" + id_proposal,
+                    type: "POST",
+                    data: { id_proposal: id_proposal },
+                    dataType: "json",
+                    success: function (result) {
+                        var data = result.data;
+
+                        $('#id_proposal').val();
+                        $('#npp').val(data.NPP);
+                        $('#namaDosen').val(data.NAMA);
+                        $('#judulProposal').val(data.JUDUL);
+
+                    }
+                })
+
             }
 
 

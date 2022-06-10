@@ -282,7 +282,88 @@ FROM         siatmax.MST_UNIT INNER JOIN
                 }
             }
         }
+        public DBOutput GetDataAnggotaPenelitian(int id_proposal)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
 
+                    string query = @"SELECT [ID_PERSONIL_PENELITIAN],[NPP],[NAMA_LENGKAP_GELAR],[TEMPAT_LAHIR],
+                    [TGL_LAHIR],[JNS_KEL],[EMAIL],[ID_REF_FUNGSIONAL],[ID_UNIT],[ID_UNIT_AKADEMIK],[ID_REF_GOLONGAN]
+                    ,[ID_REF_JBTN_AKADEMIK],[NO_TELPON_RUMAH],[NO_TELPON_HP],[WARGANEGARA],[NPWP],[NIP_PNS],[NIDN]
+                    ,[ALAMAT_KOTA],[ALAMAT],[ALAMAT_PROVINSI],[ALAMAT_KODEPOS],[ID_PROPOSAL],[INSTITUSI_ASAL],[BIDANG_KEAHLIAN_PENELITIAN]
+                    FROM [PORTAL_DOSEN].[silppm].[TBL_PERSONIL_PENELITIAN] where ID_PROPOSAL= @id_proposal;";
+
+                    //var data = conn.QueryF<dynamic>(query, new { id_proposal = id_proposal }).ToList();
+
+                    //output.data = data;
+
+                    //return output;
+                    var data = conn.Query<dynamic>(query, new { id_proposal = id_proposal }).ToList();
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    //output.status = false;
+                    //output.pesan = ex.Message;
+                    //output.data = new List<string>();
+                    //return output;
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetAnggota()
+        {
+
+            DBOutput output = new DBOutput();
+            output.status = true;
+            
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT     simka.MST_KARYAWAN.NPP, simka.MST_KARYAWAN.NAMA, simka.MST_KARYAWAN.NAMA_LENGKAP_GELAR, simka.MST_KARYAWAN.NICKNAME, 
+                      simka.MST_KARYAWAN.MST_ID_UNIT, siatmax.MST_UNIT.NAMA_UNIT
+                        FROM         simka.MST_KARYAWAN LEFT OUTER JOIN
+                                              siatmax.MST_UNIT ON simka.MST_KARYAWAN.MST_ID_UNIT = siatmax.MST_UNIT.ID_UNIT";
+                    var data = conn.Query<dynamic>(query).ToList();
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
+        //        SELECT[ID_PERSONIL_PENELITIAN],[NPP],[NAMA_LENGKAP_GELAR],[TEMPAT_LAHIR],
+        //[TGL_LAHIR],[JNS_KEL],[EMAIL],[ID_REF_FUNGSIONAL],[ID_UNIT],[ID_UNIT_AKADEMIK],[ID_REF_GOLONGAN]
+        //,[ID_REF_JBTN_AKADEMIK],[NO_TELPON_RUMAH],[NO_TELPON_HP],[WARGANEGARA],[NPWP],[NIP_PNS],[NIDN]
+        //,[ALAMAT_KOTA],[ALAMAT],[ALAMAT_PROVINSI],[ALAMAT_KODEPOS],[ID_PROPOSAL],[INSTITUSI_ASAL],[BIDANG_KEAHLIAN_PENELITIAN]
+        //        FROM[PORTAL_DOSEN].[silppm].[TBL_PERSONIL_PENELITIAN] where ID_PROPOSAL = @id_proposal;
 
     }
 

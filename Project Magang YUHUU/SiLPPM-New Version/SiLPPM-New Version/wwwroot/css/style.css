@@ -35,6 +35,15 @@ body {
     width: 65rem;
 }
 
+.mdi-account-circle {
+    content: "\F0009";
+    font-size: x-large;
+}
+.mdi-lock {
+    content: "\F033E";
+    font-size: x-large;
+}
+
 .login-card-text {
     color: #000;
     font-size: 24pt;

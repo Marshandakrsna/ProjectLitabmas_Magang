@@ -1,4 +1,5 @@
-﻿@{ ViewData["Title"] = "Add Jurnal "; }
+﻿@{ ViewData["Title"] = "Add Prosiding "; }
+
 
 <!DOCTYPE html>
 
@@ -12,6 +13,7 @@
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/style2.css" />
     <style>
+
 
         body {
             font-family: 'Karla', sans-serif;
@@ -32,6 +34,7 @@
             transition: opacity 0.6s;
             margin-bottom: 15px;
         }
+
 
         .radio-checkbox {
             font-size: large;
@@ -73,6 +76,8 @@
             transform: translateY(4px);
         }
 
+
+
         .td, th {
             vertical-align: middle;
         }
@@ -83,13 +88,13 @@
     <div class="px-3 mt-3">
         <div class="content-wrapper p-3">
 
-            <h4 class="head-title">Add Jurnal</h4>
+            <h4 class="head-title"><i class="fas fa-plus-circle" style="margin-right: 20px;"></i> Add Prosiding</h4>
 
             <hr />
             @if (TempData["succ"] != null)
             {
                 <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color:green">
-                    <strong><i class='fas fa-bell' style='font-size:22px; color:floralwhite'></i>&nbsp;@TempData["succ"].ToString()</strong>
+                    <strong><i class='fas fa-bell' style='font-size:22px; color:floralwhite'></i>&nbsp; @TempData["succ"].ToString()</strong>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true" style="color:white">&times;</span>
                     </button>
@@ -110,58 +115,50 @@
                 <div>
 
                     <div class="px-3 pb-2">
-                        <form method="post" asp-action="AddJurnal" asp-controller="Penelitian" enctype="multipart/form-data">
+                        <form method="post" asp-action="AddProsidingProfile" asp-controller="Profile" enctype="multipart/form-data">
 
                             @Html.AntiForgeryToken()
 
 
                             <div class="row">
-                                <div class="col-md-6">
+                           
                                     <div class="mb-4">
                                         <div class="input-group">
-                                            <input type="hidden" autocomplete="off" class="form-control" name="id_proposal" id="id_proposal" value="@Model.refpropo2.ID_PROPOSAL" />
+                                            <input type="hidden" autocomplete="off" class="form-control" name="id_proposal" id="id_proposal" value="@Model.refpropo.ID_PROPOSAL" />
                                         </div>
                                     </div>
-                                    <div class="mb-4">
+                                    <div class="col">
                                         <label for="basic-addon1" class="form-label">Judul Penelitian</label>
                                         <div class="input-group">
-
                                             <input type="text" autocomplete="off" class="form-control" name="judul" id="judul" required />
-
                                         </div>
                                     </div>
-
-                                    <div class="mb-4">
+                                    <div class="col mb-4">
                                         <label for="basic-addon1" class="form-label">Level Seminar/Prosiding</label>
                                         <div class="input-group">
 
-                                            <select name="id_level_jurnal" id="id_level_jurnal" style="width:750px; height:35px" required>
+                                            <select name="id_level_seminar" id="id_level_seminar" style="width:750px; height:35px" required>
                                                 <option hidden style="color:lightgrey">Pilih Jenis Level</option>
                                                 @foreach (var item in Model.dataLevel)
                                                 {
-                                                    <option value="@item.ID_LEVEL_JURNAL"> @item.LEVEL</option>
-
+                                                    <option value="@item.ID_LEVEL_SEMINAR"> @item.LEVEL</option>
                                                 }
                                             </select>
-
                                         </div>
                                     </div>
                                     <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Nama Jurnal</label>
+                                        <label for="basic-addon1" class="form-label">Nama Seminar</label>
                                         <div class="input-group">
-                                            <input name="nama_seminar" id="nama_seminar" type="text" autocomplete="off" class="form-control" required />
-
+                                            <input name="nama_jurnal" id="nama_jurnal" type="text" autocomplete="off" class="form-control" required />
                                         </div>
                                     </div>
-                                    <div class="mb-4">
+                                    <div class="col">
                                         <label for="basic-addon1" class="form-label">ISSN/ISBN</label>
                                         <div class="input-group">
-
                                             <input name="issn" id="issn" type="text" autocomplete="off" class="form-control" required />
-
                                         </div>
                                     </div>
-                                    <div class="mb-4">
+                                    <div class="col mb-4">
                                         <label for="basic-addon1" class="form-label">DOI</label>
                                         <div class="input-group">
                                             <input name="doi" id="doi" type="text" autocomplete="off" class="form-control" required />
@@ -171,56 +168,59 @@
 
                                     <hr />
 
-
-                                    <div class="btn">
+                                    <div class="btn" style="text-align:start">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <button type="reset" class="btn btn-default">Reset</button>
 
                                     </div>
 
                                 </div>
-                            </div>
+                           
                         </form>
                     </div>
                     <div class="card-body">
                         <table id="datatable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-
+                                    <th>ID Outcome Prosiding</th>
                                     <th>Judul Publikasi</th>
                                     <th>Level Jurnal</th>
-                                    <th>Nama Jurnal</th>
+                                    <th>Nama Seminar</th>
                                     <th>DOI</th>
                                     <th>ISBN</th>
                                     <th>Aksi</th>
                                 </tr>
+
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.data)
                                 {
 
                                     <tr>
+                                        <td> @item.ID_OUTCOME_PROSIDING</td>
                                         <td>@item.JUDUL </td>
                                         <td>@item.LEVEL</td>
-                                        <td>@item.NAMA_SEMINAR</td>
+                                        <td>@item.NAMA_JURNAL</td>
                                         <td>@item.DOI</td>
                                         <td>@item.ISBN</td>
+
                                         <td>
                                             <button type="submit" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Delete Jurnal" onclick="togModalDelete(@item.ID_OUTCOME_PUBLIKASI)" id="deleteButton_">
+                                                    title="Delete Prosiding" onclick="togModalDelete(@item.ID_OUTCOME_PROSIDING)" id="deleteButton_">
                                                 <i class="mdi mdi-delete" aria-hidden="true"> </i>
                                             </button>
                                         </td>
+                                        @*<td> <p style="font-weight:bold"><a href="ConfirmDeleteProsiding?id_outcome_prosiding=@item.ID_OUTCOME_PROSIDING+?id_proposal=@item.ID_PROPOSAL"><i class="fa fa-trash" style='font-size:24px;position:center'> </i></a></p></td>*@
                                     </tr>
                                 }
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-
     @*Modal Delete*@
     <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -241,52 +241,53 @@
     </div>
 
 </body>
+
 </html>
 
 <script>
     var tempIdDelete;
-    var id_outcome_publikasi;
+    var id_outcome_prosiding;
 
     function closeModal() {
         $('#modalDelete').modal('hide');
     }
     function togModalDelete(id) {
         //console.log(id)
-        id_outcome_publikasi = id;
+        id_outcome_prosiding = id;
         this.tempIdDelete = id;
         $('#modalDelete').modal('show');
     }
     function confirmDelete() {
         var self = this;
-        console.log(id_outcome_publikasi);
+        console.log(id_outcome_prosiding);
         var prosiding = $('#deleteButton_' + this.tempIdDelete);
         var myTable = $('#datatable').DataTable();
 
         $.ajax({
             type: "POST",
-            url: "/Penelitian/ConfirmDeleteJurnal?id_outcome_publikasi=" + id_outcome_publikasi,
-            data: ({ id_outcome_publikasi: id_outcome_publikasi}),
-            success: function (data) {
+            url: "/Penelitian/ConfirmDeleteProsiding?id_outcome_prosiding=" + id_outcome_prosiding,
+                data: ({ id_outcome_prosiding: id_outcome_prosiding }),
+                success: function (data) {
 
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Data berhasil dihapus!',
-                    confirmButtonText: 'Tutup',
-                })
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Data berhasil dihapus!',
+                        confirmButtonText: 'Tutup',
+                    })
 
-                closeModal();
-                window.location.reload();
+                    closeModal();
+                    window.location.reload();
 
-            },
-            error: function () {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'SiLPPM said: ',
-                    text: 'Data gagal dihapus!',
-                })
-                window.location.reload();
-            }
-        });
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'SiLPPM said: ',
+                        text: 'Data gagal dihapus!',
+                    })
+                    window.location.reload();
+                }
+            });
     }
 
 </script>

@@ -14,6 +14,7 @@ namespace SiLPPM_New_Version.Controllers
         PenelitianDAO penelitianDAO;
         ProfileDAO myprofile;
         dynamic myobj;
+
         public PenelitianController()
         {
             myobj = new ExpandoObject();
@@ -113,8 +114,9 @@ namespace SiLPPM_New_Version.Controllers
 
         public IActionResult IndexDaftar()
         {
-            var data = penelitianDAO.GetListPenelitian();
-
+            var data = penelitianDAO.GetPenelitianSetReviewer();
+            var reviewer = penelitianDAO.GetRefGetReviewer();
+            myobj.reviewer = reviewer.data;
             myobj.data = data.data;
 
             return View(myobj);
@@ -200,5 +202,30 @@ namespace SiLPPM_New_Version.Controllers
             var cek = penelitianDAO.DeleteJurnal(id_outcome_publikasi);
             return Json(cek);
         }
+
+        //Set Reviewer Daftar Penelitian
+        public JsonResult ajaxGetReviewer(int id_proposal)
+        {
+            var data = penelitianDAO.GetPenelitianSetReviewerByID(id_proposal);
+            return Json(data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult addSetReviewer(int id_proposal, string reviewer1, string reviewer2)
+        {
+            var cek = penelitianDAO.UpdateSetReviewer(id_proposal, reviewer1, reviewer2);
+            if (cek.status == true)
+            {
+                TempData["succ"] = "Berhasil menambahkan data Reviewer ";
+            }
+            else
+            {
+                TempData["err"] = "Gagal menambahkan data Reviewer, " + cek.pesan;
+            }
+            return RedirectToAction("IndexDaftar");
+        }
+
     }
 }
