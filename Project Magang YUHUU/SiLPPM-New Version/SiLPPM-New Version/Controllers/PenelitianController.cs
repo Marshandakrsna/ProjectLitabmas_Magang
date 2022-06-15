@@ -227,5 +227,26 @@ namespace SiLPPM_New_Version.Controllers
             return RedirectToAction("IndexDaftar");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddPenelitian(int ID_TAHUN_ANGGARAN, int NO_SEMESTER, int ID_KATEGORI, int ID_ROAD_MAP_PENELITIAN, int ID_SKIM, int ID_TEMA_UNIVERSITAS, int ID_STATUS_PENELITIAN, string JENIS, string JUDUL, string LOKASI,
+            string NPP, string AWAL, string AKHIR, string IS_CHECKED, string NPP_REVIEWER, string REVIEWER1, string REVIEWER2, string IS_SETUJU_LPPM, int BEBAN_SKS, int BEBAN_SKS_ANGGOTA, string DOKUMEN, string LEMBAR_PENGESAHAN, string KEYWORD,
+            int JARAK_KAMPUS_KM, int JARAK_KAMPUS_JAM, string OUTCOME, string LONGITUDE, string LATITUDE, string INSERT_DATE, string IP_ADDRESS, string USER_ID, string KETERANGAN_DANA_EKSTERNAL)
+        {
+
+            var cek = penelitianDAO.AddPenelitian(ID_TAHUN_ANGGARAN,  NO_SEMESTER,  ID_KATEGORI,  ID_ROAD_MAP_PENELITIAN,  ID_SKIM,  ID_TEMA_UNIVERSITAS,  ID_STATUS_PENELITIAN,  JENIS, JUDUL,  LOKASI,
+            NPP, AWAL, AKHIR, IS_CHECKED,  NPP_REVIEWER,  REVIEWER1,  REVIEWER2, IS_SETUJU_LPPM,  BEBAN_SKS,  BEBAN_SKS_ANGGOTA,  DOKUMEN, LEMBAR_PENGESAHAN,  KEYWORD,
+             JARAK_KAMPUS_KM,  JARAK_KAMPUS_JAM,  OUTCOME,  LONGITUDE,  LATITUDE,  INSERT_DATE,  IP_ADDRESS,  USER_ID, KETERANGAN_DANA_EKSTERNAL);
+            if (cek.status)
+            {
+                TempData["succ"] = "Berhasil menambahkan data";
+            }
+            else
+            {
+                TempData["err"] = "Gagal menambahkan data" + cek.pesan;
+            }
+            return RedirectToAction("IndexTambah", "Penelitian");
+        }
+
     }
 }

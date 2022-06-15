@@ -442,6 +442,55 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                 }
             }
         }
+        public DBOutput AddPenelitian(int ID_TAHUN_ANGGARAN, int NO_SEMESTER, int ID_KATEGORI, int ID_ROAD_MAP_PENELITIAN, int ID_SKIM, int ID_TEMA_UNIVERSITAS, int ID_STATUS_PENELITIAN, string JENIS, string JUDUL,string LOKASI,
+            string NPP,  string AWAL, string AKHIR, string IS_CHECKED, string NPP_REVIEWER, string REVIEWER1, string REVIEWER2, string IS_SETUJU_LPPM, int BEBAN_SKS, int BEBAN_SKS_ANGGOTA, string DOKUMEN, string LEMBAR_PENGESAHAN, string KEYWORD,
+            int JARAK_KAMPUS_KM, int JARAK_KAMPUS_JAM, string OUTCOME, string LONGITUDE, string LATITUDE, string INSERT_DATE, string IP_ADDRESS, string USER_ID, string KETERANGAN_DANA_EKSTERNAL)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"INSERT INTO [SIATMAX].[silppm].[TBL_PENELITIAN]
+                    ([ID_TAHUN_ANGGARAN],[NO_SEMESTER],[ID_KATEGORI],[ID_ROAD_MAP_PENELITIAN]
+                    ,[ID_SKIM],[ID_TEMA_UNIVERSITAS],[ID_STATUS_PENELITIAN],[JENIS]
+                    ,[JUDUL],[LOKASI],[NPP],[AWAL],[AKHIR],[IS_DROPPED],[IS_SETUJU_PRODI],[IS_SETUJU_DEKAN]
+                    --,[NPP_REVIEWER],[REVIEWER1],[REVIEWER2],[IS_SETUJU_LPPM]
+                    ,[BEBAN_SKS],[BEBAN_SKS_ANGGOTA], [DOKUMEN],[LEMBAR_PENGESAHAN]
+                    ,[KEYWORD],[JARAK_KAMPUS_KM],[JARAK_KAMPUS_JAM],[OUTCOME],[LONGITUDE]
+                    ,[LATITUDE]
+                    ,[INSERT_DATE],[IP_ADDRESS],[USER_ID],KETERANGAN_DANA_EKSTERNAL)  OUTPUT  INSERTED.ID_PROPOSAL
+                    VALUES (@ID_TAHUN_ANGGARAN,@NO_SEMESTER,@ID_KATEGORI,@ID_ROAD_MAP_PENELITIAN
+                    ,@ID_SKIM,@ID_TEMA_UNIVERSITAS,6,@JENIS
+                    ,@JUDUL,@LOKASI,@NPP,@NPP1,@NPP2,@AWAL,@AKHIR,@IS_CHECKED,0,1,1
+                    --,@NPP_REVIEWER,@REVIEWER1,@REVIEWER2,@IS_SETUJU_LPPM
+                    ,@BEBAN_SKS,@BEBAN_SKS_ANGGOTA,@DOKUMEN,@LEMBAR_PENGESAHAN
+                    ,@KEYWORD,@JARAK_KAMPUS_KM,@JARAK_KAMPUS_JAM,@OUTCOME,@LONGITUDE,@LATITUDE
+                    ,@INSERT_DATE,@IP_ADDRESS,@USER_ID,@KETERANGAN_DANA_EKSTERNAL)";
+
+                    var param = new { ID_TAHUN_ANGGARAN = ID_TAHUN_ANGGARAN, NO_SEMESTER = NO_SEMESTER, ID_KATEGORI = ID_KATEGORI, ID_ROAD_MAP_PENELITIAN = ID_ROAD_MAP_PENELITIAN, ID_SKIM = ID_SKIM, ID_TEMA_UNIVERSITAS = ID_TEMA_UNIVERSITAS, 
+                    ID_STATUS_PENELITIAN = ID_STATUS_PENELITIAN, JENIS=JENIS, JUDUL = JUDUL, LOKASI = LOKASI, NPP = NPP, AWAL = AWAL, AKHIR= AKHIR, IS_CHECKED = IS_CHECKED, NPP_REVIEWER = NPP_REVIEWER, REVIEWER1 = REVIEWER1, REVIEWER2 = REVIEWER2, IS_SETUJU_LPPM = IS_SETUJU_LPPM,  BEBAN_SKS = BEBAN_SKS, BEBAN_SKS_ANGGOTA = BEBAN_SKS_ANGGOTA,
+                    DOKUMEN = DOKUMEN , LEMBAR_PENGESAHAN = LEMBAR_PENGESAHAN, KEYWORD = KEYWORD, JARAK_KAMPUS_KM = JARAK_KAMPUS_KM, JARAK_KAMPUS_JAM = JARAK_KAMPUS_JAM, OUTCOME = OUTCOME, LONGITUDE = LONGITUDE, LATITUDE = LATITUDE, INSERT_DATE = INSERT_DATE, IP_ADDRESS = IP_ADDRESS, USER_ID = USER_ID, KETERANGAN_DANA_EKSTERNAL = KETERANGAN_DANA_EKSTERNAL};
+
+
+                    conn.Execute(query, param);
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
         public DBOutput GetHistoryProsiding()
         {
             DBOutput output = new DBOutput();
@@ -1153,6 +1202,42 @@ join silppm.REF_LEVEL_SEMINAR r on ps.ID_LEVEL_SEMINAR=r.ID_LEVEL_SEMINAR where 
             }
         }
 
+        public DBOutput GetDataPenelitian(string username)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT [ID_PROPOSAL],[ID_TAHUN_ANGGARAN],[NO_SEMESTER],[ID_KATEGORI]
+                ,[ID_ROAD_MAP_PENELITIAN],[ID_SKIM],[ID_TEMA_UNIVERSITAS]
+                ,[ID_STATUS_PENELITIAN],[JENIS],[JUDUL],[LOKASI],silppm.TBL_PENELITIAN.NPP,[NPP1],[NPP2]
+                ,[AWAL],[AKHIR],[BEBAN_SKS],[BEBAN_SKS_ANGGOTA],[DANA_USUL],[DANA_PRIBADI]
+                ,[DANA_EKSTERNAL],[DANA_KERJASAMA],[DANA_UAJY],[DANA_SETUJU],[DOKUMEN]
+                ,[LEMBAR_PENGESAHAN],[KEYWORD],[JARAK_KAMPUS_KM],[JARAK_KAMPUS_JAM]
+                ,[OUTCOME],[LONGITUDE],[LATITUDE],KETERANGAN_DANA_EKSTERNAL
+                  FROM [silppm].[TBL_PENELITIAN] JOIN simkA.MST_KARYAWAN ON simkA.MST_KARYAWAN.NPP = [silppm].[TBL_PENELITIAN].NPP
+                where simka.MST_KARYAWAN.USERNAME = @username";
 
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { username = username });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
     }
 }

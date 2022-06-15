@@ -103,13 +103,15 @@ namespace SiLPPM_New_Version.Controllers
             var username = User.Claims
                         .Where(c => c.Type == "username")
                             .Select(c => c.Value).SingleOrDefault();
-            //var id_proposal = User.Claims
-            //               .Where(c => c.Type == "id_proposal")
-            //               .Select(c => c.Value).ToString();
+            var npp = User.Claims
+                           .Where(c => c.Type == "npp")
+                           .Select(c => c.Value).SingleOrDefault();
+
 
             var refpropo = dao.GetListPenelitianByUsername(username);
             var refpropo2 = dao.GetListPengabdianByUsername(username);
-            var anggota = dao.GetDataAnggotaPenelitian(id_proposal);
+            //var anggota = dao.GetDataAnggotaPenelitian(id_proposal);
+            var dataPenelitian = penelitianDAO.GetDataPenelitian(username);
             var data = dao.GetDataUser(username);
             var data2 = dao.GetPangkatByUsername(username);
             var data3 = dao.GetGolonganByUsername(username);
@@ -117,9 +119,33 @@ namespace SiLPPM_New_Version.Controllers
             var data5 = dao.GetJurusanByUsername(username);
             var data6 = penelitianDAO.GetJabatanAkaByUsername(username);
             var refjenis = penelitianDAO.GetRefGolongan();
+            var dataAnggota = dao.GetAnggota();
+            var dataAnggotaNPP = dao.GetAnggotaByNPP(npp);
+            //TAMBAH PENELITIAN
+            var refjenis1 = penelitianDAO.GetRefSkim();
+            var refjenis2 = penelitianDAO.GetRefTahunAka();
+            var refjenis3 = penelitianDAO.GetRefSemester();
+            var refjenis4 = penelitianDAO.GetRefOutput();
+            var refjenis5 = penelitianDAO.GetRefJenis();
+            var refjenis6 = penelitianDAO.GetRefTema();
+            var refjenis7 = penelitianDAO.GetRefKategori();
+            var refOutcome = penelitianDAO.GetOutcome();
+
+
+            //PEMANGGILAN TAMBAH PENELITIAN
+            myobj.refjenis1 = refjenis1.data;
+            myobj.refjenis2 = refjenis2.data;
+            myobj.refjenis3 = refjenis3.data;
+            myobj.refjenis4 = refjenis4.data;
+            myobj.refjenis5 = refjenis5.data;
+            myobj.refjenis6 = refjenis6.data;
+            myobj.refjenis7 = refjenis7.data;
+            myobj.refOutcome = refOutcome.data;
+            myobj.dataPenelitian = dataPenelitian.data;
+            myobj.dataAnggotaNPP = dataAnggotaNPP.data;
 
             //PEMANGGILAN IDENTITAS PENELITI
-            myobj.anggota = anggota.data;
+            //myobj.anggota = anggota.data;
             myobj.data = data.data;
             myobj.data2 = data2.data;
             myobj.data3 = data3.data;
@@ -129,6 +155,7 @@ namespace SiLPPM_New_Version.Controllers
             myobj.refjenis = refjenis.data;
             myobj.refpropo = refpropo.data;
             myobj.refpropo2 = refpropo2.data;
+            myobj.dataAnggota = dataAnggota.data;
           
             return View(myobj);
         }
@@ -169,6 +196,23 @@ namespace SiLPPM_New_Version.Controllers
             }
             return RedirectToAction("AddProsiding", "Penelitian");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddAnggotaUAJY( int id_proposal, string npp )
+        {
+
+
+            var cek = dao.AddAnggotaUAJY(id_proposal,npp);
+            if (cek.status)
+            {
+                TempData["succ"] = id_proposal.ToString();
+            }
+            else
+            {
+                TempData["err"] = "Gagal menambahkan data, " + cek.pesan;
+            }
+            return RedirectToAction("EditDetailPenelitian");
+        }
 
         //INPUT DATA JURNAL PENELITIAN
         public IActionResult AddJurnalProfile()
@@ -203,5 +247,32 @@ namespace SiLPPM_New_Version.Controllers
             return RedirectToAction("AddJurnal", "Penelitian");
         }
 
+        
+
+        public JsonResult ajaxGetPeserta(int id_proposal)
+        {
+            var data = dao.GetDataAnggotaPenelitian(id_proposal);
+            return Json(data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult addAnggPenelitianNonUAJY(string npp, string nama_lengkap_gelar, string email, string no_telpon_rumah, string no_telpon_hp,
+            string npwp, string nip_pns, string nidn, string alamat_kota, string alamat, string alamat_provinsi, string alamat_kodepos, int id_proposal)
+        {
+
+
+            var cek = dao.AddAnggotaNonUAJY(npp, nama_lengkap_gelar, email,  no_telpon_rumah,  no_telpon_hp,
+             npwp,  nip_pns,  nidn,  alamat_kota,  alamat,  alamat_provinsi,alamat_kodepos,  id_proposal);
+            if (cek.status)
+            {
+                TempData["succ"] = "Berhasil menambahkan data";
+            }
+            else
+            {
+                TempData["err"] = "Gagal menambahkan data, " + cek.pesan;
+            }
+            return RedirectToAction("EditDetailPenelitian");
+        }
     }
 }

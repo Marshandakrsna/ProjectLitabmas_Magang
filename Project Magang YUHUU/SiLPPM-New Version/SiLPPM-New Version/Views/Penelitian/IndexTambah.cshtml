@@ -43,13 +43,6 @@
             min-width: inherit;
         }
 
-        .blue-color {
-            background-color: #1d84C6 !important;
-        }
-
-        .green-color {
-            background-color: #1CB394 !important;
-        }
     .btn:active {
         background-color: #ffe7ab;
         transform: translateY(4px);
@@ -89,250 +82,221 @@
                 <div>
 
                     <div class="px-3 pb-2">
+                        <form method="post" asp-action="AddPenelitian" asp-controller="Penelitian" enctype="multipart/form-data">
 
-                        @Html.AntiForgeryToken()
+                            @Html.AntiForgeryToken()
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Skim Penelitian</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
-                                        <select style="width:710px">
-                                            <option hidden style="color:lightgrey">Pilih Skim Penelitian</option>
-                                            @foreach (var item in Model.refjenis)
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Skim Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px">
+                                                <option hidden style="color:lightgrey">Pilih Skim Penelitian</option>
+                                                @foreach (var item in Model.refjenis)
+                                                {
+                                                    <option value="@item.ID_SKIM"> @item.DESKRIPSI</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Tahun Akademik</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px">
+                                                <option hidden style="color:lightgrey">Pilih Tahun Akademik</option>
+                                                @foreach (var item in Model.refjenis2)
+                                                {
+                                                    <option value="@item.ID_TAHUN_AKADEMIK"> @item.TAHUN_AKADEMIK</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="basic-addon2" class="form-label">Semester Akademik </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon2"><i class="mdi mdi-pencil small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px">
+                                                <option hidden style="color:lightgrey">Pilih Semester Akademik</option>
+                                                @foreach (var item in Model.refjenis3)
+                                                {
+                                                    <option value="@item.NO_SEMESTER"> @item.SEMESTER_AKADEMIK</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 ">
+                                        <label for="basic-addon1" class="form-label">Output</label>
+
+                                        <div class="radio-checkbox">
+
+                                            @foreach (var item in Model.refjenis4)
                                             {
-                                                <option value="@item.ID_SKIM"> @item.DESKRIPSI</option>
+                                                <input type="checkbox" value="@item.ID_OUTPUT"> @item.DESKRIPSI
 
                                             }
-                                        </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Outcome</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon2"><i class="mdi mdi-pencil small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px">
+                                                <option hidden style="color:lightgrey">Pilih Outcome </option>
+                                                @foreach (var item in Model.refOutcome)
+                                                {
+                                                    <option value="@item.ID_OUTCOME"> @item.DESKRIPSI</option>
+
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Jarak dari Kampus UAJY</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <input type="text" class="form-control" placeholder="Jarak dari Kampus UAJY" aria-describedby="basic-addon1" >
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Tanggal Mulai Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar small" aria-hidden="true"> </i></span>
+                                            <input type="date" class="form-control" placeholder="DD/MM/YYYY" ">
+
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Beban SKS</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <input type="text" class="form-control" placeholder="Beban SKS" aria-label="Nomor Barcode" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Dokumen Proposal/blind Proposal</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <input type="FILE" class="form-control" placeholder="Dokumen Proposal" aria-describedby="basic-addon1" >
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Tahun Akademik</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
-                                        <select style="width:710px">
-                                            <option hidden style="color:lightgrey">Pilih Tahun Akademik</option>
-                                            @foreach (var item in Model.refjenis2)
-                                            {
-                                                <option value="@item.ID_TAHUN_AKADEMIK"> @item.TAHUN_AKADEMIK</option>
-
-                                            }
-                                        </select>
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label for="basic-addon3" class="form-label">Judul Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-home small" aria-hidden="true"> </i></span>
+                                            <textarea id="subject" name="subject" placeholder="  Judul Penelitian" style="height: 200px; width: 710px;"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="mb-4">
-                                    <label for="basic-addon2" class="form-label">Semester Akademik </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon2"><i class="mdi mdi-pencil small" aria-hidden="true"> </i></span>
-                                        <select style="width:710px">
-                                            <option hidden style="color:lightgrey">Pilih Semester Akademik</option>
-                                            @foreach (var item in Model.refjenis3)
-                                            {
-                                                <option value="@item.NO_SEMESTER"> @item.SEMESTER_AKADEMIK</option>
-
-                                            }
-                                        </select>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Kata Kunci(Inggris)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar-range small" aria-hidden="true"> </i></span>
+                                            <input type="text" class="form-control" placeholder="Kata Kunci" aria-label="Masa Berlaku" aria-describedby="basic-addon1" >
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="mb-4 ">
-                                    <label for="basic-addon1" class="form-label">Output</label>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Kategori Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px">
+                                                <option hidden style="color:lightgrey">Pilih Kategori Penelitian</option>
+                                                @foreach (var item in Model.refjenis7)
+                                                {
+                                                    <option value="@item.ID_KATEGORI"> @item.DESKRIPSI</option>
 
-                                    <div class="radio-checkbox">
-
-                                        @foreach (var item in Model.refjenis4)
-                                        {
-                                            <input type="checkbox" value="@item.ID_OUTPUT"> @item.DESKRIPSI
-
-                                        }
+                                                }
+                                            </select>
+                                        </div>
                                     </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Tema Penelitian Universitas</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px">
+                                                <option hidden style="color:lightgrey">Pilih Tema Penelitian</option>
+                                                @foreach (var item in Model.refjenis6)
+                                                {
+                                                    <option value="@item.ID_TEMA_UNIVERSITAS"> @item.DESKRIPSI</option>
 
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Outcome</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon2"><i class="mdi mdi-pencil small" aria-hidden="true"> </i></span>
-                                        <select style="width:710px">
-                                            <option hidden style="color:lightgrey">Pilih Outcome </option>
-                                            @foreach (var item in Model.refOutcome)
-                                            {
-                                                <option value="@item.ID_OUTCOME"> @item.DESKRIPSI</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    @*<div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Topik Penelitian sesuai dengan rencana unit</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <input type="text" class="form-control" placeholder="Topik Penelitian" aria-label="Nomor Barcode" aria-describedby="basic-addon1" id="noBarcode" onchange="autofillTabel()">
+                                        </div>
+                                    </div>*@
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Jenis Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px">
+                                                <option hidden style="color:lightgrey">Pilih Jenis Penelitian</option>
+                                                @foreach (var item in Model.refjenis5)
+                                                {
+                                                    <option value="@item.ID_JENIS_PENELITIAN"> @item.JENIS_PENELITIAN</option>
 
-                                            }
-                                        </select>
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Lokasi Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-magnify small" aria-hidden="true"> </i></span>
+                                            @*<input type="text" class="form-control" placeholder="Nomor Barcode" aria-label="Nomor Barcode" aria-describedby="basic-addon1" id="noBarcode" onchange="autofillTabel()">*@
+                                            <input id="pac-input"
+                                                   class="controls"
+                                                   type="text"
+                                                   placeholder="Search Box">
+                                            <div id="map"></div>
+                                            <script src="https://maps.googleapis.com/maps/api/js?AIzaSyAOPreDHEYqILNxTGIiSuaYMHSnLzVFlVc&callback=initAutocomplete&libraries=places&v=weekly" async="" defer="defer" type="text/javascript"></script>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Peta Lokasi</label>
+
 
                                     </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Jarak dari Kampus UAJY</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                        <input type="text" class="form-control" placeholder="Jarak dari Kampus UAJY" aria-label="Nomor Barcode" aria-describedby="basic-addon1" id="noBarcode" onchange="autofillTabel()">
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Tanggal Mulai Penelitian</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar small" aria-hidden="true"> </i></span>
-                                        <input type="date" class="form-control" placeholder="DD/MM/YYYY" ">
-
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Beban SKS</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                        <input type="text" class="form-control" placeholder="Beban SKS" aria-label="Nomor Barcode" aria-describedby="basic-addon1" id="noBarcode" onchange="autofillTabel()">
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Dokumen Proposal/blind Proposal</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                        <input type="FILE" class="form-control" placeholder="Dokumen Proposal" aria-describedby="basic-addon1" onchange="autofillTabel()">
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Dokumen Lembar Pengesahan</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <input type="file" class="form-control" placeholder="Dokumen Lembar Pengesahan" aria-describedby="basic-addon1">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </form>
 
-                            <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label for="basic-addon3" class="form-label">Judul Penelitian</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-home small" aria-hidden="true"> </i></span>
-                                        <textarea id="subject" name="subject" placeholder="  Judul Penelitian" style="height: 200px; width: 710px;"></textarea>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Kata Kunci(Inggris)</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar-range small" aria-hidden="true"> </i></span>
-                                        <input type="text" class="form-control" placeholder="Kata Kunci" aria-label="Masa Berlaku" aria-describedby="basic-addon1" id="berlakuAnggota">
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Kategori Penelitian</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                        <select style="width:710px">
-                                            <option hidden style="color:lightgrey">Pilih Kategori Penelitian</option>
-                                            @foreach (var item in Model.refjenis7)
-                                            {
-                                                <option value="@item.ID_KATEGORI"> @item.DESKRIPSI</option>
-
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Tema Penelitian Universitas</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                        <select style="width:710px">
-                                            <option hidden style="color:lightgrey">Pilih Tema Penelitian</option>
-                                            @foreach (var item in Model.refjenis6)
-                                            {
-                                                <option value="@item.ID_TEMA_UNIVERSITAS"> @item.DESKRIPSI</option>
-
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Topik Penelitian sesuai dengan rencana unit</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                        <input type="text" class="form-control" placeholder="Topik Penelitian" aria-label="Nomor Barcode" aria-describedby="basic-addon1" id="noBarcode" onchange="autofillTabel()">
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Jenis Penelitian</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                        <select style="width:710px">
-                                            <option hidden style="color:lightgrey">Pilih Jenis Penelitian</option>
-                                            @foreach (var item in Model.refjenis5)
-                                            {
-                                                <option value="@item.ID_JENIS_PENELITIAN"> @item.JENIS_PENELITIAN</option>
-
-                                            }
-                                        </select>
-
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Lokasi Penelitian</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-magnify small" aria-hidden="true"> </i></span>
-                                        @*<input type="text" class="form-control" placeholder="Nomor Barcode" aria-label="Nomor Barcode" aria-describedby="basic-addon1" id="noBarcode" onchange="autofillTabel()">*@
-                                        <input id="pac-input"
-                                               class="controls"
-                                               type="text"
-                                               placeholder="Search Box">
-                                        <div id="map"></div>
-                                        <script src="https://maps.googleapis.com/maps/api/js?AIzaSyAOPreDHEYqILNxTGIiSuaYMHSnLzVFlVc&callback=initAutocomplete&libraries=places&v=weekly" async="" defer="defer" type="text/javascript"></script>
+                            <hr />
 
 
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Peta Lokasi</label>
+                            <button class="btn btn-outline-primary">Simpan</button>
 
-
-
-
-                                </div>
-                                <div class="mb-4">
-                                    <label for="basic-addon1" class="form-label">Dokumen Lembar Pengesahan</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                        <input type="file" class="form-control" placeholder="Dokumen Lembar Pengesahan" aria-describedby="basic-addon1" onchange="autofillTabel()">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr />
-
-                
-                        <button class="btn btn-outline-primary">Simpan</button>
-
-                        @*<div class="card-body">
-                            <table id="datatable" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Aksi</th>
-                                        <th>Jenis Event</th>
-                                        <th>Judul Event</th>
-                                        <th>Tgl Event</th>
-                                        <th>Teknologi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-
-                                    <tr>
-                                        <td>
-                                            
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>*@
+                          
 
                     </div>
                 </div>
             </div>
-            @*<button onclick="getBukuTerpinjam('180709963')">Tes</button>*@
-
-
         </div>
 
 

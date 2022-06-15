@@ -15,6 +15,11 @@
     <!-- Data Table-->
     @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">*@
     <style>
+        #anggota {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
         .button {
             border: none;
             color: white;
@@ -58,30 +63,47 @@
 
 
         .button2 {
-            background-color: white;
+            background-color: #129e42;
             color: black;
-            border: 2px solid #F2AA4C;
+            border: 2px solid #129e42;
         }
 
             .button2:hover {
-                background-color: #f5b35e;
+                background-color: #13843a;
                 color: white;
             }
 
         .button3 {
-            background-color: white;
+            background-color: #2535c9;
             color: black;
-            border: 2px solid #14b34b;
+            border: 2px solid #2535c9;
         }
 
+
             .button3:hover {
-                background-color: #46d076;
+                background-color: #1a2695;
                 color: white;
             }
+
+        .button4 {
+            background-color: #F2AA4C;
+            color: black;
+            border: 2px solid #F2AA4C;
+            padding: 3px 7px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 15px;
+        }
 
         body {
             font-family: 'Karla', sans-serif;
         }
+
 
         .content-wrapper {
             border-radius: 15px;
@@ -160,13 +182,210 @@
 
                 </div>
             </nav>
+
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-data" role="tabpanel" aria-labelledby="nav-data-tab">
+                    <div class="content-wrapper p-3" id="content" style="margin-top:10px">
+                        <form method="post" asp-action="UbahPenelitian" asp-controller="Profile" enctype="multipart/form-data">
 
+                            @Html.AntiForgeryToken()
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="basic-addon1" class="form-label">ID PROPOSAL</label>
+                                    <input type="text" class="form-control" id="id_proposal" name="id_proposal" value="@Model.refpropo.ID_PROPOSAL" required>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Skim Penelitian</label>
+                                        <div class="input-group">
+                                            <select style="width:710px">
+                                                <option hidden style="color:lightgrey">Pilih Skim Penelitian</option>
+                                                @foreach (var item in Model.refjenis1)
+                                                {
+                                                    <option value="@item.ID_SKIM"> @item.DESKRIPSI</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Tahun Akademik</label>
+                                        <div class="input-group">
+                                            <select style="width:710px">
+                                                <option hidden style="color:lightgrey">Pilih Tahun Akademik</option>
+                                                @foreach (var item in Model.refjenis2)
+                                                {
+                                                    <option value="@item.ID_TAHUN_AKADEMIK"> @item.TAHUN_AKADEMIK</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="basic-addon2" class="form-label">Semester Akademik </label>
+                                        <div class="input-group">
+                                            <select style="width:710px">
+                                                <option hidden style="color:lightgrey">Pilih Semester Akademik</option>
+                                                @foreach (var item in Model.refjenis3)
+                                                {
+                                                    <option value="@item.NO_SEMESTER"> @item.SEMESTER_AKADEMIK</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 ">
+                                        <label for="basic-addon1" class="form-label">Output</label>
+
+                                        <div class="radio-checkbox">
+
+                                            @foreach (var item in Model.refjenis4)
+                                            {
+                                                <input type="checkbox" value="@item.ID_OUTPUT"> @item.DESKRIPSI
+
+                                            }
+                                        </div>
+
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Outcome</label>
+                                        <div class="input-group">
+                                            <select style="width:710px">
+                                                <option hidden style="color:lightgrey">Pilih Outcome </option>
+                                                @foreach (var item in Model.refOutcome)
+                                                {
+                                                    <option value="@item.ID_OUTCOME"> @item.DESKRIPSI</option>
+
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Jarak dari Kampus UAJY</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <input type="text" class="form-control" value="@Model.dataPenelitian.JARAK_KAMPUS_KM" placeholder="Jarak dari Kampus UAJY" aria-label="Nomor Barcode" aria-describedby="basic-addon1" id="noBarcode">
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Tanggal Mulai Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar small" aria-hidden="true"> </i></span>
+                                            <input type="date" class="form-control" placeholder="DD/MM/YYYY">
+
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Beban SKS</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <input type="text" class="form-control" value="@Model.dataPenelitian.BEBAN_SKS" placeholder="Beban SKS" aria-label="Nomor Barcode" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Dokumen Proposal/blind Proposal</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <input type="FILE" class="form-control" placeholder="Dokumen Proposal" aria-describedby="basic-addon1" >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label for="basic-addon3" class="form-label">Judul Penelitian</label>
+                                        <div class="input-group">
+                                            <input id="subject" name="subject" type="text" placeholder="  Judul Penelitian" value="@Model.dataPenelitian.JUDUL" style=" height:20px;width: 710px;">
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Kata Kunci(Inggris)</label>
+                                        <div class="input-group">
+                                            <input type="text" value="@Model.dataPenelitian.KEYWORD" class="form-control" placeholder="Kata Kunci" aria-label="Masa Berlaku" aria-describedby="basic-addon1" id="berlakuAnggota">
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Kategori Penelitian</label>
+                                        <div class="input-group">
+                                            <select style="width:710px">
+                                                <option hidden style="color:lightgrey">Pilih Kategori Penelitian</option>
+                                                @foreach (var item in Model.refjenis7)
+                                                {
+                                                    <option value="@item.ID_KATEGORI"> @item.DESKRIPSI</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Tema Penelitian Universitas</label>
+                                        <div class="input-group">
+                                            <select style="width:710px">
+                                                <option hidden style="color:lightgrey">Pilih Tema Penelitian</option>
+                                                @foreach (var item in Model.refjenis6)
+                                                {
+                                                    <option value="@item.ID_TEMA_UNIVERSITAS"> @item.DESKRIPSI</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Jenis Penelitian</label>
+                                        <div class="input-group">
+                                            <select style="width:710px">
+                                                <option hidden style="color:lightgrey">Pilih Jenis Penelitian</option>
+                                                @foreach (var item in Model.refjenis5)
+                                                {
+                                                    <option value="@item.ID_JENIS_PENELITIAN"> @item.JENIS_PENELITIAN</option>
+
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Lokasi Penelitian</label>
+                                        <div class="input-group">
+                                            <input id="pac-input"
+                                                   class="controls"
+                                                   type="text"
+                                                   placeholder="Search Box">
+                                            <div id="map"></div>
+                                            <script src="https://maps.googleapis.com/maps/api/js?AIzaSyAOPreDHEYqILNxTGIiSuaYMHSnLzVFlVc&callback=initAutocomplete&libraries=places&v=weekly" async="" defer="defer" type="text/javascript"></script>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Peta Lokasi</label>
+
+
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Dokumen Lembar Pengesahan</label>
+                                        <div class="input-group">
+                                            <input type="file" class="form-control" placeholder="Dokumen Lembar Pengesahan" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <button type="submit" class="btn btn-success">Simpan</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="nav-identitas" role="tabpanel" aria-labelledby="nav-identitas-tab">
                     <br />
-                    <div class="content-wrapper p-3" style="border:" id="content">
+
+                    <div class="content-wrapper p-3" id="content">
 
                         <span style="  font-weight:bolder; margin-bottom: 20px;"><i class="fas fa-user" style="margin-right: 5px;"></i> KETUA PENELITI</span>
                         <br>
@@ -248,37 +467,25 @@
                                             @Model.data.EMAIL_INSTITUSI
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td class="style8">
+                                            Anggota Penelitian Kelompok
+                                        </td>
+                                        <td>
+                                            <button style="margin-left: 2px; margin-top: 5px;" class="button4" onclick="getAnggota(@Model.refpropo.ID_PROPOSAL)"><i class="fas fa-eye"></i>&nbsp; Lihat Anggota</button>
+                                        </td>
+                                    </tr>
+
 
                                 </thead>
                                 <tbody>
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                    <div class="content-wrapper p-3" style="border:" id="content">
-                        <br>
-                        <div style="width: 100%; overflow-x: auto;" class="col">
-                            <table id="datatable" class="table table-bordered table-striped text-center">
-                                <thead>
-                                    <tr>
-                                        <th>NPP</th>
-                                        <th>NAMA</th>
-                                        <th>INSTITUSI</th>
-                                        <th>KEAHLIAN</th>
-                                        <th>EMAIL</th>
-                                        <th>TELFON RUMAH</th>
-                                        <th>HP</th>
-                                        <th>ALAMAT</th>
-                                    </tr>
-
-                                </thead>
-                                <tbody class="bodyIdentitas"></tbody>
-                            </table>
-                        </div>
-                        <button style="margin-left: 10px; margin-top: 40px;" class="button button2" onclick="addAnggotaUAJY(@Model.refpropo.ID_PROPOSAL)">Tambah Anggota UAJY</button>
-                        <button style="margin-left: 10px; margin-top: 40px;" class="button button3" onclick="addAnggotaNonUAJY(@Model.refpropo.ID_PROPOSAL)">Tambah Anggota Non UAJY</button>
                         <button style="margin-left: 10px; margin-top: 40px;" class="button button1">Ubah Proposal</button>
+
                     </div>
+
 
                 </div>
                 <div class="tab-pane fade" id="nav-cv" role="tabpanel" aria-labelledby="nav-cv-tab">
@@ -355,7 +562,7 @@
 </html>
 
 <!-- Modal Dialog 1 -->
-<div class="modal fade" id="TambahAnggotaNonUAJY" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="TambahAnggotaNonUAJY" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="overflow-y:auto">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color:antiquewhite">
@@ -364,16 +571,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <br />
-            <form class="formTambahAnggotaNonUAJY" method="post" asp-action="addAnggPenelitianNonUAJY" asp-controller="Profile" enctype="multipart/form-data" novalidate>
+            <form class="formTambahAnggotaNonUAJY " method="post" asp-action="addAnggPenelitianNonUAJY" asp-controller="Profile" enctype="multipart/form-data" novalidate>
                 @Html.AntiForgeryToken()
 
                 <div class="modal-body">
-                    <input type="hidden" class="form-control" id="id_proposal" name="id_proposal" value="" required>
 
                     <div class="mb-4">
+                        <div class="form-group row" hidden>
+                            <label class="col-sm-3 col-form-label">ID_PROPOSAL</label>
+                            <input id="id_proposal" name="id_proposal" type="hidden" class="style1" style=" word-wrap:break-word" value="@Model.refpropo.ID_PROPOSAL" />
+
+                        </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">NPP</label>
-                            <input id="npp" name="npp" type="text" class="style1" style=" word-wrap:break-word" required />
+                            <label class="col-sm-3 col-form-label" >NPP </label>
+                            <input id="npp" name="npp" type="text" class="style1" style=" word-wrap:break-word" placeholder="Masukan NPP"/>
 
                         </div>
 
@@ -382,7 +593,7 @@
                                 NIDN
 
                             </label>
-                            <input type="text" id="nidn" name="nidn" class="style1" required />
+                            <input type="text" id="nidn" name="nidn" class="style1"placeholder="Masukan NIDN" />
 
                         </div>
                         <div class="form-group row">
@@ -390,7 +601,7 @@
                                 NPWP
 
                             </label>
-                            <input type="text" id="npwp" name="npwp" class="style1" required />
+                            <input type="text" id="npwp" name="npwp" class="style1" placeholder="Masukan NPWP"/>
 
                         </div>
                         <div class="form-group row">
@@ -398,7 +609,7 @@
                                 Nama
 
                             </label>
-                            <input type="text" id="nama" name="nama" class="style1" required />
+                            <input type="text" id="nama_lengkap_gelar" name="nama_lengkap_gelar" class="style1"placeholder="Masukan Nama" />
 
                         </div>
                         <div class="form-group row">
@@ -406,7 +617,7 @@
                                 Jabatan Fungsional
 
                             </label>
-                            <input type="text" id="jabatanFungsional" name="jabatanFungsional" class="style1" required />
+                            <input type="text" id="jabatanFungsional" name="jabatanFungsional" class="style1"placeholder="Masukan Jabatan Fungsional" />
 
                         </div>
                         <div class="form-group row">
@@ -414,8 +625,8 @@
                                 Pangkat, Golongan
 
                             </label>
-                            <input type="text" id="pangkat" name="pangkat" class="style1 col-md-3 " style="margin-right:30px" required />
-                            <input type="text" id="golongan" name="golongan" class="style1 col-md-3" required />
+                            <input type="text" id="pangkat" name="pangkat" class="style1 col-md-3 " style="margin-right:30px" placeholder="Masukan Pangkat"/>
+                            <input type="text" id="golongan" name="golongan" class="style1 col-md-3" placeholder="Masukan Golongan"/>
 
                         </div>
                         <div class="form-group row">
@@ -423,14 +634,14 @@
                                 Bidang Keahlian
 
                             </label>
-                            <input type="text" id="bidangKeahlian" name="bidangKeahlian" class="style1" required />
+                            <input type="text" id="bidangKeahlian" name="bidangKeahlian" class="style1"placeholder="Masukan Bidang Keahlian" />
 
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">
                                 Unit/Fakultas
                             </label>
-                            <input type="text" id="fakultas" name="fakultas" class="style1" required />
+                            <input type="text" id="fakultas" name="fakultas" class="style1" placeholder="Masukan Unit/Fakultas" />
 
                         </div>
                         <div class="form-group row">
@@ -438,14 +649,14 @@
                                 Jurusan/Prodi
 
                             </label>
-                            <input type="text" id="prodi" name="prodi" class="style1" required />
+                            <input type="text" id="prodi" name="prodi" class="style1" placeholder="Masukan Jurusan/Prodi"/>
 
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">
                                 Alamat
                             </label>
-                            <input type="text" id="alamat" name="alamat" class="style1" required />
+                            <input type="text" id="alamat" name="alamat" class="style1" placeholder="Masukan Alamat"/>
 
                         </div>
                         <div class="form-group row">
@@ -453,7 +664,7 @@
                                 Kota
 
                             </label>
-                            <input type="text" id="kota" name="kota" class="style1" required />
+                            <input type="text" id="alamat_kota" name="alamat_kota" class="style1" placeholder="Masukan Kota"/>
 
                         </div>
                         <div class="form-group row">
@@ -461,7 +672,7 @@
                                 Provinsi
 
                             </label>
-                            <input type="text" id="provinsi" name="provinsi" class="style1" required />
+                            <input type="text" id="alamat_provinsi" name="alamat_provinsi" class="style1"placeholder="Masukan Provinsi" />
 
                         </div>
                         <div class="form-group row">
@@ -469,14 +680,14 @@
                                 Kode Pos
 
                             </label>
-                            <input type="text" id="kodePos" name="kodePos" class="style1" required />
+                            <input type="text" id="alamat_kodePos" name="alamat_kodePos" class="style1" placeholder="Masukan Kode Pos" />
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">
                                 No.Telp
 
                             </label>
-                            <input type="text" id="telepon" name="telepon" class="style1" required />
+                            <input type="text" id="no_telpon_hp" name="no_telepon_hp" class="style1" placeholder="Masukan Nomor Telepon"/>
 
                         </div>
                         <div class="form-group row">
@@ -484,7 +695,7 @@
                                 Email
 
                             </label>
-                            <input type="email" id="email" name="email" class="style1" required />
+                            <input type="email" id="email" name="email" class="style1" placeholder="Masukan Email"/>
 
                         </div>
 
@@ -502,47 +713,60 @@
 <!-- Modal Dialog 1 End-->
 <!-- Modal Dialog 2 -->
 
-<!--<div class="modal fade" id="modalAnggotaUAJY">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" id="ShowAnggota" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="overflow-y:auto">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" style="color:black; font-family:'Trebuchet MS';font-display:swap; transition:cubic-bezier()"> <i class="fas fa-clipboard"></i>&nbsp; Tambah Anggota UAJY</h5>
+                <h5 class="modal-title" style="color:black; font-family:'Trebuchet MS';font-display:swap; transition:cubic-bezier()"> <i class="fas fa-clipboard"></i>&nbsp; Daftar Anggota Penelitian Kelompok</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
 
-                <div class="col-md-12">-->
-                    <!-- data anggota -->
-                    <!--<table id="tableanggota" class="table table-bordered table-striped">
+                <div class="col-md-12">
+                    <table id="tableanggota" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Pilih</th>
+                                <th>ID PERSONIL PENELITIAN</th>
                                 <th>NPP</th>
-                                <th>Nama </th>
+                                <th>NAMA</th>
+                                <th>INSTITUSI</th>
+                                <th>KEAHLIAN</th>
+                                <th>EMAIL</th>
+                                <th>TELFON RUMAH</th>
+                                <th>HP</th>
+                                <th>ALAMAT</th>
+
                             </tr>
                         </thead>
-                        <tbody class="bodyanggota">
+                        <tbody class="bodyanggota" id="anggota">
                         </tbody>
                     </table>
+
                 </div>
+                <button style="margin-left: 2px; margin-top: 30px;background-color:#2f3cba" class="button btn-three" onclick="addAnggotaUAJY(@Model.refpropo.ID_PROPOSAL)"><i class="fas fa-plus"></i>&nbsp; Tambah Anggota UAJY</button>
+                <button style="margin-left: 2px; margin-top: 30px;background-color:#27a452" class="button btn-three" onclick="addAnggotaNonUAJY(@Model.refpropo.ID_PROPOSAL)"><i class="fas fa-plus"></i>&nbsp; Tambah Anggota Non UAJY</button>
+
             </div>
+
+
+
             <div class="modal-footer">
                 <button type="button" id="closeModal" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
 
 
             </div>
-        </div>-->
-        <!-- /.modal-content -->
-    <!--</div>-->
-    <!-- /.modal-dialog -->
-<!--</div>-->
-<!-- /.modal -->
+        </div>
+
+    </div>
+
+</div>
+
 <!-- Modal Dialog 2 End -->
 <!-- Modal Dialog 3 -->
 
-<div class="modal fade" id="modalSearch">
+<div class="modal fade" id="modalSearch" style="overflow-y:auto">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -552,12 +776,47 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div class="col-md-12">
 
-                <div class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" class="btn btn-primary" onclick="getAnggotaUAJY()">
-                        <i class="fas fa-search"></i>
-                    </button>
+                    <form method="post" asp-action="AddAnggotaUAJY" asp-controller="Profile" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <table id="tableAnggotaUAJY" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th>Pilih</th>
+                                    <th>NPP</th>
+                                    <th>Nama </th>
+                                </tr>
+                            </thead>
+                            <tbody id="data">
+                                <tr hidden>
+                                    <td>
+                                        <input type="hidden" autocomplete="off" class="form-control" name="id_proposal" id="id_proposal" value="@Model.refpropo.ID_PROPOSAL" />
+                                    </td>
+
+                                </tr>
+
+                                @foreach (var item in Model.dataAnggota)
+                                {
+                                    <tr>
+                                        <td>
+                                            <button type="submit" onclick="addAnggotaPenelitianUAJY(@item.NPP, @Model.refpropo.ID_PROPOSAL)" style="font-weight:bold;color:royalblue; border-color:transparent; cursor:pointer">Pilih @item.NPP</button>
+                                        </td>
+                                        <td id="nppAnggota" name="npp">
+                                            @item.NPP
+                                            <input id="nppAnggota" hidden name="npp" value="@item.NPP"/>
+                                        </td>
+                                        <td id="nama_lengkap_gelar" name="nama_lengkap_gelar">
+                                            @item.NAMA_LENGKAP_GELAR
+                                            <input id="nama_lengkap_gelar" hidden name="nama_lengkap_gelar" value="@item.NAMA_LENGKAP_GELAR" />
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
             </div>
             <div class="modal-footer">
@@ -566,21 +825,27 @@
 
             </div>
         </div>
-        <!-- /.modal-content -->
+
     </div>
-    <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<!-- Modal Dialog 3 End -->
 
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 <script>
+    var tempIdTambah;
+    var tableanggota;
+
+
+
     function addAnggotaNonUAJY(id_proposal) {
 
         id_proposal = id_proposal;
         this.tempIdProposal = id_proposal;
+        $('#ShowAnggota').modal('hide');
         $('#TambahAnggotaNonUAJY').modal('show');
 
         $('#btnAddAnggota').html('Tambah');
@@ -590,10 +855,53 @@
 
         id_proposal = id_proposal;
         this.tempIdProposal = id_proposal;
+        $('#ShowAnggota').modal('hide');
         $('#modalSearch').modal('show');
         $('#id_proposal').val(id_proposal);
+        
+
     }
+    function getAnggota(id_proposal) {
+
+        id_proposal = id_proposal;
+        this.tempIdProposal = id_proposal;
+
+        $('#id_proposal').val(id_proposal);
+        $.ajax({
+            type: "GET",
+            url: "/Profile/ajaxGetPeserta",
+            cache: false,
+            data: { id_proposal: id_proposal },
+            dataType: "json",
+            success: function (result) {
+                $('#ShowAnggota').modal('show');
+                var str = '';
+                var data = result.data;
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].NAMA_LENGKAP_GELAR != "" && data[i].NAMA_LENGKAP_GELAR != null) {
+                        str += '<tr><td>' + data[i].ID_PERSONIL_PENELITIAN + '</td><td>' + data[i].NPP + '</td><td>' + data[i].NAMA_LENGKAP_GELAR + '</td><td>' +
+                            data[i].INSTITUSI_ASAL + '</td><td>' + data[i].BIDANG_KEAHLIAN_PENELITIAN + '</td><td>' + data[i].EMAIL + '</td><td>'
+                            + data[i].NO_TELPON_RUMAH + '</td><td>' + data[i].NO_TELPON_HP + '</td><td>' + data[i].ALAMAT + '</td></tr>';
+                    }
+                }
+
+                $(".bodyanggota").html(str);
+
+            }
+        })
+    }
+
     $('#tableanggota').DataTable({
+        "paging": false,
+        "lengthChange": true,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+    });
+
+    $('#tableAnggotaUAJY').DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,
@@ -601,8 +909,78 @@
         "info": true,
         "autoWidth": false,
         "responsive": true,
-
     });
 
-   
+
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+
+
+    window.addEventListener('load', function () {
+        /*var forms = document.querySelectorAll('.needs-validation')*/
+        var forms = document.getElementsByClassName('formTambahAnggotaNonUAJY');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+
+    function addAnggotaPenelitianUAJY( id_proposal, nppAnggota) {
+        //var self = this;
+        console.log(nppAnggota);
+        console.log(id_proposal);
+        var nppAnggota = this.value;
+        var id_proposal = this.value;
+        // masih ngebug diisinii
+        
+        /*var myTable = $('#tableanggotaUAJY').DataTable();*/
+
+        $.ajax({
+            type: "POST",
+            url: "/Profile/AddAnggotaUAJY/" + id_proposal + "/" + nppAnggota,
+            data: { id_proposal : id_proposal , nppAnggota : nppAnggota },
+            success: function (data) {
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Data berhasil diTAMBAH!',
+                    confirmButtonText: 'Tutup',
+                })
+                closeModal();
+                window.location.reload();
+
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'SiLPPM said: ',
+                    text: 'Data gagal diTAMBAH!',
+                })
+                window.location.reload();
+            }
+        });
+    }
+
 </script>

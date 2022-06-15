@@ -1,13 +1,16 @@
 ﻿@{ var role = User.Claims
-                      .Where(c => c.Type == "role")
-                          .Select(c => c.Value).SingleOrDefault();
-     var id_proposal = User.Claims
-                      .Where(c => c.Type == "id_proposal")
-                          .Select(c => c.Value).ToString();
-    
+                       .Where(c => c.Type == "role")
+                           .Select(c => c.Value).SingleOrDefault();
+    var id_proposal = User.Claims
+                     .Where(c => c.Type == "id_proposal")
+                         .Select(c => c.Value).ToString();
+    var npp = User.Claims
+                    .Where(c => c.Type == "npp")
+                        .Select(c => c.Value).ToString();
+
     var nama = User.Claims
-        .Where(c => c.Type == "nama_lengkap")
-            .Select(c => c.Value).SingleOrDefault();
+.Where(c => c.Type == "nama_lengkap")
+    .Select(c => c.Value).SingleOrDefault();
 
     var username = User.Claims
         .Where(c => c.Type == "username")
