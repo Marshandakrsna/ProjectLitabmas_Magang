@@ -29,21 +29,26 @@ namespace SiLPPM_New_Version.Controllers
             var username = User.Claims
                        .Where(c => c.Type == "username")
                            .Select(c => c.Value).SingleOrDefault();
+            var npp = User.Claims
+                       .Where(c => c.Type == "npp")
+                           .Select(c => c.Value).SingleOrDefault();
 
             var data = dao.GetDataUser(username);
             var data2 = dao.GetPangkatByUsername(username);
             var data3 = dao.GetGolonganByUsername(username);
             var data4 = dao.GetFakByUsername(username);
             var data5 = dao.GetJurusanByUsername(username);
-        
+            var proposal = dao.GetDataPropo(username);
+            var pengabdian = dao.GetDataPropoPengabdian(username);
             var refpropo = dao.GetListPenelitianByUsername(username);
             var refpropo2 = dao.GetListPengabdianByUsername(username);
             myobj.data = data.data;
+            myobj.proposal = proposal.data;
+            myobj.pengabdian = pengabdian.data;
             myobj.data2 = data2.data;
             myobj.data3 = data3.data;
             myobj.data4 = data4.data;
             myobj.data5 = data5.data;
-        
             myobj.refpropo = refpropo.data;
             myobj.refpropo2 = refpropo2.data;
             return View(myobj);
@@ -107,7 +112,7 @@ namespace SiLPPM_New_Version.Controllers
                            .Where(c => c.Type == "npp")
                            .Select(c => c.Value).SingleOrDefault();
 
-
+            var history = dao.GetHistoryPenelitianByNPP(username);
             var refpropo = dao.GetListPenelitianByUsername(username);
             var refpropo2 = dao.GetListPengabdianByUsername(username);
             //var anggota = dao.GetDataAnggotaPenelitian(id_proposal);
@@ -133,6 +138,7 @@ namespace SiLPPM_New_Version.Controllers
 
 
             //PEMANGGILAN TAMBAH PENELITIAN
+            myobj.history = history.data;
             myobj.refjenis1 = refjenis1.data;
             myobj.refjenis2 = refjenis2.data;
             myobj.refjenis3 = refjenis3.data;
@@ -159,6 +165,35 @@ namespace SiLPPM_New_Version.Controllers
           
             return View(myobj);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UbahPenelitian(int ID_TAHUN_ANGGARAN, int NO_SEMESTER, int ID_KATEGORI, int ID_ROAD_MAP_PENELITIAN, int ID_SKIM, int ID_TEMA_UNIVERSITAS, int ID_STATUS_PENELITIAN, string JENIS, string JUDUL, string LOKASI,
+          string NPP, string AWAL, string AKHIR, string NPP_REVIEWER, string REVIEWER1, string REVIEWER2, string IS_SETUJU_LPPM, int BEBAN_SKS, string KEYWORD,
+           string OUTCOME, string LONGITUDE, string LATITUDE, string INSERT_DATE, string USER_ID, string KETERANGAN_DANA_EKSTERNAL, string ID_PROPOSAL)
+        {
+
+
+
+            var cek = dao.UbahPenelitian(ID_TAHUN_ANGGARAN, NO_SEMESTER, ID_KATEGORI, ID_ROAD_MAP_PENELITIAN, ID_SKIM, ID_TEMA_UNIVERSITAS, ID_STATUS_PENELITIAN, JENIS, JUDUL, LOKASI,
+            NPP, AWAL, AKHIR, NPP_REVIEWER, REVIEWER1, REVIEWER2, IS_SETUJU_LPPM, BEBAN_SKS, KEYWORD,
+            OUTCOME, LONGITUDE, LATITUDE, INSERT_DATE, USER_ID, KETERANGAN_DANA_EKSTERNAL, ID_PROPOSAL);
+
+            USER_ID = User.Claims
+                          .Where(c => c.Type == "npp")
+                          .Select(c => c.Value).SingleOrDefault();
+            INSERT_DATE = DateTime.Now.ToString();
+            if (cek.status)
+            {
+                TempData["succ"] = "Berhasil mengubah data";
+            }
+            else
+            {
+                TempData["err"] = "Gagal mengubah data" + cek.pesan;
+            }
+            return RedirectToAction("EditDetailPenelitian", "Profile");
+        }
+
         public IActionResult EditDetailPengabdian()
         {
             return View(myobj);
@@ -166,6 +201,22 @@ namespace SiLPPM_New_Version.Controllers
 
         public IActionResult AddProsidingProfile()
         {
+            //var username = User.Claims
+            //         .Where(c => c.Type == "username")
+            //             .Select(c => c.Value).SingleOrDefault();
+
+            var id_proposal = User.Claims
+                    .Where(c => c.Type == "id_proposal")
+                        .Select(c => c.Value).SingleOrDefault();
+
+            //var data = penelitianDAO.GetHistoryProsiding(id_proposal);
+            //var refpropo = dao.GetListPenelitianByUsername(username);
+            //var dataLevel = penelitianDAO.GetRefLevelSeminar();
+
+            //myobj.prosiding = data.data;
+            //myobj.dataLevel = dataLevel.data;
+            //myobj.refpropo = refpropo.data;
+            //return View(myobj);
             var username = User.Claims
                      .Where(c => c.Type == "username")
                          .Select(c => c.Value).SingleOrDefault();
@@ -217,6 +268,21 @@ namespace SiLPPM_New_Version.Controllers
         //INPUT DATA JURNAL PENELITIAN
         public IActionResult AddJurnalProfile()
         {
+            //var username = User.Claims
+            //        .Where(c => c.Type == "username")
+            //            .Select(c => c.Value).SingleOrDefault();
+
+            //var id_proposal = User.Claims
+            //       .Where(c => c.Type == "username")
+            //           .Select(c => c.Value).SingleOrDefault();
+
+            //var data = penelitianDAO.GetHistoryJurnal(id_proposal);
+            //var dataLevel = penelitianDAO.GetRefLevelJurnal();
+            //var refpropo2 = dao.GetListPenelitianByUsername(username);
+            //myobj.refpropo2 = refpropo2.data;
+            //myobj.data = data.data;
+            //myobj.dataLevel = dataLevel.data;
+            //return View(myobj);
             var username = User.Claims
                     .Where(c => c.Type == "username")
                         .Select(c => c.Value).SingleOrDefault();

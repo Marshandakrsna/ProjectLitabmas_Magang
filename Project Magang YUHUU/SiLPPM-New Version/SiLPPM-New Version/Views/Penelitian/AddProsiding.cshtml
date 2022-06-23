@@ -119,7 +119,7 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    
+
                                     <div class="mb-4">
                                         <div class="input-group">
                                             <input type="hidden" autocomplete="off" class="form-control" name="id_proposal" id="id_proposal" value="@Model.refpropo.ID_PROPOSAL" />
@@ -180,7 +180,8 @@
                         <table id="datatable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID Outcome Prosiding</th>
+                                    <th>ID Proposal</th>
+                                 
                                     <th>Judul Publikasi</th>
                                     <th>Level Jurnal</th>
                                     <th>Nama Seminar</th>
@@ -191,19 +192,24 @@
 
                             </thead>
                             <tbody>
+                             
+                          
                                 @foreach (var item in Model.data)
                                 {
-
                                     <tr>
-                                        <td> @item.ID_OUTCOME_PROSIDING</td>
+                                        <td> @item.ID_PROPOSAL</td>
                                         <td>@item.JUDUL </td>
                                         <td>@item.LEVEL</td>
                                         <td>@item.NAMA_JURNAL</td>
                                         <td>@item.DOI</td>
                                         <td>@item.ISBN</td>
-                                        
-                                        <td><button type="submit" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                                    title="Delete Prosiding"onclick="togModalDelete(@item.ID_OUTCOME_PROSIDING)" id="deleteButton_"><i class="mdi mdi-delete" aria-hidden="true"> </i></button></td>
+
+                                        <td>
+                                            <button type="submit" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Delete Prosiding" onclick="togModalDelete(@item.ID_OUTCOME_PROSIDING)" id="deleteButton_">
+                                                <i class="mdi mdi-delete" aria-hidden="true"> </i>
+                                            </button>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
@@ -214,7 +220,7 @@
             </div>
         </div>
     </div>
-     @*Modal Delete*@ 
+    @*Modal Delete*@
     <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

@@ -102,6 +102,7 @@
         th, td {
             padding: 8px;
             text-align: left;
+            width: 50px;
             border-top: 1px solid #696868;
             border-left: solid #696868;
             border-right: 1px solid #696868;
@@ -147,26 +148,29 @@
                         <table>
                             <thead class="text-center">
                                 <tr>
-                                  
+
                                     <th>Judul</th>
                                     <th> Aksi</th>
-                               
+
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach (var item in Model.history)
+                                {
+                                    <tr>
+
+                                        <td> @item.JUDUL</td>
+
+                                        <td class="text-center">
+                                            @*<i class="fas fa-sign-out-alt fa-lg nav-icon" style="color:firebrick; font-size:larger"></i><strong style="color:firebrick"> LOGOUT </strong>*@
+                                            <i class="mdi mdi-eye" style="color:firebrick; font-size:larger" title="Lihat Prosiding"><a style=" color: chocolate; font-weight:bolder" href="AddProsiding?id_proposal=@item.ID_PROPOSAL">Prosiding</a></i> &nbsp;
+                                            <i class="mdi mdi-eye" style="font-size: larger; color: #007bff" title="Lihat Jurnal"> <a style="font-weight:bolder" href="AddJurnal?id_proposal=@item.ID_PROPOSAL">Jurnal</a></i>
+
+                                        </td>
+                                    </tr>
+                                }
 
 
-                                <tr>
-
-                                    <td> @Model.refpropo.JUDUL</td>
-
-                                    <td class="text-center">
-                                        @*<i class="fas fa-sign-out-alt fa-lg nav-icon" style="color:firebrick; font-size:larger"></i><strong style="color:firebrick"> LOGOUT </strong>*@
-                                        <i class="mdi mdi-eye" style="color:firebrick; font-size:larger" title="Lihat Prosiding"><a style=" color: chocolate; font-weight:bolder" href="AddProsiding?id_proposal=@Model.refpropo.ID_PROPOSAL">Prosiding</a></i> &nbsp;
-                                        <i class="mdi mdi-eye" style="font-size: larger; color: #007bff" title="Lihat Jurnal"> <a style="font-weight:bolder" href="AddJurnal?id_proposal=@Model.refpropo2.ID_PROPOSAL">Jurnal</a></i>
-      
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>

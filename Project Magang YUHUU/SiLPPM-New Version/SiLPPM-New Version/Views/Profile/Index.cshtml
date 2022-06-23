@@ -210,18 +210,20 @@
                             </thead>
                             <tbody>
 
+                                @foreach (var item in Model.proposal)
+                                 {
+                                    <tr>
+                                        <td>
+                                            <p style="font-weight:bold"><a href="LihatProposalPenelitian?id_proposal=@item.id_proposal">Lihat Review</a></p>
+                                        </td>
+                                        <td> @item.Judul</td>
+                                        <td>@item.DESKRIPSI</td>
 
-                                <tr>
-                                    <td>
-                                        <p style="font-weight:bold"><a href="LihatProposalPenelitian?id_proposal=@Model.refpropo.ID_PROPOSAL">Lihat Review</a></p>
-                                    </td>
-                                    <td> @Model.refpropo.JUDUL</td>
-                                    <td>@Model.refpropo.DESKRIPSI</td>
-
-                                    <td>
-                                        <p style=" font-weight:bold; background-color: darkorange; border-radius: 5px; width: 110px; padding: 5px; cursor: pointer" class="text-center"><a href="EditDetailPenelitian?id_proposal=@Model.refpropo.ID_PROPOSAL">Edit Detail</a></p>
-                                    </td>
-                                </tr>
+                                        <td>
+                                            <p style=" font-weight:bold; background-color: darkorange; border-radius: 5px; width: 110px; padding: 5px; cursor: pointer" class="text-center"><a href="EditDetailPenelitian?id_proposal=@Model.refpropo.ID_PROPOSAL">Edit Detail</a></p>
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -239,17 +241,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <p style="font-weight:bold; border-radius:5px; width:110px; padding:5px; cursor:pointer"><a href="LihatProposalPengabdian?id_proposal=@Model.refpropo2.ID_PROPOSAL">Lihat Review</a></p>
-                                        </td>
-                                        <td> @Model.refpropo2.JUDUL</td>
-                                        <td>@Model.refpropo2.DESKRIPSI</td>
+                                    @foreach (var item in Model.pengabdian)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <p style="font-weight:bold; border-radius:5px; width:110px; padding:5px; cursor:pointer"><a href="LihatProposalPengabdian?id_proposal=@item.ID_PROPOSAL">Lihat Review</a></p>
+                                            </td>
+                                            <td> @item.JUDUL_KEGIATAN</td>
+                                            <td>@item.DESKRIPSI</td>
 
-                                        <td>
-                                            <p class="text-center" style="font-weight:bold;background-color:darkorange;  border-radius:5px; width:110px; padding:5px; cursor:pointer"  href="EditDetailPengabdian?id_proposal=@Model.refpropo2.ID_PROPOSAL">Edit Detail</p>
-                                        </td>
-                                    </tr>
+                                            <td>
+                                                <p class="text-center" style="font-weight:bold;background-color:darkorange;  border-radius:5px; width:110px; padding:5px; cursor:pointer" href="EditDetailPengabdian?id_proposal=@item.ID_PROPOSAL">Edit Detail</p>
+                                            </td>
+                                        </tr>
+                                    }
+
+
                                 </tbody>
                             </table>
                         </div>

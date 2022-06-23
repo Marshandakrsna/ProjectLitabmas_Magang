@@ -154,22 +154,25 @@
                             </thead>
                             <tbody>
 
+                                @foreach (var item in Model.history)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.TAHUN_AKADEMIK
+                                        </td>
+                                        <td> @item.JUDUL</td>
+                                        <td>
+                                            @item.DANA_PRIBADI
+                                        </td>
 
-                                <tr>
-                                    <td>
-                                        @Model.refpropo.TAHUN_AKADEMIK
-                                    </td>
-                                    <td> @Model.refpropo.JUDUL</td>
-                                    <td>
-                                        @Model.refpropo.DANA_PRIBADI
-                                    </td>
-                    
-                                <td>      @Model.refpropo.DANA_EKSTERNAL </td>
-                                <td>
-                                    @Model.refpropo.DANA_KERJASAMA
-                                </td>
-                                    <td>@Model.refpropo.DANA_UAJY</td>
-                                </tr>
+                                        <td>      @item.DANA_EKSTERNAL </td>
+                                        <td>
+                                            @item.DANA_KERJASAMA
+                                        </td>
+                                        <td>@item.DANA_UAJY</td>
+                                    </tr>
+                                }
+
                             </tbody>
                         </table>
                     </div>
@@ -178,7 +181,6 @@
             <button class="button button1">Tambah Proposal</button>
 
         </div>
-
 
     </div>
 
