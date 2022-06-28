@@ -23,7 +23,7 @@ namespace SiLPPM_New_Version.Controllers
             penelitianDAO = new PenelitianDAO();
             dao = new ProfileDAO();
         }
-        public IActionResult Index()
+        public IActionResult Profile()
         {
 
             var username = User.Claims

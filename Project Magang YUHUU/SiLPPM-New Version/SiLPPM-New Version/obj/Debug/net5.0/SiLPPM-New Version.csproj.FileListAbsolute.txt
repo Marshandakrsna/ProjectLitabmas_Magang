@@ -433,3 +433,16 @@ E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New V
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Profile\AddProsidingProfile.cshtml.g.cs
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Profile\AddJurnalProfile.cshtml.g.cs
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\IndexInput.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\HomePenelitian.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\KelolaPenelitian\KelolaReviewer.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\adminListPenelitian.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\adminPenelitian.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\AdminRevPenelitian.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\IndexReviewerPeneliti.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\KelolaReviewer.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengabdian\DekanListReviewPengabdian.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengabdian\adminListPengabdian.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengabdian\adminPengabdian.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengabdian\HomePengabdian.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengelolaan\AdminKelolaUser.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Profile\Profile.cshtml.g.cs

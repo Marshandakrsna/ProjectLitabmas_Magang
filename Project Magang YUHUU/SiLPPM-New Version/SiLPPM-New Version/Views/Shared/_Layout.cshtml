@@ -1,9 +1,21 @@
-﻿@{ var role = User.Claims
-                       .Where(c => c.Type == "role")
-                           .Select(c => c.Value).SingleOrDefault();
+﻿@using System;
+@using System.Linq;
+@using System.Security.Claims
+@using SiLPPM_New_Version.DAO;
+
+@{ 
+    AccountDAO accountDAO = new AccountDAO();
+
+    var role = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToArray();
+
+    var id_role = User.Claims.Where(c => c.Type == "id_role").Select(c => c.Value).ToArray();
+
+    var mainMenu = accountDAO.getAllMenu(id_role);
+    var subMenu = accountDAO.getAllSubMenu(id_role);
+
     var id_proposal = User.Claims
-                     .Where(c => c.Type == "id_proposal")
-                         .Select(c => c.Value).ToString();
+                         .Where(c => c.Type == "id_proposal")
+                             .Select(c => c.Value).ToString();
     var npp = User.Claims
                     .Where(c => c.Type == "npp")
                         .Select(c => c.Value).ToString();
@@ -52,6 +64,7 @@
         body {
             font-family: 'Karla', sans-serif;
         }
+
         .brand {
             background-color: #001038;
             background-image: url("https://www.transparenttextures.com/patterns/black-thread.png");
@@ -61,8 +74,8 @@
             background-color: #001038 !important;
             background-image: url("https://www.transparenttextures.com/patterns/black-twill.png");
         }
-     
-       
+
+
 
         .user-panel, .brand-link {
             border-bottom: 1px solid #1565C0 !important;
@@ -118,8 +131,33 @@
                                 <p>Home</p>
                             </a>
                         </li>
-
-                        <li class="nav-item has-treeview">
+                        @foreach(var main in mainMenu)
+                        { 
+                            <li class="nav-item">
+                                 <a class="nav-link" asp-area="" asp-controller="" asp-action="">
+                                
+                                <p> 
+                                    @main.DESKRIPSI
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                            @foreach (var sub in subMenu)
+                            {
+                                if(@sub.ID_SI_MENU == @main.ID_SI_MENU)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="" asp-controller="@main.LINK" asp-action="@sub.LINK">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>@sub.DESKRIPSI</p>
+                                        </a>
+                                    </li>                                            
+                                }
+                            }
+                           </ul>
+                        </li>                                         
+                        }
+                        @*<li class="nav-item has-treeview">
                             <a asp-action="Index" asp-controller="Penelitian" class="nav-link">
                                 <i class="nav-icon fas fa-book" aria-hidden="true"></i>
                                 <p>
@@ -129,25 +167,25 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-action="IndexTambah" asp-controller="Penelitian" class="nav-link">
+                                    <a asp-action="HomePenelitian" asp-controller="Penelitian" class="nav-link">
                                         <i class="fa fa-circle" style=" font-size:smaller; color:chocolate; margin-left: 12px"></i>
                                         <p>Tambah Penelitian</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-action="IndexPengelolaan" asp-controller="KelolaPenelitian" class="nav-link">
+                                    <a asp-action="KelolaReviewer" asp-controller="Penelitian" class="nav-link">
                                         <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
                                         <p>Pengelolaan Review Proposal</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-action="IndexInput" asp-controller="Penelitian" class="nav-link">
+                                    <a asp-action="adminPenelitian" asp-controller="Penelitian" class="nav-link">
                                         <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
                                         <p>Input Penelitian (Admin)</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-action="IndexDaftar" asp-controller="Penelitian" class="nav-link">
+                                    <a asp-action="adminListPenelitian" asp-controller="Penelitian" class="nav-link">
                                         <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
                                         <p>Daftar Penelitian</p>
                                     </a>
@@ -166,31 +204,31 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-action="IndexTambah" asp-controller="Pengabdian" class="nav-link">
+                                    <a asp-action="HomePengabdian" asp-controller="Pengabdian" class="nav-link">
                                         <i class="fa fa-circle" style=" font-size:smaller; color:chocolate; margin-left: 12px"></i>
                                         <p>Tambah Pengabdian</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-action="IndexPengesahan" asp-controller="Pengabdian" class="nav-link">
+                                    <a asp-action="DekanListReviewPengabdian" asp-controller="Pengabdian" class="nav-link">
                                         <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
                                         <p>Pengesahan Proposal </p>
                                     </a>
                                 </li>
-                                @*<li class="nav-item">
-                                    <a asp-action="IndexLihat" asp-controller="Pengabdian" class="nav-link">
-                                        <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
-                                        <p>Lihat Monev Pengabdian</p>
-                                    </a>
-                                </li>*@
                                 <li class="nav-item">
-                                    <a asp-action="IndexInput" asp-controller="Pengabdian" class="nav-link">
+                                        <a asp-action="DekanLihatMonevPengabdian" asp-controller="Pengabdian" class="nav-link">
+                                            <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
+                                            <p>Lihat Monev Pengabdian</p>
+                                        </a>
+                                    </li>
+                                <li class="nav-item">
+                                    <a asp-action="adminPengabdian" asp-controller="Pengabdian" class="nav-link">
                                         <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
                                         <p>Input Pengabdian (Admin)</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-action="IndexDaftar" asp-controller="Pengabdian" class="nav-link">
+                                    <a asp-action="adminListPengabdian" asp-controller="Pengabdian" class="nav-link">
                                         <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
                                         <p>Daftar Pengabdian</p>
                                     </a>
@@ -208,7 +246,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-action="Index" asp-controller="Profile" class="nav-link">
+                                    <a asp-action="Profile" asp-controller="Profile" class="nav-link">
                                         <i class="fa fa-circle" style=" font-size:smaller; color:chocolate; margin-left: 12px"></i>
                                         <p>Lihat Profile</p>
                                     </a>
@@ -226,13 +264,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-action="IndexPengelolaan" asp-controller="Pengelolaan" class="nav-link">
+                                    <a asp-action="AdminKelolaUser" asp-controller="Pengelolaan" class="nav-link">
                                         <i class="fa fa-circle" style=" font-size:smaller; color:chocolate; margin-left: 12px"></i>
                                         <p>Pengelolaan Assesor/Reviewer</p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li>*@
 
                     </ul>
                 </nav>
@@ -289,6 +327,20 @@
                 }
             })
         }
+        //$(document).ready(function () {
+        //    $.ajax({
+        //        type: "GET",
+        //        url: "/Account/GetMenu",
+        //        cache: false,
+        //        dataTypeL: "string",
+        //        success: function (result) {
+        //            $("#menu").append(result);
+        //        },
+        //        error: function (xhr) {
+        //            alert("Telah terjadi kesalahan dengan kode : " + xhr.status + ", silahkan menghubungi admin terkait.");
+        //        }
+        //    });
+        //});
     </script>
 
     <!-- Bootstrap 4 -->

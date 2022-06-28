@@ -835,7 +835,7 @@
                                 {
                                     <tr>
                                         <td>
-                                            <button type="submit" onclick="addAnggotaPenelitianUAJY(@item.NPP, @Model.refpropo.ID_PROPOSAL)" style="font-weight:bold;color:royalblue; border-color:transparent; cursor:pointer">Pilih @item.NPP</button>
+                                            <button type="submit" onclick="addAnggotaPenelitianUAJY(@item.NPP, @Model.refpropo.ID_PROPOSAL)" style="font-weight:bold;color:royalblue; border-color:transparent; cursor:pointer">Pilih</button>
                                         </td>
                                         <td id="nppAnggota" name="npp">
                                             @item.NPP
@@ -872,6 +872,38 @@
 <script>
     var tempIdTambah;
     var tableanggota;
+    var tableAnggotaUAJY;
+    refreshTableAnggota();
+    refreshTableAnggotaUAJY();
+
+    function refreshTableAnggota() {
+        tableanggota = $("#tableanggota").DataTable({
+          
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+
+        });
+    }
+
+    function refreshTabelAnggotaUAJY() {
+        tableAnggotaUAJY = $("#tableAnggotaUAJY").DataTable({
+
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+
+        });
+    }
+
 
 
 
@@ -925,25 +957,25 @@
         })
     }
 
-    $('#tableanggota').DataTable({
-        "paging": false,
-        "lengthChange": true,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-    });
+    //$('#tableanggota').DataTable({
+    //    "paging": false,
+    //    "lengthChange": true,
+    //    "searching": false,
+    //    "ordering": true,
+    //    "info": true,
+    //    "autoWidth": false,
+    //    "responsive": true,
+    //});
 
-    $('#tableAnggotaUAJY').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-    });
+    //$('#tableAnggotaUAJY').DataTable({
+    //    "paging": true,
+    //    "lengthChange": true,
+    //    "searching": true,
+    //    "ordering": true,
+    //    "info": true,
+    //    "autoWidth": false,
+    //    "responsive": true,
+    //});
 
 
     function myFunction() {

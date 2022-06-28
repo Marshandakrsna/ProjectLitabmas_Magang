@@ -14,6 +14,7 @@ namespace SiLPPM_New_Version.Controllers
     public class PenelitianController : Controller
     {
         PenelitianDAO penelitianDAO;
+        KelolaPenelitianDAO kelolaDAO;
         ProfileDAO myprofile;
         dynamic myobj;
 
@@ -21,9 +22,11 @@ namespace SiLPPM_New_Version.Controllers
         {
             myobj = new ExpandoObject();
             penelitianDAO = new PenelitianDAO();
+            kelolaDAO = new KelolaPenelitianDAO();
             myprofile = new ProfileDAO();
         }
-        public IActionResult IndexTambah()
+       
+        public IActionResult HomePenelitian()
         {
 
             //TAMBAH PENELITIAN
@@ -56,7 +59,8 @@ namespace SiLPPM_New_Version.Controllers
             return View(myobj);
            
         }
-        public IActionResult IndexInput()
+ 
+        public IActionResult adminPenelitian()
         {
             //TAMBAH PENELITIAN
             var username = User.Claims
@@ -152,7 +156,7 @@ namespace SiLPPM_New_Version.Controllers
 
         }
 
-        public IActionResult IndexDaftar()
+        public IActionResult adminListPenelitian()
         {
             var data = penelitianDAO.GetPenelitianSetReviewer();
             var reviewer = penelitianDAO.GetRefGetReviewer();
@@ -283,7 +287,7 @@ namespace SiLPPM_New_Version.Controllers
             {
                 TempData["err"] = "Gagal menambahkan data Reviewer, " + cek.pesan;
             }
-            return RedirectToAction("IndexDaftar");
+            return RedirectToAction("adminListPenelitian");
         }
 
         [HttpPost]
@@ -306,8 +310,54 @@ namespace SiLPPM_New_Version.Controllers
             {
                 TempData["err"] = "Gagal menambahkan data" + cek.pesan;
             }
-            return RedirectToAction("IndexTambah", "Penelitian");
+            return RedirectToAction("HomePenelitian", "Penelitian");
         }
 
+        public IActionResult KelolaReviewer()
+        {
+            var reviewer = kelolaDAO.GetRefGetReviewer();
+            var data = kelolaDAO.GetPenelitianSetReviewer();
+            myobj.reviewer = reviewer.data;
+            myobj.data = data.data;
+            return View(myobj);
+        }
+        public IActionResult IndexReviewerPeneliti()
+        {
+            var data = kelolaDAO.GetPenelitianReviewer();
+            myobj.data = data.data;
+            return View(myobj);
+        }
+
+        //untuk menampilkan dan menentukan reviewer
+
+        public JsonResult ajaxGetDetailKelolaReviewer(int id_proposal)
+        {
+            var data = kelolaDAO.GetPenelitianSetReviewerByID(id_proposal);
+            return Json(data);
+        }
+        public IActionResult AdminRevPenelitian(int id_proposal)
+        {
+            var data = kelolaDAO.GetPenelitianReviewerByID(id_proposal);
+            var kriteria = kelolaDAO.GetRefKelolaReviewer();
+            myobj.data = data.data;
+            myobj.kriteria = kriteria.data;
+            return View(myobj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult addKelolaReviewer(int id_proposal, string reviewer1, string reviewer2)
+        {
+            var cek = kelolaDAO.UpdateSetReviewer(id_proposal, reviewer1, reviewer2);
+            if (cek.status == true)
+            {
+                TempData["succ"] = "Berhasil menambahkan data Reviewer ";
+            }
+            else
+            {
+                TempData["err"] = "Gagal menambahkan data Reviewer, " + cek.pesan;
+            }
+            return RedirectToAction("KelolaReviewer");
+        }
     }
 }

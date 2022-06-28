@@ -1240,5 +1240,43 @@ join silppm.REF_LEVEL_SEMINAR r on ps.ID_LEVEL_SEMINAR=r.ID_LEVEL_SEMINAR where 
                 }
             }
         }
+
+        public DBOutput GetDataPengabdian(string username)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT [ID_PROPOSAL] ,[NPP] ,[ID_TAHUN_ANGGARAN] ,[REVIEWER1]
+                    ,[REVIEWER2],[JUDUL_KEGIATAN] ,[LANDASAN_PENELITIAN],[JENIS_PENGABDIAN]
+                    ,[ANGGOTA1],[ANGGOTA2] ,[MITRA] ,[MITRA_KEAHLIAN] ,[LOKASI] ,[JARAK_PT_LOKASI]
+                    ,[OUTPUT],[OUTCOME] ,[AWAL],[AKHIR] ,[SASARAN] ,[SKS_KETUA] ,[SKS_ANGGOTA]
+                    ,[ID_ROAD_MAP] ,[DANA_UAJY] ,[DANA_PRIBADI] ,[DOKUMEN] ,[IS_DROPPED] ,[ID_STATUS]
+                    ,[IS_CHECKED] ,[IS_SETUJU_PRODI] ,[IS_SETUJU_DEKAN] ,[IS_SETUJU_LPPM]
+                    ,[NPP_REVIEWER] ,[DANA_SETUJU] ,[INSERT_DATE] ,[IP_ADDRESS] ,[USER_ID] ,[ID_SKIM]
+                    ,[ID_TEMA_UNIVERSITAS] ,[NO_SEMESTER] FROM [PORTAL_DOSEN].[silppm].[TBL_PENGABDIAN]
+                    where simka.MST_KARYAWAN.USERNAME = @username";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { username = username });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
     }
 }

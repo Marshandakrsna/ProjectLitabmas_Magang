@@ -55,6 +55,8 @@ namespace SiLPPM_New_Version.Controllers
             TempData["username"] = username;
             ClaimsIdentity identity = null;
             bool isAuthenticated = false;
+            var ul = dao.GetUser(username);
+            var IDUnit = Convert.ToString(ul.ID_UNIT);
             string strrole = "";
             string strnamalengkap = "";
 
@@ -64,8 +66,6 @@ namespace SiLPPM_New_Version.Controllers
             }
             else
             {
-                var ul = dao.GetUser(username);
-
                 if (ul != null)
                 {
                     if (ul.password == password)
@@ -79,19 +79,25 @@ namespace SiLPPM_New_Version.Controllers
                                     new Claim(ClaimTypes.Role, strrole),
                                     new Claim("username", ul.username),
                                     new Claim("role", strrole),
+                                    new Claim("id_unit",IDUnit),
                                     new Claim("nama_lengkap", strnamalengkap),
                                 }, CookieAuthenticationDefaults.AuthenticationScheme);
+                        foreach (var role in ul)
+                        {
+                            identity.AddClaim(new Claim(ClaimTypes.Role, strrole));
+                            identity.AddClaim(new Claim("id_role", Convert.ToString(ul.ID_ROLE)));
+                        }
                     }
                     else
                     {
                         // password tidak sesuai
-                        TempData["err_message"] = "Gagal Login! Password anda salah.";
+                        TempData["err_message"] = "[!] Gagal Login! Password anda salah.";
                     }
                 }
                 else
                 {
                     // data dosen tidak ditemukan
-                    TempData["err_message"] = "Gagal Login! Data tidak ditemukan.";
+                    TempData["err_message"] = "[!] Gagal Login! Data tidak ditemukan.";
                 }
             }
 

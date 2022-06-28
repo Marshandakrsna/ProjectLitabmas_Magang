@@ -17,7 +17,7 @@ namespace SiLPPM_New_Version.Controllers
             myobj = new ExpandoObject();
             dao= new KelolaPenelitianDAO();
         }
-        public IActionResult IndexPengelolaan()
+        public IActionResult KelolaReviewer()
         {
             var reviewer = dao.GetRefGetReviewer();
             var data= dao.GetPenelitianSetReviewer();

@@ -1,4 +1,4 @@
-﻿@{ ViewData["Title"] = "Penelitian "; }
+﻿@{ ViewData["Title"] = "Tambah Pengabdian "; }
 
 <!DOCTYPE html>
 
@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="~/css/style2.css" />
     <!-- Data Table-->
     @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">*@
-<style>
-      
+    <style>
+
 
         body {
             font-family: 'Karla', sans-serif;
@@ -33,7 +33,7 @@
             font-size: large;
             letter-spacing: 1px;
         }
-   
+
 
         .title-card {
             color: #FFFFFF;
@@ -43,18 +43,28 @@
             min-width: inherit;
         }
 
-    .btn:active {
-        background-color: #ffe7ab;
-        transform: translateY(4px);
-    }
-    .btn:hover {
-        background-color: #ffe7ab;
-    }
+        .blue-color {
+            background-color: #1d84C6 !important;
+        }
+
+        .green-color {
+            background-color: #1CB394 !important;
+        }
+
+        .btn:active {
+            background-color: #ffe7ab;
+            transform: translateY(4px);
+        }
+
+        .btn:hover {
+            background-color: #ffe7ab;
+        }
 
         .td, th {
             vertical-align: middle;
         }
-</style>
+    
+    </style>
 </head>
 <body>
 
@@ -65,15 +75,14 @@
         <div class="content-wrapper p-3">
 
             <div class="card-title">
-                <a href="IndexTambah" class="btn" style="background-color:burlywood">Data Penelitian</a>
-                <a href="IndexTambahPeneliti" class="btn" style="background-color:burlywood">Identitas Peneliti</a>
-                <a href="IndexTambahCV" class="btn " style="background-color:burlywood">CV- Pengalaman Penelitian</a>
-                <a href="IndexTambahPublikasi" class="btn" style="background-color:burlywood">Publikasi</a>
+                <a href="HomePengabdian" class="btn" style="background-color:burlywood">Data Penelitian</a>
+                <a href="IndexIdentitasPengusul" class="btn" style="background-color:burlywood">Identitas Pengusul</a>
+                <a href="IndexRAB" class="btn " style="background-color:burlywood">RAB</a>
 
             </div> &nbsp;&nbsp;
 
             <hr />
-            <h4 class="head-title">Tambah Penelitian</h4>
+            <h4 class="head-title">Tambah Pengabdian</h4>
 
             <hr />
             @if (TempData["succ"] != null)
@@ -101,34 +110,32 @@
                 <div>
 
                     <div class="px-3 pb-2">
-                        <form method="post" asp-action="AddPenelitian" asp-controller="Penelitian" enctype="multipart/form-data">
-
+                        <form method="post" asp-action="AddPengabdian" asp-controller="Pengabdian" enctype="multipart/form-data">
                             @Html.AntiForgeryToken()
 
                             <div class="row">
                                 <div class="col-md-6">
-
                                     <div class="mb-4" hidden>
                                         <div class="input-group">
-                                            <input type="hidden" autocomplete="off" class="form-control" name="USER_ID" id="USER_ID" value="@Model.refpropo.USERNAME" />
+                                            <input type="text" autocomplete="off" class="form-control" name="USER_ID" id="USER_ID" value="@Model.refpropo.USERNAME" />
                                         </div>
                                     </div>
                                     <div class="mb-4" hidden>
                                         <div class="input-group">
-                                            <input type="hidden" autocomplete="off" class="form-control" name="username" id="username" value="@Model.refpropo.USERNAME" />
+                                            <input type="text" autocomplete="off" class="form-control" name="username" id="username" value="@Model.refpropo.USERNAME" />
                                         </div>
                                     </div>
                                     <div class="mb-4" hidden>
                                         <div class="input-group">
-                                            <input type="hidden" autocomplete="off" class="form-control" name="npp" id="npp" value="@Model.refpropo.NPP" />
+                                            <input type="text" autocomplete="off" class="form-control" name="npp" id="npp" value="@Model.refpropo.NPP" />
                                         </div>
                                     </div>
                                     <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Skim Penelitian</label>
+                                        <label for="basic-addon1" class="form-label">Skim Pengabdian</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
                                             <select style="width:710px" id="ID_SKIM" name="ID_SKIM">
-                                                <option hidden style="color:lightgrey">Pilih Skim Penelitian</option>
+                                                <option hidden style="color:lightgrey">Pilih Skim Pengabdian</option>
                                                 @foreach (var item in Model.refjenis)
                                                 {
                                                     <option value="@item.ID_SKIM"> @item.DESKRIPSI</option>
@@ -183,23 +190,15 @@
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Outcome</label>
                                         <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon2"><i class="mdi mdi-pencil small" aria-hidden="true"> </i></span>
-                                            <select style="width:710px" id="ID_OUTCOME" name="ID_OUTCOME">
-                                                <option hidden style="color:lightgrey">Pilih Outcome </option>
-                                                @foreach (var item in Model.refOutcome)
-                                                {
-                                                    <option value="@item.ID_OUTCOME"> @item.DESKRIPSI</option>
-
-                                                }
-                                            </select>
-
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <input type="text" class="form-control" placeholder="Outcome" aria-label="Nomor Barcode" aria-describedby="basic-addon1" id="noBarcode" onchange="autofillTabel()">
                                         </div>
                                     </div>
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Jarak dari Kampus UAJY</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                            <input type="text" class="form-control" id="JARAK_KAMPUS_KM" placeholder="Jarak dari Kampus UAJY" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" placeholder="Jarak dari Kampus UAJY" aria-label="Nomor Barcode" aria-describedby="basic-addon1" id="JARAK_KAMPUS_KM">
                                         </div>
                                     </div>
                                     <div class="mb-4">
@@ -211,38 +210,46 @@
                                         </div>
                                     </div>
                                     <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Tanggal Akhir Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar small" aria-hidden="true"> </i></span>
+                                            <input type="date" class="form-control" placeholder="DD/MM/YYYY" id="AKHIR" name="AKHIR">
+
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Beban SKS</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                            <input type="text" class="form-control" placeholder="Beban SKS" id="BEBAN_SKS" name="BEBAN_SKS" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" placeholder="Beban SKS" aria-describedby="basic-addon1" id="BEBAN_SKS" name="BEBAN_SKS">
                                         </div>
                                     </div>
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Dokumen Proposal/blind Proposal</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                            <input type="FILE" class="form-control" id="DOKUMEN" name="DOKUMEN" placeholder="Dokumen Proposal" aria-describedby="basic-addon1">
+                                            <input type="FILE" class="form-control" placeholder="Dokumen Proposal" aria-describedby="basic-addon1" onchange="autofillTabel()">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="mb-4">
-                                        <label for="basic-addon3" class="form-label">Judul Penelitian</label>
+                                        <label for="basic-addon3" class="form-label">Judul Kegiatan Pengabdian</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-home small" aria-hidden="true"> </i></span>
-                                            <textarea id="JUDUL" name="JUDUL" placeholder="  Judul Penelitian" style="height: 200px; width: 710px;"></textarea>
+                                            <textarea id="JUDUL" name="JUDUL" placeholder="  Judul Pengabdian" style="height: 200px; width: 710px;"></textarea>
                                         </div>
                                     </div>
                                     <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Kata Kunci(Inggris)</label>
+                                        <label for="basic-addon1" class="form-label">Landasan Penelitian</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar-range small" aria-hidden="true"> </i></span>
-                                            <input type="text" class="form-control" id="KEYWORD" name="KEYWORD" placeholder="Kata Kunci" aria-label="Masa Berlaku" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" placeholder="Landasan Penelitian" aria-label="Masa Berlaku" aria-describedby="basic-addon1" id="LANDASAN_PENELITIAN" name="LANDASAN_PENELITIAN">
                                         </div>
                                     </div>
-                                    <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Kategori Penelitian</label>
+                                    @*<div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Kategori Pengabdian</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
                                             <select style="width:710px" id="ID_KATEGORI" name="ID_KATEGORI">
@@ -254,12 +261,12 @@
                                                 }
                                             </select>
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Tema Penelitian Universitas</label>
+                                        <label for="basic-addon1" class="form-label">Tema  Universitas</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                            <select style="width:710px" id="ID_TEMA_PENELITIAN" name="ID_TEMA_PENELITIAN">
+                                            <select style="width:710px" id="ID_TEMA_UNIVERSITAS" name="ID_TEMA_UNIVERSITAS">
                                                 <option hidden style="color:lightgrey">Pilih Tema Penelitian</option>
                                                 @foreach (var item in Model.refjenis6)
                                                 {
@@ -269,43 +276,32 @@
                                             </select>
                                         </div>
                                     </div>
-                                    @*<div class="mb-4">
-                                            <label for="basic-addon1" class="form-label">Topik Penelitian sesuai dengan rencana unit</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                                <input type="text" class="form-control" placeholder="Topik Penelitian" aria-label="Nomor Barcode" aria-describedby="basic-addon1" id="noBarcode" onchange="autofillTabel()">
-                                            </div>
-                                        </div>*@
                                     <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Jenis Penelitian</label>
+                                        <label for="basic-addon1" class="form-label">Topik Penelitian sesuai dengan rencana unit</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                            <select style="width:710px" id="ID_JENIS_PENELITIAN" name="ID_JENIS_PENELITIAN">
-                                                <option hidden style="color:lightgrey">Pilih Jenis Penelitian</option>
-                                                @foreach (var item in Model.refjenis5)
-                                                {
-                                                    <option value="@item.ID_JENIS_PENELITIAN"> @item.JENIS_PENELITIAN</option>
+                                            <input type="text" class="form-control" placeholder="Topik Penelitian" aria-label="Nomor Barcode" aria-describedby="basic-addon1" id="noBarcode" onchange="autofillTabel()">
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Jenis Pengabdian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
 
-                                                }
-                                            </select>
+                                            <input id="JENIS_PENGABDIAN" name="JENIS_PENGABDIAN" type="text" class="form-control" placeholder="Topik Penelitian" aria-label="Nomor Barcode" aria-describedby="basic-addon1" value="Jenis Pengabdian">
 
                                         </div>
                                     </div>
-                                    @*<div class="mb-4">
-                                            <label for="basic-addon1" class="form-label">Lokasi Penelitian</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-magnify small" aria-hidden="true"> </i></span>
-                                                <input id="LOKASI"
-                                                       name="LOKASI"
-                                                       class="controls"
-                                                       type="text"
-                                                       placeholder="Search Box">
-                                                <div id="map"></div>
-                                                <script src="https://maps.googleapis.com/maps/api/js?AIzaSyAOPreDHEYqILNxTGIiSuaYMHSnLzVFlVc&callback=initAutocomplete&libraries=places&v=weekly" async="" defer="defer" type="text/javascript"></script>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Mitra Kerjasama atau Mitra Sasaran</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
 
+                                            <input type="text" class="form-control" placeholder="Nama Mitra" id="MITRA" name="MITRA" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" placeholder="Bidang Keahlian" id="MITRA_KEAHLIAN" name="MITRA_KEAHLIAN" aria-describedby="basic-addon1">
 
-                                            </div>
-                                        </div>*@
+                                        </div>
+                                    </div>
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Lokasi Penelitian</label>
                                         <div class="input-group">
@@ -344,32 +340,58 @@
                                         <label for="basic-addon1" class="form-label">Dokumen Lembar Pengesahan</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                            <input type="file" class="form-control" id="LEMBAR_PENGESAHAN" placeholder="Dokumen Lembar Pengesahan" aria-describedby="basic-addon1">
+                                            <input type="file" class="form-control" placeholder="Dokumen Lembar Pengesahan" aria-describedby="basic-addon1" id="LEMBAR_PENGESAHAN" name="LEMBAR_PENGESAHAN">
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <hr />
 
-                            <div class="btn">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+
+                            <button class="btn btn-outline-primary" onclick="getDataFromTable">Simpan</button>
+
+                            @*<div class="card-body">
+                                    <table id="datatable" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Aksi</th>
+                                                <th>Jenis Event</th>
+                                                <th>Judul Event</th>
+                                                <th>Tgl Event</th>
+                                                <th>Teknologi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
 
-                            </div>
-                            @*<div id="map">ciba</div>
-                            <div id="msg"></div>*@
+                                            <tr>
+                                                <td>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>*@
                         </form>
-
                     </div>
                 </div>
             </div>
+            @*<button onclick="getBukuTerpinjam('180709963')">Tes</button>*@
+
+
         </div>
 
 
     </div>
+
     @*<script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBITRIT4ptq1kGsIQKQM1wMejXkhZTQJGI&callback=initMap">
-    </script>*@
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBITRIT4ptq1kGsIQKQM1wMejXkhZTQJGI&callback=initMap">
+        </script>*@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBITRIT4ptq1kGsIQKQM1wMejXkhZTQJGI&sensor=false">
     </script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBITRIT4ptq1kGsIQKQM1wMejXkhZTQJGI&callback=initAutocomplete&libraries=places&v=weekly">
@@ -452,7 +474,7 @@
                 position: dakota,
                 peta: peta,
             });
-           
+
 
             // Update current position info.
             updateMarkerPosition(latLng);
@@ -483,6 +505,5 @@
     </script>
 
 </body>
-
 
 </html>

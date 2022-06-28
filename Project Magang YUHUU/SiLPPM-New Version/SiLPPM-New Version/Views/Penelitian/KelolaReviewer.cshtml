@@ -1,0 +1,353 @@
+﻿@{ ViewData["Title"] = "Kelola  Reviewer Penelitian "; }
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/@@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!-- Data Table-->
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">*@
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Karla', sans-serif;
+        }
+
+
+        [aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {
+            display: none;
+        }
+        .table thead th {
+            vertical-align: middle;
+            align-content: center;
+            text-align: center;
+        }
+
+        .label {
+            color: white;
+            border-radius: 5px;
+            border-spacing: 20px;
+            padding: 5px;
+            margin-top: 50px;
+            margin-bottom: 60px;
+        }
+        .modal-header {
+            border-radius: 41px;
+        }
+        .modal-dialog {
+            transform: scale(1.15);
+            transition: transform 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946), opacity 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+            border-radius:10px;
+        }
+        .penelitianDiajukan {
+            background-color: chocolate;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .propoPenelitian {
+            background-color: darkcyan;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .propoPengabdian {
+            background-color: darkcyan;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+        .btn:active {
+            background-color: #ffe7ab;
+            transform: translateY(4px);
+        }
+
+        .btn:hover {
+            background-color: #ffe7ab;
+        }
+
+        .style1 {
+            background-color: #fafafa;
+            border: 0;
+            box-shadow: 0 0 4px rgba(0,0,0,0.3);
+            transition: .3s box-shadow;
+            margin-bottom: 15px;
+            height: 40px;
+            width: 450px;
+        }
+
+        .style1:hover {
+            box-shadow: 0 0 4px rgba(0,0,0,0.5);
+        }
+
+        .content-wrapper {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 10px;
+            min-height: 402px !important;
+        }
+
+        .title-card {
+            color: #FFFFFF;
+            background-color: #F2AA4C;
+            padding: 15px;
+            border-radius: 10px 10px 0px 0px;
+            min-width: inherit;
+        }
+
+        .blue-color {
+            background-color: #1d84C6 !important;
+        }
+
+        .green-color {
+            background-color: #1CB394 !important;
+        }
+
+        .td, th {
+            vertical-align: middle;
+        }
+
+        .td, .style8 {
+            width: 170px;
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="px-3 mt-3">
+        <div class="content-wrapper p-3">
+
+            <div class="card-header">
+
+                <a href="#" class="brand-link" style="background-color:lightblue">
+                    <img src="~/images/profile-user.png" alt="Profile" class="brand-image img-circle elevation-3" style="opacity: .8">
+
+                    <span style="color:black">
+                        Kelola Reviewer Penelitian
+                    </span>
+
+                </a>
+            </div>
+            <a class="card-link" data-toggle="collapse" href="#menuone" aria-expanded="false" aria-controls="menuone" style="float:right; margin-right:40px">
+                <span class="collapsed"><i class="fa fa-plus"></i></span>
+                <span class="expanded"><i class="fa fa-minus"></i></span>
+            </a>
+            <div id="menuone" class="collapse">
+                <div class="card-body" style="margin-left:10px">
+                    <a href="KelolaReviewer" class="btn" style="background-color:sandybrown">Kelola Reviewer Penelitian</a>
+                    <a href="IndexReviewerPeneliti" class="btn" style="background-color:sandybrown">Reviewer Penelitian</a>
+                </div>
+            </div>
+            @if (TempData["succ"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color:green">
+                    <strong>@TempData["succ"].ToString()</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+            @if (TempData["err"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>@TempData["err"].ToString()</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+            <div style="width: 100%; overflow-x: auto;" class="col">
+                <div class="card-body">
+                    <table id="tblData" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>AKSI</th>
+                                <th>NAMA</th>
+                                <th>FAKULTAS</th>
+                                <th>PRODI</th>
+                                <th>JUDUL</th>
+                                <th>STATUS</th>
+                                <th>TAHUN AKADEMIK</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.data)
+                            {
+                                <tr>
+                                    <td>
+                                        <p style="font-weight:bold;color:royalblue; cursor:pointer" onclick="addDetailProposal(@item.ID_PROPOSAL)">Pilih</p>
+                                    </td>
+                                    <td> @item.NAMA</td>
+                                    <td>@item.FAK</td>
+                                    <td>@item.PRODI</td>
+                                    <td>@item.JUDUL</td>
+                                    <td>@item.DESKRIPSI</td>
+                                    <td>@item.TAHUN_AKADEMIK</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Dialog 1 -->
+    <div class="modal fade" id="DetailKelolaProposal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:antiquewhite">
+                    <h5 class="modal-title" style="color:black; font-family:'Trebuchet MS';font-display:swap; transition:cubic-bezier()"> <i class="fas fa-clipboard"></i>&nbsp; Detail Kelola Reviewer Penelitian</h5>
+                    @*<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>*@
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <hr style="border:dashed; border-color:aliceblue" />
+                <form class="formDetailKelolaReviewer" method="post" asp-action="addKelolaReviewer" asp-controller="KelolaPenelitian" enctype="multipart/form-data" novalidate>
+                    @Html.AntiForgeryToken()
+
+                    <div class="modal-body">
+                        <input type="hidden" class="form-control" id="id_proposal" name="id_proposal" value="" required>
+
+                        <div class="mb-4">
+                            <div class="form-group">
+                                <label>
+                                    Judul
+                                    <input id="judulProposal"  name="judulProposal" type="text" class="style1" style="margin-left:70px; word-wrap:break-word" disabled/>
+                                </label>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    Nama Dosen
+                                    <input type="text" id="namaDosen" name="namaDosen" class="style1" style="margin-left:15px" disabled/>
+                                </label>
+
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    Reviewer 1
+                                    <select class="style1" id="reviewer1" name="reviewer1" style="margin-left:30px" required>
+                                        <option hidden style="color:lightgrey; ">Pilih Reviewer 1</option>
+                                        @foreach (var item in Model.reviewer)
+                                        {
+                                            <option value="@item.NPP"> @item.NAMA_LENGKAP_GELAR</option>
+
+                                        }
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    Reviewer 2
+                                    <select class="style1" id="reviewer2" name="reviewer2" style="margin-left:30px"  required>
+                                        <option hidden style="color:lightgrey; ">Pilih Reviewer 2</option>
+                                        @foreach (var item in Model.reviewer)
+                                        {
+                                            <option value="@item.NPP"> @item.NAMA_LENGKAP_GELAR</option>
+
+                                        }
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="closeModal"  class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="btnAddKelolaReviewer" class="btn btn-primary" data-dismiss="modal"></button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Dialog 1 End-->
+
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });</script>
+
+
+    <script>
+        var id_proposal;
+        var tempIdProposal;
+        $('#tblData').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+
+        });
+
+        $('#DetailKelolaProposal').on('hidden.bs.modal', function () {
+            $('#DetailKelolaProposal').modal('hide');
+
+            var forms = document.getElementsByClassName('formDetailKelolaReviewer');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.classList.remove('was-validated');
+            });
+        });
+
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('formDetailKelolaReviewer');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+
+       
+        function addDetailProposal(id_proposal) {
+           
+            id_proposal = id_proposal;
+            this.tempIdProposal = id_proposal;
+            $('#DetailKelolaProposal').modal('show');
+
+            $('#btnAddKelolaReviewer').html('Tambah');
+            $('#id_proposal').val(id_proposal); //bisa masuk
+            $('#judulProposal').val(judulProposal);
+
+            $.ajax({
+                url: "/KelolaPenelitian/ajaxGetDetailKelolaReviewer?id_proposal="+id_proposal,
+                type: "POST",
+                data: { id_proposal: id_proposal },
+                dataType: "json",
+                success: function (result) {
+                    var data = result.data;
+                    
+                    $('#id_proposal').val();
+                    $('#npp').val(data.NPP);
+                    $('#namaDosen').val(data.NAMA);
+                    $('#judulProposal').val(data.JUDUL);
+     
+                }
+            })
+          
+        }
+      
+
+    </script>
+
+
+</body>
+</html>

@@ -22,7 +22,7 @@ namespace SiLPPM_New_Version.Controllers
             myprofile = new ProfileDAO();
             mydao = new PenelitianDAO();
         }
-        public IActionResult IndexDaftar()
+        public IActionResult adminListPengabdian()
         {
 
             var data = dao.GetListPengabdian();
@@ -31,8 +31,12 @@ namespace SiLPPM_New_Version.Controllers
 
             return View(myobj);
         }
-        public IActionResult IndexTambah()
+        public IActionResult HomePengabdian()
         {
+            var username = User.Claims
+                     .Where(c => c.Type == "username")
+                         .Select(c => c.Value).SingleOrDefault();
+
 
             var refjenis = mydao.GetRefSkim();
             var refjenis2 = mydao.GetRefTahunAka();
@@ -41,13 +45,24 @@ namespace SiLPPM_New_Version.Controllers
             var refjenis5 = mydao.GetRefJenis();
             var refjenis6 = mydao.GetRefTema();
             var refjenis7 = mydao.GetRefKategori();
+
+             var refpropo = mydao.GetDataPenelitian(username);
             myobj.refjenis = refjenis.data;
             myobj.refjenis2 = refjenis2.data;
             myobj.refjenis3 = refjenis3.data;
             myobj.refjenis4 = refjenis4.data;
             myobj.refjenis5 = refjenis5.data;
             myobj.refjenis6 = refjenis6.data;
+            myobj.refpropo = refpropo.data;
             myobj.refjenis7 = refjenis7.data;
+            return View(myobj);
+        }
+        public IActionResult DekanListReviewPengabdian()
+        {
+            return View(myobj);
+        }
+        public IActionResult adminPengabdian()
+        {
             return View(myobj);
         }
         public IActionResult IndexIdentitasPengusul()
@@ -92,6 +107,29 @@ namespace SiLPPM_New_Version.Controllers
         }
 
 
+        // INPUT DATA PENELITIAN
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddPengabdian(int ID_TAHUN_ANGGARAN, int NO_SEMESTER, int ID_KATEGORI, int ID_ROAD_MAP_PENELITIAN, int ID_SKIM, int ID_TEMA_UNIVERSITAS, int ID_STATUS_PENELITIAN, string JENIS, string JUDUL, string LOKASI,
+          string NPP, string AWAL, string AKHIR, string NPP_REVIEWER, string REVIEWER1, string REVIEWER2, string IS_SETUJU_LPPM, int BEBAN_SKS, string KEYWORD,
+           string OUTCOME, string LONGITUDE, string LATITUDE, string INSERT_DATE, string IP_ADDRESS, string USER_ID, string KETERANGAN_DANA_EKSTERNAL)
+        {
+
+            var cek = dao.AddPengabdian(ID_TAHUN_ANGGARAN, NO_SEMESTER, ID_KATEGORI, ID_ROAD_MAP_PENELITIAN, ID_SKIM, ID_TEMA_UNIVERSITAS, ID_STATUS_PENELITIAN, JENIS, JUDUL, LOKASI,
+            NPP, AWAL, AKHIR, NPP_REVIEWER, REVIEWER1, REVIEWER2, IS_SETUJU_LPPM, BEBAN_SKS, KEYWORD,
+            OUTCOME, LONGITUDE, LATITUDE, INSERT_DATE, IP_ADDRESS, USER_ID, KETERANGAN_DANA_EKSTERNAL);
+
+
+            if (cek.status)
+            {
+                TempData["succ"] = "Berhasil menambahkan data";
+            }
+            else
+            {
+                TempData["err"] = "Gagal menambahkan data" + cek.pesan;
+            }
+            return RedirectToAction("HomePengabdian", "Pengabdian");
+        }
 
     }
 }

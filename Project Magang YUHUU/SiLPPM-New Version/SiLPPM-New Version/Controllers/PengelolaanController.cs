@@ -18,7 +18,7 @@ namespace SiLPPM_New_Version.Controllers
             myobj = new ExpandoObject();
             dao = new PengelolaanDAO();
         }
-        public IActionResult IndexPengelolaan()
+        public IActionResult AdminKelolaUser()
         {
 
             var data = dao.GetPengelolaanRole();

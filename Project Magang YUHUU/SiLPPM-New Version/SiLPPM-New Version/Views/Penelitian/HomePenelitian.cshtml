@@ -1,0 +1,488 @@
+﻿@{ ViewData["Title"] = "Penelitian "; }
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="~/css/mapStyle.css" />
+    <script src="~/js/mapJavaScript.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/style2.css" />
+    <!-- Data Table-->
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">*@
+<style>
+      
+
+        body {
+            font-family: 'Karla', sans-serif;
+        }
+
+        .content-wrapper {
+            border-radius: 15px;
+            box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 10px;
+            min-height: 402px !important;
+        }
+
+        .radio-checkbox {
+            font-size: large;
+            letter-spacing: 1px;
+        }
+   
+
+        .title-card {
+            color: #FFFFFF;
+            background-color: #F2AA4C;
+            padding: 15px;
+            border-radius: 10px 10px 0px 0px;
+            min-width: inherit;
+        }
+
+    .btn:active {
+        background-color: #ffe7ab;
+        transform: translateY(4px);
+    }
+    .btn:hover {
+        background-color: #ffe7ab;
+    }
+
+        .td, th {
+            vertical-align: middle;
+        }
+</style>
+</head>
+<body>
+
+
+
+
+    <div class="px-3 mt-3">
+        <div class="content-wrapper p-3">
+
+            <div class="card-title">
+                <a href="HomePenelitian" class="btn" style="background-color:burlywood">Data Penelitian</a>
+                <a href="IndexTambahPeneliti" class="btn" style="background-color:burlywood">Identitas Peneliti</a>
+                <a href="IndexTambahCV" class="btn " style="background-color:burlywood">CV- Pengalaman Penelitian</a>
+                <a href="IndexTambahPublikasi" class="btn" style="background-color:burlywood">Publikasi</a>
+
+            </div> &nbsp;&nbsp;
+
+            <hr />
+            <h4 class="head-title">Tambah Penelitian</h4>
+
+            <hr />
+            @if (TempData["succ"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color:green">
+                    <strong><i class='fas fa-bell' style='font-size:22px; color:floralwhite'></i>&nbsp; @TempData["succ"].ToString()</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="color:white">&times;</span>
+                    </button>
+                </div>
+            }
+            @if (TempData["err"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><i class='fas fa-exclamation-triangle' style='font-size:22px; color:floralwhite'></i>&nbsp;@TempData["err"].ToString()</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="color:white">&times;</span>
+                    </button>
+                </div>
+            }
+
+
+            <div class="pb-3 mt-3">
+
+                <div>
+
+                    <div class="px-3 pb-2">
+                        <form method="post" asp-action="AddPenelitian" asp-controller="Penelitian" enctype="multipart/form-data">
+
+                            @Html.AntiForgeryToken()
+
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="mb-4" hidden>
+                                        <div class="input-group">
+                                            <input type="hidden" autocomplete="off" class="form-control" name="USER_ID" id="USER_ID" value="@Model.refpropo.USERNAME" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-4" hidden>
+                                        <div class="input-group">
+                                            <input type="hidden" autocomplete="off" class="form-control" name="username" id="username" value="@Model.refpropo.USERNAME" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-4" hidden>
+                                        <div class="input-group">
+                                            <input type="hidden" autocomplete="off" class="form-control" name="npp" id="npp" value="@Model.refpropo.NPP" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Skim Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px" id="ID_SKIM" name="ID_SKIM">
+                                                <option hidden style="color:lightgrey">Pilih Skim Penelitian</option>
+                                                @foreach (var item in Model.refjenis)
+                                                {
+                                                    <option value="@item.ID_SKIM"> @item.DESKRIPSI</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Tahun Akademik</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px" id="ID_TAHUN_AKADEMIK" name="ID_TAHUN_AKADEMIK">
+                                                <option hidden style="color:lightgrey">Pilih Tahun Akademik</option>
+                                                @foreach (var item in Model.refjenis2)
+                                                {
+                                                    <option value="@item.ID_TAHUN_AKADEMIK"> @item.TAHUN_AKADEMIK</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="basic-addon2" class="form-label">Semester Akademik </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon2"><i class="mdi mdi-pencil small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px" id="NO_SEMESTER" name="NO_SEMESTER">
+                                                <option hidden style="color:lightgrey">Pilih Semester Akademik</option>
+                                                @foreach (var item in Model.refjenis3)
+                                                {
+                                                    <option value="@item.NO_SEMESTER"> @item.SEMESTER_AKADEMIK</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 ">
+                                        <label for="basic-addon1" class="form-label">Output</label>
+
+                                        <div class="radio-checkbox" id="ID_OUTPUT">
+
+                                            @foreach (var item in Model.refjenis4)
+                                            {
+                                                <input type="checkbox" value="@item.ID_OUTPUT"> @item.DESKRIPSI
+
+                                            }
+                                        </div>
+
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Outcome</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon2"><i class="mdi mdi-pencil small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px" id="ID_OUTCOME" name="ID_OUTCOME">
+                                                <option hidden style="color:lightgrey">Pilih Outcome </option>
+                                                @foreach (var item in Model.refOutcome)
+                                                {
+                                                    <option value="@item.ID_OUTCOME"> @item.DESKRIPSI</option>
+
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Jarak dari Kampus UAJY</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <input type="text" class="form-control" id="JARAK_KAMPUS_KM" placeholder="Jarak dari Kampus UAJY" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Tanggal Mulai Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar small" aria-hidden="true"> </i></span>
+                                            <input type="date" class="form-control" placeholder="DD/MM/YYYY" id="AWAL" name="AWAL">
+
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Beban SKS</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <input type="text" class="form-control" placeholder="Beban SKS" id="BEBAN_SKS" name="BEBAN_SKS" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Dokumen Proposal/blind Proposal</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <input type="FILE" class="form-control" id="DOKUMEN" name="DOKUMEN" placeholder="Dokumen Proposal" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label for="basic-addon3" class="form-label">Judul Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-home small" aria-hidden="true"> </i></span>
+                                            <textarea id="JUDUL" name="JUDUL" placeholder="  Judul Penelitian" style="height: 200px; width: 710px;"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Kata Kunci(Inggris)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar-range small" aria-hidden="true"> </i></span>
+                                            <input type="text" class="form-control" id="KEYWORD" name="KEYWORD" placeholder="Kata Kunci" aria-label="Masa Berlaku" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Kategori Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px" id="ID_KATEGORI" name="ID_KATEGORI">
+                                                <option hidden style="color:lightgrey">Pilih Kategori Penelitian</option>
+                                                @foreach (var item in Model.refjenis7)
+                                                {
+                                                    <option value="@item.ID_KATEGORI"> @item.DESKRIPSI</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Tema Penelitian Universitas</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px" id="ID_TEMA_PENELITIAN" name="ID_TEMA_PENELITIAN">
+                                                <option hidden style="color:lightgrey">Pilih Tema Penelitian</option>
+                                                @foreach (var item in Model.refjenis6)
+                                                {
+                                                    <option value="@item.ID_TEMA_UNIVERSITAS"> @item.DESKRIPSI</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    @*<div class="mb-4">
+                                            <label for="basic-addon1" class="form-label">Topik Penelitian sesuai dengan rencana unit</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                                <input type="text" class="form-control" placeholder="Topik Penelitian" aria-label="Nomor Barcode" aria-describedby="basic-addon1" id="noBarcode" onchange="autofillTabel()">
+                                            </div>
+                                        </div>*@
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Jenis Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px" id="ID_JENIS_PENELITIAN" name="ID_JENIS_PENELITIAN">
+                                                <option hidden style="color:lightgrey">Pilih Jenis Penelitian</option>
+                                                @foreach (var item in Model.refjenis5)
+                                                {
+                                                    <option value="@item.ID_JENIS_PENELITIAN"> @item.JENIS_PENELITIAN</option>
+
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    @*<div class="mb-4">
+                                            <label for="basic-addon1" class="form-label">Lokasi Penelitian</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-magnify small" aria-hidden="true"> </i></span>
+                                                <input id="LOKASI"
+                                                       name="LOKASI"
+                                                       class="controls"
+                                                       type="text"
+                                                       placeholder="Search Box">
+                                                <div id="map"></div>
+                                                <script src="https://maps.googleapis.com/maps/api/js?AIzaSyAOPreDHEYqILNxTGIiSuaYMHSnLzVFlVc&callback=initAutocomplete&libraries=places&v=weekly" async="" defer="defer" type="text/javascript"></script>
+
+
+                                            </div>
+                                        </div>*@
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Lokasi Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-magnify small" aria-hidden="true"> </i></span>
+                                            @*<input type="text" class="form-control" placeholder="Nomor Barcode" aria-label="Nomor Barcode" aria-describedby="basic-addon1" id="noBarcode" onchange="autofillTabel()">*@
+                                            <input id="pac-input"
+                                                   class="controls"
+                                                   type="text"
+                                                   placeholder="Search Box">
+                                            <div id="map"></div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Peta Lokasi</label>
+                                        @*<div id="mapCanvas">
+                                                <div id="map"></div>
+                                            </div>*@
+                                        <div id="googleMap" style="width:100%;height:380px;"></div>
+                                        <div id="infoPanel">
+                                            <b>Marker status:</b>
+                                            <div id="markerStatus">
+                                                <i>Click and drag the marker.</i>
+                                            </div>
+                                            <b>Current position:</b>
+                                            <div id="info">
+                                            </div>
+                                            <b>Closest matching address:</b>
+                                            <div id="address"> </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Dokumen Lembar Pengesahan</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <input type="file" class="form-control" id="LEMBAR_PENGESAHAN" placeholder="Dokumen Lembar Pengesahan" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+
+                            <div class="btn">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                            </div>
+                            @*<div id="map">ciba</div>
+                            <div id="msg"></div>*@
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    @*<script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBITRIT4ptq1kGsIQKQM1wMejXkhZTQJGI&callback=initMap">
+    </script>*@
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBITRIT4ptq1kGsIQKQM1wMejXkhZTQJGI&sensor=false">
+    </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBITRIT4ptq1kGsIQKQM1wMejXkhZTQJGI&callback=initAutocomplete&libraries=places&v=weekly">
+    </script>
+
+    <script type="text/javascript">
+        //window.onload = initialize;
+        var geocoder = new google.maps.Geocoder();
+        //var map;
+        //function initMap() {
+        //    // The map, centered on Central Park
+        //    const center = { lat: 40.774102, lng: -73.971734 };
+        //    const options = { zoom: 15, scaleControl: true, center: center };
+        //    map = new google.maps.Map(
+        //        document.getElementById('map'), options);
+        //    // Locations of landmarks
+        //    const dakota = { lat: 40.7767644, lng: -73.9761399 };
+        //    const frick = { lat: 40.771209, lng: -73.9673991 };
+        //    // The markers for The Dakota and The Frick Collection
+        //    var mk1 = new google.maps.Marker({ position: dakota, map: map });
+        //    var mk2 = new google.maps.Marker({ position: frick, map: map });
+        //}
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(initialize);
+        } else {
+            alert("Geo Location is not supported on your current browser!");
+        }
+        function geocodePosition(pos) {
+            geocoder.geocode({
+                latLng: pos
+            }, function (responses) {
+                if (responses && responses.length > 0) {
+                    updateMarkerAddress(responses[0].formatted_address);
+                } else {
+                    updateMarkerAddress('Cannot determine address at this location.');
+                }
+            });
+        }
+
+        function updateMarkerStatus(str) {
+            document.getElementById('markerStatus').innerHTML = str;
+        }
+
+        function updateMarkerPosition(latLng) {
+            document.getElementById('info').innerHTML = [
+                latLng.lat(),
+                latLng.lng()
+            ].join(', ');
+
+        }
+        function updateLabelDalemWeb(latLing) {
+
+        }
+        function updateMarkerAddress(str) {
+            document.getElementById('address').innerHTML = str;
+        }
+
+        function initialize(position) {
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
+
+            var latLng = new google.maps.LatLng(lat, long);
+
+            var propertiPeta = {
+                center: latLng,
+                zoom: 9,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            const dakota = { lat: -7.780400, lng: 110.414100 };
+            var peta = new google.maps.Map(document.getElementById("googleMap"), propertiPeta);
+
+            //var marker = new google.maps.Marker({
+            //    position: dakota,
+            //    title: 'Point A',
+            //    peta: peta,
+            //    draggable: true
+            //});
+            const marker = new google.maps.Marker({
+                position: dakota,
+                peta: peta,
+            });
+           
+
+            // Update current position info.
+            updateMarkerPosition(latLng);
+            geocodePosition(latLng);
+
+            // Add dragging event listeners.
+            google.maps.event.addListener(marker, 'dragstart', function () {
+                updateMarkerAddress('Dragging...');
+            });
+
+            google.maps.event.addListener(marker, 'drag', function () {
+                updateMarkerStatus('Dragging...');
+                updateMarkerPosition(marker.getPosition());
+            });
+
+            google.maps.event.addListener(marker, 'dragend', function () {
+                updateMarkerStatus('Drag ended');
+                geocodePosition(marker.getPosition());
+            });
+            updateLabelDalemWeb(latLng);
+        }
+
+
+
+        // Onload handler to fire off the app.
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+</body>
+
+
+</html>
