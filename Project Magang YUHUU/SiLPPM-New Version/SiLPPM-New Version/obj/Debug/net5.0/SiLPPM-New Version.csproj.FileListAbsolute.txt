@@ -446,3 +446,13 @@ E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New V
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengabdian\HomePengabdian.cshtml.g.cs
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengelolaan\AdminKelolaUser.cshtml.g.cs
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Profile\Profile.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Home\IndexReviewer.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Home\IndexDosen.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Home\IndexKALPPM.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Home\IndexAdmin.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Home\IndexPustakawan.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\History\AdminDisplayHistory.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\History\AdminDisplayHistoryPengabdian.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Review\ListRevPenelitian.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Review\RevPenelitian.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengabdian\DekanApprovalProposalPengabdian.cshtml.g.cs

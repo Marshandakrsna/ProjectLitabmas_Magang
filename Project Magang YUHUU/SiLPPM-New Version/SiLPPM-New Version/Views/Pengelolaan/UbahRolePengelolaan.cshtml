@@ -87,7 +87,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="basic-addon1" class="form-label">NPP</label>
-                                    <input type="text" class="form-control" id="npp" name="npp" value="@Model.data.NPP" required>
+                                    <input type="text" class="form-control" id="npp" name="npp" value="@Model.data.NPP" >
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Nama</label>
                                         <div class="input-group">
@@ -101,7 +101,7 @@
                                         <label for="basic-addon1" class="form-label">Role</label>
                                         <div class="input-group">
 
-                                            <select name="id_role" id="id_role" style="width: 750px; height: 33px;">
+                                            <select name="id_role" id="id_role" style="width: 770px; height: 36px;">
                                                 @foreach (var item in Model.data2)
                                                 {
                                                     <option value="@item.ID_ROLE"> @item.DESKRIPSI</option>

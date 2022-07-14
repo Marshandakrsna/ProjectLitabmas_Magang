@@ -56,7 +56,7 @@ namespace SiLPPM_New_Version.Controllers
             ClaimsIdentity identity = null;
             bool isAuthenticated = false;
             var ul = dao.GetUser(username);
-            var IDUnit = Convert.ToString(ul.ID_UNIT);
+           
             string strrole = "";
             string strnamalengkap = "";
 
@@ -79,7 +79,6 @@ namespace SiLPPM_New_Version.Controllers
                                     new Claim(ClaimTypes.Role, strrole),
                                     new Claim("username", ul.username),
                                     new Claim("role", strrole),
-                                    new Claim("id_unit",IDUnit),
                                     new Claim("nama_lengkap", strnamalengkap),
                                 }, CookieAuthenticationDefaults.AuthenticationScheme);
                         foreach (var role in ul)
@@ -107,6 +106,7 @@ namespace SiLPPM_New_Version.Controllers
                 var principal = new ClaimsPrincipal(identity);
                 var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                 TempData["err_message"] = "Login berhasil, selamat datang di Si LPPM";
+
                 return RedirectToAction("Index", "Home");
             }
             else

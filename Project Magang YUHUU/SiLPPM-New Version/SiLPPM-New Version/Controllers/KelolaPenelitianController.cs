@@ -53,15 +53,17 @@ namespace SiLPPM_New_Version.Controllers
         public IActionResult addKelolaReviewer(int id_proposal, string reviewer1, string reviewer2)
         {
             var cek = dao.UpdateSetReviewer(id_proposal, reviewer1, reviewer2);
-            if (cek.status == true)
+            if (cek.status == true )
             {
                 TempData["succ"] = "Berhasil menambahkan data Reviewer ";
+
             }
             else
             {
                 TempData["err"] = "Gagal menambahkan data Reviewer, " + cek.pesan;
             }
-            return RedirectToAction("IndexPengelolaan");
+            return RedirectToAction("KelolaReviewer");
+
         }
     }
 }

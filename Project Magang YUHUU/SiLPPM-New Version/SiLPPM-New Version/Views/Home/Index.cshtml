@@ -1,9 +1,12 @@
 ﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Dashboard"; }
+    ViewData["Title"] = "Dashboard";
+    }
+
+@using SiLPPM_New_Version.DAO;
 
 @{ var role = User.Claims
-                       .Where(c => c.Type == "role")
-                           .Select(c => c.Value).SingleOrDefault();
+                            .Where(c => c.Type == "role")
+                                .Select(c => c.Value).SingleOrDefault();
 
     var nama = User.Claims
         .Where(c => c.Type == "nama_lengkap")
@@ -11,19 +14,24 @@
 
     var username = User.Claims
         .Where(c => c.Type == "username")
-            .Select(c => c.Value).SingleOrDefault(); }
+            .Select(c => c.Value).SingleOrDefault();
 
-
+        }
 <!DOCTYPE html>
 
 <html>
 <head>
-
+    <link rel="stylesheet" href="~/css/StyleSheet.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap"
+          rel="stylesheet">
+       <link rel = "icon" href = "./images/atma-logo.png" 
+        type = "image/x-icon">
     <link rel="stylesheet" href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css">
     <style>
         .icon-wrapper {
             width: 100%;
         }
+
 
         .judul {
             margin-top: 30px;
@@ -61,16 +69,7 @@
             min-height: fit-content !important;
         }
 
-        @*.content {
-            background-attachment: fixed;
-            background-position: 50%;
-            background-repeat: no-repeat;
-            background-size: cover;
-            min-height: 50vh;
-            background-image: url("./images/perpus-uajy.jpg");
-        }
-
-        *@
+     
 
         @@media(max-width: 600px) {
             .judul
@@ -112,7 +111,8 @@
 }
 
     <div class="px-3 content-wrapper bg-transparent">
-        <h1 class="judul" style="text-align:center; font-family:'Berlin Sans FB'">Selamat Datang @nama</h1>
+        <h1 class="judul" style="text-align:center; background-color:aliceblue; font-family:'Berlin Sans FB'">Selamat Datang @nama  </h1>
+
         <h5 class="sub-judul pr-4" style="text-align:center; font-family:'Comic Sans MS'">
             Sistem Informasi Lembaga Penelitian dan Pengabdian Masyarakat Universitas
             Atma Jaya Yogyakarta
@@ -121,85 +121,44 @@
             Sistem ini meliputi pelayanan akan kegiatan dosen berupa Penelitian dan
             Pengabdian.
         </h5>
-        <hr /><hr /><br />
-        <div class="container containerBeforeLogin">
-            <div class="row">
+        <br /><br />
+              <div class="row1-container">
+                  <div class="box cyan">
+                      <h2 style="font-size:25px"> Total Penelitian</h2>
+                      @foreach (var item in Model.count)
+                      {
+                          <p>@item.JUMLAH</p>
+                      }
 
+                      <img src="https://assets.codepen.io/2301174/icon-supervisor.svg" alt="">
+                  </div>
 
-                <div class="col-12">
-                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                  <div class="box red">
+                      <h2 style="font-size:25px">Total Penelitian Selesai</h2>
+                      @foreach (var item in Model.countSelesai)
+                      {
+                          <p>@item.JUMLAH</p>
+                      }
+                      <img src="https://assets.codepen.io/2301174/icon-team-builder.svg" alt="">
+                  </div>
 
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card cardBefore" style="background-color:steelblue;">
-                                            <img alt="100x280" src="~/images/uajy1.png" style="width:100%" height="280px">
-                                            <div class="card-body">
-                                                <h4 class="card-title">Kampus 1 UAJY</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card cardBefore" style="background-color:darkorange;">
-                                            <img alt="100x280" src="~/images/uajy2.jpg" style="width:100%" height="280px">
-                                            <div class="card-body">
-                                                <h4 class="card-title" style="text-align:center">Kampus 2 UAJY</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card cardBefore" style="background-color:steelblue;">
-                                            <img alt="200x280" src="~/images/uajy3.jpeg" style="width:100%" height="280px">
-                                            <div class="card-body" style="text-align:center;font-weight:bold">
-                                                <h4 class="card-title" style="text-align:center">Kampus 3 UAJY</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card cardBefore" style="background-color:darkorange;">
-                                            <img alt="100%x280" src="~/images/uajy4.jpg" style="width:100%" height="280px">
-                                            <div class="card-body">
-                                                <h4 class="card-title" style="text-align:center">Kampus 4 UAJY</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card cardBefore" style="background-color:steelblue;">
-                                            <img alt="100%x280" src="~/images/uajyperpus.jpg" style="width:100%" height="280px">
-                                            <div class="card-body">
-                                                <h4 class="card-title" style="text-align:center">Perpustakaan UAJY</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card cardBefore" style="background-color:darkorange;">
-                                            <img alt="100%x280" src="~/images/uajystudent.jpg" style="width:100%" height="280px">
-                                            <div class="card-body">
-                                                <h4 class="card-title" style="text-align:center">Student Center UAJY</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 text-right">
-                    <a class="btn btn-info mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
-                        <i class="fa fa-arrow-left"></i>
-                    </a>
-                    <a class="btn btn-info mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
+                  <div class="box blue">
+                      <h2 style="font-size:25px">Total Pengabdian</h2>
+                      @foreach (var item in Model.countPengabdian)
+                      {
+                          <p>@item.JUMLAH</p>}
+                      <img src="https://assets.codepen.io/2301174/icon-calculator.svg" alt="">
+                  </div>
+                  <div class="box orange">
+                      <h2 style="font-size:25px">Total Penelitian Menunggu Review</h2>
+                      @foreach (var item in Model.countMenungguReview)
+                      {
+                          <p>@item.JUMLAH</p>}
+                      <img src="https://assets.codepen.io/2301174/icon-karma.svg" alt="">
+                  </div>
+              </div>
+     
 
-            </div>
-        </div>
     </div>
 </body>
 </html>

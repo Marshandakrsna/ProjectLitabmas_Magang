@@ -6,6 +6,8 @@ using System.Dynamic;
 using SiLPPM_New_Version.DAO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace SiLPPM_New_Version.Controllers
 {
@@ -44,11 +46,16 @@ namespace SiLPPM_New_Version.Controllers
             var refjenis4 = mydao.GetRefOutput();
             var refjenis5 = mydao.GetRefJenis();
             var refjenis6 = mydao.GetRefTema();
+            var refOutcome = mydao.GetOutcome();
+
             var refjenis7 = mydao.GetRefKategori();
 
              var refpropo = mydao.GetDataPenelitian(username);
+            var cekUser = mydao.GetUserByUsername(username);
             myobj.refjenis = refjenis.data;
             myobj.refjenis2 = refjenis2.data;
+            myobj.cekUser = cekUser.data;
+            myobj.refOutcome = refOutcome.data;
             myobj.refjenis3 = refjenis3.data;
             myobj.refjenis4 = refjenis4.data;
             myobj.refjenis5 = refjenis5.data;
@@ -59,10 +66,47 @@ namespace SiLPPM_New_Version.Controllers
         }
         public IActionResult DekanListReviewPengabdian()
         {
+            var pengesahan = dao.GetListPengesahanPengabdian();
+            myobj.pengesahan = pengesahan.data;
+            return View(myobj);
+        }
+        public IActionResult DekanApprovalProposalPengabdian(string id_proposal)
+        {
+            var data = dao.GetApprovalPengabdian(id_proposal);
+            var nama = dao.GetNamaDosenByIDProposalPengabdian(id_proposal);
+            var topikPenelitian = dao.GetTopikByIDProposalPengabdian(id_proposal);
+            myobj.data = data.data;
+            myobj.topikPenelitian = topikPenelitian.data;
+            myobj.nama = nama.data;
+
             return View(myobj);
         }
         public IActionResult adminPengabdian()
         {
+            var username = User.Claims
+                  .Where(c => c.Type == "username")
+                      .Select(c => c.Value).SingleOrDefault();
+
+
+            var refjenis = mydao.GetRefSkim();
+            var refjenis2 = mydao.GetRefTahunAka();
+            var refjenis3 = mydao.GetRefSemester();
+            var refjenis4 = mydao.GetRefOutput();
+            var refjenis5 = mydao.GetRefJenis();
+            var refjenis6 = mydao.GetRefTema();
+            var refjenis7 = mydao.GetRefKategori();
+            var refOutcome = mydao.GetOutcome();
+
+            var refpropo = mydao.GetDataPenelitian(username);
+            myobj.refjenis = refjenis.data;
+            myobj.refjenis2 = refjenis2.data;
+            myobj.refjenis3 = refjenis3.data;
+            myobj.refOutcome = refOutcome.data;
+            myobj.refjenis4 = refjenis4.data;
+            myobj.refjenis5 = refjenis5.data;
+            myobj.refjenis6 = refjenis6.data;
+            myobj.refpropo = refpropo.data;
+            myobj.refjenis7 = refjenis7.data;
             return View(myobj);
         }
         public IActionResult IndexIdentitasPengusul()
@@ -105,19 +149,32 @@ namespace SiLPPM_New_Version.Controllers
             myobj.refpropo2 = refpropo2.data;
             return View(myobj);
         }
+        public byte[] _getByteArrayFromDokumenPengabdian(IFormFile DOKUMEN)
+        {
+            using (var target = new MemoryStream())
+            {
+                DOKUMEN.CopyTo(target);
+                var cek = target.ToArray();
+                return cek;
+            }
+        }
 
-
-        // INPUT DATA PENELITIAN
+        // INPUT DATA PENELITIAN PADA HOME PENGABDIAN
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddPengabdian(int ID_TAHUN_ANGGARAN, int NO_SEMESTER, int ID_KATEGORI, int ID_ROAD_MAP_PENELITIAN, int ID_SKIM, int ID_TEMA_UNIVERSITAS, int ID_STATUS_PENELITIAN, string JENIS, string JUDUL, string LOKASI,
-          string NPP, string AWAL, string AKHIR, string NPP_REVIEWER, string REVIEWER1, string REVIEWER2, string IS_SETUJU_LPPM, int BEBAN_SKS, string KEYWORD,
-           string OUTCOME, string LONGITUDE, string LATITUDE, string INSERT_DATE, string IP_ADDRESS, string USER_ID, string KETERANGAN_DANA_EKSTERNAL)
+        public IActionResult AddPengabdian(int ID_TAHUN_ANGGARAN, string REVIEWER1, string REVIEWER2, string JUDUL_KEGIATAN, string LANDASAN_PENELITIAN, string JENIS_PENGABDIAN, string ANGGOTA1,
+             string ANGGOTA2, string MITRA, string MITRA_KEAHLIAN, string LOKASI, int JARAK_PT_LOKASI, string OUTPUT, string OUTCOME, int ID_ROAD_MAP, string AWAL, string AKHIR, string SASARAN,
+             int SKS_KETUA, int SKS_ANGGOTA,string NPP,  float DANA_EKSTERNAL, float DANA_KERJASAMA, float DANA_UAJY, float DANA_PRIBADI,
+            IFormFile dokumenPengabdian, string INSERT_DATE, string IP_ADDRESS, string USER_ID, int ID_SKIM, int ID_TEMA_UNIVERSITAS, int NO_SEMESTER)
         {
+            var propo = dao._getByteArrayFromDokumenPengabdian(dokumenPengabdian);
+  
 
-            var cek = dao.AddPengabdian(ID_TAHUN_ANGGARAN, NO_SEMESTER, ID_KATEGORI, ID_ROAD_MAP_PENELITIAN, ID_SKIM, ID_TEMA_UNIVERSITAS, ID_STATUS_PENELITIAN, JENIS, JUDUL, LOKASI,
-            NPP, AWAL, AKHIR, NPP_REVIEWER, REVIEWER1, REVIEWER2, IS_SETUJU_LPPM, BEBAN_SKS, KEYWORD,
-            OUTCOME, LONGITUDE, LATITUDE, INSERT_DATE, IP_ADDRESS, USER_ID, KETERANGAN_DANA_EKSTERNAL);
+
+            var cek = dao.AddPengabdian(ID_TAHUN_ANGGARAN, REVIEWER1, REVIEWER2, JUDUL_KEGIATAN, LANDASAN_PENELITIAN, JENIS_PENGABDIAN, ANGGOTA1,
+              ANGGOTA2, MITRA, MITRA_KEAHLIAN, LOKASI, JARAK_PT_LOKASI, OUTPUT, OUTCOME, ID_ROAD_MAP, AWAL, AKHIR, SASARAN,
+              SKS_KETUA, SKS_ANGGOTA, NPP,  DANA_EKSTERNAL, DANA_KERJASAMA, DANA_UAJY, DANA_PRIBADI,
+              propo, INSERT_DATE, IP_ADDRESS, USER_ID, ID_SKIM, ID_TEMA_UNIVERSITAS, NO_SEMESTER);
 
 
             if (cek.status)
@@ -126,9 +183,38 @@ namespace SiLPPM_New_Version.Controllers
             }
             else
             {
-                TempData["err"] = "Gagal menambahkan data" + cek.pesan;
+                TempData["err"] = "Gagal menambahkan data " + cek.pesan;
             }
             return RedirectToAction("HomePengabdian", "Pengabdian");
+        }
+
+        // untuk halaman Tambah pengabdian (ADMIN)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddPengabdianAdmin(int ID_TAHUN_ANGGARAN, string REVIEWER1, string REVIEWER2, string JUDUL_KEGIATAN, string LANDASAN_PENELITIAN, string JENIS_PENGABDIAN, string ANGGOTA1,
+          string ANGGOTA2, string MITRA, string MITRA_KEAHLIAN, string LOKASI, int JARAK_PT_LOKASI, string OUTPUT, string OUTCOME, int ID_ROAD_MAP, string AWAL, string AKHIR, string SASARAN,
+          int SKS_KETUA, int SKS_ANGGOTA, string NPP, float DANA_EKSTERNAL, float DANA_KERJASAMA, float DANA_UAJY, float DANA_PRIBADI,
+         IFormFile dokumenPengabdian, string INSERT_DATE, string IP_ADDRESS, string USER_ID, int ID_SKIM, int ID_TEMA_UNIVERSITAS, int NO_SEMESTER)
+        {
+            var propo = dao._getByteArrayFromDokumenPengabdian(dokumenPengabdian);
+
+
+
+            var cek = dao.AddPengabdian(ID_TAHUN_ANGGARAN, REVIEWER1, REVIEWER2, JUDUL_KEGIATAN, LANDASAN_PENELITIAN, JENIS_PENGABDIAN, ANGGOTA1,
+              ANGGOTA2, MITRA, MITRA_KEAHLIAN, LOKASI, JARAK_PT_LOKASI, OUTPUT, OUTCOME, ID_ROAD_MAP, AWAL, AKHIR, SASARAN,
+              SKS_KETUA, SKS_ANGGOTA, NPP, DANA_EKSTERNAL, DANA_KERJASAMA, DANA_UAJY, DANA_PRIBADI,
+              propo, INSERT_DATE, IP_ADDRESS, USER_ID, ID_SKIM, ID_TEMA_UNIVERSITAS, NO_SEMESTER);
+
+
+            if (cek.status)
+            {
+                TempData["succ"] = "Berhasil menambahkan data";
+            }
+            else
+            {
+                TempData["err"] = "Gagal menambahkan data " + cek.pesan;
+            }
+            return RedirectToAction("adminPengabdian", "Pengabdian");
         }
 
     }

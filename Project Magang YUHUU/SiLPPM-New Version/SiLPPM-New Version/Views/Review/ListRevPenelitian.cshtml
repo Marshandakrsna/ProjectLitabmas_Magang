@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewData["Title"] = "List Review Penelitian";
+}
+
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/@@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!-- Data Table-->
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">*@
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Karla', sans-serif;
+        }
+
+
+        [aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {
+            display: none;
+        }
+
+        .table thead th {
+            vertical-align: middle;
+            align-content: center;
+            text-align: center;
+        }
+
+        .label {
+            color: white;
+            border-radius: 5px;
+            border-spacing: 20px;
+            padding: 5px;
+            margin-top: 50px;
+            margin-bottom: 60px;
+        }
+
+
+
+        .btn:active {
+            background-color: indianred;
+            transform: translateY(4px);
+        }
+
+        .btn:hover {
+            background-color: indianred;
+        }
+
+        .content-wrapper {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            background-color: white;
+            border-radius: 10px;
+            min-height: 402px !important;
+        }
+
+        .title-card {
+            color: #FFFFFF;
+            background-color: #F2AA4C;
+            padding: 15px;
+            border-radius: 10px 10px 0px 0px;
+            min-width: inherit;
+        }
+
+        a:hover, a:active {
+            color: white;
+        }
+
+
+        .td, th {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="px-3 mt-3">
+        <div class="content-wrapper p-3" style=" background-color: white;">
+
+            <h5 class="card-header font-weight-bold bg-light"><span class="text-black">History Penelitian</span></h5>
+
+
+            <div style="width: 100%; overflow-x: auto;" class="col">
+                <div class="card-body">
+                    <table id="tblDataHistoryPenelitian" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>AKSI</th>
+                                <th>ID PROPOSAL</th>
+                              
+                                <th>JUDUL</th>
+                                <th>STATUS</th>
+                           
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.listReview)
+                            {
+                                <tr>
+                                    <td>
+                                        <p  style=" font-weight: bold; background-color: coral; border-radius: 33px; margin-left: 10px; width: 82px; vertical-align: middle; text-align-last: center; padding: 5px; cursor: pointer;" class=" btn text-center"><i class="fas fa-comment-dots">&nbsp;<a style="color:black; " href="RevPenelitian?id_proposal=@item.id_proposal">Pilih</a></i></p>
+                                    </td>
+                                    <td> @item.id_proposal</td>
+                                 
+                                    <td>@item.Judul</td>
+                                    <td>@item.DESKRIPSI</td>
+                                
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+
+    @section Scripts{
+
+        <script>
+            var tblDataDaftarPengabdian;
+            refreshTabelDaftarPengabdian();
+
+            function refreshTabelDaftarPengabdian() {
+                tblDataDaftarPengabdian = $("#tblDataHistoryPenelitian").DataTable({
+
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                }).buttons().container().appendTo('#tblDataHistoryPenelitian_wrapper .col-md-6:eq(0)');
+            }
+
+
+        </script>
+    }
+</body>
+</html>

@@ -126,19 +126,120 @@
                     <tbody>
 
 
-                        @foreach (var item in Model.kriteria)
-                        {
-                            <tr class="text-center align-middle">
-                                <td> @item.KRITERIA</td>
-                                <td> @item.BOBOT</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        }
+                        @*@foreach (var item in Model.kriteria)
+        {
+            <tr class="text-center align-middle">
+                <td> @item.KRITERIA</td>
+                <td> @item.BOBOT</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+        }*@
+                        <tr class="text-center align-middle">
+                            <td> Relevansi usulan penelitian terhadap bidang fokus, tema, dan topik dengan tema penelitian Universitas dan Unit</td>
+                            <td>7.5</td>
+                            <td id="N1_FIELD1">0</td>
+                            <td id="nilai">0</td>
+                            <td>
+                                <select id="N1_JUSTIFIKASI1" name="N1_JUSTIFIKASI1" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
+                                    <option value="0">Tidak relevan/topik lainnya</option>
+                                    <option value="3">Relevan</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="text-center align-middle">
+                            <td> Kualitas dan relevansi tujuan, permasalahan, state of the art, metode, dan kebaruan penelitian</td>
+                            <td>37.5</td>
+                            <td id="N1_FIELD2">0</td>
+                            <td id="nilai2">0</td>
+                            <td>
+                                <select id="N1_JUSTIFIKASI2" name="N1_JUSTIFIKASI2" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
+                                    <option value="0">Tidak ada</option>
+                                    <option value="5">Kurang Signifikan</option>
+                                    <option value="10">Cukup Signifikan</option>
+                                    <option value="15">Sangat Signifikan</option>
+
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="text-center align-middle">
+                            <td> Keterkaitan usulan penelitian terhadap hasil penelitian yang didapat sebelumnya dan rencana kedepan (roadmap penelitian)</td>
+                            <td>12.5</td>
+                            <td id="N1_FIELD3">0</td>
+                            <td id="nilai3">0</td>
+                            <td>
+                                <select id="N1_JUSTIFIKASI3" name="N1_JUSTIFIKASI3" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
+                                    <option value="0">Tidak ada roadmap</option>
+                                    <option value="2"> Ada roadmap, keterkaitan milestone dan usulan penelitian tidak jelas </option>
+                                    <option value="6"> Ada roadmap, keterkaitan milestone dan usulan penelitian jelas</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="text-center align-middle">
+                            <td> Kesesuaian kompetensi tim peneliti dan pembagian tugas</td>
+                            <td>7.5</td>
+                            <td id="N1_FIELD4">0</td>
+                            <td id="nilai4">0</td>
+                            <td>
+                                <select id="N1_JUSTIFIKASI4" name="N1_JUSTIFIKASI4" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
+                                    <option value="1">Tidak kompeten, tugas tidak jelas</option>
+                                    <option value="2">Cukup kompeten, tugas cukup jelas </option>
+                                    <option value="3"> Sangat kompeten, tugas sangat jelas</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="text-center align-middle">
+                            <td> Kewajaran metode tahapan target capaian luaran wajib penelitian</td>
+                            <td>12.5</td>
+                            <td id="N1_FIELD5">0</td>
+                            <td id="nilai5">0</td>
+                            <td>
+                                <select id="N1_JUSTIFIKASI5" name="N1_JUSTIFIKASI5" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
+                                    <option value="1">Tidak jelas</option>
+                                    <option value="3"> Kurang jelas </option>
+                                    <option value="5"> Sangat jelas</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr class="text-center align-middle">
+                            <td> Kekinian dan sumber primer pengacuan pustaka</td>
+                            <td>12.5</td>
+                            <td id="N1_FIELD6">0</td>
+                            <td id="nilai6">0</td>
+                            <td>
+                                <select id="N1_JUSTIFIKASI6" name="N1_JUSTIFIKASI6" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
+                                    <option value="0">Tidak ada rujukan primer</option>
+                                    <option value="1"> Rujukan primer dan mutakhir 1-50%</option>
+                                    <option value="3"> Rujukan primer dan mutakhir 51-80%</option>
+                                    <option value="5"> Rujukan primer dan mutakhir >80%</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="text-center align-middle">
+                            <td> Penulisan usulan sesuai panduan (jumlah kata per bagian, isi dokumen pendukung)</td>
+                            <td>10</td>
+                            <td id="N1_FIELD7">0</td>
+                            <td id="nilai7">0</td>
+                            <td>
+                                <select id="N1_JUSTIFIKASI7" name="N1_JUSTIFIKASI7" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
+                                    <option value="0">Tidak</option>
+                                    <option value="4"> Ya </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align:center; vertical-align:central; color:darkred; font-weight:bolder">TOTAL</td>
+                            <td id="jumlahTotal">0</td>
+                            <td></td>
+                        </tr>
 
                     </tbody>
                 </table>
+                <hr />
+                <button type="submit" class="btn btn-danger">Simpan</button>
             </div>
         </div>
     </div>
@@ -147,7 +248,92 @@
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl)
-            });</script>
+            });
+       function displayValue() {
+            /* Untuk Value 1 --> Relevansi usulan penelitian.. */
+            var value1 = document.getElementById("N1_JUSTIFIKASI1").value;
+                skorValue1 = parseInt(value1) * 20;
+                nilaiValue1 = 7.5 * skorValue1;
+                document.getElementById("N1_FIELD1").innerHTML = skorValue1;
+                temp1 = document.getElementById("nilai").innerHTML = nilaiValue1;
+            /* Untuk Value 2 --> Kualitas dan relevansi tujuan.. */
+            var value2 = document.getElementById("N1_JUSTIFIKASI2").value;
+                skorValue2 = parseInt(value2) * 10;
+                nilaiValue2 = 37.5 * skorValue2;
+                document.getElementById("N1_FIELD2").innerHTML = skorValue2;
+                temp2 = document.getElementById("nilai2").innerHTML = nilaiValue2;
+            /* Untuk Value 3 --> Keterkaitan usulan penelitian.. */
+            var value3 = document.getElementById("N1_JUSTIFIKASI3").value;
+                skorValue3 = parseInt(value3) * 10;
+                nilaiValue3 = 12.5 * skorValue3;
+                document.getElementById("N1_FIELD3").innerHTML = skorValue3;
+                temp3 = document.getElementById("nilai3").innerHTML = parseInt(nilaiValue3);
+            /* Untuk Value 4 --> Kesesuaian kompetensi tim peneliti.. */
+            var value4 = document.getElementById("N1_JUSTIFIKASI4").value;
+                skorValue4 = parseInt(value4) * 10;
+                nilaiValue4 = 7.5 * skorValue4;
+                document.getElementById("N1_FIELD4").innerHTML = skorValue4;
+                temp4 = document.getElementById("nilai4").innerHTML = parseInt(nilaiValue4);
+            /* Untuk Value 5 --> Kewajaran metode tahapan target.. */
+            var value5 = document.getElementById("N1_JUSTIFIKASI5").value;
+                skorValue5 = parseInt(value5) * 20;
+                nilaiValue5 = 12.5 * skorValue5;
+                document.getElementById("N1_FIELD5").innerHTML = skorValue5;
+                temp5 = document.getElementById("nilai5").innerHTML = parseInt(nilaiValue5);
+            /* Untuk Value 6 --> Kekinian dan sumber primer.. */
+            var value6 = document.getElementById("N1_JUSTIFIKASI6").value;
+                skorValue6 = parseInt(value6) * 10;
+                nilaiValue6 = 12.5 * skorValue6;
+                document.getElementById("N1_FIELD6").innerHTML = skorValue6;
+                temp6 = document.getElementById("nilai6").innerHTML = parseInt(nilaiValue6);
+            /* Untuk Value 7 --> Penulisan usulan sesuai panduan.. */
+            var value7 = document.getElementById("N1_JUSTIFIKASI7").value;
+                skorValue7 = parseInt(value7) * 20;
+                nilaiValue7 = 10 * skorValue7;
+                document.getElementById("N1_FIELD7").innerHTML = skorValue7;
+                temp7 = document.getElementById("nilai7").innerHTML = parseInt(nilaiValue7);
+
+            document.getElementById("jumlahTotal").innerHTML = temp1 + temp2 + temp3 + temp4 + temp5 + temp6 + temp7;
+            var x = document.getElementById("jumlahTotal").innerHTML;
+            if (x > 500) {
+                alert("LEBIH DARI 10!");
+            } else {
+                console.log("no")
+            }
+            console.log(x);
+
+        }
+        //function value2() {
+           
+        //}
+        //function value3() {
+           
+        //}
+        //function value4() {
+          
+        //}
+        //function value5() {
+         
+        //}
+        //function value6() {
+            
+        //}
+        //function value7() {
+         
+        //}
+        //function totalSkor() {
+        //    var temp1 = document.getElementById("skor1").value;
+        //    var temp2 = document.getElementById("skor2").value;
+        //    var temp3 = document.getElementById("skor3").value;
+        //    var temp4 = document.getElementById("skor4").value;
+        //    var temp5 = document.getElementById("skor5").value;
+        //    var temp6 = document.getElementById("skor6").value;
+        //    var temp7 = document.getElementById("skor7").value;
+
+         
+        //}
+
+    </script>
 
 
 

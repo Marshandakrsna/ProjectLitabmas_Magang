@@ -256,7 +256,7 @@ namespace SiLPPM_New_Version.Controllers
             var cek = dao.AddAnggotaUAJY(id_proposal,npp);
             if (cek.status)
             {
-                TempData["succ"] = id_proposal.ToString();
+                TempData["succ"] = "Berhasil menambahkan data";
             }
             else
             {

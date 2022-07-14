@@ -1,0 +1,281 @@
+﻿@{ ViewData["Title"] = "Profile "; }
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/@@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+
+
+    <!-- Data Table-->
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">*@
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Karla', sans-serif;
+        }
+
+        .label {
+            color: white;
+            border-radius: 5px;
+            border-spacing: 20px;
+            padding: 5px;
+            margin-top: 50px;
+            margin-bottom: 60px;
+        }
+
+        .penelitianDiajukan {
+            background-color: chocolate;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .propoPenelitian {
+            background-color: darkcyan;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .propoPengabdian {
+            background-color: darkcyan;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .content-wrapper {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 10px;
+            min-height: 402px !important;
+            background-color: #ffffff;
+            background-repeat: no-repeat;
+            background-position: right top;
+        }
+
+        .title-card {
+            color: #FFFFFF;
+            background-color: #F2AA4C;
+            padding: 15px;
+            border-radius: 10px 10px 0px 0px;
+            min-width: inherit;
+        }
+
+        .blue-color {
+            background-color: #1d84C6 !important;
+        }
+
+        .green-color {
+            background-color: #1CB394 !important;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="px-3 mt-3">
+        <div class="content-wrapper p-3">
+            <div class="card-header">
+                <a href="#" class="brand-link" style="background-color:azure">
+                    <img src="~/images/approved.png" class="brand-image" style="opacity: .8">
+                    <span style="color:black; font-weight:bold">PENGESAHAN PROPOSAL PENGABDIAN MASYARAKAT</span>
+                </a>
+            </div>
+
+            <div style="width: 100%; overflow-x: auto;" class="col">
+                <br />
+                <table class="table table-striped table-bordered table-hover dt-responsive nowrap">
+                    <thead>
+                        <tr>
+
+                            <td class="style8">
+                                ID PROPOSAL
+                            </td>
+                            <td>
+                                @Model.data.ID_PROPOSAL
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td class="style8">
+                                Periode Penelitian
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Judul Kegiatan Pengabdian
+                            </td>
+                            <td>
+                                @Model.data.JUDUL_KEGIATAN
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Judul Penelitian yang digunakan sebagai landasan
+                            </td>
+                            <td>
+                                @Model.data.LANDASAN_PENELITIAN
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Jenis Pengabdian
+                            </td>
+                            <td>
+                                @Model.data.JENIS_PENGABDIAN 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Dosen Pengusul
+                            </td>
+                            <td>
+                                @Model.nama.NAMA
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Anggota 1
+                            </td>
+                            <td>
+                                @Model.data.ANGGOTA1
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Anggota 2
+                            </td>
+                            <td>
+                                @Model.data.ANGGOTA2
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Mitra Kerjasama/Mitra Sasaran
+                            </td>
+                            <td>
+                                @Model.data.MITRA
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Lokasi
+                            </td>
+                            <td>
+                                @Model.data.LOKASI
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Jarak PT ke Lokasi kegiatan
+                            </td>
+                            <td>
+                                @Model.data.JARAK_PT_LOKASI
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Luaran(Output) yang dihasilkan
+                            </td>
+                            <td>
+                                @Model.data.OUTPUT
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Outcome
+                            </td>
+                            <td>
+                                @Model.data.OUTCOME
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Jangka Waktu dan Durasi Pelaksanaan Kegiatan
+                            </td>
+                            <td>
+                                @Model.data.AWAL / @Model.data.AKHIR
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Sasaran
+                            </td>
+                            <td>
+                                @Model.data.SASARAN
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Topik Penelitian sesuai rencana unit
+                            </td>
+                            <td>
+                              
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Dana yang diusulkan
+                            </td>
+                            <td>
+                                @Model.data.DANA_UAJY (DANA UAJY) || @Model.data.DANA_PRIBADI (DANA PRIBADI)
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="style8">
+                                Dokumen
+                            </td>
+                            <td>
+                                <a href=""> Unduh Dokumen</a>
+                            </td>
+
+                        </tr>
+
+
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i>&nbsp; Setujui Proposal</button>
+                <button type="submit" class="btn btn-danger"><i class="fa fa-close"></i>&times; Revisi/Tolak</button>
+
+            </div>
+        </div>
+    </div>
+    <script>
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });</script>
+
+</body>
+</html>

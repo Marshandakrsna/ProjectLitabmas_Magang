@@ -1,0 +1,158 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Dashboard Dosen"; }
+
+@{ var role = User.Claims
+                         .Where(c => c.Type == "role")
+                             .Select(c => c.Value).SingleOrDefault();
+
+    var nama = User.Claims
+        .Where(c => c.Type == "nama_lengkap")
+            .Select(c => c.Value).SingleOrDefault();
+
+    var username = User.Claims
+        .Where(c => c.Type == "username")
+            .Select(c => c.Value).SingleOrDefault(); }
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheet.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <style>
+        .icon-wrapper {
+            width: 100%;
+        }
+
+
+        .judul {
+            margin-top: 30px;
+            margin-left: 16px;
+        }
+
+        .sub-judul {
+            margin-left: 16px;
+            font-size: 12pt;
+            text-align: justify;
+        }
+
+        .card-content-1 {
+            background-color: #FFBE69;
+            border-radius: 15px;
+            border-color: transparent;
+            max-width: 30% !important;
+        }
+
+        .card-content-2 {
+            background-color: #4BB7F2;
+            border-radius: 15px;
+            border-color: transparent;
+            max-width: 30% !important;
+        }
+
+        .card-content-3 {
+            background-color: #63F287;
+            border-radius: 15px;
+            border-color: transparent;
+            max-width: 30% !important;
+        }
+
+        .content-wrapper {
+            min-height: fit-content !important;
+        }
+
+        @*.content {
+            background-attachment: fixed;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 50vh;
+            background-image: url("./images/perpus-uajy.jpg");
+        }
+
+        *@
+
+        @@media(max-width: 600px) {
+            .judul
+
+        {
+            font-size: 18pt;
+        }
+
+        .sub-judul {
+            font-size: 10pt;
+        }
+
+        .card-content-1 {
+            margin-top: 30px;
+        }
+
+        .card-content-2 {
+            margin-top: 30px;
+        }
+
+        .card-content-3 {
+            margin-top: 30px;
+        }
+        }
+    </style>
+</head>
+<body>
+    @if (TempData["err_message"] != null)
+    {
+<script>
+        @* alert("@TempData["err_message"].ToString()");*@
+        Swal.fire({
+            title: 'Login Berhasil! ',
+            text: "@TempData["err_message"].ToString()",
+            confirmButtonColor: '#f2aa4c',
+            confirmButtonText: 'Close'
+        })
+</script>
+}
+
+<div class="px-3 content-wrapper bg-transparent">
+    <h1 class="judul" style="text-align:center; font-family:'Berlin Sans FB'">Selamat Datang @nama  </h1>
+    <h5 class="sub-judul pr-4" style="text-align:center; font-family:'Comic Sans MS'">
+        Sistem Informasi Lembaga Penelitian dan Pengabdian Masyarakat Universitas
+        Atma Jaya Yogyakarta
+    </h5>
+    <h5 class="sub-judul pr-4" style="text-align:center; font-family:'Comic Sans MS'">
+        Sistem ini meliputi pelayanan akan kegiatan dosen berupa Penelitian dan
+        Pengabdian.
+    </h5>
+    <br /><br /> 
+    
+    <div class="row1-container">
+        <div class="box box-down cyan">
+            <h2> 1</h2>
+            <p>Melihat Detail Penelitian </p>
+            <img src="https://assets.codepen.io/2301174/icon-supervisor.svg" alt="">
+        </div>
+
+        <div class="box red">
+            <h2>2</h2>
+            <p >Melihat Proposal Penelitian</p>
+            <img src="https://assets.codepen.io/2301174/icon-team-builder.svg" alt="">
+        </div>
+
+        <div class="box box-down blue">
+            <h2>3</h2>
+            <p  > Melakukan Approval Terhadap Proposal Penelitian</p>
+            <img src="https://assets.codepen.io/2301174/icon-calculator.svg" alt="">
+        </div>
+    </div>
+    <div class="row2-container">
+        <div class="box orange">
+            <h2>4</h2>
+            <p  >Melihat Proposal Pengabdian</p>
+            <img src="https://assets.codepen.io/2301174/icon-karma.svg" alt="">
+        </div>
+    </div>
+ 
+</div>
+</body>
+</html>

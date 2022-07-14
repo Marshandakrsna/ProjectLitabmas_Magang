@@ -9,18 +9,22 @@ namespace SiLPPM_New_Version.DAO
 {
     public class AccountDAO
     {
-        public List<dynamic> getAllMenu(Array id_role)
+        public List<dynamic> getAllMenu(string username)
         {
             using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
             {
                 try
                 {
                     string query = @"
-                        SELECT      DISTINCT ID_SI_MENU, ID_SISTEM_INFORMASI, DESKRIPSI, ISACTIVE, LINK, NO_URUT
-                        FROM        siatmax.TBL_SI_MENU
-                        WHERE       ID_SISTEM_INFORMASI = 8 AND ISACTIVE = 1 ";
+                       SELECT DISTINCT d.DESKRIPSI, d.DESKRIPSI, d.LINK, d.ID_SI_MENU, d.NO_URUT
+                                FROM siatmax.TBL_USER_ROLE a
+                                JOIN siatmax.TBL_ROLE_SUBMENU b ON a.ID_ROLE = b.ID_ROLE
+                                JOIN siatmax.TBL_SI_SUBMENU c ON b.ID_SI_SUBMENU = c.ID_SI_SUBMENU
+                                JOIN siatmax.TBL_SI_MENU d ON c.ID_SI_MENU = d.ID_SI_MENU
+                                WHERE a.NPP = @username AND a.ID_SISTEM_INFORMASI = 8 AND c.ISACTIVE = 1 AND d.ISACTIVE = 1 AND d.ID_SISTEM_INFORMASI = 8 ORDER BY d.NO_URUT ASC ";
 
-                    var data = conn.Query<dynamic>(query).ToList();
+                    var param = new { username = username };
+                    var data = conn.Query<dynamic>(query, param).ToList();
 
                     return data;
                 }
@@ -34,7 +38,7 @@ namespace SiLPPM_New_Version.DAO
                 }
             }
         }
-        public List<dynamic> getAllSubMenu(Array id_role)
+        public List<dynamic> getAllSubMenu(string username)
         {
             using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
             {
@@ -43,16 +47,18 @@ namespace SiLPPM_New_Version.DAO
                     int arrayIndex = 0;
 
                     string query = @"
-                        SELECT      DISTINCT siatmax.TBL_ROLE_SUBMENU.ID_SI_SUBMENU, siatmax.TBL_ROLE_SUBMENU.ID_ROLE, siatmax.TBL_SI_SUBMENU.ID_SI_MENU, siatmax.TBL_SI_SUBMENU.DESKRIPSI, siatmax.TBL_SI_SUBMENU.ISACTIVE, siatmax.TBL_SI_SUBMENU.LINK
-                        FROM        siatmax.TBL_ROLE_SUBMENU 
-                        INNER JOIN  siatmax.TBL_SI_SUBMENU ON siatmax.TBL_ROLE_SUBMENU.ID_SI_SUBMENU = siatmax.TBL_SI_SUBMENU.ID_SI_SUBMENU
-                        INNER JOIN  siatmax.TBL_SI_MENU ON siatmax.TBL_SI_SUBMENU.ID_SI_MENU = siatmax.TBL_SI_MENU.ID_SI_MENU
-                        WHERE       siatmax.TBL_SI_MENU.ID_SISTEM_INFORMASI = 8 AND siatmax.TBL_SI_SUBMENU.ISACTIVE = 1";
+                      SELECT DISTINCT c.DESKRIPSI, c.DESKRIPSI, c.LINK, c.ID_SI_MENU,c.ID_SI_SUBMENU
+                                FROM siatmax.TBL_USER_ROLE a
+                                JOIN siatmax.TBL_ROLE_SUBMENU b ON a.ID_ROLE = b.ID_ROLE
+                                JOIN siatmax.TBL_SI_SUBMENU c ON b.ID_SI_SUBMENU = c.ID_SI_SUBMENU
+                                JOIN siatmax.TBL_SI_MENU d ON c.ID_SI_MENU = d.ID_SI_MENU
+                                WHERE a.NPP = @username AND d.ID_SISTEM_INFORMASI = 8 AND c.ISACTIVE = 1 AND d.ISACTIVE = 1
+                                ORDER BY c.ID_SI_SUBMENU ASC";
 
-                    if (Array.IndexOf(id_role, "1") != -1)
-                    {
-                        query += @"AND siatmax.TBL_ROLE_SUBMENU.ID_ROLE = 1";
-                    }
+                    //if (Array.IndexOf(id_role, "1") != -1)
+                    //{
+                    //    query += @"AND siatmax.TBL_ROLE_SUBMENU.ID_ROLE = 1";
+                    //}
                     //else
                     //{
                     //    if (id_role.Length > 1)
@@ -69,7 +75,7 @@ namespace SiLPPM_New_Version.DAO
                     //                query += @" AND (";
                     //            }
 
-                    //            query += @" siatmax.TBL_ROLE_SUBMENU.ID_ROLE = " + String.Join("", id);
+                    //            query += @" siatmax.TBL_ROLE_SUBMENU.ID_ROLE = 1" ;
                     //        }
                     //        query += @")";
                     //    }
@@ -77,12 +83,13 @@ namespace SiLPPM_New_Version.DAO
                     //    {
                     //        foreach (var id in id_role)
                     //        {
-                    //            query += @" AND siatmax.TBL_ROLE_SUBMENU.ID_ROLE = " + String.Join("", id);
+                    //            query += @" AND siatmax.TBL_ROLE_SUBMENU.ID_ROLE = 1" ;
                     //        }
                     //    }
                     //}
 
-                    var data = conn.Query<dynamic>(query).ToList();
+                    var param = new { username = username };
+                    var data = conn.Query<dynamic>(query, param).ToList();
 
                     return data;
                 }
@@ -128,6 +135,7 @@ namespace SiLPPM_New_Version.DAO
                 }
             }
         }
+        
 
         //public dynamic GetDataUser(string username)
         //{

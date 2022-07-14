@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using SiLPPM_New_Version.DAO;
 using System.Security.Claims;
 using System.Dynamic;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace SiLPPM_New_Version.Controllers
 {
@@ -16,6 +18,7 @@ namespace SiLPPM_New_Version.Controllers
         PenelitianDAO penelitianDAO;
         KelolaPenelitianDAO kelolaDAO;
         ProfileDAO myprofile;
+        AccountDAO accountDAO;
         dynamic myobj;
 
         public PenelitianController()
@@ -23,6 +26,7 @@ namespace SiLPPM_New_Version.Controllers
             myobj = new ExpandoObject();
             penelitianDAO = new PenelitianDAO();
             kelolaDAO = new KelolaPenelitianDAO();
+            accountDAO = new AccountDAO();
             myprofile = new ProfileDAO();
         }
        
@@ -33,7 +37,7 @@ namespace SiLPPM_New_Version.Controllers
             var username = User.Claims
                        .Where(c => c.Type == "username")
                            .Select(c => c.Value).SingleOrDefault();
-
+            var cekUser = penelitianDAO.GetUserByUsername(username);
 
             var refpropo = penelitianDAO.GetDataPenelitian(username);
             var refjenis = penelitianDAO.GetRefSkim();
@@ -45,8 +49,9 @@ namespace SiLPPM_New_Version.Controllers
             var refjenis7 = penelitianDAO.GetRefKategori();
             var refOutcome = penelitianDAO.GetOutcome();
 
-       
+
             //PEMANGGILAN TAMBAH PENELITIAN
+            myobj.cekUser = cekUser.data;
             myobj.refjenis = refjenis.data;
             myobj.refjenis2 = refjenis2.data;
             myobj.refjenis3= refjenis3.data;
@@ -290,27 +295,84 @@ namespace SiLPPM_New_Version.Controllers
             return RedirectToAction("adminListPenelitian");
         }
 
+        public byte[] _getByteArrayFromImage(IFormFile LEMBAR_PENGESAHAN)
+        {
+            using (var target = new MemoryStream())
+            {
+                LEMBAR_PENGESAHAN.CopyTo(target);
+                var dt = target.ToArray();
+                return dt;
+            }
+        }
+        public byte[] _getByteArrayFromImage2(IFormFile DOKUMEN)
+        {
+            using (var target = new MemoryStream())
+            {
+                DOKUMEN.CopyTo(target);
+                var dt = target.ToArray();
+                return dt;
+            }
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddPenelitian(int ID_TAHUN_ANGGARAN, int NO_SEMESTER, int ID_KATEGORI, int ID_ROAD_MAP_PENELITIAN, int ID_SKIM, int ID_TEMA_UNIVERSITAS, int ID_STATUS_PENELITIAN, string JENIS, string JUDUL, string LOKASI,
-            string NPP, string AWAL, string AKHIR, string NPP_REVIEWER, string REVIEWER1, string REVIEWER2, string IS_SETUJU_LPPM, int BEBAN_SKS, string KEYWORD,
+        public IActionResult AddPenelitian(int ID_TAHUN_ANGGARAN, int NO_SEMESTER, int ID_KATEGORI, int ID_ROAD_MAP_PENELITIAN, int ID_SKIM, 
+            int ID_TEMA_UNIVERSITAS, string JENIS, string JUDUL, string LOKASI,
+            string NPP, string AWAL, string AKHIR, string NPP_REVIEWER, string REVIEWER1, string REVIEWER2, string IS_SETUJU_LPPM, int BEBAN_SKS, int BEBAN_SKS_ANGGOTA,
+            float DANA_USUL, float DANA_PRIBADI, float DANA_EKSTERNAL, float DANA_KERJASAMA, float DANA_UAJY, float DANA_SETUJU,
+            IFormFile dokumenProposal, IFormFile dokumenPengesahan, string KEYWORD,string JARAK_KAMPUS_KM, string JARAK_KAMPUS_JAM,
              string OUTCOME, string LONGITUDE, string LATITUDE, string INSERT_DATE, string IP_ADDRESS,  string USER_ID, string KETERANGAN_DANA_EKSTERNAL)
         {
+            var proposal = penelitianDAO._getByteArrayFromDokumen(dokumenProposal);
+            var pengesahan = penelitianDAO._getByteArrayFromPengesahan(dokumenPengesahan);
+            var dana_usul = DANA_UAJY + DANA_PRIBADI + DANA_KERJASAMA + DANA_EKSTERNAL;
+            DANA_SETUJU = dana_usul;
 
-            var cek = penelitianDAO.AddPenelitian(ID_TAHUN_ANGGARAN,  NO_SEMESTER,  ID_KATEGORI,  ID_ROAD_MAP_PENELITIAN,  ID_SKIM,  ID_TEMA_UNIVERSITAS,  ID_STATUS_PENELITIAN,  JENIS, JUDUL,  LOKASI,
-            NPP, AWAL, AKHIR,  NPP_REVIEWER,  REVIEWER1,  REVIEWER2, IS_SETUJU_LPPM,  BEBAN_SKS,   KEYWORD,
-            OUTCOME,  LONGITUDE,  LATITUDE,  INSERT_DATE,  IP_ADDRESS,  USER_ID, KETERANGAN_DANA_EKSTERNAL);
+            var cek = penelitianDAO.AddPenelitian(ID_TAHUN_ANGGARAN, NO_SEMESTER, ID_KATEGORI, ID_ROAD_MAP_PENELITIAN, ID_SKIM, ID_TEMA_UNIVERSITAS,
+                 JENIS, JUDUL, LOKASI, NPP, AWAL, AKHIR, NPP_REVIEWER, REVIEWER1, REVIEWER2, IS_SETUJU_LPPM, BEBAN_SKS, BEBAN_SKS_ANGGOTA, dana_usul, DANA_PRIBADI, DANA_EKSTERNAL, DANA_KERJASAMA, DANA_UAJY, DANA_SETUJU,
+                proposal, pengesahan, KEYWORD, JARAK_KAMPUS_KM, JARAK_KAMPUS_JAM, OUTCOME, LONGITUDE, LATITUDE, INSERT_DATE, IP_ADDRESS, USER_ID, KETERANGAN_DANA_EKSTERNAL);
 
-           
+
             if (cek.status)
             {
                 TempData["succ"] = "Berhasil menambahkan data";
             }
             else
             {
-                TempData["err"] = "Gagal menambahkan data" + cek.pesan;
+                TempData["err"] = "Gagal menambahkan data " + cek.pesan;
             }
             return RedirectToAction("HomePenelitian", "Penelitian");
+        }
+        
+        //untuk add data penelitian(admin)
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddPenelitianAdmin(int ID_TAHUN_ANGGARAN, int NO_SEMESTER, int ID_KATEGORI, int ID_ROAD_MAP_PENELITIAN, int ID_SKIM,
+         int ID_TEMA_UNIVERSITAS, string JENIS, string JUDUL, string LOKASI,
+         string NPP, string AWAL, string AKHIR, string NPP_REVIEWER, string REVIEWER1, string REVIEWER2, string IS_SETUJU_LPPM, int BEBAN_SKS, int BEBAN_SKS_ANGGOTA,
+         float DANA_USUL, float DANA_PRIBADI, float DANA_EKSTERNAL, float DANA_KERJASAMA, float DANA_UAJY, float DANA_SETUJU,
+         IFormFile dokumenProposal, IFormFile dokumenPengesahan, string KEYWORD, string JARAK_KAMPUS_KM, string JARAK_KAMPUS_JAM,
+          string OUTCOME, string LONGITUDE, string LATITUDE, string INSERT_DATE, string IP_ADDRESS, string USER_ID, string KETERANGAN_DANA_EKSTERNAL)
+        {
+            var proposal = penelitianDAO._getByteArrayFromDokumen(dokumenProposal);
+            var pengesahan = penelitianDAO._getByteArrayFromPengesahan(dokumenPengesahan);
+            var dana_usul = DANA_UAJY + DANA_PRIBADI + DANA_KERJASAMA + DANA_EKSTERNAL;
+            DANA_SETUJU = dana_usul;
+
+            var cek = penelitianDAO.AddPenelitian(ID_TAHUN_ANGGARAN, NO_SEMESTER, ID_KATEGORI, ID_ROAD_MAP_PENELITIAN, ID_SKIM, ID_TEMA_UNIVERSITAS,
+                 JENIS, JUDUL, LOKASI, NPP, AWAL, AKHIR, NPP_REVIEWER, REVIEWER1, REVIEWER2, IS_SETUJU_LPPM, BEBAN_SKS, BEBAN_SKS_ANGGOTA, dana_usul, DANA_PRIBADI, DANA_EKSTERNAL, DANA_KERJASAMA, DANA_UAJY, DANA_SETUJU,
+                proposal, pengesahan, KEYWORD, JARAK_KAMPUS_KM, JARAK_KAMPUS_JAM, OUTCOME, LONGITUDE, LATITUDE, INSERT_DATE, IP_ADDRESS, USER_ID, KETERANGAN_DANA_EKSTERNAL);
+
+
+            if (cek.status)
+            {
+                TempData["succ"] = "Berhasil menambahkan data";
+            }
+            else
+            {
+                TempData["err"] = "Gagal menambahkan data " + cek.pesan;
+            }
+            return RedirectToAction("adminPenelitian", "Penelitian");
         }
 
         public IActionResult KelolaReviewer()
@@ -358,6 +420,25 @@ namespace SiLPPM_New_Version.Controllers
                 TempData["err"] = "Gagal menambahkan data Reviewer, " + cek.pesan;
             }
             return RedirectToAction("KelolaReviewer");
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult addNilaiReview(string ID_PROPOSAL, string ID_REVIEWER, int COUNT_REVISI, int N1_FIELD1, int N1_FIELD2, int N1_FIELD3, int N1_FIELD4, int N1_FIELD5, int N1_FIELD6, int N1_FIELD7,
+              string N1_JUSTIFIKASI1, string N1_JUSTIFIKASI2, string N1_JUSTIFIKASI3, string N1_JUSTIFIKASI4, string N1_JUSTIFIKASI5, string N1_JUSTIFIKASI6, string N1_JUSTIFIKASI7)
+        {
+            var cek = penelitianDAO.AddNilaiReviewPenelitian(ID_PROPOSAL, ID_REVIEWER,  COUNT_REVISI,  N1_FIELD1,  N1_FIELD2, N1_FIELD3,  N1_FIELD4, N1_FIELD5,  N1_FIELD6, N1_FIELD7,
+               N1_JUSTIFIKASI1, N1_JUSTIFIKASI2,  N1_JUSTIFIKASI3,  N1_JUSTIFIKASI4,  N1_JUSTIFIKASI5,  N1_JUSTIFIKASI6,  N1_JUSTIFIKASI7);
+            if (cek.status == true)
+            {
+                TempData["succ"] = "Berhasil menambahkan Nilai Review Penelitian";
+            }
+            else
+            {
+                TempData["err"] = "Gagal menambahkan Nilai Review Penelitian, " + cek.pesan;
+            }
+            return RedirectToAction("RevPenelitian","Review");
         }
     }
 }

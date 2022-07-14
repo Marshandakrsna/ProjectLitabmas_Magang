@@ -5,13 +5,18 @@
 
 @{ 
     AccountDAO accountDAO = new AccountDAO();
-
-    var role = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToArray();
+    var username = User.Claims
+                     .Where(c => c.Type == "username")
+                         .Select(c => c.Value).SingleOrDefault();
+    var role = User.Claims
+                       .Where(c => c.Type == "role")
+                           .Select(c => c.Value).SingleOrDefault();
 
     var id_role = User.Claims.Where(c => c.Type == "id_role").Select(c => c.Value).ToArray();
 
-    var mainMenu = accountDAO.getAllMenu(id_role);
-    var subMenu = accountDAO.getAllSubMenu(id_role);
+    var mainMenu = accountDAO.getAllMenu(username);
+    var subMenu = accountDAO.getAllSubMenu(username);
+
 
     var id_proposal = User.Claims
                          .Where(c => c.Type == "id_proposal")
@@ -24,9 +29,7 @@
 .Where(c => c.Type == "nama_lengkap")
     .Select(c => c.Value).SingleOrDefault();
 
-    var username = User.Claims
-        .Where(c => c.Type == "username")
-            .Select(c => c.Value).SingleOrDefault(); }
+    }
 
 <!DOCTYPE html>
 <html lang="en">
@@ -77,7 +80,7 @@
 
 
 
-        .user-panel, .brand-link {
+        .user-panel, .brand-link { 
             border-bottom: 1px solid #1565C0 !important;
         }
     </style>
@@ -125,152 +128,156 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column text-sm nav-compact" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item ">
-                            <a asp-action="Index" asp-controller="Home" class="nav-link">
-                                <i class="nav-icon fas fa-home" aria-hidden="true"> </i>
-                                <p>Home</p>
-                            </a>
-                        </li>
-                        @foreach(var main in mainMenu)
-                        { 
+                     
+                            <li class="nav-item ">
+                                <a asp-action="Index" asp-controller="Home" class="nav-link">
+                                    <i class="nav-icon fas fa-home" aria-hidden="true"> </i>
+                                    <p>Home</p>
+                                </a>
+                            </li>
+                        
+                        @foreach (var main in mainMenu)
+                        {
                             <li class="nav-item">
-                                 <a class="nav-link" asp-area="" asp-controller="" asp-action="">
-                                
-                                <p> 
-                                    @main.DESKRIPSI
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                            @foreach (var sub in subMenu)
-                            {
-                                if(@sub.ID_SI_MENU == @main.ID_SI_MENU)
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-area="" asp-controller="@main.LINK" asp-action="@sub.LINK">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>@sub.DESKRIPSI</p>
-                                        </a>
-                                    </li>                                            
-                                }
-                            }
-                           </ul>
-                        </li>                                         
+                                <a class="nav-link" asp-area="" asp-controller="" asp-action="">
+                  
+                                    <p>
+                                        @main.DESKRIPSI
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    @foreach (var sub in subMenu)
+                                    {
+                                        if (@sub.ID_SI_MENU == @main.ID_SI_MENU)
+                                        {
+                                            <li class="nav-item">
+                                                <a class="nav-link" asp-area="" asp-controller="@main.LINK" asp-action="@sub.LINK">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>@sub.DESKRIPSI</p>
+                                                </a>
+                                            </li>
+
+                                        }
+                                    }
+                                </ul>
+                            </li>
+
                         }
                         @*<li class="nav-item has-treeview">
-                            <a asp-action="Index" asp-controller="Penelitian" class="nav-link">
-                                <i class="nav-icon fas fa-book" aria-hidden="true"></i>
-                                <p>
-                                    Penelitian
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a asp-action="HomePenelitian" asp-controller="Penelitian" class="nav-link">
-                                        <i class="fa fa-circle" style=" font-size:smaller; color:chocolate; margin-left: 12px"></i>
-                                        <p>Tambah Penelitian</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-action="KelolaReviewer" asp-controller="Penelitian" class="nav-link">
-                                        <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
-                                        <p>Pengelolaan Review Proposal</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-action="adminPenelitian" asp-controller="Penelitian" class="nav-link">
-                                        <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
-                                        <p>Input Penelitian (Admin)</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-action="adminListPenelitian" asp-controller="Penelitian" class="nav-link">
-                                        <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
-                                        <p>Daftar Penelitian</p>
-                                    </a>
-                                </li>
+            <a asp-action="Index" asp-controller="Penelitian" class="nav-link">
+                <i class="nav-icon fas fa-book" aria-hidden="true"></i>
+                <p>
+                    Penelitian
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a asp-action="HomePenelitian" asp-controller="Penelitian" class="nav-link">
+                        <i class="fa fa-circle" style=" font-size:smaller; color:chocolate; margin-left: 12px"></i>
+                        <p>Tambah Penelitian</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="KelolaReviewer" asp-controller="Penelitian" class="nav-link">
+                        <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
+                        <p>Pengelolaan Review Proposal</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="adminPenelitian" asp-controller="Penelitian" class="nav-link">
+                        <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
+                        <p>Input Penelitian (Admin)</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="adminListPenelitian" asp-controller="Penelitian" class="nav-link">
+                        <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
+                        <p>Daftar Penelitian</p>
+                    </a>
+                </li>
 
-                            </ul>
-                        </li>
+            </ul>
+        </li>
 
-                        <li class="nav-item has-treeview ">
-                            <a asp-action="Index" asp-controller="Pengabdian" class="nav-link">
-                                <i class="nav-icon fas fa-regular fa-hands" aria-hidden="true"> </i>
-                                <p>
-                                    Pengabdian Masyarakat
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a asp-action="HomePengabdian" asp-controller="Pengabdian" class="nav-link">
-                                        <i class="fa fa-circle" style=" font-size:smaller; color:chocolate; margin-left: 12px"></i>
-                                        <p>Tambah Pengabdian</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-action="DekanListReviewPengabdian" asp-controller="Pengabdian" class="nav-link">
-                                        <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
-                                        <p>Pengesahan Proposal </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                        <a asp-action="DekanLihatMonevPengabdian" asp-controller="Pengabdian" class="nav-link">
-                                            <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
-                                            <p>Lihat Monev Pengabdian</p>
-                                        </a>
-                                    </li>
-                                <li class="nav-item">
-                                    <a asp-action="adminPengabdian" asp-controller="Pengabdian" class="nav-link">
-                                        <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
-                                        <p>Input Pengabdian (Admin)</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-action="adminListPengabdian" asp-controller="Pengabdian" class="nav-link">
-                                        <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
-                                        <p>Daftar Pengabdian</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+        <li class="nav-item has-treeview ">
+            <a asp-action="Index" asp-controller="Pengabdian" class="nav-link">
+                <i class="nav-icon fas fa-regular fa-hands" aria-hidden="true"> </i>
+                <p>
+                    Pengabdian Masyarakat
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a asp-action="HomePengabdian" asp-controller="Pengabdian" class="nav-link">
+                        <i class="fa fa-circle" style=" font-size:smaller; color:chocolate; margin-left: 12px"></i>
+                        <p>Tambah Pengabdian</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="DekanListReviewPengabdian" asp-controller="Pengabdian" class="nav-link">
+                        <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
+                        <p>Pengesahan Proposal </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                        <a asp-action="DekanLihatMonevPengabdian" asp-controller="Pengabdian" class="nav-link">
+                            <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
+                            <p>Lihat Monev Pengabdian</p>
+                        </a>
+                    </li>
+                <li class="nav-item">
+                    <a asp-action="adminPengabdian" asp-controller="Pengabdian" class="nav-link">
+                        <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
+                        <p>Input Pengabdian (Admin)</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="adminListPengabdian" asp-controller="Pengabdian" class="nav-link">
+                        <i class="fa fa-circle " style="font-size: smaller; color: chocolate; margin-left: 12px"></i>
+                        <p>Daftar Pengabdian</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
-                        <li class="nav-item has-treeview">
-                            <a asp-action="Index" asp-controller="Profile" class="nav-link">
-                                <i class="nav-icon fas fa-solid fa-user" aria-hidden="true"> </i>
-                                <p>
-                                    My Profile
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a asp-action="Profile" asp-controller="Profile" class="nav-link">
-                                        <i class="fa fa-circle" style=" font-size:smaller; color:chocolate; margin-left: 12px"></i>
-                                        <p>Lihat Profile</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+        <li class="nav-item has-treeview">
+            <a asp-action="Index" asp-controller="Profile" class="nav-link">
+                <i class="nav-icon fas fa-solid fa-user" aria-hidden="true"> </i>
+                <p>
+                    My Profile
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a asp-action="Profile" asp-controller="Profile" class="nav-link">
+                        <i class="fa fa-circle" style=" font-size:smaller; color:chocolate; margin-left: 12px"></i>
+                        <p>Lihat Profile</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
-                        <li class="nav-item has-treeview ">
-                            <a asp-action="Index" asp-controller="Pengelolaan" class="nav-link">
-                                <i class="nav-icon fas fa-duotone fa-list" aria-hidden="true"> </i>
-                                <p>
-                                    Pengelolaan
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a asp-action="AdminKelolaUser" asp-controller="Pengelolaan" class="nav-link">
-                                        <i class="fa fa-circle" style=" font-size:smaller; color:chocolate; margin-left: 12px"></i>
-                                        <p>Pengelolaan Assesor/Reviewer</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>*@
+        <li class="nav-item has-treeview ">
+            <a asp-action="Index" asp-controller="Pengelolaan" class="nav-link">
+                <i class="nav-icon fas fa-duotone fa-list" aria-hidden="true"> </i>
+                <p>
+                    Pengelolaan
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a asp-action="AdminKelolaUser" asp-controller="Pengelolaan" class="nav-link">
+                        <i class="fa fa-circle" style=" font-size:smaller; color:chocolate; margin-left: 12px"></i>
+                        <p>Pengelolaan Assesor/Reviewer</p>
+                    </a>
+                </li>
+            </ul>
+        </li>*@
 
                     </ul>
                 </nav>

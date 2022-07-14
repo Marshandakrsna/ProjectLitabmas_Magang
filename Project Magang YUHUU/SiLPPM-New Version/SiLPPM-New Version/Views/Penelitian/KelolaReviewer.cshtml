@@ -208,7 +208,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <hr style="border:dashed; border-color:aliceblue" />
-                <form class="formDetailKelolaReviewer" method="post" asp-action="addKelolaReviewer" asp-controller="KelolaPenelitian" enctype="multipart/form-data" novalidate>
+                <form class="formDetailKelolaReviewer" method="post" asp-action="addKelolaReviewer" asp-controller="KelolaPenelitian" enctype="multipart/form-data" novalidate onsubmit="validasi()">
                     @Html.AntiForgeryToken()
 
                     <div class="modal-body">
@@ -233,7 +233,7 @@
                             <div class="form-group">
                                 <label>
                                     Reviewer 1
-                                    <select class="style1" id="reviewer1" name="reviewer1" style="margin-left:30px" required>
+                                    <select class="style1" id="reviewer1" name="reviewer1" style="margin-left:30px" onchange="validasi()" required>
                                         <option hidden style="color:lightgrey; ">Pilih Reviewer 1</option>
                                         @foreach (var item in Model.reviewer)
                                         {
@@ -246,21 +246,22 @@
                             <div class="form-group">
                                 <label>
                                     Reviewer 2
-                                    <select class="style1" id="reviewer2" name="reviewer2" style="margin-left:30px"  required>
+                                    <select class="style1" id="reviewer2" name="reviewer2" style="margin-left:30px" onchange="validasi()" required>
                                         <option hidden style="color:lightgrey; ">Pilih Reviewer 2</option>
                                         @foreach (var item in Model.reviewer)
                                         {
-                                            <option value="@item.NPP"> @item.NAMA_LENGKAP_GELAR</option>
+                                            <option value="@item.NPP" > @item.NAMA_LENGKAP_GELAR </option>
 
                                         }
                                     </select>
                                 </label>
                             </div>
+                            
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="closeModal"  class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" id="btnAddKelolaReviewer" class="btn btn-primary" data-dismiss="modal"></button>
+                        <button type="submit" id="btnAddKelolaReviewer" class="btn btn-primary" data-dismiss="modal" onclick="validasi()"></button>
 
                     </div>
                 </form>
@@ -281,6 +282,7 @@
 
 
     <script>
+        
         var id_proposal;
         var tempIdProposal;
         $('#tblData').DataTable({
@@ -316,7 +318,15 @@
             });
         }, false);
 
-       
+        function validasi() {
+            var reviewer1 = document.getElementById('reviewer1').value;
+            var reviewer2 = document.getElementById('reviewer2').value;
+            if (reviewer1 == reviewer2) {
+
+                alert('INPUTAN NAMA REVIEWER TIDAK BOLEH SAMA!');
+            }
+         
+        }
         function addDetailProposal(id_proposal) {
            
             id_proposal = id_proposal;
@@ -326,7 +336,7 @@
             $('#btnAddKelolaReviewer').html('Tambah');
             $('#id_proposal').val(id_proposal); //bisa masuk
             $('#judulProposal').val(judulProposal);
-
+         
             $.ajax({
                 url: "/KelolaPenelitian/ajaxGetDetailKelolaReviewer?id_proposal="+id_proposal,
                 type: "POST",
@@ -339,6 +349,7 @@
                     $('#npp').val(data.NPP);
                     $('#namaDosen').val(data.NAMA);
                     $('#judulProposal').val(data.JUDUL);
+                   
      
                 }
             })

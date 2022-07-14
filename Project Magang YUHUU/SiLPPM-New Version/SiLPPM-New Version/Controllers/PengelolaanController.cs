@@ -54,7 +54,7 @@ namespace SiLPPM_New_Version.Controllers
             {
                 TempData["err"] = "Gagal menambahkan data Role, " + cek.pesan;
             }
-            return RedirectToAction("IndexPengelolaan");
+            return RedirectToAction("AdminKelolaUser");
         }
 
     }
