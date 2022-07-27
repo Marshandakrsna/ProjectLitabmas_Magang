@@ -147,34 +147,67 @@
                                     <td class="style8">
                                         Dana UAJY
                                     </td>
-                                    <td>
-                                        @Model.refpropo.DANA_UAJY
-                                    </td>
+                                    @if (Model.countPengabdian.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @Model.refpropo.DANA_UAJY
+                                        </td>
+                                    }
+
+
                                 </tr>
                                 <tr>
                                     <td class="style8">
                                         Dana Pribadi
                                     </td>
-                                    <td>
-                                        @Model.refpropo.DANA_PRIBADI
-                                    </td>
+                                    @if (Model.countPengabdian.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @Model.refpropo.DANA_PRIBADI
+                                        </td>
+                                    }
+
                                 </tr>
                                 <tr>
                                     <td class="style8">
                                         Dana Eksternal
                                     </td>
-                                    <td>
+                                    @if (Model.countPengabdian.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
 
-                                        @Model.refpropo.DANA_EKSTERNAL
-                                    </td>
+                                            @Model.refpropo.DANA_EKSTERNAL
+                                        </td>
+                                    }
+
                                 </tr>
                                 <tr>
                                     <td class="style8">
                                         Dana Kerjasama
                                     </td>
-                                    <td>
-                                        @Model.refpropo.DANA_KERJASAMA
-                                    </td>
+                                    @if (Model.countPengabdian.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @Model.refpropo.DANA_KERJASAMA
+                                        </td>
+                                    }
+
                                 </tr>
 
                             </thead>

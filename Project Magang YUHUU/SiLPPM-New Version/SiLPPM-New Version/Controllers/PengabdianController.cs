@@ -134,19 +134,24 @@ namespace SiLPPM_New_Version.Controllers
             return View(myobj);
         }
 
-        public IActionResult IndexRAB()
+        public IActionResult IndexRAB(int id_proposal)
         {
             var username = User.Claims
                        .Where(c => c.Type == "username")
                            .Select(c => c.Value).SingleOrDefault();
-
+            var countPengabdian = dao.GetCountPengabdian(username);
 
             var refpropo = myprofile.GetListPenelitianByUsername(username);
             var refpropo2 = myprofile.GetListPengabdianByUsername(username);
-
-
+            myobj.countPengabdian = countPengabdian.data;
             myobj.refpropo = refpropo.data;
             myobj.refpropo2 = refpropo2.data;
+
+            int tempJustifRev1;
+            if (countPengabdian.data.JUMLAH == 0 || countPengabdian.data.JUMLAH == null)
+            {
+                tempJustifRev1 = 0;
+            }
             return View(myobj);
         }
         public byte[] _getByteArrayFromDokumenPengabdian(IFormFile DOKUMEN)

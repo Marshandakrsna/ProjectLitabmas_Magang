@@ -52,7 +52,7 @@ namespace SiLPPM_New_Version.DAO
                 try
                 {
                     string query = @"select distinct k.NPP,k.NAMA,r.DESKRIPSI from simka.MST_KARYAWAN k join siatmax.TBL_USER_ROLE u 
-on u.NPP=k.NPP join siatmax.REF_ROLE r on r.ID_ROLE=u.ID_ROLE where ( r.DESKRIPSI= 'Dosen' and u.ID_SISTEM_INFORMASI=8  or r.DESKRIPSI='Assesor' 
+on u.NPP=k.NPP join siatmax.REF_ROLE r on r.ID_ROLE=u.ID_ROLE where ( r.DESKRIPSI= 'Dosen' and u.ID_SISTEM_INFORMASI=8  or r.DESKRIPSI='Reviewer' 
 and u.ID_SISTEM_INFORMASI=8 and u.IS_ACTIVE='1')  and k.npp=@npp order by r.DESKRIPSI";
 
                     var data = conn.QueryFirstOrDefault<dynamic>(query, new { npp = npp});

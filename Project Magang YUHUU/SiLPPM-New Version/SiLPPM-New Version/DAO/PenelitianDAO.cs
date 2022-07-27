@@ -21,10 +21,7 @@ namespace SiLPPM_New_Version.DAO
             {
                 try
                 {
-                    string query = @"SELECT ID_SKIM
-      ,KATEGORI
-      ,DESKRIPSI
-  FROM PORTAL_DOSEN.silppm.REF_SKIM";
+                    string query = @"SELECT ID_SKIM ,KATEGORI ,DESKRIPSI FROM PORTAL_DOSEN.silppm.REF_SKIM";
 
                     var data = conn.Query<dynamic>(query).ToList();
 
@@ -534,7 +531,7 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                 try
                 {
                     string query = @"insert into silppm.TBL_NILAI_REVIEW_PENELITIAN
-                    ([ID_PROPOSAL],[ID_REVIEWER],[COUNT_REVISI],[N1_FIELD1],[N1_FIELD2],[N1_FIELD3],
+                  
                     ([ID_PROPOSAL],[ID_REVIEWER],[COUNT_REVISI],[N1_FIELD1],[N1_FIELD2],[N1_FIELD3],
                     [N1_FIELD4],[N1_FIELD5],[N1_FIELD6],[N1_FIELD7],
                     [N1_JUSTIFIKASI1],[N1_JUSTIFIKASI2],[N1_JUSTIFIKASI3],[N1_JUSTIFIKASI4],[N1_JUSTIFIKASI5]
@@ -1633,7 +1630,44 @@ and (REVIEWER1 = @NPP  or REVIEWER2 = @NPP ) and id_proposal = @id_proposal
                   FROM [silppm].[TBL_PENELITIAN] JOIN simkA.MST_KARYAWAN ON simkA.MST_KARYAWAN.NPP = [silppm].[TBL_PENELITIAN].NPP
                 where simka.MST_KARYAWAN.USERNAME = @username";
 
-                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { username = username });
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { username = username});
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetDataPen(int id_proposal)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT [ID_PROPOSAL],[ID_TAHUN_ANGGARAN],[NO_SEMESTER],[ID_KATEGORI], [USERNAME]
+                ,[ID_ROAD_MAP_PENELITIAN],[ID_SKIM],[ID_TEMA_UNIVERSITAS]
+                ,[ID_STATUS_PENELITIAN],[JENIS],[JUDUL],[LOKASI],silppm.TBL_PENELITIAN.NPP,[NPP1],[NPP2]
+                ,[AWAL],[AKHIR],[BEBAN_SKS],[BEBAN_SKS_ANGGOTA],[DANA_USUL],[DANA_PRIBADI]
+                ,[DANA_EKSTERNAL],[DANA_KERJASAMA],[DANA_UAJY],[DANA_SETUJU],[DOKUMEN]
+                ,[LEMBAR_PENGESAHAN],[KEYWORD],[JARAK_KAMPUS_KM],[JARAK_KAMPUS_JAM]
+                ,[OUTCOME],[LONGITUDE],[LATITUDE],KETERANGAN_DANA_EKSTERNAL
+                  FROM [silppm].[TBL_PENELITIAN] JOIN simkA.MST_KARYAWAN ON simkA.MST_KARYAWAN.NPP = [silppm].[TBL_PENELITIAN].NPP
+                where silppm.TBL_PENELITIAN.ID_PROPOSAL = @id_proposal";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_proposal = id_proposal });
 
                     output.data = data;
 
@@ -1653,7 +1687,7 @@ and (REVIEWER1 = @NPP  or REVIEWER2 = @NPP ) and id_proposal = @id_proposal
             }
         }
 
-        public DBOutput GetDataPengabdian(string username)
+        public DBOutput GetDataPengabdian(int id_proposal)
         {
             DBOutput output = new DBOutput();
             output.status = true;
@@ -1669,11 +1703,11 @@ and (REVIEWER1 = @NPP  or REVIEWER2 = @NPP ) and id_proposal = @id_proposal
                     ,[IS_CHECKED] ,[IS_SETUJU_PRODI] ,[IS_SETUJU_DEKAN] ,[IS_SETUJU_LPPM]
                     ,[NPP_REVIEWER] ,[DANA_SETUJU] ,[INSERT_DATE] ,[IP_ADDRESS] ,[USER_ID] ,[ID_SKIM]
                     ,[ID_TEMA_UNIVERSITAS] ,[NO_SEMESTER] FROM [PORTAL_DOSEN].[silppm].[TBL_PENGABDIAN]
-                    where simka.MST_KARYAWAN.USERNAME = @username";
+                    where ID_PROPOSAL = @id_proposal";
 
-                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { username = username });
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_proposal = id_proposal });
 
-                    output.data = data;
+                        output.data = data;
 
                     return output;
                 }

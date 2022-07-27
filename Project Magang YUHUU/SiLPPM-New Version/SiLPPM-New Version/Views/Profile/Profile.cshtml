@@ -30,8 +30,13 @@
             margin-top: 50px;
             margin-bottom: 60px;
         }
+        .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color:darkslateblue;
+    border-radius: 51px;
+}
 
-        .penelitianDiajukan {
+        .stylePengabdian {
             background-color: chocolate;
             margin-top: 50px;
             margin-bottom: 20px;
@@ -93,114 +98,125 @@
     </style>
 </head>
 <body>
-        <div class="px-3 mt-3">
-            <div class="content-wrapper p-3">
-                <a href="#" class="brand-link">
-                    <img src="~/images/profile-user.png" alt="Profile" class="brand-image img-circle elevation-3" style="opacity: .8">
-                    <span style="color:black">Profile</span>
+    <div class="px-3 mt-3">
+        <div class="content-wrapper p-3">
+            <a href="#" class="brand-link">
+                <img src="~/images/profile-user.png" alt="Profile" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span style="color:black">Profile</span>
 
-                </a>
-                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                    <ol class="breadcrumb">
+            </a>
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
 
-                        <li class="breadcrumb-item"><a asp-controller="Account" asp-action="IndexLihat">Profile</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Index</li>
-                    </ol>
-                </nav>
-                <div style="width: 100%; overflow-x: auto;" class="col">
-                    <table class="table table-striped table-bordered table-hover dt-responsive nowrap">
-                        <thead>
-                            <tr>
-                        
-                                <td class="style8">
-                                    Nama
-                                </td>
-                                <td>
-                                    @Model.data.NAMA_LENGKAP_GELAR
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="style8">
-                                    Pangkat/Golongan
-                                </td>
-                                <td>
-                                    @Model.data2.DESKRIPSI/@Model.data3.ID_REF_GOLONGAN
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="style8">
-                                    NPP/NIDN
-                                </td>
-                                <td>
+                    <li class="breadcrumb-item"><a asp-controller="Account" asp-action="IndexLihat">Profile</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Index</li>
+                </ol>
+            </nav>
+            <div style="width: 100%; overflow-x: auto;" class="col">
+                <table class="table table-striped table-bordered table-hover dt-responsive nowrap">
+                    <thead>
+                        <tr>
 
-                                    @Model.data.NPP / @Model.data.NIDN
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="style8">
-                                    Unit/Fakultas/Jurusan
-                                </td>
-                                <td>
+                            <td class="style8">
+                                Nama
+                            </td>
+                            <td>
+                                @Model.data.NAMA_LENGKAP_GELAR
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Pangkat/Golongan
+                            </td>
+                            <td>
+                                @Model.data2.DESKRIPSI/@Model.data3.ID_REF_GOLONGAN
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                NPP/NIDN
+                            </td>
+                            <td>
+
+                                @Model.data.NPP / @Model.data.NIDN
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Unit/Fakultas/Jurusan
+                            </td>
+                            <td>
                                 @Model.data4.NAMA_UNIT/@Model.data5.NAMA_UNIT
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="style8">
-                                    Alamat
-                                </td>
-                                <td>
-                                   @Model.data.ALAMAT
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="style8">
-                                    Alamat Kantor
-                                </td>
-                                <td>
-                                
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="style8">
-                                    No. Telp/Faks
-                                </td>
-                                <td>
-                                   @Model.data.NO_TELPON_HP
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="style8">
-                                    Email
-                                </td>
-                                <td>
-                                   @Model.data.EMAIL_INSTITUSI
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="style8">
-                                    Bidang Keahlian
-                                </td>
-                                <td>
-                                    
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-                <div>
-                    <span class="label penelitianDiajukan">Proposal yang sudah diajukan :</span>
-                  <br />
-                    <br />
-                    <br />
-                </div>
-                <div>
-                    <span class="label propoPenelitian">Proposal Penelitian :</span>
-
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Alamat
+                            </td>
+                            <td>
+                                @Model.data.ALAMAT
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Alamat Kantor
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                No. Telp/Faks
+                            </td>
+                            <td>
+                                @Model.data.NO_TELPON_HP
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Email
+                            </td>
+                            <td>
+                                @Model.data.EMAIL_INSTITUSI
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style8">
+                                Bidang Keahlian
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="px-3 mt-3">
+        <div class="content-wrapper p-3">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist"style=" background-color: #c4d9e6; color: white; border-radius: 50px; height: 47px;">
+                <li class="nav-item" style="margin-top: 3px; width: 160px; text-align: center; ">
+                    <a class="nav-link active" id="pills-penelitian-tab" data-toggle="pill" href="#pills-penelitian" role="tab" aria-controls="pills-penelitian" aria-selected="true">Penelitian</a>
+                </li>
+                <li class="nav-item"style="margin-top: 3px; width: 160px; text-align: center;">
+                    <a class="nav-link" id="pills-pengabdian-tab" data-toggle="pill" href="#pills-pengabdian" role="tab" aria-controls="pills-pengabdian" aria-selected="false">Pengabdian</a>
+                </li>
+         
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-penelitian" role="tabpanel" aria-labelledby="pills-penelitian-tab">
+                    <div class="card-header">
+                        <a href="#" class="brand-link" style="background-color:white">
+                            <img src="~/images/research-and-development.png" class="brand-image">
+                            <span style="color:black; font-weight:bold">PENELITIAN USER</span>
+                        </a>
+                    </div>
                     <div class="card-body">
-                        <table id="datatable" class="table table-bordered table-striped">
-                            <thead>
+                        <span class="label propoPenelitian">Proposal Penelitian yang diajukan :</span><br />
+                        <table id="datatable" class="table table-bordered table-striped" style="margin-top:30px; margin-bottom:25px">
+                            <thead class="text-center">
                                 <tr>
                                     <th>Aksi</th>
                                     <th>Judul Proposal</th>
@@ -211,7 +227,7 @@
                             <tbody>
 
                                 @foreach (var item in Model.proposal)
-                                 {
+                                {
                                     <tr>
                                         <td>
                                             <p style="font-weight:bold"><a href="LihatProposalPenelitian?id_proposal=@item.id_proposal">Lihat Review</a></p>
@@ -226,49 +242,121 @@
                                 }
                             </tbody>
                         </table>
+                        <span class="label propoPenelitian">Proposal Penelitian yang telah diterima:</span><br />
+                        <table id="datatable" class="table table-bordered table-striped" style="margin-top:30px; margin-bottom:25px">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>Judul Proposal</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.penelitianDiterima)
+                                {
+                                <tr>
+                                    <td> @item.JUDUL</td>
+                                    <td>@item.DESKRIPSI</td>
+
+                                    <td>
+                                        <select name="optionPengabdian" id="optionPengabdian" class="center" onchange="location = this.value;" style=" height: 35px; border-radius: 12px;">
+                                            <option hidden> -- Pilih -- </option>
+                                            <option value="LihatProposalPenelitian?id_proposal=@item.id_proposal">Lihat Review</option>
+                                            <option value="AddProsidingProfile">Lihat Jadwal</option>
+                                            <option value="Contact.php">Lapor Perkembangan</option>
+                                            <option value="Sitemap.php">Unggah Draft Laporan Final</option>
+                                            <option value="Sitemap.php">Unggah Laporan Final</option>
+                                            <option value="Sitemap.php">Unggah Outcome</option>
+                                            <option value="Sitemap.php">Perpanjang Masa Akhir</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
 
-                    <div>
-                        <span class="label propoPengabdian">Proposal Pengabdian:</span>
-                        <div class="card-body">
-                            <table id="datatable" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Aksi</th>
-                                        <th>Judul Proposal</th>
-                                        <th>Status</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.pengabdian)
-                                    {
-                                        <tr>
-                                            <td>
-                                                <p style="font-weight:bold; border-radius:5px; width:110px; padding:5px; cursor:pointer"><a href="LihatProposalPengabdian?id_proposal=@item.ID_PROPOSAL">Lihat Review</a></p>
-                                            </td>
-                                            <td> @item.JUDUL_KEGIATAN</td>
-                                            <td>@item.DESKRIPSI</td>
-
-                                            <td>
-                                                <p class="text-center" style="font-weight:bold;background-color:darkorange;  border-radius:5px; width:110px; padding:5px; cursor:pointer" href="EditDetailPengabdian?id_proposal=@item.ID_PROPOSAL">Edit Detail</p>
-                                            </td>
-                                        </tr>
-                                    }
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        </div>
-                    </div>
                 </div>
-        </div>
-        <script>
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });</script>
+                <div class="tab-pane fade" id="pills-pengabdian" role="tabpanel" aria-labelledby="pills-pengabdian-tab">
+                    <div class="card-header">
+                        <a href="#" class="brand-link" style="background-color:white">
+                            <img src="~/images/team.png" class="brand-image" >
+                            <span style="color:black; font-weight:bold">PENGABDIAN USER</span>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <span class="label stylePengabdian">Proposal Pengabdian yang sudah diajukan :</span>
+                        <table id="datatable" class="table table-bordered table-striped" style="margin-top:30px; margin-bottom:25px">
+                            <thead>
+                                <tr>
+                                    <th>Aksi</th>
+                                    <th>Judul Proposal</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.pengabdian)
+                                {
+                                    <tr>
+                                        <td>
+                                            <p style="font-weight:bold; border-radius:5px; width:110px; padding:5px; cursor:pointer"><a href="LihatProposalPengabdian?id_proposal=@item.ID_PROPOSAL">Lihat Review</a></p>
+                                        </td>
+                                        <td> @item.JUDUL_KEGIATAN</td>
+                                        <td>@item.DESKRIPSI</td>
+
+                                        <td>
+
+                                            <p style=" font-weight:bold; background-color: darkorange; border-radius: 5px; width: 110px; padding: 5px; cursor: pointer" class="text-center"><a href="EditDetailPengabdian?id_proposal=@item.ID_PROPOSAL">Edit Detail</a></p>
+
+                                        </td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                        <span class="label stylePengabdian">Proposal Pengabdian yang sudah diterima :</span>
+                        <table id="datatable" class="table table-bordered table-striped" style="margin-top:30px; margin-bottom:25px">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>Judul Proposal</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.pengabdianDiterima)
+                                {
+                                    <tr>
+                                        <td> @item.JUDUL_KEGIATAN</td>
+                                        <td>@item.DESKRIPSI</td>
+
+                                        <td>
+                                            <select name="optionPengabdian" id="optionPengabdian" class="center" onchange="location = this.value;" style=" height: 35px; border-radius: 12px;">
+                                                <option hidden> -- Pilih -- </option>
+                                                <option value="Contact.php">Lihat Review</option>
+                                                <option value="AddProsidingProfile">Lihat Jadwal</option>
+                                                <option value="Contact.php">Lapor Perkembangan</option>
+                                                <option value="Sitemap.php">Unggah Draft Laporan Final</option>
+                                                <option value="Sitemap.php">Unggah Laporan Final</option>
+                                                <option value="Sitemap.php">Unggah Outcome</option>
+                                                <option value="Sitemap.php">Perpanjang Masa Akhir</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

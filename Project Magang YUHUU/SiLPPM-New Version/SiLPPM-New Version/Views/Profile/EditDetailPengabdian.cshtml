@@ -1,1 +1,712 @@
-﻿<p
+﻿
+@{
+    ViewData["Title"] = "List Review Penelitian";
+}
+
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/@@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!-- Date Picker -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap-datepicker.min.css" />
+    <script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
+    <!--Mapbox-->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
+    <script src="https://unpkg.com/@@turf/turf@6/turf.min.js"></script>
+    <!-- Data Table-->
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">*@
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Karla', sans-serif;
+        }
+
+
+        [aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {
+            display: none;
+        }
+
+        .table thead th {
+            vertical-align: middle;
+            align-content: center;
+            text-align: center;
+        }
+
+        .label {
+            color: white;
+            border-radius: 5px;
+            border-spacing: 20px;
+            padding: 5px;
+            margin-top: 50px;
+            margin-bottom: 60px;
+        }
+
+
+
+        .btn:active {
+            background-color: indianred;
+            transform: translateY(4px);
+        }
+
+        .btn:hover {
+            background-color: indianred;
+        }
+
+        .content-wrapper {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            background-color: white;
+            border-radius: 10px;
+            min-height: 402px !important;
+        }
+
+        .title-card {
+            color: #FFFFFF;
+            background-color: #F2AA4C;
+            padding: 15px;
+            border-radius: 10px 10px 0px 0px;
+            min-width: inherit;
+        }
+
+        a:hover, a:active {
+            color: white;
+        }
+
+
+        .td, th {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="px-3 mt-3">
+        <div class="content-wrapper p-3" style=" background-color: white;">
+
+            <h5 class="card-header font-weight-bold bg-light"><span class="text-black">Edit Detail Pengabdian</span></h5>
+
+            @if (TempData["succ"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color:green">
+                    <strong><i class='fas fa-bell' style='font-size:22px; color:floralwhite'></i>&nbsp; @TempData["succ"].ToString()</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="color:white">&times;</span>
+                    </button>
+                </div>
+            }
+            @if (TempData["err"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><i class='fas fa-exclamation-triangle' style='font-size:22px; color:floralwhite'></i>&nbsp;@TempData["err"].ToString()</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="color:white">&times;</span>
+                    </button>
+                </div>
+            }
+            <div class="pb-3 mt-3">
+
+                <div>
+
+                    <div class="px-3 pb-2">
+                        <form method="post" asp-action="UbahPengabdian" asp-controller="Profile" enctype="multipart/form-data">
+                            @Html.AntiForgeryToken()
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label hidden for="basic-addon1" class="form-label">ID PROPOSAL</label>
+                                    <input hidden class="form-control" id="id_proposal" name="id_proposal" value="@Model.pengabdianID.ID_PROPOSAL">
+                                    <label  for="basic-addon1" hidden class="form-label">NPP</label>
+                                    <input hidden class="form-control" id="NPP" name="NPP" value="@Model.dataPengabdian.NPP">
+                                    <div class="mb-4"hidden>
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   autocomplete="off"
+                                                   class="form-control"
+                                                   name="USER_ID"
+                                                   id="USER_ID"
+                                                   value="@Model.cekUser.username" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-4" hidden>
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   autocomplete="off"
+                                                   class="form-control"
+                                                   name="username"
+                                                   id="username"
+                                                   value="@Model.cekUser.username" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-4" hidden>
+                                        <div class="input-group">
+                                            <input type="hidden"
+                                                   autocomplete="off"
+                                                   class="form-control"
+                                                   name="NPP"
+                                                   id="NPP"
+                                                   value="@Model.cekUser.NPP" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Skim Pengabdian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px" id="ID_SKIM" name="ID_SKIM">
+                                                <option hidden style="color:lightgrey">Pilih Skim Pengabdian</option>
+                                                @foreach (var item in Model.refjenis)
+                                                {
+                                                    <option value="@item.ID_SKIM"> @item.DESKRIPSI</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Tahun Akademik</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px" id="ID_TAHUN_AKADEMIK" name="ID_TAHUN_AKADEMIK">
+                                                <option hidden style="color:lightgrey">Pilih Tahun Akademik</option>
+                                                @foreach (var item in Model.refjenis2)
+                                                {
+                                                    <option value="@item.ID_TAHUN_ANGGARAN"> @item.TAHUN_ANGGARAN</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="basic-addon2" class="form-label">Semester Akademik </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon2"><i class="mdi mdi-pencil small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px" id="NO_SEMESTER" name="NO_SEMESTER">
+                                                <option hidden style="color:lightgrey">Pilih Semester Akademik</option>
+                                                @foreach (var item in Model.refjenis3)
+                                                {
+                                                    <option value="@item.NO_SEMESTER"> @item.SEMESTER_AKADEMIK</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="card alert-default">
+                                        <div class="card-header">
+                                            <i class="fas fa-file-export" aria-hidden="true"></i>
+                                            <label for="luaranOutput"
+                                                   class="col-sm-3 col-form-label col-form-label-sm">Luaran Output</label><br />
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                @*<label
+                      for="luaranOutcome"
+                      class="col-sm-3 col-form-label col-form-label-sm"
+                      >Luaran Outcome</label
+                    ><br />*@
+                                                <div class="col-sm-9 row" id="outputList">
+                                                    <div class="col-sm-6">
+                                                        @foreach (var item in Model.refjenis4)
+                                                        {
+                                                            <div class="col-sm-5 custom-control custom-checkbox ml-2 mr-2">
+                                                                <input type="checkbox" class="custom-control-input" onclick="pushOutput()" id="output_@item.ID_OUTPUT" value="@item.DESKRIPSI">
+                                                                <label class="custom-control-label font-weight-normal" for="output_@item.ID_OUTPUT">@item.DESKRIPSI</label>
+                                                            </div>
+                                                        }
+                                                        <input type="text" class="form-control form-control-sm" name="output" id="output" readonly hidden>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card alert-default">
+                                        <div class="card-header">
+                                            <i class="fas fa-file-export" aria-hidden="true"></i>
+                                            <label for="luaranOutcome"
+                                                   class="col-sm-3 col-form-label col-form-label-sm">Luaran Outcome</label><br />
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+
+                                                <div class="col-sm-9 row" id="outcomeList">
+                                                    <div class="col-sm-6">
+                                                        <label class="col-form-label col-form-label-sm">Publikasi</label>
+
+                                                        @foreach (var item in Model.refOutcome)
+                                                        {
+                                                            if
+(item.ID_JENIS_OUTCOME == 1)
+                                                            {
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox"
+                                                                           class="custom-control-input"
+                                                                           onclick="pushOutcome()"
+                                                                           id="outcome_@item.ID_OUTCOME"
+                                                                           value="@item.DESKRIPSI" />
+                                                                    <label class="custom-control-label font-weight-normal"
+                                                                           for="outcome_@item.ID_OUTCOME">@item.DESKRIPSI</label>
+                                                                    </div>
+                                                                }
+                                                            }
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label class="col-form-label col-form-label-sm">HaKI</label>
+                                                        @foreach (var item in Model.refOutcome)
+                                                        {
+                                                            if
+(item.ID_JENIS_OUTCOME == 2)
+                                                            {
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox"
+                                                                           class="custom-control-input"
+                                                                           onclick="pushOutcome()"
+                                                                           id="outcome_@item.ID_OUTCOME"
+                                                                           value="@item.DESKRIPSI" />
+                                                                    <label class="custom-control-label font-weight-normal"
+                                                                           for="outcome_@item.ID_OUTCOME">@item.DESKRIPSI</label>
+                                                                    </div>
+                                                                }
+                                                            }
+                                                    </div>
+                                                    <input type="text"
+                                                           class="form-control form-control-sm"
+                                                           name="outcome"
+                                                           id="outcome"
+                                                           readonly
+                                                           hidden />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card" style="border-left-width: 3px; border-left-color: #dc3545">
+                                        <div class="card-body">
+                                            <label class="pb-2" style="color: #fd7e14">Beban SKS</label>
+                                            <div class="form-group row">
+                                                <label for="SKS_KETUA" class="col-sm-3 col-form-label col-form-label-sm">SKS Ketua</label>
+                                                <div class="col-sm-3">
+                                                    <input type="number" class="form-control form-control-sm" placeholder="Beban SKS Ketua" id="SKS_KETUA" name="SKS_KETUA" value="@Model.dataPengabdian.SKS_KETUA">
+                                                </div>
+                                                <label for="SKS_ANGGOTA" class="col-sm-3 col-form-label col-form-label-sm">SKS Anggota</label>
+                                                <div class="col-sm-3">
+                                                    <input type="number" class="form-control form-control-sm" id="SKS_ANGGOTA" name="SKS_ANGGOTA" placeholder="Beban SKS Anggota" value="@Model.dataPengabdian.SKS_ANGGOTA">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                  
+                                   
+                                    <div class="card alert-default">
+                                        <div class="card-header">
+                                            <i class="fa fa-money-bill" aria-hidden="true"></i>
+                                            Pendanaan
+                                        </div>
+                                        <div class="card-body">
+                                            <label for="DANA_UAJY"
+                                                   class="col-sm-3 col-form-label col-form-label-sm"
+                                                   style="color: steelblue">Dana UAJY</label>
+                                            <div class="row col-sm-12">
+                                                <div class="col-sm-9 input-group input-group-sm">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
+                                                    </div>
+                                                    <input type="text" id="DANA_UAJY" name="DANA_UAJY" class="form-control" value="@Model.dataPengabdian.DANA_UAJY" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                </div>
+
+                                            </div>
+                                            <label for="danaPribadi"
+                                                   class="col-sm-3 col-form-label col-form-label-sm"
+                                                   style="color: steelblue">Dana Pribadi</label>
+                                            <div class="row col-sm-12">
+                                                <div class="col-sm-9 input-group input-group-sm">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
+                                                    </div>
+                                                    <input type="text" id="DANA_PRIBADI" name="DANA_PRIBADI" class="form-control" value="@Model.dataPengabdian.DANA_PRIBADI" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                </div>
+
+                                            </div>
+                                            <label for="danaEksternal"
+                                                   class="col-sm-3 col-form-label col-form-label-sm"
+                                                   style="color: steelblue">Dana Eksternal</label>
+                                            <div class="row col-sm-12">
+                                                <div class="col-sm-9 input-group input-group-sm">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
+                                                    </div>
+                                                    <input type="text" id="DANA_EKSTERNAL" name="DANA_EKSTERNAL" class="form-control" value="@Model.dataPengabdian.DANA_EKSTERNAL" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                </div>
+
+                                            </div>
+                                            <label for="danaKerjasama"
+                                                   class="col-sm-3 col-form-label col-form-label-sm"
+                                                   style="color: steelblue">Dana Kerjasama</label>
+                                            <div class="row col-sm-12">
+                                                <div class="col-sm-9 input-group input-group-sm">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
+                                                    </div>
+                                                    <input type="text" id="DANA_KERJASAMA" name="DANA_KERJASAMA" class="form-control" value="@Model.dataPengabdian.DANA_KERJASAMA" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label for="basic-addon3" class="form-label">Judul Kegiatan Pengabdian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-home small" aria-hidden="true"> </i></span>
+                                            <input id="JUDUL_KEGIATAN" name="JUDUL_KEGIATAN" placeholder="Judul Pengabdian" value="@Model.dataPengabdian.JUDUL_KEGIATAN" style=" height: 40px; width: 710px;"  />
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Landasan Penelitian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar-range small" aria-hidden="true"> </i></span>
+                                            <input type="text" class="form-control" placeholder="Landasan Penelitian" aria-label="LANDASAN_PENELITIAN" aria-describedby="basic-addon1" id="LANDASAN_PENELITIAN" value="@Model.dataPengabdian.LANDASAN_PENELITIAN" name="LANDASAN_PENELITIAN">
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Sasaran</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar-range small" aria-hidden="true"> </i></span>
+                                            <input type="text" class="form-control" placeholder="Sasaran" value="@Model.dataPengabdian.SASARAN" aria-label="SASARAN" aria-describedby="basic-addon1" id="SASARAN" name="SASARAN">
+                                        </div>
+                                    </div>
+                                 
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Tema  Universitas</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px" id="ID_TEMA_UNIVERSITAS" name="ID_TEMA_UNIVERSITAS">
+                                                <option hidden style="color:lightgrey">Pilih Tema Penelitian</option>
+                                                @foreach (var item in Model.refjenis6)
+                                                {
+                                                    <option value="@item.ID_TEMA_UNIVERSITAS"> @item.DESKRIPSI</option>
+
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="id_roadMap" class="col-sm-3 col-form-label col-form-label-sm">
+                                            Topik Sesuai Rencana
+                                            <a data-container="body" data-toggle="popover" data-placement="top" data-content="Topik sesuai dengan rencana unit">
+                                                <i class="fa fa-info-circle fa-xs text-primary"></i>
+                                            </a>
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
+                                            <select style="width:710px" id="ID_ROAD_MAP" name="ID_ROAD_MAP">
+                                                <option selected hidden>Pilih Topik Sesuai</option>
+                                                <option value="1">Peduli Kaum Difabel</option>
+                                                <option value="4">Pengabdian Masyarakat Wonosari</option>
+                                                <option value="5">Pengabdian Masyarakat Kulonprogo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Jenis Pengabdian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+
+                                            <input id="JENIS_PENGABDIAN" name="JENIS_PENGABDIAN" type="text" class="form-control" placeholder="Jenis Pengabdian" aria-describedby="basic-addon1" value="@Model.dataPengabdian.JENIS_PENGABDIAN">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="card alert-default">
+                                        <div class="card-header" style="border-bottom-color:lightsteelblue; border-bottom-left-radius:10px;border-bottom-right-radius:10px">
+                                            <i class="fa fa-solid fa-clock" aria-hidden="true"></i>
+                                            Tanggal dan Durasi Penelitian
+                                        </div>
+
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="AWAL" class="col-sm-3 col-form-label col-form-label-sm">Tanggal Mulai Penelitian</label>
+                                                <div class="col-sm-3">
+                                                    <input class="form-control form-control-sm datepicker" type="date" id="AWAL" name="AWAL" placeholder="YYYY-MM-DD">
+                                                </div>
+                                                <label for="AKHIR" class="col-sm-3 col-form-label col-form-label-sm">Tanggal Akhir Penelitian</label>
+                                                <div class="col-sm-3">
+                                                    <input class="form-control form-control-sm datepicker" type="date" id="AKHIR" name="AKHIR" placeholder="YYYY-MM-DD">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="durasi" class="col-sm-3 col-form-label col-form-label-sm">Durasi Efektif</label>
+                                                <div class="col-sm-3">
+                                                    <select id="durasi" class="custom-select custom-select-sm" name="durasi">
+                                                        <option selected hidden>Pilih Durasi</option>
+                                                        <option value="1">1 Bulan</option>
+                                                        <option value="2">2 Bulan</option>
+                                                        <option value="3">3 Bulan</option>
+                                                        <option value="4">4 Bulan</option>
+                                                        <option value="5">5 Bulan</option>
+                                                        <option value="6">6 Bulan</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Mitra Kerjasama atau Mitra Sasaran</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+
+                                            <input type="text" class="form-control" placeholder="Nama Mitra" id="MITRA" name="MITRA" value="@Model.dataPengabdian.MITRA" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" placeholder="Bidang Keahlian" id="MITRA_KEAHLIAN" name="MITRA_KEAHLIAN" value="@Model.dataPengabdian.MITRA_KEAHLIAN" aria-describedby="basic-addon1">
+
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">Lokasi Pengabdian</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-magnify small" aria-hidden="true"> </i></span>
+                                            <input type="text" class="form-control" placeholder="Lokasi Penelitian" aria-label="Lokasi Penelitian" value="@Model.dataPengabdian.LOKASI" aria-describedby="basic-addon1" id="LOKASI">
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="card" style="border-right-width: 3px; border-right-color:royalblue">
+                                        <div class="card-body">
+                                            <label class="pb-2" style="">
+                                                <i class="fa fa-map" aria-hidden="true"></i>
+                                                Peta Lokasi
+                                                <a data-container="body" data-toggle="popover" data-placement="top" data-content="Silakan lakukan pencarian terhadap lokasi lebih dahulu. Jika lokasi kurang tepat, lakukan drag pada marker">
+                                                    <i class="fa fa-info-circle fa-xs text-primary"></i>
+                                                </a>
+                                            </label>
+                                            <div class="form-group">
+                                                <div id="map" style="width:100%;height:300px;">
+                                                    <pre id="coordinates" class="coordinates form-group"></pre>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="longitude" class="col-sm-3 col-form-label col-form-label-sm">Longitude</label>
+                                                <div class="col-sm-3">
+                                                    <input type="text" readonly class="form-control form-control-sm" id="longitude" name="longitude" placeholder="0">
+                                                </div>
+                                                <label for="latitude" class="col-sm-3 col-form-label col-form-label-sm">Latitude</label>
+                                                <div class="col-sm-3">
+                                                    <input type="text" readonly class="form-control form-control-sm" id="latitude" name="latitude" placeholder="0">
+                                                </div>
+                                            </div>
+                                            <label class="pb-2" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color:royalblue">Jarak Lokasi dari Kampus UAJY</label>
+                                            <div class="form-group row">
+                                                <label for="jarak" class="col-sm-3 col-form-label col-form-label-sm">Jarak ke Lokasi</label>
+                                                <div class="col-sm-3 d-flex">
+                                                    <input type="text" class="form-control form-control-sm" id="jarak" name="jarak" placeholder="0">
+                                                    <span class="form-control-sm">km</span>
+                                                </div>
+                                                <label for="waktu" class="col-sm-3 col-form-label col-form-label-sm">Waktu</label>
+                                                <div class="col-sm-3 d-flex">
+                                                    <input type="text" class="form-control form-control-sm" id="waktu" name="waktu" placeholder="0">
+                                                    <span class="form-control-sm">jam</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <div class="btn">
+                                <button type="submit"  class="btn btn-primary">
+                                    Submit
+                                </button>
+                            </div>
+                        
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+
+    @section Scripts{
+
+        <script>
+            var tblDataDaftarPengabdian;
+            refreshTabelDaftarPengabdian();
+
+
+            //Onload handler to fire off the app.
+            //google.maps.event.addDomListener(window, 'load', initialize);
+            mapboxgl.accessToken = 'pk.eyJ1IjoicG9ydGFsdWFqeSIsImEiOiJja3R3ZmN5NGwwdTI5MnVteHhuNWdnOTkxIn0.f2R7OUqhkBaSbVxmC1pIUw';
+            const coordinates = document.getElementById('coordinates');
+            const map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [110.41402263910413, -7.780548008097142],
+                zoom: 13
+            });
+
+            //popup on UAJY marker
+            const popup = new mapboxgl.Popup({ offset: 20, padding: 5 })
+                .setHTML('<strong>Universitas Atma Jaya Yogyakarta</strong>' +
+                    '<p>Jl. Babarsari No.44, Janti, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281</span>');
+
+            //create marker for UAJY
+            const markerUAJY = new mapboxgl.Marker(
+                {
+                    color: 'red'
+                })
+                .setLngLat(
+                    [110.41402263910413, -7.780548008097142])
+                .addTo(map)
+                .setPopup(popup);
+
+            //initialize geocoder
+            const geocoder = new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                marker: false,
+                mapboxgl: mapboxgl,
+            });
+
+            map.addControl(geocoder);
+
+            //create marker for destinantion
+            const markerPoint = new mapboxgl.Marker({
+                draggable: true
+            });
+
+            //response when user interact with mapbox
+            geocoder.on('result', e => {
+                markerPoint.setLngLat(e.result.center).addTo(map);
+
+                const lngLat = markerPoint.getLngLat();
+
+                var to = [lngLat.lng, lngLat.lat];
+                var from = [markerUAJY.getLngLat().lng, markerUAJY.getLngLat().lat];
+
+                var distance = (turf.distance(to, from, 'kilometers')).toPrecision(4);
+
+                coordinates.style.display = 'block';
+                coordinates.innerHTML = `<strong>Information Marker</strong> </br>Longitude: ${lngLat.lng} <br/>Latitude : ${lngLat.lat} <br/>Distance : ${distance} km`;
+                document.getElementById("longitude").value = lngLat.lng;
+                document.getElementById("latitude").value = lngLat.lat;
+                document.getElementById("jarak").value = distance;
+
+                markerPoint.on('dragend', e => {
+                    const lngLat = markerPoint.getLngLat();
+
+                    var to = [lngLat.lng, lngLat.lat];
+                    var from = [markerUAJY.getLngLat().lng, markerUAJY.getLngLat().lat];
+
+                    var distance = (turf.distance(to, from, 'kilometers')).toPrecision(4);
+
+                    coordinates.style.display = 'block';
+                    coordinates.innerHTML = `<strong>Information Marker</strong> </br>Longitude: ${lngLat.lng} <br/>Latitude: ${lngLat.lat} <br/>Distance: ${distance} km`;
+                    document.getElementById("longitude").value = lngLat.lng;
+                    document.getElementById("latitude").value = lngLat.lat;
+                    document.getElementById("jarak").value = distance;
+                })
+            });
+            //untuk datapicker
+            $(document).ready(function () {
+                $(".datepicker").datepicker({
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                    todayHighlight: true,
+                });
+                $("#AWAL").on('changeDate', function (selected) {
+                    var startDate = new Date(selected.date.valueOf());
+                    $("#AKHIR").datepicker('setStartDate', startDate);
+                    if ($("#AWAL").val() > $("#AKHIR").val()) {
+                        $("#AKHIR").val($("#AWAL").val());
+                    }
+                });
+            });
+            function pushOutput() {
+                var arrItem = [];
+
+                $("#outputList div input[type=checkbox]").each(function (index, val) {
+                    var checkId = $(val).attr("Id");
+                    var value = $(val).attr("Value");
+                    var Ischecked = $("#" + checkId).is(":checked", true);
+
+                    if (Ischecked) {
+                        arrItem.push(value);
+                        document.getElementById("output").value = arrItem;
+                    }
+
+                    if (arrItem.length == 0) {
+                        document.getElementById("output").value = "";
+                    }
+                })
+            }
+
+            function pushOutcome() {
+                var arrItem = [];
+
+                $("#outcomeList div input[type=checkbox]").each(function (index, val) {
+                    var checkId = $(val).attr("Id");
+                    var value = $(val).attr("Value");
+                    var Ischecked = $("#" + checkId).is(":checked", true);
+                    if (Ischecked) {
+                        arrItem.push(value);
+                        document.getElementById("outcome").value = arrItem;
+
+                    }
+
+                    if (arrItem.length == 0) {
+                        document.getElementById("outcome").value = "";
+                    }
+                })
+            }
+
+            function refreshTabelDaftarPengabdian() {
+                tblDataDaftarPengabdian = $("#tblDataHistoryPenelitian").DataTable({
+
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                }).buttons().container().appendTo('#tblDataHistoryPenelitian_wrapper .col-md-6:eq(0)');
+            }
+
+
+        </script>
+    }
+</body>
+</html>

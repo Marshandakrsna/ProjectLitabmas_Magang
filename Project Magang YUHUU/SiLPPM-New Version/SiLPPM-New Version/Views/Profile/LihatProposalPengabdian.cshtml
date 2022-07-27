@@ -241,14 +241,135 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.kriteria)
-                                {
-                                    <tr class="text-center align-middle">
-                                        <td> @item.KRITERIA</td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                }
+                                
+                                <tr class="text-center align-middle">
+                                    <td>
+                                        Analisis Situasi (Kondisi eksisting mitra, persoalan yang dihadapi mitra)
+                                        Bobot: 20%
+                                    </td>
+                                    @if (Model.countReviewer1.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                    else
+                                    {
+
+                                        <td> @Model.reviewer1.SKOR1 </td>
+                                    }
+
+
+                                    @if (Model.countReviewer1.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                  
+                                </tr>
+                                <tr class="text-center align-middle">
+                                    <td>
+                                        Permasalahan mitra (Kecocokan permasalahan spesifik yang dihadapi mitra dan program serta kompetisi tim)
+                                        Bobot: 15%
+                                    </td>
+                                    @if (Model.countReviewer1.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                    else
+                                    {
+
+                                        <td> @Model.reviewer1.SKOR2 </td>
+                                    }
+
+
+                                    @if (Model.countReviewer1.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                </tr>
+                                <tr class="text-center align-middle">
+                                    <td>
+                                        Solusi yang ditawarkan (Ketepatan metode pendekatan untuk mengatasi permasalahan, rencana kegiatan, dan kontribusi partisipasi mitra)
+                                        Bobot: 20%
+                                    </td>
+                                    @if (Model.countReviewer1.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                    else
+                                    {
+
+                                        <td> @Model.reviewer1.SKOR3 </td>
+                                    }
+
+
+                                    @if (Model.countReviewer1.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                </tr>
+                                <tr class="text-center align-middle">
+                                    <td>
+                                        Target Luaran (Jenis luaran output&outcome dan spesifikasinya sesuai kegiatan yang diusulkan)
+                                        Bobot: 15%
+                                    </td>
+                                    @if (Model.countReviewer1.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                    else
+                                    {
+
+                                        <td> @Model.reviewer1.SKOR4 </td>
+                                    }
+
+
+                                    @if (Model.countReviewer1.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                </tr>
+                                <tr class="text-center align-middle">
+                                    <td>
+                                        Kelayakan TIM (Kuatilikasi tim pelaksana, relevansi skill tim, sinergisme tim, pengalaman kemasyarakatan, organisasi tim, jadwal kegiatan, kelengkapan lampiran)
+                                        Bobot: 10%
+                                    </td>
+                                    @if (Model.countReviewer1.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                    else
+                                    {
+
+                                        <td> @Model.reviewer1.SKOR5 </td>
+                                    }
+
+
+                                    @if (Model.countReviewer1.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                </tr>
+                                <tr class="text-center align-middle">
+                                    <td>
+                                        Biaya Pekerjaan (Kelayakan usulan biaya, biaya program: Bahan habis, peralatan, perjalanan, dan lain-lain pengeluaran)
+                                        Bobot: 20%
+                                    </td>
+                                    @if (Model.countReviewer1.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                    else
+                                    {
+
+                                        <td> @Model.reviewer1.SKOR6 </td>
+                                    }
+
+
+                                    @if (Model.countReviewer1.JUMLAH == 0)
+                                    {
+                                        <td> - </td>
+                                    }
+                                </tr>
+                                
                             </tbody>
                         </table>
 

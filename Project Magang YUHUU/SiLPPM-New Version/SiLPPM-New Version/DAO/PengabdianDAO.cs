@@ -50,6 +50,42 @@ namespace SiLPPM_New_Version.DAO
                 }
             }
         }
+        public DBOutput GetCountPengabdian(string username)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT count(silppm.TBL_PENELITIAN.ID_PROPOSAL) as JUMLAH FROM siatmax.MST_UNIT INNER JOIN
+                      simka.MST_KARYAWAN ON siatmax.MST_UNIT.ID_UNIT = simka.MST_KARYAWAN.ID_UNIT INNER JOIN
+                      siatmax.MST_UNIT AS MST_UNIT_1 ON simka.MST_KARYAWAN.ID_UNIT_AKADEMIK = MST_UNIT_1.ID_UNIT INNER JOIN
+                      silppm.TBL_PENELITIAN INNER JOIN silppm.TBL_PERSONIL_PENELITIAN ON silppm.TBL_PENELITIAN.ID_PROPOSAL = silppm.TBL_PERSONIL_PENELITIAN.ID_PROPOSAL INNER JOIN
+                      silppm.REF_STATUS_PENELITIAN_PENGABDIAN ON silppm.REF_STATUS_PENELITIAN_PENGABDIAN.ID_STATUS_PENELITIAN = silppm.TBL_PENELITIAN.ID_STATUS_PENELITIAN INNER JOIN
+                      siatmax.TBL_TAHUN_AKADEMIK ON silppm.TBL_PENELITIAN.ID_TAHUN_ANGGARAN = siatmax.TBL_TAHUN_AKADEMIK.ID_TAHUN_AKADEMIK ON 
+                      simka.MST_KARYAWAN.NPP = silppm.TBL_PERSONIL_PENELITIAN.NPP where  simka.MST_KARYAWAN.USERNAME = @username";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { username = username });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
         public DBOutput GetApprovalPengabdian(string id_proposal)
         {
             DBOutput output = new DBOutput();
