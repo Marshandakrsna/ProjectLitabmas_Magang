@@ -80,9 +80,11 @@
         .green-color {
             background-color: #1CB394 !important;
         }
-        a :hover{
-            color:darkslateblue;
+
+        a :hover {
+            color: darkslateblue;
         }
+
         table {
             border-collapse: collapse;
             width: 100%;
@@ -95,13 +97,31 @@
         }
 
         tr:hover {
-            background-color:snow;
+            background-color: snow;
         }
     </style>
 </head>
 <body>
     <div class="px-3 mt-3">
         <div class="content-wrapper p-3">
+            @if (TempData["succ"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color:green">
+                    <strong><i class='fas fa-bell' style='font-size:22px; color:floralwhite'></i>&nbsp; @TempData["succ"].ToString()</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="color:white">&times;</span>
+                    </button>
+                </div>
+            }
+            @if (TempData["err"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><i class='fas fa-exclamation-triangle' style='font-size:22px; color:floralwhite'></i>&nbsp;@TempData["err"].ToString()</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="color:white">&times;</span>
+                    </button>
+                </div>
+            }
             <div class="card-header">
                 <a href="#" class="brand-link" style="background-color:azure">
                     <img src="~/images/approved.png" class="brand-image" style="opacity: .8">
@@ -111,9 +131,9 @@
 
             <div style="width: 100%; overflow-x: auto;" class="col">
                 <br />
-                <table class="table  table-hover dt-responsive nowrap"style="line-height:16px;border:hidden">
+                <table id="datatable" class="table  table-hover dt-responsive nowrap" style="line-height:16px;border:hidden">
                     <thead>
-                        <tr hidden> 
+                        <tr>
 
                             <td class="style8" style="font-weight: bold;color: steelblue;">
                                 ID PROPOSAL
@@ -271,7 +291,7 @@
                                 Dokumen
                             </td>
                             <td style="line-height:50px">
-                                <span class="label style"><a style="color:white" href=""><i class="fa fa-file-download"></i> Unduh Dokumen</a></span>
+                                <span class="label style"><a style="color:white" href="/PreviewFileProposalPengabdian/@Model.data.ID_PROPOSAL"><i class="fa fa-file-download"></i> Unduh Dokumen</a></span>
                             </td>
 
                         </tr>
@@ -281,17 +301,192 @@
                     <tbody>
                     </tbody>
                 </table>
-                <button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i>&nbsp; Setujui Proposal</button>
-                <button type="submit" class="btn btn-danger"><i class="fa fa-close"></i>&times; Revisi/Tolak</button>
+                <button type="submit" class="btn btn-success" onclick="togModalUpdateSetuju(@Model.data.ID_PROPOSAL)" id="setujuiButton_"><i class="fa fa-check-circle"></i>&nbsp; Setujui Proposal</button>
+                <button type="submit" class="btn btn-danger" onclick="togModalUpdateTolak(@Model.data.ID_PROPOSAL)" id="tolakButton_"><i class="fa fa-close"></i>&times; Tolak Proposal</button>
+                <button type="submit" class="btn btn-warning" onclick="togModalRevisi(@Model.data.ID_PROPOSAL)" id="revisiButton_"><i class="fa fa-close"></i>&times; Revisi Proposal</button>
+
+                @*<button type="submit" class="btn btn-danger" onclick="togModalUpdateTolak( id="tolakButton_"><i class="fa fa-close"></i>&times; Tolak Proposal</button>*@
 
             </div>
         </div>
     </div>
-    <script>
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });</script>
+    @*Modal Revisi*@
+    <div class="modal fade" id="modalRevisi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Revisi Proposal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form class="formTambahFeedback " method="post" asp-action="addFeedback" asp-controller="Pengabdian" enctype="multipart/form-data" novalidate>
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">ID_PROPOSAL</label>
+                        <input id="ID_PROPOSAL" name="ID_PROPOSAL" type="text" class="style1" style=" word-wrap:break-word" value="@Model.data.ID_PROPOSAL" />
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">NPP</label>
+                        <input id="NPP" name="NPP" type="text" class="style1" style=" word-wrap:break-word" value="@Model.data.NPP" />
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Status</label>
+                        <input id="STATUS" name="STATUS" type="text" class="style1" style=" word-wrap:break-word" value="Revisi" />
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label">
+                            Alasan Revisi
+                        </label>
+                        <textarea text="text" id="FEEDBACK" name="FEEDBACK" class="style1"></textarea>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    @*Modal Dekan Disetujui*@
+    <div class="modal fade" id="modalSetuju" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Menyetujui Proposal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah anda yakin ingin menyetujui proposal ini?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" onclick="setujuiProposal()" class="btn btn-danger">Setujui</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*Modal Dekan Tolak*@
+    <div class="modal fade" id="modalTolak" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Tolak Proposal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah anda yakin ingin menolak proposal ini?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" onclick="tolakProposal()" class="btn btn-danger">Tolak</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+    function togModalUpdateSetuju(id) {
+        //console.log(id)
+        id_proposal = id;
+        this.tempIdUpdate = id;
+        $('#modalSetuju').modal('show');
+    }
+    function togModalUpdateTolak(id) {
+        //console.log(id)
+        id_proposal = id;
+        this.tempIdUpdate = id;
+        $('#modalTolak').modal('show');
+    }
+    function togModalRevisi(id_proposal) {
+        //console.log(id)
+        id_proposal = id_proposal;
+        this.tempIdProposal = id_proposal;
+        $('#modalRevisi').modal('show');
+    
+        $('#id_proposal').val(id_proposal);
+    }
+    function closeModal() {
+        $('#modalSetuju').modal('hide');
+    }
+    function closeModalTolak() {
+        $('#modalTolak').modal('hide');
+    }
+    function closeModalRevisi() {
+        $('#modalRevisi').modal('hide');
+    }
+
+    function setujuiProposal() {
+        var self = this;
+        console.log(id_proposal);
+        var update = $('#updateButton_' + this.tempIdDelete);
+        var myTable = $('#datatable').DataTable();
+
+        $.ajax({
+            type: "POST",
+            url: "/Pengabdian/UpdateStatusDekanDisetujui?id_proposal=" + id_proposal,
+            data: ({ id_proposal: id_proposal }),
+            success: function (data) {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Data berhasil diupdate!',
+                    confirmButtonText: 'Tutup',
+                })
+                closeModal();
+                window.location.reload();
+
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'SiLPPM said: ',
+                    text: 'Data gagal diupdate!',
+                })
+                window.location.reload();
+            }
+        });
+    }
+    function tolakProposal() {
+        var self = this;
+        console.log(id_proposal);
+        var update = $('#tolakButton_' + this.tempIdDelete);
+        var myTable = $('#datatable').DataTable();
+
+        $.ajax({
+            type: "POST",
+            url: "/Pengabdian/UpdateStatusDekanDitolak?id_proposal=" + id_proposal,
+            data: ({ id_proposal: id_proposal }),
+            success: function (data) {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Data berhasil diupdate!',
+                    confirmButtonText: 'Tutup',
+                })
+                closeModalTolak();
+                window.location.reload();
+
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'SiLPPM said: ',
+                    text: 'Data gagal diupdate!',
+                })
+                window.location.reload();
+            }
+        });
+    }
+</script>

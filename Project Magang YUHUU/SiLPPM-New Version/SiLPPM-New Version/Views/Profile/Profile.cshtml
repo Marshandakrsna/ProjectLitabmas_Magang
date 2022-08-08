@@ -30,6 +30,151 @@
             margin-top: 50px;
             margin-bottom: 60px;
         }
+
+        .wrapper .tooltip {
+            position: absolute;
+            top: 0;
+            font-size: 14px;
+            background: #ffffff;
+            color: #ffffff;
+            padding: 5px 8px;
+            border-radius: 5px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+            .wrapper .tooltip::before {
+                position: absolute;
+                content: "";
+                height: 8px;
+                width: 8px;
+                background: #ffffff;
+                bottom: -3px;
+                left: 50%;
+                transform: translate(-50%) rotate(45deg);
+                transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+
+        .wrapper .icon:hover .tooltip {
+            top: -45px;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .wrapper .icon:hover span,
+        .wrapper .icon:hover .tooltip {
+            text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .wrapper .edit:hover .tooltip,
+        .wrapper .edit:hover .tooltip::before {
+            background: #2b8a50;
+            color: #ffffff;
+        }
+
+
+        .wrapper .download:hover .tooltip,
+        .wrapper .download:hover .tooltip::before {
+            background: #3b5999;
+            color: #ffffff;
+        }
+
+            .wrapper .downloadPengesahan:hover .tooltip,
+            .wrapper .download:hover .tooltip::before {
+                background: #aa2828;
+                color: #ffffff;
+            }
+
+        :root {
+            --bg: #dcdde1;
+            --color-icon: #535c68;
+            --social-icon1: #2b8a50;
+            --social-icon2: #3b5999;
+            --social-icon3: #aa2828;
+            --social-icon4: #3b5999;
+            --social-icon5: #0077B5;
+        }
+
+     
+        section {
+          
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: -10;
+        }
+
+        .icon-list {
+            width: 100%;
+            max-width: 50rem;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .icon-item {
+            list-style: none
+        }
+
+        .icon-link {
+            display: inline-flex;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: var(--color-icon);
+            width: 3rem;
+            height: 3rem;
+            transition: .5s linear;
+            position: relative;
+            z-index: 1;
+            margin: auto
+        }
+
+            .icon-link:hover {
+                color: #fff;
+            }
+
+            .icon-link i {
+                margin: auto;
+            }
+
+            .icon-link::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 3rem;
+                height: 3rem;
+                background: #000;
+                border-radius: 50%;
+                z-index: -1;
+                transform: scale(0);
+                transition: 0.3s cubic-bezier(.95, .32, .37, 1.21);
+            }
+
+            .icon-link:hover::before {
+                transform: scale(1);
+            }
+
+        .edit a:hover:before {
+            background: var(--social-icon1);
+        }
+
+
+
+        .download a:hover:before {
+            background: #3b5999;
+        }
+        .downloadPengesahan a:hover:before {
+            background: var(--social-icon3);
+        }
+
+       
         .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: #fff;
     background-color:darkslateblue;
@@ -196,14 +341,14 @@
     </div>
     <div class="px-3 mt-3">
         <div class="content-wrapper p-3">
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist"style=" background-color: #c4d9e6; color: white; border-radius: 50px; height: 47px;">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style=" background-color: #c4d9e6; color: white; border-radius: 50px; height: 47px;">
                 <li class="nav-item" style="margin-top: 3px; width: 160px; text-align: center; ">
                     <a class="nav-link active" id="pills-penelitian-tab" data-toggle="pill" href="#pills-penelitian" role="tab" aria-controls="pills-penelitian" aria-selected="true">Penelitian</a>
                 </li>
-                <li class="nav-item"style="margin-top: 3px; width: 160px; text-align: center;">
+                <li class="nav-item" style="margin-top: 3px; width: 160px; text-align: center;">
                     <a class="nav-link" id="pills-pengabdian-tab" data-toggle="pill" href="#pills-pengabdian" role="tab" aria-controls="pills-pengabdian" aria-selected="false">Pengabdian</a>
                 </li>
-         
+
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-penelitian" role="tabpanel" aria-labelledby="pills-penelitian-tab">
@@ -215,31 +360,89 @@
                     </div>
                     <div class="card-body">
                         <span class="label propoPenelitian">Proposal Penelitian yang diajukan :</span><br />
-                        <table id="datatable" class="table table-bordered table-striped" style="margin-top:30px; margin-bottom:25px">
+                        <table id="datatable" class="table table-bordered table-striped" style="margin-top: 30px; vertical-align: middle; margin-bottom: 25px">
                             <thead class="text-center">
                                 <tr>
                                     <th>Aksi</th>
                                     <th>Judul Proposal</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
+                                    <th>Download File</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 @foreach (var item in Model.proposal)
                                 {
-                                    <tr>
-                                        <td>
-                                            <p style="font-weight:bold"><a href="LihatProposalPenelitian?id_proposal=@item.id_proposal">Lihat Review</a></p>
-                                        </td>
-                                        <td> @item.Judul</td>
-                                        <td>@item.DESKRIPSI</td>
 
-                                        <td>
-                                            <p style=" font-weight:bold; background-color: darkorange; border-radius: 5px; width: 110px; padding: 5px; cursor: pointer" class="text-center"><a href="EditDetailPenelitian?id_proposal=@item.id_proposal">Edit Detail</a></p>
+                                    <tr>
+                                        <td style="vertical-align: middle;">
+                                            <p style="font-weight: bold;"><a href="LihatProposalPenelitian?id_proposal=@item.id_proposal">Lihat Review</a></p>
                                         </td>
+                                        <td style="vertical-align: middle;"> @item.Judul</td>
+                                        <td style="vertical-align: middle;">@item.DESKRIPSI</td>
+
+                                        <td style="vertical-align: middle;">
+
+                                            <section>
+                                                <ul class="icon-list wrapper">
+                                                    <li class="icon icon-item edit">
+                                                        <span class="tooltip">Edit</span>
+                                                        <a href="EditDetailPenelitian?id_proposal=@item.id_proposal" class="icon-link"><i class="fa fa-edit"></i></a>
+                                                    </li>
+
+                                                </ul>
+                                            </section>
+                                        </td>
+                                        <td style="vertical-align: middle;">
+                                            @if (item.DOKUMEN != null && item.DOKUMEN.Length > 0)
+                                            {
+                                                <section>
+                                                    <ul class="icon-list wrapper">
+
+                                                        <li class="icon icon-item download">
+                                                            <span class="tooltip">Proposal</span>
+                                                            <a href="/PreviewFileProposal/@item.id_proposal" class="icon-link"><i class="fa fa-file-download"></i></a>
+                                                            @*<a onclick="previewPDF()" class="icon-link"><i class="fa fa-file-download"></i></a>*@
+
+                                                        </li>
+                                                        <li class="icon icon-item downloadPengesahan">
+                                                            <span class="tooltip">Pengesahan</span>
+                                                            <a href="/PreviewFilePengesahan/@item.id_proposal" class="icon-link"><i class="fa fa-file-download"></i></a>
+                                                            @*<a onclick="previewPDF()" class="icon-link"><i class="fa fa-file-download"></i></a>*@
+
+                                                        </li>
+                                                    </ul>
+                                                </section>
+
+                                            }
+                                            else
+                                            {
+                                                <section>
+                                                    <ul class="icon-list wrapper">
+
+                                                        <li class="icon icon-item download">
+                                                            <span class="tooltip">Proposal</span>
+                                                            <a onclick="alert()" class="icon-link"><i class="fa fa-file-download"></i></a>
+                                                            @*<a onclick="previewPDF()" class="icon-link"><i class="fa fa-file-download"></i></a>*@
+
+                                                        </li>
+                                                        <li class="icon icon-item downloadPengesahan">
+                                                            <span class="tooltip">Pengesahan</span>
+                                                            <a onclick="alert()" class="icon-link"><i class="fa fa-file-download"></i></a>
+                                                            @*<a onclick="previewPDF()" class="icon-link"><i class="fa fa-file-download"></i></a>*@
+
+                                                        </li>
+                                                    </ul>
+                                                </section>
+                                            }
+
+                                        </td>
+
+
                                     </tr>
                                 }
+
                             </tbody>
                         </table>
                         <span class="label propoPenelitian">Proposal Penelitian yang telah diterima:</span><br />
@@ -253,26 +456,33 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @foreach (var item in Model.penelitianDiterima)
                                 {
-                                <tr>
-                                    <td> @item.JUDUL</td>
-                                    <td>@item.DESKRIPSI</td>
+                                    <tr>
 
-                                    <td>
-                                        <select name="optionPengabdian" id="optionPengabdian" class="center" onchange="location = this.value;" style=" height: 35px; border-radius: 12px;">
-                                            <option hidden> -- Pilih -- </option>
-                                            <option value="LihatProposalPenelitian?id_proposal=@item.id_proposal">Lihat Review</option>
-                                            <option value="AddProsidingProfile">Lihat Jadwal</option>
-                                            <option value="Contact.php">Lapor Perkembangan</option>
-                                            <option value="Sitemap.php">Unggah Draft Laporan Final</option>
-                                            <option value="Sitemap.php">Unggah Laporan Final</option>
-                                            <option value="Sitemap.php">Unggah Outcome</option>
-                                            <option value="Sitemap.php">Perpanjang Masa Akhir</option>
-                                        </select>
-                                    </td>
-                                </tr>
+
+                                        <td style="vertical-align: middle;"> @item.JUDUL</td>
+                                        <td style="vertical-align: middle;">@item.DESKRIPSI</td>
+
+                                        <td style="vertical-align: middle;">
+                                            <select name="optionPengabdian" id="optionPengabdian" class="center" onchange="location = this.value;" style=" height: 35px; border-radius: 12px;">
+                                                <option hidden> -- Pilih -- </option>
+                                                <option value="LihatProposalPenelitian?id_proposal=@item.id_proposal">Lihat Review</option>
+                                                <option value="AddProsidingProfile">Lihat Jadwal</option>
+                                                <option value="Contact.php">Lapor Perkembangan</option>
+                                                <option value="Sitemap.php">Unggah Draft Laporan Final</option>
+                                                <option value="Sitemap.php">Unggah Laporan Final</option>
+                                                <option value="Sitemap.php">Unggah Outcome</option>
+                                                <option value="Sitemap.php">Perpanjang Masa Akhir</option>
+                                            </select>
+                                        </td>
+
+                                    </tr>
                                 }
+
+
+
                             </tbody>
                         </table>
                     </div>
@@ -281,14 +491,14 @@
                 <div class="tab-pane fade" id="pills-pengabdian" role="tabpanel" aria-labelledby="pills-pengabdian-tab">
                     <div class="card-header">
                         <a href="#" class="brand-link" style="background-color:white">
-                            <img src="~/images/team.png" class="brand-image" >
+                            <img src="~/images/team.png" class="brand-image">
                             <span style="color:black; font-weight:bold">PENGABDIAN USER</span>
                         </a>
                     </div>
                     <div class="card-body">
                         <span class="label stylePengabdian">Proposal Pengabdian yang sudah diajukan :</span>
                         <table id="datatable" class="table table-bordered table-striped" style="margin-top:30px; margin-bottom:25px">
-                            <thead>
+                            <thead class="text-center">
                                 <tr>
                                     <th>Aksi</th>
                                     <th>Judul Proposal</th>
@@ -298,19 +508,41 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @foreach (var item in Model.pengabdian)
                                 {
                                     <tr>
-                                        <td>
+                                        <td style="vertical-align: middle;">
                                             <p style="font-weight:bold; border-radius:5px; width:110px; padding:5px; cursor:pointer"><a href="LihatProposalPengabdian?id_proposal=@item.ID_PROPOSAL">Lihat Review</a></p>
                                         </td>
-                                        <td> @item.JUDUL_KEGIATAN</td>
-                                        <td>@item.DESKRIPSI</td>
+                                        <td style="vertical-align: middle;"> @item.JUDUL_KEGIATAN</td>
+                                        <td style="vertical-align: middle;">@item.DESKRIPSI</td>
 
-                                        <td>
+                                        <td style="vertical-align: middle;">
 
-                                            <p style=" font-weight:bold; background-color: darkorange; border-radius: 5px; width: 110px; padding: 5px; cursor: pointer" class="text-center"><a href="EditDetailPengabdian?id_proposal=@item.ID_PROPOSAL">Edit Detail</a></p>
-
+                                            @*<p style=" font-weight:bold; background-color: darkorange; border-radius: 5px; width: 110px; padding: 5px; cursor: pointer" class="text-center"><a href="EditDetailPengabdian?id_proposal=@item.ID_PROPOSAL">Edit Detail</a></p>*@
+                                            <section>
+                                                <ul class="icon-list wrapper">
+                                                    <li class="icon icon-item edit">
+                                                        <span class="tooltip">Edit</span>
+                                                        <a href="EditDetailPengabdian?id_proposal=@item.ID_PROPOSAL" class="icon-link"><i class="fa fa-edit"></i></a>
+                                                    </li>
+                                                    @if (item.DOKUMEN != null && item.DOKUMEN.Length > 0)
+                                                    {
+                                                        <li class="icon icon-item download">
+                                                            <span class="tooltip">Download</span>
+                                                            <a href="/PreviewFileProposalPengabdian/@item.ID_PROPOSAL" class="icon-link"><i class="fa fa-file-download"></i></a>
+                                                        </li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li class="icon icon-item download">
+                                                            <span class="tooltip">Download</span>
+                                                            <a onclick="alert()" class="icon-link"><i class="fa fa-file-download"></i></a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </section>
                                         </td>
 
                                     </tr>
@@ -330,13 +562,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @foreach (var item in Model.pengabdianDiterima)
                                 {
                                     <tr>
-                                        <td> @item.JUDUL_KEGIATAN</td>
-                                        <td>@item.DESKRIPSI</td>
+                                        <td style="vertical-align: middle;"> @item.JUDUL_KEGIATAN</td>
+                                        <td style="vertical-align: middle;">@item.DESKRIPSI</td>
 
-                                        <td>
+                                        <td style="vertical-align: middle;">
                                             <select name="optionPengabdian" id="optionPengabdian" class="center" onchange="location = this.value;" style=" height: 35px; border-radius: 12px;">
                                                 <option hidden> -- Pilih -- </option>
                                                 <option value="Contact.php">Lihat Review</option>
@@ -350,6 +583,7 @@
                                         </td>
                                     </tr>
                                 }
+
                             </tbody>
                         </table>
                     </div>
@@ -358,5 +592,52 @@
             </div>
         </div>
     </div>
+    @*<div class="modal fade modal-download" id="modal-download" tabindex="-1" role="dialog"  aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-m">
+                    <div class="modal-header" style=" background-color: #ffce36; border-top-left-radius: 42px; border-top-right-radius: 42px;">
+                        <h5 class="modal-title">Download File</h5>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="modal-content m-auto" style=" height: 34vh; background-color: ghostwhite; border-bottom-left-radius: 42px; border-bottom-right-radius: 42px;">
+
+                        <span style=" background-color: royalblue; width: 320px; margin-top: 64px; font-family: monospace; font-weight: bolder; text-align: left; line-height: 50px; place-self: center; border-radius: 11px;">
+                            <span class="btn" style="color:white"><i class="fa fa-download"></i><a href="/PreviewFileProposal/@item.id_proposal"> Download File Proposal</a></span>
+                        </span>
+                        <span style=" background-color: #cd4343; width: 320px; text-align: left; place-self: center; font-family: monospace; font-weight: bolder; margin-top: 10px; line-height: 50px; border-radius: 11px;">
+                            <button class="btn"style="color:white"><i class="fa fa-download"></i> Download Lembar Pengesahan</button>
+                         </span>
+                    </div>
+                </div>
+        </div>*@
+    <div class="modal fade modal-error" id="modal-error" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content text-center rounded-pill">
+                <div class="modal-header card-est bg-danger rounded-pill w-75 m-auto">
+                    <div class="m-auto">
+                        <i class="fa fa-exclamation-triangle fa-3x pt-3 pb-3" aria-hidden="true"></i>
+                        <h5 class="modal-title">Ooops!</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h6 class="p-3">Tidak ada File</h6>
+                    <button type="button" class="btn btn-warning rounded-pill btn-est m-2" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function previewPDF(id_proposal) {
+            $('#modal-download').modal('show');
+
+        }
+        function alert() {
+            $('#modal-error').modal('show');
+            
+        }
+    </script>
+
 </body>
 </html>

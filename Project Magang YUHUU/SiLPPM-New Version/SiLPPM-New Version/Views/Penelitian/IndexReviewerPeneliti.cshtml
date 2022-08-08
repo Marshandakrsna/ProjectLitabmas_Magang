@@ -127,7 +127,7 @@
                 <a href="#" class="brand-link" style="background-color:lightblue">
                     <img src="~/images/profile-user.png" alt="Profile" class="brand-image img-circle elevation-3" style="opacity: .8">
                     <span style="color:black">
-                   Reviewer Penelitian
+                        Reviewer Penelitian
 
                     </span>
                 </a>
@@ -151,7 +151,8 @@
                     <table id="tblData" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>INPUT NILAI</th>
+                                <th>ID PROPOSAL</th>
+                                <th style="width: 121px">INPUT NILAI</th>
                                 <th>NAMA DOSEN</th>
                                 <th>FAKULTAS</th>
                                 <th>PRODI</th>
@@ -163,26 +164,57 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @*@{
+                                string Reviewer1 = ViewBag.tempReviewer1.ID_REVIEWER;
+                            }
+                            @{
+                                string Reviewer2 = ViewBag.tempReviewer2.ID_REVIEWER;
+                            }*@
                             @foreach (var item in Model.data)
                             {
+                                @*@if (item.REVIEWER1 != Reviewer1)
+                                {*@
+                                    @*<tr>
+                                        <td> @item.ID_PROPOSAL</td>
+                                        <td>
+                                            <p style="font-weight:bold"><a onclick="alert()">Reviewer 1</a></p>
+                                            <p style="font-weight:bold"><a href="AdminRevPenelitian?id_proposal=@item.ID_PROPOSAL&nppReviewer2=@item.REVIEWER2&npp=@item.NPP">Reviewer 2</a></p>
 
-                                <tr>
-                                    <td>
-                                        <p style="font-weight:bold"><a href="AdminRevPenelitian?id_proposal=@item.ID_PROPOSAL&npp=@item.REVIEWER1">Reviewer 1</a></p>
-                                        <p style="font-weight:bold"><a href="AdminRevPenelitian?id_proposal=@item.ID_PROPOSAL&npp=@item.REVIEWER2">Reviewer 2</a></p>
+                                        </td>
 
-                                    </td>
+                                        <td> @item.NAMA</td>
+                                        <td>@item.FAK</td>
 
-                                    <td> @item.NAMA</td>
-                                    <td>@item.FAK</td>
+                                        <td>@item.PRODI</td>
+                                        <td>@item.JUDUL</td>
+                                        <td>@item.DESKRIPSI</td>
+                                        <td>@item.TAHUN_AKADEMIK</td>
+                                        <td>@item.REVIEWER1</td>
+                                        <td>@item.REVIEWER2</td>
+                                    </tr>*@
 
-                                    <td>@item.PRODI</td>
-                                    <td>@item.JUDUL</td>
-                                    <td>@item.DESKRIPSI</td>
-                                    <td>@item.TAHUN_AKADEMIK</td>
-                                    <td>@item.REVIEWER1</td>
-                                    <td>@item.REVIEWER2</td>
-                                </tr>
+                                @*}
+                                else
+                                {*@
+                                    <tr>
+                                        <td> @item.ID_PROPOSAL</td>
+                                        <td>
+                                            <p style="font-weight:bold"><a href="AdminRevPenelitian?id_proposal=@item.ID_PROPOSAL&nppReviewer1=@item.REVIEWER1&npp=@item.NPP">Reviewer 1</a></p>
+                                            <p style="font-weight:bold"><a href="AdminRevPenelitian?id_proposal=@item.ID_PROPOSAL&nppReviewer2=@item.REVIEWER2&npp=@item.NPP">Reviewer 2</a></p>
+
+                                        </td>
+
+                                        <td> @item.NAMA</td>
+                                        <td>@item.FAK</td>
+
+                                        <td>@item.PRODI</td>
+                                        <td>@item.JUDUL</td>
+                                        <td>@item.DESKRIPSI</td>
+                                        <td>@item.TAHUN_AKADEMIK</td>
+                                        <td>@item.REVIEWER1</td>
+                                        <td>@item.REVIEWER2</td>
+                                    </tr>
+                                @*}*@
                             }
                         </tbody>
                     </table>
@@ -193,7 +225,22 @@
 
         </div>
     </div>
-
+    <div class="modal fade modal-error" id="modal-error" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content text-center rounded-pill">
+                <div class="modal-header card-est bg-danger rounded-pill w-75 m-auto">
+                    <div class="m-auto">
+                        <i class="fa fa-exclamation-triangle fa-3x pt-3 pb-3" aria-hidden="true"></i>
+                        <h5 class="modal-title">Ooops!</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h6 class="p-3">Tidak ada File</h6>
+                    <button type="button" class="btn btn-warning rounded-pill btn-est m-2" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -202,23 +249,28 @@
 
 
     <script>
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });</script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });</script>
 
 
     <script>
-            $('#tblData').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+        $('#tblData').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
 
-            });</script>
+        });
+        function alert() {
+            $('#modal-error').modal('show');
+
+        }
+    </script>
 
 
 </body>

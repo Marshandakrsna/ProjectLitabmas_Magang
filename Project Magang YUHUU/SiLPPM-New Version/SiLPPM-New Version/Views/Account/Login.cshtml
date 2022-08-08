@@ -5,19 +5,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-          crossorigin="anonymous" />
-
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap5/css/bootstrap.min.css" />
     <!-- Material Icon -->
-    <link rel="stylesheet" href="~/css/style.css" />
     <link href="https://cdn.jsdelivr.net/npm/@@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet" />
-
     <!-- Animate on Scroll -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- Material Icon -->
+    <link rel="stylesheet" href="~/css/style.css" />
+
+
 
     <link href="~/sweetalert/sweetalert.min.js" />
     <link rel="stylesheet" href="sweetalert2.min.css">
@@ -26,18 +27,31 @@
 </head>
 <body>
     <div class="page-wrapper">
-        @if (TempData["err_message"] != null)
-        {
-            <script>
-                        Swal.fire({
-                            title: 'SiLPPM said : ',
-                            text: "@TempData["err_message"].ToString()",
-                            confirmButtonColor: '#f2aa4c',
-                            confirmButtonText: 'Close'
-                        })
-            </script>}
+
+        
         <!-- Card Wrapper -->
         <div class="d-flex justify-content-center align-items-center card-wrapper">
+            <!-- Modal untuk pilih role-->
+            <form method="post" asp-controller="Account" asp-action="do_login" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <div class="modal fade" id="modalRole" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel" style="color:black; font-family:'Trebuchet MS';font-display:swap; transition:cubic-bezier()"> <i class="fas fa-key"></i>&nbsp; Pilih Role</h5>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" class="form-control" id="username" name="username" value="" readonly="readonly">
+                                <input type="hidden" class="form-control" id="password" name="password" value="" readonly="readonly">
+                                <select id="role" name="role" class="form-select" required></select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger">Pilih</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
             <!-- Card Login -->
             <div data-aos="zoom-out-up" class="login-card">
                 <div class="row login-card-row">
@@ -90,62 +104,35 @@
                         </p>
 
                         @*FORM LOGIN*@
-                        <form asp-action="do_login" asp-controller="Account" method="post">
+                        <form id="formLogin" method="post" enctype="multipart/form-data">
+                            @Html.AntiForgeryToken()
                             <!-- Username Field -->
-
-                            <div data-aos="fade-left"
-                                 style="height:45px; border-radius:40px"
-                                 data-aos-delay="300"
-                                 class="input-group flex-nowrap mb-4 px-5">
+                            <div data-aos="fade-left" data-aos-delay="300" class="input-group flex-nowrap mb-4 px-5">
                                 <span class="input-group-text" id="addon-wrapping">
                                     <i class="mdi mdi-account-circle fa-lg" aria-hidden="true"> </i>
                                 </span>
-                                <input type="text"
-                                       name="username"
-                                       style="font-size:larger"
-                                       class="form-control"
-                                      
-                                       placeholder="Username"
-                                       aria-label="Username"
-                                       aria-describedby="addon-wrapping" />
+                                <input id="inpUsername" type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" required />
                             </div>
-
                             <!-- Password Field -->
-                            <div data-aos="fade-left"
-                                 data-aos-delay="400"
-                                 style="height:45px"
-                                 class="input-group flex-nowrap mb-4 px-5">
+                            <div data-aos="fade-left" data-aos-delay="400" class="input-group flex-nowrap mb-4 px-5">
                                 <span class="input-group-text" id="addon-wrapping">
                                     <i class="mdi mdi-lock fa-lg" aria-hidden="true"> </i>
                                 </span>
-                                <input type="password"
-                                       
-                                       name="password"
-                                       style="font-size:larger"
-                                       class="form-control"
-                                       placeholder="Password"
-                                       aria-label="Password"
-                                       aria-describedby="addon-wrapping" />
+                                <input id="inpPassword" type="password" name="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="addon-wrapping" required />
                             </div>
-
-
                             <!-- Submit Button -->
-                            <div data-aos="fade-left"
-                                 data-aos-delay="500"
-                                 
-                                 class="input-group d-flex justify-content-center">
-                                <input type="submit"
-                                       class="btn btn-outline-warning"
-                                       name="buttonLogin" />
+                            <div data-aos="fade-left" data-aos-delay="500" class="input-group d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary">Masuk</button>
                             </div>
                         </form>
+
 
                         <!-- Motto -->
                         <div class="mt-auto wrapper-motto">
                             <p data-aos="zoom-in-up"
                                data-aos-delay="900"
                                class="motto" style="color:darkorange;">
-
+                                
                                 UNGGUL - INKLUSIF - HUMANIS - BERINTEGRITAS
                             </p>
                         </div>
@@ -159,7 +146,7 @@
                                  alt="decoration-yellow" />
                         </div>
 
-                    
+
                     </div>
                 </div>
             </div>
@@ -172,12 +159,54 @@
             </p>
         </div>
     </div>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.all.min.js"></script>
-    <script src="sweetalert2.min.js"></script>
+    <!-- jQuery -->
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/jquery.validate.js"></script>
+    <!-- Boostrap -->
+    <script src="~/lib/bootstrap5/js/bootstrap.bundle.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
     <!-- Animate on Scroll Script -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init({ once: true });</script>
+
+    <script>
+        AOS.init({ once: true });
+
+        $('#formLogin').on('submit', function (e) {
+            e.preventDefault();
+
+            if (!$(".form-control").isValid) {
+                var formData = $('#formLogin').serialize();
+
+                $.ajax({
+                    url: "/Account/getRole",
+                    type: "POST",
+                    data: formData,
+                    dataType: "json",
+                    success: function (result) {
+                        if (!result.status) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Login Gagal!',
+                                text: result.pesan,
+                                confirmButtonColor: '#f2aa4c',
+                                confirmButtonText: 'Close'
+                            })
+                        }
+                        else {
+                            for (var i = 0; i < result.data.length; i++) {
+                                $('#role').append('<option value="' + result.data[i].ID_ROLE + ',' + result.data[i].DESKRIPSI + '">' + result.data[i].DESKRIPSI + '</option>');
+                            }
+                            $('#username').val($('#inpUsername').val());
+                            $('#password').val($('#inpPassword').val());
+
+                            $('#modalRole').modal('show');
+                        }
+                    }
+                })
+            }
+        });
+    </script>
 </body>
 
 </html>

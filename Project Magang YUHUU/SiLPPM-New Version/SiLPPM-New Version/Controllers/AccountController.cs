@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Dynamic;
+using SiLPPM_New_Version.Models;
 
 namespace SiLPPM_New_Version.Controllers
 {
@@ -17,27 +18,15 @@ namespace SiLPPM_New_Version.Controllers
     {
         AccountDAO dao = new AccountDAO();
 
-        //public IActionResult IndexLihat()
-        //{
-          
-        //        var username = User.Claims
-        //            .Where(c => c.Type == "username")
-        //                .Select(c => c.Value).SingleOrDefault();
-
-        //    var data = dao.GetDataUser(username);
-
-        //    return View(data);
-        //}
+        public AccountController()
+        {
+            dao = new AccountDAO();
+        }
 
         public IActionResult Login()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Home");
-            }
             return View();
         }
-
 
         [Authorize]
         public JsonResult LogOut()
@@ -47,81 +36,95 @@ namespace SiLPPM_New_Version.Controllers
             return Json("success");
 
         }
-
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult do_login(string username, string password)
+        public IActionResult getRole(string username, string password)
         {
-            TempData["username"] = username;
-            ClaimsIdentity identity = null;
-            bool isAuthenticated = false;
-            var ul = dao.GetUser(username);
-           
-            string strrole = "";
-            string strnamalengkap = "";
+            DBOutput data = new DBOutput();
 
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            var ul = dao.GetUser(username);
+
+            if (ul != null)
             {
-                TempData["err_message"] = "Gagal Login! Kolom username dan password tidak boleh kosong.";
+                if (ul.password == password)
+                {
+                    data.status = true;
+                    data.pesan = "Login berhasil";
+                    data.data = dao.getUserRole(ul.NPP);
+                }
+                else
+                {
+                    data.status = false;
+                    data.pesan = "Password yang anda masukkan salah";
+                }
             }
             else
             {
+                data.status = false;
+                data.pesan = "User tidak ditemukan";
+            }
+
+            return Json(data);
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult do_login(string username, string password, string Role)
+        {
+        
+            ClaimsIdentity identity = null;
+            bool isAuthenticated = false;
+            var role = Role.Split(',');
+            var ul = dao.GetUser(username);
+            string strrole = "";
+            string strnamalengkap = "";
+
                 if (ul != null)
                 {
                     if (ul.password == password)
                     {
-                        strrole = ul.role;
                         strnamalengkap = ul.nama_lengkap;
-                     
+
                         isAuthenticated = true;
                         identity = new ClaimsIdentity(new[] {
-                                    new Claim(ClaimTypes.Name, ul.username),
-                                    new Claim(ClaimTypes.Role, strrole),
-                                    new Claim("username", ul.username),
-                                    new Claim("role", strrole),
-                                    new Claim("nama_lengkap", strnamalengkap),
-                                }, CookieAuthenticationDefaults.AuthenticationScheme);
-                        foreach (var role in ul)
+                                        new Claim(ClaimTypes.Name, ul.username),
+                                        new Claim(ClaimTypes.Role, role[1]),
+                                        new Claim("username", ul.username),
+                                        new Claim("IDRole", role[0]),
+                                        new Claim("NPP", ul.NPP),
+                                        new Claim("nama_lengkap", strnamalengkap),
+                                    }, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                        if (role[0] == "3")
                         {
-                            identity.AddClaim(new Claim(ClaimTypes.Role, strrole));
-                            identity.AddClaim(new Claim("id_role", Convert.ToString(ul.ID_ROLE)));
+                            identity.AddClaim(new Claim("IDUnit", "0"));
+                            identity.AddClaim(new Claim("namaUnit", "-"));
+                        }
+                        else
+                        {
+                            identity.AddClaim(new Claim("IDUnit", Convert.ToString(ul.ID_UNIT)));
+                            identity.AddClaim(new Claim("namaUnit", Convert.ToString(ul.NAMA_UNIT)));
                         }
                     }
-                    else
-                    {
-                        // password tidak sesuai
-                        TempData["err_message"] = "[!] Gagal Login! Password anda salah.";
-                    }
+                }
+              
+          
+                if (isAuthenticated)
+                {
+                    // berhasil login
+                    var principal = new ClaimsPrincipal(identity);
+                    var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                    TempData["err_message"] = "Login berhasil, selamat datang di Si LPPM";
+
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    // data dosen tidak ditemukan
-                    TempData["err_message"] = "[!] Gagal Login! Data tidak ditemukan.";
+                    // gagal login
+                    return RedirectToAction("Login");
                 }
-            }
-
-            if (isAuthenticated)
-            {
-                // berhasil login
-                var principal = new ClaimsPrincipal(identity);
-                var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                TempData["err_message"] = "Login berhasil, selamat datang di Si LPPM";
-
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                // gagal login
-                return RedirectToAction("Login");
-            }
         }
-        //[HttpGet("GetPangkatByUsername/{uname}")] //Buat Nampilin Pangkat
-        //public JsonResult GetPangkat(string uname)
-        //{
-        //    dynamic getPangkatByUsername = dao.GetPangkatByUsername(uname);
-        //    return Json(getPangkatByUsername);
-            
-        //}
+
 
 
     }

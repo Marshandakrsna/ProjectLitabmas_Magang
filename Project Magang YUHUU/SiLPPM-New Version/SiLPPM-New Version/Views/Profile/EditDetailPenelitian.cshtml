@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css">
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/style2.css" />
+
     <!-- Date Picker -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
@@ -229,9 +230,9 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="basic-addon1" hidden class="form-label">ID PROPOSAL</label>
-                                    <input  hidden class="form-control" id="id_proposal" name="id_proposal" value="@Model.lihatPropo.id_proposal">
+                                    <input hidden class="form-control" id="id_proposal" name="id_proposal" value="@Model.lihatPropo.id_proposal">
                                     <label for="basic-addon1" hidden class="form-label">NPP</label>
-                                    <input  hidden class="form-control" id="NPP" name="NPP" value="@Model.dataPenelitian.NPP">
+                                    <input hidden class="form-control" id="NPP" name="NPP" value="@Model.dataPenelitian.NPP">
 
                                     <div class="mb-4" hidden>
                                         <div class="input-group">
@@ -243,7 +244,7 @@
                                                    value="@Model.cekUser.username" />
                                         </div>
                                     </div>
-                                    <div class="mb-4"hidden>
+                                    <div class="mb-4" hidden>
                                         <div class="input-group">
                                             <input type="hidden"
                                                    autocomplete="off"
@@ -253,7 +254,7 @@
                                                    value="@Model.cekUser.username" />
                                         </div>
                                     </div>
-                                    <div class="mb-4"hidden>
+                                    <div class="mb-4" hidden>
                                         <div class="input-group">
                                             <input type="hidden"
                                                    autocomplete="off"
@@ -263,20 +264,36 @@
                                                    value="@Model.cekUser.NPP" />
                                         </div>
                                     </div>
+                                    @{
+                                        int Skim = ViewBag.tempPenelitian.ID_SKIM;
+                                    }
+
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Skim Penelitian</label>
                                         <div class="input-group">
                                             <select style="width: 710px; height: 40px;" id="ID_SKIM" name="ID_SKIM">
-                                                <option hidden style="color:lightgrey">Pilih Skim Penelitian</option>
                                                 @foreach (var item in Model.refjenis1)
                                                 {
-                                                    <option value="@item.ID_SKIM"> @item.DESKRIPSI</option>
+                                                    @if (item.ID_SKIM == Skim)
+                                                    {
+                                                        <option value="@item.ID_SKIM" selected> @item.DESKRIPSI</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.ID_SKIM"> @item.DESKRIPSI</option>
+
+                                                    }
+
+
 
                                                 }
                                             </select>
                                         </div>
                                     </div>
 
+                                    @{
+                                        int Tahun = ViewBag.tempPenelitian.ID_TAHUN_ANGGARAN;
+                                    }
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Tahun Akademik</label>
                                         <div class="input-group">
@@ -289,15 +306,28 @@
                                                 </option>
                                                 @foreach (var item in Model.refjenis2)
                                                 {
-                                                    <option value="@item.ID_TAHUN_ANGGARAN">
-                                                        @item.TAHUN_ANGGARAN
-                                                    </option>
+                                                    @if (item.ID_TAHUN_AKADEMIK == Tahun)
+                                                    {
+                                                        <option value="@item.ID_TAHUN_AKADEMIK" selected>
+                                                            @item.TAHUN_AKADEMIK
+                                                        </option>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.ID_TAHUN_AKADEMIK">
+                                                            @item.TAHUN_AKADEMIK
+                                                        </option>
+
+                                                    }
 
                                                 }
                                             </select>
                                         </div>
                                     </div>
-
+                                    @{
+                                        int Semester = ViewBag.tempPenelitian.NO_SEMESTER;
+                                    }
                                     <div class="mb-4">
                                         <label for="basic-addon2" class="form-label">Semester Akademik </label>
                                         <div class="input-group">
@@ -305,7 +335,15 @@
                                                 <option hidden style="color:lightgrey">Pilih Semester Akademik</option>
                                                 @foreach (var item in Model.refjenis3)
                                                 {
-                                                    <option value="@item.NO_SEMESTER"> @item.SEMESTER_AKADEMIK</option>
+                                                    @if (item.NO_SEMESTER == Semester)
+                                                    {
+                                                        <option value="@item.NO_SEMESTER" selected> @item.SEMESTER_AKADEMIK</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.NO_SEMESTER"> @item.SEMESTER_AKADEMIK</option>
+
+                                                    }
 
                                                 }
                                             </select>
@@ -329,7 +367,7 @@
                                                                 <label class="custom-control-label font-weight-normal" for="output_@item.ID_OUTPUT">@item.DESKRIPSI</label>
                                                             </div>
                                                         }
-                                                        <input type="text" class="form-control form-control-sm" name="output" id="output" readonly hidden>
+                                                        <input type="text" class="form-control form-control-sm" name="output" id="output">
                                                     </div>
                                                 </div>
                                             </div>
@@ -409,15 +447,14 @@
                                             <div class="form-group row">
                                                 <label for="AWAL" class="col-sm-3 col-form-label col-form-label-sm ">Tanggal Mulai Penelitian</label>
                                                 <div class="input-group col-sm-3">
-                                                    <input class="form-control form-control-sm datepicker " type="date" id="AWAL" name="AWAL" placeholder="YYYY-MM-DD" value="@Model.dataPenelitian.AWAL" />
-                                                    
+                                                    <input class="form-control form-control-sm datepicker " id="AWAL" name="AWAL" placeholder="YYYY-MM-DD" />
+
                                                 </div>
                                                 <label for="AKHIR" class="col-sm-3 col-form-label col-form-label-sm datepicker">Tanggal Akhir Penelitian</label>
                                                 <div class="col-sm-3">
-                                                    <input class="form-control form-control-sm datepicker" type="date" id="AKHIR" name="AKHIR" placeholder="YYYY-MM-DD" value="@Model.dataPenelitian.AKHIR"/>
+                                                    <input class="form-control form-control-sm datepicker" id="AKHIR" name="AKHIR" placeholder="YYYY-MM-DD" />
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="mb-4">
@@ -457,6 +494,9 @@
                                                    aria-describedby="basic-addon1" />
                                         </div>
                                     </div>
+                                    @{
+                                        int Kategori = ViewBag.tempPenelitian.ID_KATEGORI;
+                                    }
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Kategori Penelitian</label>
                                         <div class="input-group">
@@ -468,28 +508,50 @@
                                                 </option>
                                                 @foreach (var item in Model.refjenis7)
                                                 {
-                                                    <option value="@item.ID_KATEGORI">
-                                                        @item.DESKRIPSI
-                                                    </option>
+                                                    @if (item.ID_KATEGORI == Kategori)
+                                                    {
+                                                        <option value="@item.ID_KATEGORI" selected>
+                                                            @item.DESKRIPSI
+                                                        </option>
 
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.ID_KATEGORI">
+                                                            @item.DESKRIPSI
+                                                        </option>
+                                                    }
                                                 }
                                             </select>
                                         </div>
                                     </div>
+                                    @{
+                                        int Tema = ViewBag.tempPenelitian.ID_TEMA_UNIVERSITAS;
+                                    }
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Tema Penelitian Universitas</label>
                                         <div class="input-group">
                                             <select style="width: 710px; height: 40px;"
-                                                    id="ID_TEMA_PENELITIAN"
-                                                    name="ID_TEMA_PENELITIAN">
+                                                    id="ID_TEMA_UNIVERSITAS"
+                                                    name="ID_TEMA_UNIVERSITAS">
                                                 <option hidden style="color: lightgrey">
                                                     Pilih Tema Penelitian
                                                 </option>
                                                 @foreach (var item in Model.refjenis6)
                                                 {
-                                                    <option value="@item.ID_TEMA_UNIVERSITAS">
-                                                        @item.DESKRIPSI
-                                                    </option>
+                                                    @if (item.ID_TEMA_UNIVERSITAS == Tema)
+                                                    {
+                                                        <option value="@item.ID_TEMA_UNIVERSITAS" selected>
+                                                            @item.DESKRIPSI
+                                                        </option>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.ID_TEMA_UNIVERSITAS">
+                                                            @item.DESKRIPSI
+                                                        </option>
+                                                    }
 
                                                 }
                                             </select>
@@ -551,27 +613,38 @@
                                         </div>
                                     </div>
 
+                                    @*@{
+                    int Jenis = ViewBag.tempPenelitian.ID_JENIS_PENELITIAN;
+                }
+                <div class="mb-4">
+                    <label for="basic-addon1" class="form-label">Jenis Penelitian</label>
+                    <div class="input-group">
+                        <select style="width: 710px; height: 40px;"
+                                id="ID_JENIS_PENELITIAN"
+                                name="ID_JENIS_PENELITIAN">
+                            <option hidden style="color: lightgrey">
+                                Pilih Jenis Penelitian
+                            </option>
+                            @foreach (var item in Model.refjenis5)
+                            {
+                                @if (item.ID_JENIS_PENELITIAN == Jenis)
+                                {
+                                    <option value="@item.ID_JENIS_PENELITIAN" selected>
+                                        @item.JENIS_PENELITIAN
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@item.ID_JENIS_PENELITIAN">
+                                        @item.JENIS_PENELITIAN
+                                    </option>
+                                }
 
-                                    <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Jenis Penelitian</label>
-                                        <div class="input-group">
-                                            <select style="width: 710px; height: 40px;"
-                                                    id="ID_JENIS_PENELITIAN"
-                                                    name="ID_JENIS_PENELITIAN">
-                                                <option hidden style="color: lightgrey">
-                                                    Pilih Jenis Penelitian
-                                                </option>
-                                                @foreach (var item in Model.refjenis5)
-                                                {
-                                                    <option value="@item.ID_JENIS_PENELITIAN">
-                                                        @item.JENIS_PENELITIAN
-                                                    </option>
+                             }
+                            </select>
 
-                                                }
-                                            </select>
-
-                                        </div>
-                                    </div>
+                    </div>
+                </div>*@
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Lokasi Penelitian</label>
                                         <div class="input-group">
@@ -655,13 +728,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                   
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <button type="submit" class="btn btn-success">Simpan</button>
-                                        </div>
-                                    </div>
+
+
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn-success">Simpan</button>
                                 </div>
                             </div>
                         </form>
@@ -1259,6 +1333,27 @@
         $('#id_proposal').val(id_proposal);
 
     }
+    //untuk datapicker
+    $(document).ready(function () {
+        $(".datepicker").datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true,
+        });
+        $("#AWAL").on('changeDate', function (selected) {
+            var startDate = new Date(selected.date.valueOf());
+            $("#AKHIR").datepicker('setStartDate', startDate);
+            if ($("#AWAL").val() > $("#AKHIR").val()) {
+                $("#AKHIR").val($("#AWAL").val());
+            }
+        });
+    });
+    //lock enter button (for input tag)
+    $(document).keypress(function (event) {
+        if (event.which == "13") {
+            event.preventDefault();
+        }
+    });
     function getAnggota(id_proposal) {
         id_proposal = id_proposal;
         this.tempIdProposal = id_proposal;
@@ -1295,24 +1390,6 @@
         "responsive": true,
     });
 
-    //$('#tableanggota').DataTable({
-    //    "paging": false,
-    //    "lengthChange": true,
-    //    "searching": false,
-    //    "ordering": true,
-    //    "info": true,
-    //    "autoWidth": false,
-    //    "responsive": true,
-    //});
-    //$('#tableAnggotaUAJY').DataTable({
-    //    "paging": true,
-    //    "lengthChange": true,
-    //    "searching": true,
-    //    "ordering": true,
-    //    "info": true,
-    //    "autoWidth": false,
-    //    "responsive": true,
-    //});
     function myFunction() {
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("myInput");
@@ -1381,21 +1458,7 @@
             }
         })
     }
-    //untuk datapicker
-    $(document).ready(function () {
-        $(".datepicker").datepicker({
-            format: 'yyyy-mm-dd',
-            autoclose: true,
-            todayHighlight: true,
-        });
-        $("#AWAL").on('changeDate', function (selected) {
-            var startDate = new Date(selected.date.valueOf());
-            $("#AKHIR").datepicker('setStartDate', startDate);
-            if ($("#AWAL").val() > $("#AKHIR").val()) {
-                $("#AKHIR").val($("#AWAL").val());
-            }
-        });
-    });
+  
 
     function addAnggotaPenelitianUAJY(id_proposal, nppAnggota) {
         //var self = this;

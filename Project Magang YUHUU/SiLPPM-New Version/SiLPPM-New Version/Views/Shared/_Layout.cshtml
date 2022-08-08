@@ -8,14 +8,12 @@
     var username = User.Claims
                      .Where(c => c.Type == "username")
                          .Select(c => c.Value).SingleOrDefault();
-    var role = User.Claims
-                       .Where(c => c.Type == "role")
-                           .Select(c => c.Value).SingleOrDefault();
+    var RoleUser = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).Single();
+    var IDRoleUser = User.Claims.Where(c => c.Type == "IDRole").Select(c => c.Value).Single();
+    var namaUnit = User.Claims.Where(c => c.Type == "namaUnit").Select(c => c.Value).Single();
 
-    var id_role = User.Claims.Where(c => c.Type == "id_role").Select(c => c.Value).ToArray();
-
-    var mainMenu = accountDAO.getAllMenu(username);
-    var subMenu = accountDAO.getAllSubMenu(username);
+    var mainMenu = accountDAO.getAllMenu(IDRoleUser);
+    var subMenu = accountDAO.getAllSubMenu(IDRoleUser);
 
 
     var id_proposal = User.Claims

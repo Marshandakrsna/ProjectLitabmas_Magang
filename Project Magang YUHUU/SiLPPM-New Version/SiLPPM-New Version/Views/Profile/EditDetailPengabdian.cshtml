@@ -128,9 +128,9 @@
                                 <div class="col-md-6">
                                     <label hidden for="basic-addon1" class="form-label">ID PROPOSAL</label>
                                     <input hidden class="form-control" id="id_proposal" name="id_proposal" value="@Model.pengabdianID.ID_PROPOSAL">
-                                    <label  for="basic-addon1" hidden class="form-label">NPP</label>
+                                    <label for="basic-addon1" hidden class="form-label">NPP</label>
                                     <input hidden class="form-control" id="NPP" name="NPP" value="@Model.dataPengabdian.NPP">
-                                    <div class="mb-4"hidden>
+                                    <div class="mb-4" hidden>
                                         <div class="input-group">
                                             <input type="text"
                                                    autocomplete="off"
@@ -160,36 +160,62 @@
                                                    value="@Model.cekUser.NPP" />
                                         </div>
                                     </div>
+                                    @{
+                                        int Skim = ViewBag.tempPengabdian.ID_SKIM;
+                                    }
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Skim Pengabdian</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
                                             <select style="width:710px" id="ID_SKIM" name="ID_SKIM">
                                                 <option hidden style="color:lightgrey">Pilih Skim Pengabdian</option>
-                                                @foreach (var item in Model.refjenis)
+                                                @foreach (var item in Model.refjenis1)
                                                 {
-                                                    <option value="@item.ID_SKIM"> @item.DESKRIPSI</option>
+                                                    @if (item.ID_SKIM == Skim)
+                                                    {
+                                                        <option value="@item.ID_SKIM" selected> @item.DESKRIPSI</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.ID_SKIM"> @item.DESKRIPSI</option>
+                                                    }
 
                                                 }
                                             </select>
                                         </div>
                                     </div>
-
+                                    @{
+                                        int Tahun = ViewBag.tempPengabdian.ID_TAHUN_ANGGARAN;
+                                    }
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Tahun Akademik</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
-                                            <select style="width:710px" id="ID_TAHUN_AKADEMIK" name="ID_TAHUN_AKADEMIK">
+                                            <select style="width:710px" id="ID_TAHUN_ANGGARAN" name="ID_TAHUN_ANGGARAN">
                                                 <option hidden style="color:lightgrey">Pilih Tahun Akademik</option>
                                                 @foreach (var item in Model.refjenis2)
                                                 {
-                                                    <option value="@item.ID_TAHUN_ANGGARAN"> @item.TAHUN_ANGGARAN</option>
+                                                    @if (item.ID_TAHUN_AKADEMIK == Tahun)
+                                                    {
+                                                        <option value="@item.ID_TAHUN_AKADEMIK" selected>
+                                                            @item.TAHUN_AKADEMIK
+                                                        </option>
 
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.ID_TAHUN_AKADEMIK">
+                                                            @item.TAHUN_AKADEMIK
+                                                        </option>
+
+                                                    }
                                                 }
                                             </select>
                                         </div>
                                     </div>
-
+                                    @{
+                                        int Semester = ViewBag.tempPengabdian.NO_SEMESTER;
+                                    }
                                     <div class="mb-4">
                                         <label for="basic-addon2" class="form-label">Semester Akademik </label>
                                         <div class="input-group">
@@ -198,8 +224,15 @@
                                                 <option hidden style="color:lightgrey">Pilih Semester Akademik</option>
                                                 @foreach (var item in Model.refjenis3)
                                                 {
-                                                    <option value="@item.NO_SEMESTER"> @item.SEMESTER_AKADEMIK</option>
+                                                    @if (item.NO_SEMESTER == Semester)
+                                                    {
+                                                        <option value="@item.NO_SEMESTER" selected> @item.SEMESTER_AKADEMIK</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.NO_SEMESTER"> @item.SEMESTER_AKADEMIK</option>
 
+                                                    }
                                                 }
                                             </select>
                                         </div>
@@ -248,8 +281,7 @@
 
                                                         @foreach (var item in Model.refOutcome)
                                                         {
-                                                            if
-(item.ID_JENIS_OUTCOME == 1)
+                                                            if(item.ID_JENIS_OUTCOME == 1)
                                                             {
                                                                 <div class="custom-control custom-checkbox">
                                                                     <input type="checkbox"
@@ -309,8 +341,8 @@
                                         </div>
                                     </div>
 
-                                  
-                                   
+
+
                                     <div class="card alert-default">
                                         <div class="card-header">
                                             <i class="fa fa-money-bill" aria-hidden="true"></i>
@@ -377,7 +409,7 @@
                                         <label for="basic-addon3" class="form-label">Judul Kegiatan Pengabdian</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-home small" aria-hidden="true"> </i></span>
-                                            <input id="JUDUL_KEGIATAN" name="JUDUL_KEGIATAN" placeholder="Judul Pengabdian" value="@Model.dataPengabdian.JUDUL_KEGIATAN" style=" height: 40px; width: 710px;"  />
+                                            <input id="JUDUL_KEGIATAN" name="JUDUL_KEGIATAN" placeholder="Judul Pengabdian" value="@Model.dataPengabdian.JUDUL_KEGIATAN" style=" height: 40px; width: 710px;" />
                                         </div>
                                     </div>
                                     <div class="mb-4">
@@ -394,7 +426,9 @@
                                             <input type="text" class="form-control" placeholder="Sasaran" value="@Model.dataPengabdian.SASARAN" aria-label="SASARAN" aria-describedby="basic-addon1" id="SASARAN" name="SASARAN">
                                         </div>
                                     </div>
-                                 
+                                    @{
+                                        int Tema = ViewBag.tempPengabdian.ID_TEMA_UNIVERSITAS;
+                                    }
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Tema  Universitas</label>
                                         <div class="input-group">
@@ -403,8 +437,19 @@
                                                 <option hidden style="color:lightgrey">Pilih Tema Penelitian</option>
                                                 @foreach (var item in Model.refjenis6)
                                                 {
-                                                    <option value="@item.ID_TEMA_UNIVERSITAS"> @item.DESKRIPSI</option>
+                                                    @if (item.ID_TEMA_UNIVERSITAS == Tema)
+                                                    {
+                                                        <option value="@item.ID_TEMA_UNIVERSITAS" selected>
+                                                            @item.DESKRIPSI
+                                                        </option>
 
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.ID_TEMA_UNIVERSITAS">
+                                                            @item.DESKRIPSI
+                                                        </option>
+                                                    }
                                                 }
                                             </select>
                                         </div>

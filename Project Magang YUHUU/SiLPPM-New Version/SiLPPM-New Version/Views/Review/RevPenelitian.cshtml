@@ -134,7 +134,7 @@
                     </button>
                 </div>
             }
-        <form method="post" asp-action="addNilaiReview" asp-controller="Review" enctype="multipart/form-data">
+        <form method="post" id="formAddNilaiReview" asp-action="addNilaiReview" asp-controller="Review" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
             <div class="card-header">
                 <a href="#" class="brand-link" style="background-color:white">
@@ -289,7 +289,7 @@
                 </table>
                 <hr />
 
-                <button type="submit" class="btn btn-danger">Simpan</button>
+                <button type="submit" class="btn btn-danger"  >Simpan</button>
             </div>
 
             <!-- Input penampung data untuk insert data -->
@@ -300,6 +300,7 @@
             <input type="hidden" name="N1_FIELD5" id="N1_FIELD5" />
             <input type="hidden" name="N1_FIELD6" id="N1_FIELD6" />
             <input type="hidden" name="N1_FIELD7" id="N1_FIELD7" />
+            <input type="hidden" name="jumlah" id="jumlah"/>
         </form>
         </div>
     </div>
@@ -309,6 +310,7 @@
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         });
+
         function displayValue() {
             /* Untuk Value 1 --> Relevansi usulan penelitian.. */
             var value1 = document.getElementById("N1_JUSTIFIKASI1").value;
@@ -377,14 +379,38 @@
             //untuk menghitung total inputan skor sesuai apa yg di select
             document.getElementById("jumlahTotal").innerHTML = temp1 + temp2 + temp3 + temp4 + temp5 + temp6 + temp7;
             var x = document.getElementById("jumlahTotal").innerHTML;
-            if (x > 500) {
-                alert("LEBIH DARI 10!");
-            } else {
-                console.log("no")
-            }
-            console.log(x);
+            $("#jumlah").val(document.getElementById("jumlahTotal").innerHTML);
+            //if (x > 500) {
+            //    alert("LEBIH DARI 10!");
+            //} else {
+            //    console.log("no")
+            //}
+            //console.log(x);
 
         }
+
+     
+        window.addEventListener('load', function () {
+            var forms = $('#formAddNilaiReview');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    else {
+                        event.preventDefault();
+                        let html = document.getElementById("jumlahTotal").innerHTML;
+                        if (html > 500) {
+                            form.submit();
+                        } 
+                        console.log(html);
+                        
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
              
 
     </script>

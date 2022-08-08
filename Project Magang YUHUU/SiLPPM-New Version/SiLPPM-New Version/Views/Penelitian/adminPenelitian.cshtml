@@ -12,11 +12,14 @@
     <link rel="stylesheet" href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css">
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/style2.css" />
+    <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.css" />
+
     <!-- Date Picker -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
     <link rel="stylesheet" type="text/css" href="~/css/bootstrap-datepicker.min.css" />
     <script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-ui/jquery-ui.js"></script>
     <!--Mapbox-->
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
@@ -121,7 +124,7 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="mb-4" hidden>
+                                    @*<div class="mb-4" hidden>
                                         <div class="input-group">
                                             <input type="hidden"
                                                    autocomplete="off"
@@ -140,17 +143,21 @@
                                                    id="username"
                                                    value="@Model.refpropo.USERNAME" />
                                         </div>
-                                    </div>
-                                    <div class="mb-4" hidden>
+                                    </div>*@
+                                    <div class="mb-4">
+                                        <label for="basic-addon1" class="form-label">NPP Dosen</label>
                                         <div class="input-group">
-                                            <input type="hidden"
-                                                   autocomplete="off"
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                            </div>
+                                            <input type="text"
                                                    class="form-control"
                                                    name="npp"
-                                                   id="npp"
-                                                   value="@Model.refpropo.NPP" />
+                                                   id="npp" />
+
                                         </div>
                                     </div>
+                                    
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Skim Penelitian</label>
                                         <div class="input-group">
@@ -211,10 +218,10 @@
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 @*<label
-                          for="luaranOutcome"
-                          class="col-sm-3 col-form-label col-form-label-sm"
-                          >Luaran Outcome</label
-                        ><br />*@
+                      for="luaranOutcome"
+                      class="col-sm-3 col-form-label col-form-label-sm"
+                      >Luaran Outcome</label
+                    ><br />*@
                                                 <div class="col-sm-9 row" id="outputList">
                                                     <div class="col-sm-6">
                                                         @foreach (var item in Model.refjenis4)
@@ -927,6 +934,25 @@
                 fileReader.readAsDataURL(fileToLoad);
             }
         }
+        $("#npp").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Penelitian/ajaxGetAutoCompleteNPPDosen",
+                    data: { "NPP": request.term },
+                    type: "POST",
+                    success: function (data) {
+                        console.log(data);
+                        response($.map(data, function (item) {
+                            return item.NPP;
+                        }))
+                    }
+                });
+            },
+            select: function (e, i) {
+                $("#npp").val(i.item.value);
+            },
+            minLength: 1
+        });
 
         function previewPengesahanRequest() {
             var fileToLoad = document.getElementById("dokumenPengesahan").files[0];

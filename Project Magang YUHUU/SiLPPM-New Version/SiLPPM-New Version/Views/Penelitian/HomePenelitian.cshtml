@@ -87,7 +87,7 @@
                    style="background-color: burlywood">Identitas Peneliti</a>
                 <a href="IndexTambahCV"
                    class="btn"
-                   style="background-color: burlywood">CV- Pengalaman Penelitian</a>
+                   style="background-color: burlywood">Pengalaman Penelitian</a>
                 <a href="IndexTambahPublikasi"
                    class="btn"
                    style="background-color: burlywood">Publikasi</a>
@@ -210,8 +210,8 @@
                                                 </option>
                                                 @foreach (var item in Model.refjenis2)
                                                 {
-                                                    <option value="@item.ID_TAHUN_ANGGARAN">
-                                                        @item.TAHUN_ANGGARAN
+                                                    <option value="@item.ID_TAHUN_AKADEMIK">
+                                                        @item.TAHUN_AKADEMIK
                                                     </option>
 
                                                 }
@@ -370,7 +370,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-4">
+                                    @*<div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Jarak dari Kampus UAJY</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1">
@@ -383,7 +383,7 @@
                                                    placeholder="Jarak dari Kampus UAJY"
                                                    aria-describedby="basic-addon1" />
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="card alert-default">
                                         <div class="card-header" style="border-bottom-color:lightsteelblue; border-bottom-left-radius:10px;border-bottom-right-radius:10px">
                                             <i class="fa fa-solid fa-clock" aria-hidden="true"></i>
@@ -394,15 +394,14 @@
                                             <div class="form-group row">
                                                 <label for="AWAL" class="col-sm-3 col-form-label col-form-label-sm ">Tanggal Mulai Penelitian</label>
                                                 <div class="input-group col-sm-3">
-                                                    <input class="form-control form-control-sm datepicker " type="date" id="AWAL" name="AWAL" placeholder="YYYY-MM-DD" />
+                                                    <input class="form-control form-control-sm datepicker "  id="AWAL" name="AWAL" placeholder="YYYY-MM-DD" />
 
                                                 </div>
                                                 <label for="AKHIR" class="col-sm-3 col-form-label col-form-label-sm datepicker">Tanggal Akhir Penelitian</label>
                                                 <div class="col-sm-3">
-                                                    <input class="form-control form-control-sm datepicker" type="date" id="AKHIR" name="AKHIR" placeholder="YYYY-MM-DD" />
+                                                    <input class="form-control form-control-sm datepicker"  id="AKHIR" name="AKHIR" placeholder="YYYY-MM-DD" />
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="mb-4">
@@ -557,8 +556,8 @@
                                                 </i>
                                             </span>
                                             <select style="width: 710px"
-                                                    id="ID_TEMA_PENELITIAN"
-                                                    name="ID_TEMA_PENELITIAN">
+                                                    id="ID_TEMA_UNIVERSITAS"
+                                                    name="ID_TEMA_UNIVERSITAS">
                                                 <option hidden style="color: lightgrey">
                                                     Pilih Tema Penelitian
                                                 </option>
@@ -587,7 +586,7 @@
                                                    id="noBarcode" />
                                         </div>
                                     </div>
-                                   
+
                                     <div class="card alert-default">
                                         <div class="card-header">
                                             <i class="fa fa-money-bill" aria-hidden="true"></i>
@@ -655,6 +654,7 @@
                                                 </i>
                                             </span>
                                             <select style="width: 710px"
+                                                    class="optionJenis"
                                                     id="ID_JENIS_PENELITIAN"
                                                     name="ID_JENIS_PENELITIAN">
                                                 <option hidden style="color: lightgrey">
@@ -670,91 +670,92 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Lokasi Penelitian</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <i class="mdi mdi-magnify small" aria-hidden="true">
-                                                </i>
-                                            </span>
-                                            <input type="text"
-                                                   class="form-control"
-                                                   placeholder="Lokasi Penelitian"
-                                                   aria-label="Lokasi Penelitian"
-                                                   aria-describedby="basic-addon1"
-                                                   id="Lokasi" />
-                                        </div>
-                                    </div>
-
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <label class="pb-2" style="">
-                                                <i class="fa fa-map" aria-hidden="true"></i>
-                                                Peta Lokasi
-                                                <a data-container="body"
-                                                   data-toggle="popover"
-                                                   data-placement="top"
-                                                   data-content="Silakan lakukan pencarian terhadap lokasi lebih dahulu. Jika lokasi kurang tepat, lakukan drag pada marker">
-                                                    <i class="fa fa-info-circle fa-xs text-primary"></i>
-                                                </a>
-                                            </label>
-                                            <div class="form-group">
-                                                <div id="map" style="width: 100%; height: 380px">
-                                                    <pre id="coordinates"
-                                                         class="coordinates form-group"></pre>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="LONGITUDE"
-                                                       class="col-sm-3 col-form-label col-form-label-sm">Longitude</label>
-                                                <div class="col-sm-3">
-                                                    <input type="text"
-                                                           readonly
-                                                           class="form-control form-control-sm"
-                                                           id="LONGITUDE"
-                                                           name="LONGITUDE"
-                                                           placeholder="0" />
-                                                </div>
-                                                <label for="LATITUDE"
-                                                       class="col-sm-3 col-form-label col-form-label-sm">Latitude</label>
-                                                <div class="col-sm-3">
-                                                    <input type="text"
-                                                           readonly
-                                                           class="form-control form-control-sm"
-                                                           id="LATITUDE"
-                                                           name="LATITUDE"
-                                                           placeholder="0" />
-                                                </div>
-                                            </div>
-                                            <label class="pb-2" style=" font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                                                   color: royalblue;">Jarak Lokasi dari Kampus UAJY</label>
-                                            <div class="form-group row">
-                                                <label for="jarak"
-                                                       class="col-sm-3 col-form-label col-form-label-sm">Jarak ke Lokasi</label>
-                                                <div class="col-sm-3 d-flex">
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           id="jarak"
-                                                           placeholder="0"
-                                                           name="jarak"
-                                                           aria-describedby="basic-addon1" />
-
-                                                    <span class="form-control-sm">km</span>
-                                                </div>
-                                                <label for="waktu"
-                                                       class="col-sm-3 col-form-label col-form-label-sm">Waktu</label>
-                                                <div class="col-sm-3 d-flex">
-                                                    <input type="text"
-                                                           class="form-control form-control-sm"
-                                                           id="waktu"
-                                                           name="waktu"
-                                                           placeholder="0" />
-                                                    <span class="form-control-sm">jam</span>
-                                                </div>
+                                    <div class="form-input">
+                                        <div class="mb-4">
+                                            <label for="basic-addon1" class="form-label">Lokasi Penelitian</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <i class="mdi mdi-magnify small" aria-hidden="true">
+                                                    </i>
+                                                </span>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       placeholder="Lokasi Penelitian"
+                                                       aria-label="Lokasi Penelitian"
+                                                       aria-describedby="basic-addon1"
+                                                       id="Lokasi" />
                                             </div>
                                         </div>
-                                    </div>
 
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <label class="pb-2" style="">
+                                                    <i class="fa fa-map" aria-hidden="true"></i>
+                                                    Peta Lokasi
+                                                    <a data-container="body"
+                                                       data-toggle="popover"
+                                                       data-placement="top"
+                                                       data-content="Silakan lakukan pencarian terhadap lokasi lebih dahulu. Jika lokasi kurang tepat, lakukan drag pada marker">
+                                                        <i class="fa fa-info-circle fa-xs text-primary"></i>
+                                                    </a>
+                                                </label>
+                                                <div class="form-group">
+                                                    <div id="map" style="width: 100%; height: 380px">
+                                                        <pre id="coordinates"
+                                                             class="coordinates form-group"></pre>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="LONGITUDE"
+                                                           class="col-sm-3 col-form-label col-form-label-sm">Longitude</label>
+                                                    <div class="col-sm-3">
+                                                        <input type="text"
+                                                               readonly
+                                                               class="form-control form-control-sm"
+                                                               id="LONGITUDE"
+                                                               name="LONGITUDE"
+                                                               placeholder="0" />
+                                                    </div>
+                                                    <label for="LATITUDE"
+                                                           class="col-sm-3 col-form-label col-form-label-sm">Latitude</label>
+                                                    <div class="col-sm-3">
+                                                        <input type="text"
+                                                               readonly
+                                                               class="form-control form-control-sm"
+                                                               id="LATITUDE"
+                                                               name="LATITUDE"
+                                                               placeholder="0" />
+                                                    </div>
+                                                </div>
+                                                <label class="pb-2" style=" font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                                                       color: royalblue;">Jarak Lokasi dari Kampus UAJY</label>
+                                                <div class="form-group row">
+                                                    <label for="jarak"
+                                                           class="col-sm-3 col-form-label col-form-label-sm">Jarak ke Lokasi</label>
+                                                    <div class="col-sm-3 d-flex">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="jarak"
+                                                               placeholder="0"
+                                                               name="jarak"
+                                                               aria-describedby="basic-addon1" />
+
+                                                        <span class="form-control-sm">km</span>
+                                                    </div>
+                                                    <label for="waktu"
+                                                           class="col-sm-3 col-form-label col-form-label-sm">Waktu</label>
+                                                    <div class="col-sm-3 d-flex">
+                                                        <input type="text"
+                                                               class="form-control form-control-sm"
+                                                               id="waktu"
+                                                               name="waktu"
+                                                               placeholder="0" />
+                                                        <span class="form-control-sm">jam</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <hr />
@@ -903,6 +904,24 @@
             }
 
         }
+       
+        $(document).ready(function () {
+            $(function () {
+                $('.form-input').hide();
+
+                $('.optionJenis').change(function () {
+
+                    if ($("option[value='1']").is(":checked")) {
+                        $('.form-input').hide();
+
+                    } else {
+                       
+                        $('.form-input').show();
+                    }
+                });
+            });
+        });
+
         $(document).ready(function () {
             $("#dokumenProposal").on("change", function () {
                 let filenames = [];

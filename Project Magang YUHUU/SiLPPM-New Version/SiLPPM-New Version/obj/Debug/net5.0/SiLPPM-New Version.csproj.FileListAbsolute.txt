@@ -456,3 +456,21 @@ E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New V
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Review\ListRevPenelitian.cshtml.g.cs
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Review\RevPenelitian.cshtml.g.cs
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengabdian\DekanApprovalProposalPengabdian.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Penelitian\EditListPenelitian.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengabdian\EditListPengabdian.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Web.Mvc.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Web.Razor.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Web.Helpers.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Web.WebPages.Deployment.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Web.WebPages.Razor.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\System.Web.WebPages.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Rotativa.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\bin\Debug\net5.0\Rotativa.AspNetCore.dll
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.MvcApplicationPartsAssemblyInfo.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengabdian\DekanAddFeedbackPengabdian.cshtml.g.cs

@@ -8,6 +8,9 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
+using System.IO;
+using Azure;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SiLPPM_New_Version.Controllers
 {
@@ -16,14 +19,41 @@ namespace SiLPPM_New_Version.Controllers
         dynamic myobj;
         ProfileDAO dao;
         PenelitianDAO penelitianDAO;
-   
+        PengabdianDAO pengabdianDAO;
+
         public ProfileController()
         {
             myobj = new ExpandoObject();
             penelitianDAO = new PenelitianDAO();
+            pengabdianDAO = new PengabdianDAO();
             dao = new ProfileDAO();
         }
-        public IActionResult Profile(int id_proposal)
+        [HttpGet("PreviewFileProposal/{ID_PROPOSAL}")]
+        public ActionResult PreviewFile(int ID_PROPOSAL)
+        {
+            var preview = penelitianDAO.GetDokumenProposal(ID_PROPOSAL);
+
+            byte[] fileContent = preview;
+            MemoryStream pdfStream = new MemoryStream();
+            pdfStream.Write(fileContent, 0, fileContent.Length);
+            pdfStream.Position = 0;
+
+            return File(fileContent, "application/pdf", "Proposal Penelitian.pdf");
+        }
+        [HttpGet("PreviewFilePengesahan/{ID_PROPOSAL}")]
+        public ActionResult PreviewLembarPengesahan(int ID_PROPOSAL)
+        {
+            var preview = penelitianDAO.GetDokumenPengesahan(ID_PROPOSAL);
+
+            byte[] fileContent = preview;
+            MemoryStream pdfStream = new MemoryStream();
+            pdfStream.Write(fileContent, 0, fileContent.Length);
+            pdfStream.Position = 0;
+
+            return File(fileContent, "application/pdf", "Lembar Pengesahan.pdf");
+        }
+      
+        public IActionResult Profile(int id_proposal, int tempPenelitianDiterima, int tempPenelitianDiajukan)
         {
 
             var username = User.Claims
@@ -32,7 +62,7 @@ namespace SiLPPM_New_Version.Controllers
             var npp = User.Claims
                        .Where(c => c.Type == "npp")
                            .Select(c => c.Value).SingleOrDefault();
-
+            var countDokumen = penelitianDAO.GetCountDokumenPenelitian(id_proposal);
             var data = dao.GetDataUser(username);
             var data2 = dao.GetPangkatByUsername(username);
             var data3 = dao.GetGolonganByUsername(username);
@@ -45,7 +75,16 @@ namespace SiLPPM_New_Version.Controllers
             var refpropo2 = dao.GetListPengabdianByUsername(username);
             var pengabdianDiterima = dao.GetPengabdianDiterima(username);
             var penelitianDiterima = dao.GetPenelitianDiterima(username);
+            var countPenelitianDiterima = dao.GetCountPenelitianDiterima(npp);
+            var countPengabdianDiterima = dao.GetCountPengabdianDiterima(npp);
+            var countPenelitianDiajukan = dao.GetCountPenelitianDiajukan(npp);
+            var countPengabdianDiajukan = dao.GetCountPengabdianDiajukan(npp);
+            myobj.countPenelitianDiterima = countPenelitianDiterima.data;
+            myobj.countPengabdianDiterima = countPengabdianDiterima.data; 
+            myobj.countPenelitianDiajukan = countPenelitianDiajukan.data;
+            myobj.countPengabdianDiajukan = countPengabdianDiajukan.data;
             myobj.data = data.data;
+            myobj.countDokumen = countDokumen.data;
             myobj.pengabdianID = pengabdianID.data;
             myobj.penelitianDiterima = penelitianDiterima.data;
             myobj.pengabdianDiterima = pengabdianDiterima.data;
@@ -57,6 +96,16 @@ namespace SiLPPM_New_Version.Controllers
             myobj.data5 = data5.data;
             myobj.refpropo = refpropo.data;
             myobj.refpropo2 = refpropo2.data;
+         
+            if (countPenelitianDiterima.data.JUMLAH == 0 || countPenelitianDiterima.data.JUMLAH == null)
+            {
+                tempPenelitianDiterima = 0;
+            }
+            if (countPenelitianDiajukan.data.JUMLAH == 0 || countPenelitianDiajukan.data.JUMLAH == null)
+            {
+                tempPenelitianDiajukan = 0;
+            }
+
             return View(myobj);
         }
         public IActionResult LihatProposalPenelitian(int id_proposal)
@@ -387,13 +436,11 @@ namespace SiLPPM_New_Version.Controllers
             var refpropo = dao.GetListPenelitianByUsername(username);
             var refpropo2 = dao.GetListPengabdianByUsername(username);
             //var anggota = dao.GetDataAnggotaPenelitian(id_proposal);
-            var dataPenelitian = penelitianDAO.GetDataPen(id_proposal);
             var pengabdianID = dao.GetDataPropoPengabdianByID(id_proposal);
             var data = dao.GetDataUser(username);
             var data2 = dao.GetPangkatByUsername(username);
             var data3 = dao.GetGolonganByUsername(username);
             var cekUser = penelitianDAO.GetUserByUsername(username);
-
             var data4 = dao.GetFakByUsername(username);
             var data5 = dao.GetJurusanByUsername(username);
             var data6 = penelitianDAO.GetJabatanAkaByUsername(username);
@@ -410,7 +457,9 @@ namespace SiLPPM_New_Version.Controllers
             var refjenis7 = penelitianDAO.GetRefKategori();
             var refOutcome = penelitianDAO.GetOutcome();
 
-
+            var dataPenelitian = penelitianDAO.GetDataPen(id_proposal);
+            ViewBag.tempPenelitian = dataPenelitian.data;
+            
             //PEMANGGILAN TAMBAH PENELITIAN
             myobj.cekUser = cekUser.data;
             myobj.history = history.data;
@@ -483,8 +532,6 @@ namespace SiLPPM_New_Version.Controllers
              string INSERT_DATE, string USER_ID, int ID_SKIM, int ID_TEMA_UNIVERSITAS, int NO_SEMESTER, string ID_PROPOSAL)
         {
 
-
-
             var cek = dao.UbahPengabdian( ID_TAHUN_ANGGARAN, REVIEWER1,  REVIEWER2,  JUDUL_KEGIATAN,  LANDASAN_PENELITIAN, JENIS_PENGABDIAN,  ANGGOTA1,
              ANGGOTA2, MITRA,  MITRA_KEAHLIAN,  LOKASI,  JARAK_PT_LOKASI,  OUTPUT, OUTCOME,  ID_ROAD_MAP,  AWAL, AKHIR, SASARAN,
               SKS_KETUA,  SKS_ANGGOTA, NPP,  DANA_PRIBADI,  DANA_EKSTERNAL, DANA_KERJASAMA,  DANA_UAJY,
@@ -518,7 +565,6 @@ namespace SiLPPM_New_Version.Controllers
             var refpropo = dao.GetListPenelitianByUsername(username);
             var refpropo2 = dao.GetListPengabdianByUsername(username);
             //var anggota = dao.GetDataAnggotaPenelitian(id_proposal);
-            var dataPengabdian = penelitianDAO.GetDataPengabdian(id_proposal);
             var pengabdianID = dao.GetDataPropoPengabdianByID(id_proposal);
             var data = dao.GetDataUser(username);
             var data2 = dao.GetPangkatByUsername(username);
@@ -540,8 +586,9 @@ namespace SiLPPM_New_Version.Controllers
             var refjenis6 = penelitianDAO.GetRefTema();
             var refjenis7 = penelitianDAO.GetRefKategori();
             var refOutcome = penelitianDAO.GetOutcome();
+            var dataPengabdian = penelitianDAO.GetDataPengabdian(id_proposal);
 
-
+            ViewBag.tempPengabdian = dataPengabdian.data;
             //PEMANGGILAN TAMBAH PENELITIAN
             myobj.cekUser = cekUser.data;
             myobj.history = history.data;

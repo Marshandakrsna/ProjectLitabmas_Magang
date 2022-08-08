@@ -86,6 +86,14 @@
               "target": "Package",
               "version": "[5.0.2, )"
             },
+            "Rotativa": {
+              "target": "Package",
+              "version": "[1.7.3, )"
+            },
+            "Rotativa.AspNetCore": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
             "SqlConnection": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",

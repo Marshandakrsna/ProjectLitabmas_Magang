@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace SiLPPM_New_Version.Models
 {
     public class Penelitian
     {
+        public IFormFile DOKUMEN
+        {
+            get;set;
+        }
 
     }
     public class AnggotaUAJY{

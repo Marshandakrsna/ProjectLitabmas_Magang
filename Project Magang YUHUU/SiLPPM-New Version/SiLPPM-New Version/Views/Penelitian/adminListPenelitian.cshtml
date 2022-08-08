@@ -159,19 +159,23 @@
 
                                 <tr>
                                     <td>
-                                        <p style="font-weight:bold"><a href="google.com">Edit</a></p>
-
-
+                                        <p style="font-weight:bold"><a href="EditListPenelitian?id_proposal=@item.ID_PROPOSAL&npp=@item.NPP">Edit</a></p>
                                     </td>
                                     <td>
-                                        <p style="font-weight:bold;color:royalblue; cursor:pointer" onclick="addSetReviewer(@item.ID_PROPOSAL)">Set Reviewer</p>
-
+                                        <p style="font-weight: bold; color: #007bff; cursor: pointer" onclick="addSetReviewer(@item.ID_PROPOSAL)">Set Reviewer</p>
                                     </td>
-                                    <td>
-                                        <p style="font-weight:bold; color:royalblue;"><a href="google.com">Proposal Pengesahan</a></p>
-
-
-                                    </td>
+                                    @if (item.LEMBAR_PENGESAHAN != null && item.LEMBAR_PENGESAHAN.Length > 0)
+                                    {
+                                        <td>
+                                            <p style="font-weight: bold; color: #007bff;"><a href="/PreviewFilePengesahan/@item.ID_PROPOSAL">Proposal Pengesahan</a></p>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <p style="font-weight: bold; color: #007bff;"><a onclick="alert()">Proposal Pengesahan</a></p>
+                                        </td>
+                                    }
 
                                     <td> @item.NAMA</td>
                                     <td> @item.NPP</td>
@@ -220,7 +224,7 @@
                             <div class="form-group">
                                 <label>
                                     Nama Dosen
-                                    <input type="text" id="namaDosen" name="namaDosen" class="style1" style="margin-left:15px" disabled  />
+                                    <input type="text" id="namaDosen" name="namaDosen" class="style1" style="margin-left:15px" disabled />
                                 </label>
 
                             </div>
@@ -262,7 +266,22 @@
         </div>
     </div>
     <!-- Modal Dialog 1 End-->
-
+    <div class="modal fade modal-error" id="modal-error" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content text-center rounded-pill">
+                <div class="modal-header card-est bg-danger rounded-pill w-75 m-auto">
+                    <div class="m-auto">
+                        <i class="fa fa-exclamation-triangle fa-3x pt-3 pb-3" aria-hidden="true"></i>
+                        <h5 class="modal-title">Ooops!</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h6 class="p-3">Tidak ada File</h6>
+                    <button type="button" class="btn btn-warning rounded-pill btn-est m-2" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
@@ -274,7 +293,10 @@
             refreshTabelDaftarPenelitian();
 
 
+            function alert() {
+                $('#modal-error').modal('show');
 
+            }
             function refreshTabelDaftarPenelitian() {
                 tblDataDaftarPenelitian = $("#tblDataDaftarPenelitian").DataTable({
                     "buttons": ["csv", "excel", "pdf", "print"],

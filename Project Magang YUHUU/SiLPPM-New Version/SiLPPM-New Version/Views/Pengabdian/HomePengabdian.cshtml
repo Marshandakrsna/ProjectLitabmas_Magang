@@ -174,11 +174,11 @@
                                         <label for="basic-addon1" class="form-label">Tahun Akademik</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
-                                            <select style="width:710px" id="ID_TAHUN_AKADEMIK" name="ID_TAHUN_AKADEMIK">
+                                            <select style="width:710px" id="ID_TAHUN_ANGGARAN" name="ID_TAHUN_ANGGARAN">
                                                 <option hidden style="color:lightgrey">Pilih Tahun Akademik</option>
                                                 @foreach (var item in Model.refjenis2)
                                                 {
-                                                    <option value="@item.ID_TAHUN_ANGGARAN"> @item.TAHUN_ANGGARAN</option>
+                                                    <option value="@item.ID_TAHUN_AKADEMIK"> @item.TAHUN_AKADEMIK</option>
 
                                                 }
                                             </select>

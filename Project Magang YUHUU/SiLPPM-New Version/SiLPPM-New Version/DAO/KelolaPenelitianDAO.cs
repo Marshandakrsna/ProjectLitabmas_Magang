@@ -98,7 +98,7 @@ namespace SiLPPM_New_Version.DAO
                 try
                 {
                     string query = @"select DISTINCT m.NPP,m.NAMA,m.NAMA_LENGKAP_GELAR from simka.MST_KARYAWAN m join  [siatmax].[TBL_USER_ROLE] s on s.NPP=m.NPP join [siatmax].[REF_ROLE] r  
-                    on r.id_role=s.id_role where r.DESKRIPSI='Assesor' and s.ID_SISTEM_INFORMASI=8 and s.IS_ACTIVE='1'";
+                    on r.id_role=s.id_role where r.DESKRIPSI='Reviewer' and s.ID_SISTEM_INFORMASI=8 and s.IS_ACTIVE='1'";
 
                     var data = conn.Query<dynamic>(query).ToList();
 

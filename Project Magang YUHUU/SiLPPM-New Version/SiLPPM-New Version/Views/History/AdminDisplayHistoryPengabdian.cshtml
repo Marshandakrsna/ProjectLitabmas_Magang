@@ -104,18 +104,26 @@
                         <tbody>
                             @foreach (var item in Model.HistoryPengabdian)
                             {
-                            <tr>
-                                <td>@item.id_proposal</td>
-                                <td>@item.NAMA</td>
-                                <td>@item.FAK</td>
-                                <td>@item.PRODI</td>
-                                <td>@item.JUDUL_KEGIATAN</td>
-                                <td>@item.DESKRIPSI</td>
-                                <td>@item.TAHUN_ANGGARAN</td>
-                                <td> <p style="font-weight:bold;color:royalblue; cursor:pointer" href="">Unduh Dokumen</p></td>
-                                <td> <p style="font-weight:bold;color:royalblue; cursor:pointer" href="">Unduh Draft</p></td>
-                                <td> <p style="font-weight:bold;color:royalblue; cursor:pointer" href="">Unduh Laporan</p></td>
-                            </tr>
+                                <tr>
+                                    <td>@item.id_proposal</td>
+                                    <td>@item.NAMA</td>
+                                    <td>@item.FAK</td>
+                                    <td>@item.PRODI</td>
+                                    <td>@item.JUDUL_KEGIATAN</td>
+                                    <td>@item.DESKRIPSI</td>
+                                    <td>@item.TAHUN_ANGGARAN</td>
+                                    @if (item.DOKUMEN != null && item.DOKUMEN.Length > 0)
+                                    {
+                                        <td> <a style="font-weight:bold;color:royalblue; cursor:pointer" href="/PreviewFileProposalPengabdian/@item.id_proposal">Unduh Dokumen</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td> <a style="font-weight:bold;color:royalblue; cursor:pointer" onclick="alert()">Unduh Dokumen</a></td>
+
+                                    }
+                                    <td> <p style="font-weight:bold;color:royalblue; cursor:pointer" href="">Unduh Draft</p></td>
+                                    <td> <p style="font-weight:bold;color:royalblue; cursor:pointer" href="">Unduh Laporan</p></td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -126,7 +134,22 @@
 
         </div>
     </div>
-
+    <div class="modal fade modal-error" id="modal-error" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content text-center rounded-pill">
+                <div class="modal-header card-est bg-danger rounded-pill w-75 m-auto">
+                    <div class="m-auto">
+                        <i class="fa fa-exclamation-triangle fa-3x pt-3 pb-3" aria-hidden="true"></i>
+                        <h5 class="modal-title">Ooops!</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h6 class="p-3">Tidak ada File</h6>
+                    <button type="button" class="btn btn-warning rounded-pill btn-est m-2" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -149,7 +172,10 @@
                     "responsive": true,
                 }).buttons().container().appendTo('#tblDataHistoryPengabdian_wrapper .col-md-6:eq(0)');
             }
+            function alert() {
+                $('#modal-error').modal('show');
 
+            }
 
         </script>
     }

@@ -13,5 +13,6 @@ namespace SiLPPM_New_Version.Models
         public bool status { get; set; }
         public string pesan { get; set; }
         public dynamic data { get; set; }
+        public byte[] DOKUMEN { get; set; }
     }
 }

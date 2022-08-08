@@ -44,6 +44,84 @@ FROM   simka.MST_KARYAWAN  WHERE simka.MST_KARYAWAN.USERNAME= @USERNAME;";
                 }
             }
         }
+        public DBOutput GetDataUserList(int id_proposal)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+
+                    string query = @"SELECT     simka.MST_KARYAWAN.NPP, simka.MST_KARYAWAN.NAMA, simka.MST_KARYAWAN.ALAMAT, simka.MST_KARYAWAN.EMAIL,
+                      simka.MST_KARYAWAN.NO_TELPON_HP, siatmax.MST_UNIT.NAMA_UNIT, simka.REF_GOLONGAN.ID_REF_GOLONGAN, simka.MST_KARYAWAN.NIDN, 
+                      simka.REF_JABATAN_AKADEMIK.DESKRIPSI, MST_UNIT_1.NAMA_UNIT AS FAKULTAS, ID_PROPOSAL
+FROM         siatmax.MST_UNIT AS MST_UNIT_1 RIGHT OUTER JOIN
+                      siatmax.MST_UNIT ON MST_UNIT_1.ID_UNIT = siatmax.MST_UNIT.MST_ID_UNIT RIGHT OUTER JOIN
+                      simka.REF_JABATAN_AKADEMIK RIGHT OUTER JOIN
+                      simka.MST_KARYAWAN ON simka.REF_JABATAN_AKADEMIK.ID_REF_JBTN_AKADEMIK = simka.MST_KARYAWAN.ID_REF_JBTN_AKADEMIK ON 
+                      simka.MST_KARYAWAN.ID_UNIT_AKADEMIK = siatmax.MST_UNIT.ID_UNIT LEFT OUTER JOIN
+                      simka.REF_GOLONGAN ON simka.MST_KARYAWAN.ID_REF_GOLONGAN = simka.REF_GOLONGAN.ID_REF_GOLONGAN  join silppm.TBL_PENELITIAN on simka.MST_KARYAWAN.NPP = silppm.TBL_PENELITIAN.NPP
+WHERE    silppm.TBL_PENELITIAN.ID_PROPOSAL = @id_proposal";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_proposal = id_proposal });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetDataUserListPengabdian(string npp)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+
+                    string query = @"SELECT     simka.MST_KARYAWAN.NPP, simka.MST_KARYAWAN.NAMA, simka.MST_KARYAWAN.ALAMAT, simka.MST_KARYAWAN.EMAIL,
+                      simka.MST_KARYAWAN.NO_TELPON_HP, siatmax.MST_UNIT.NAMA_UNIT, simka.REF_GOLONGAN.ID_REF_GOLONGAN, simka.MST_KARYAWAN.NIDN, 
+                      simka.REF_JABATAN_AKADEMIK.DESKRIPSI, MST_UNIT_1.NAMA_UNIT AS FAKULTAS
+FROM         siatmax.MST_UNIT AS MST_UNIT_1 RIGHT OUTER JOIN
+                      siatmax.MST_UNIT ON MST_UNIT_1.ID_UNIT = siatmax.MST_UNIT.MST_ID_UNIT RIGHT OUTER JOIN
+                      simka.REF_JABATAN_AKADEMIK RIGHT OUTER JOIN
+                      simka.MST_KARYAWAN ON simka.REF_JABATAN_AKADEMIK.ID_REF_JBTN_AKADEMIK = simka.MST_KARYAWAN.ID_REF_JBTN_AKADEMIK ON 
+                      simka.MST_KARYAWAN.ID_UNIT_AKADEMIK = siatmax.MST_UNIT.ID_UNIT LEFT OUTER JOIN
+                      simka.REF_GOLONGAN ON simka.MST_KARYAWAN.ID_REF_GOLONGAN = simka.REF_GOLONGAN.ID_REF_GOLONGAN  
+WHERE    simka.MST_KARYAWAN.NPP = @npp";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new {npp = npp });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
 
         public DBOutput GetPangkatByUsername(string username)
         {
@@ -564,7 +642,7 @@ FROM         siatmax.MST_UNIT INNER JOIN
             {
                 try
                 {
-                    string query = @"select d.id_proposal,d.Judul,s.DESKRIPSI from silppm.TBL_PENELITIAN d join silppm.REF_STATUS_PENELITIAN_PENGABDIAN s 
+                    string query = @"select d.id_proposal,d.Judul,s.DESKRIPSI, d.DOKUMEN from silppm.TBL_PENELITIAN d join silppm.REF_STATUS_PENELITIAN_PENGABDIAN s 
                     on s.ID_STATUS_PENELITIAN=d.ID_STATUS_PENELITIAN where d.NPP= @npp and IS_DROPPED=0 ";
                 
                     var data = conn.Query<dynamic>(query, new { npp = username }).ToList();
@@ -674,6 +752,136 @@ on s.ID_STATUS_PENELITIAN=e.ID_STATUS_PENELITIAN where NPP = @npp";
 
                     return output;
 
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetCountPenelitianDiterima(string npp)
+        {
+
+            DBOutput output = new DBOutput();
+            output.status = true;
+
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"select count(e.id_proposal) JUMLAH
+from silppm.TBL_PENELITIAN_LOLOS e join silppm.REF_STATUS_PENELITIAN_PENGABDIAN s 
+on s.ID_STATUS_PENELITIAN=e.ID_STATUS_PENELITIAN where e.npp = @npp";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new {  npp= npp });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetCountPenelitianDiajukan(string npp)
+        {
+
+            DBOutput output = new DBOutput();
+            output.status = true;
+
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"select count(d.id_proposal)JUMLAH from silppm.TBL_PENELITIAN d join silppm.REF_STATUS_PENELITIAN_PENGABDIAN s 
+                    on s.ID_STATUS_PENELITIAN=d.ID_STATUS_PENELITIAN where d.NPP= @npp and IS_DROPPED=0";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { npp = npp });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetCountPengabdianDiajukan(string npp)
+        {
+
+            DBOutput output = new DBOutput();
+            output.status = true;
+
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT count(ID_PROPOSAL) JUMLAH FROM silppm.TBL_PENGABDIAN p join silppm.REF_STATUS_PENELITIAN_PENGABDIAN s 
+            on s.ID_STATUS_PENELITIAN= p.ID_STATUS where NPP = @npp and IS_DROPPED = 0";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { npp = npp });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetCountPengabdianDiterima(string npp)
+        {
+
+            DBOutput output = new DBOutput();
+            output.status = true;
+
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"select count(e.id_proposal) JUMLAH
+from silppm.TBL_PENGABDIAN_LOLOS e join silppm.REF_STATUS_PENELITIAN_PENGABDIAN s 
+on s.ID_STATUS_PENELITIAN=e.ID_STATUS where NPP =  @npp";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { npp = npp });
+
+                    output.data = data;
+
+                    return output;
                 }
                 catch (Exception ex)
                 {
@@ -1063,6 +1271,75 @@ on s.ID_STATUS_PENELITIAN=e.ID_STATUS where NPP =  @npp";
                 }
             }
         }
+        public DBOutput GetDataNilaiReviewer1ByID(string id_reviewer)
+        {
+
+            DBOutput output = new DBOutput();
+            output.status = true;
+
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"   SELECT  p.[ID_PROPOSAL],ID_REVIEWER, N1_FIELD1,N1_FIELD2,N1_FIELD3,N1_FIELD4, N1_FIELD5, N1_FIELD6, N1_FIELD7, N1_JUSTIFIKASI1,N1_JUSTIFIKASI2, N1_JUSTIFIKASI3, N1_JUSTIFIKASI4, N1_JUSTIFIKASI5, N1_JUSTIFIKASI6, N1_JUSTIFIKASI7
+                  FROM [PORTAL_DOSEN].[silppm].[TBL_NILAI_REVIEW_PENELITIAN] s join silppm.TBL_PENELITIAN p on s.ID_PROPOSAL = p.ID_PROPOSAL
+                  INTERSECT SELECT  q.ID_PROPOSAL, REVIEWER1, N1_FIELD1, N1_FIELD2,N1_FIELD3,N1_FIELD4, N1_FIELD5, N1_FIELD6, N1_FIELD7, N1_JUSTIFIKASI1,N1_JUSTIFIKASI2, N1_JUSTIFIKASI3, N1_JUSTIFIKASI4, N1_JUSTIFIKASI5, N1_JUSTIFIKASI6, N1_JUSTIFIKASI7 FROM silppm.TBL_PENELITIAN q 
+                  join silppm.TBL_NILAI_REVIEW_PENELITIAN r on q.ID_PROPOSAL = r.ID_PROPOSAL WHERE ID_REVIEWER = @id_reviewer";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_reviewer = id_reviewer });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
+        public DBOutput GetDataNilaiReviewer2ByID(string id_reviewer)
+        {
+
+            DBOutput output = new DBOutput();
+            output.status = true;
+
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"   SELECT  p.[ID_PROPOSAL],ID_REVIEWER, N1_FIELD1,N1_FIELD2,N1_FIELD3,N1_FIELD4, N1_FIELD5, N1_FIELD6, N1_FIELD7, N1_JUSTIFIKASI1,N1_JUSTIFIKASI2, N1_JUSTIFIKASI3, N1_JUSTIFIKASI4, N1_JUSTIFIKASI5, N1_JUSTIFIKASI6, N1_JUSTIFIKASI7
+                  FROM [PORTAL_DOSEN].[silppm].[TBL_NILAI_REVIEW_PENELITIAN] s join silppm.TBL_PENELITIAN p on s.ID_PROPOSAL = p.ID_PROPOSAL
+                  INTERSECT SELECT  q.ID_PROPOSAL, REVIEWER2, N1_FIELD1, N1_FIELD2,N1_FIELD3,N1_FIELD4, N1_FIELD5, N1_FIELD6, N1_FIELD7, N1_JUSTIFIKASI1,N1_JUSTIFIKASI2, N1_JUSTIFIKASI3, N1_JUSTIFIKASI4, N1_JUSTIFIKASI5, N1_JUSTIFIKASI6, N1_JUSTIFIKASI7 FROM silppm.TBL_PENELITIAN q 
+                  join silppm.TBL_NILAI_REVIEW_PENELITIAN r on q.ID_PROPOSAL = r.ID_PROPOSAL WHERE ID_REVIEWER = @id_reviewer";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_reviewer = id_reviewer });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
         public DBOutput GetHistoryPenelitianByNPP(string username)
         {
 
@@ -1096,6 +1373,146 @@ FROM         siatmax.MST_UNIT INNER JOIN
 
                     return output;
 
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetHistoryPenelitian(string npp)
+        {
+
+            DBOutput output = new DBOutput();
+            output.status = true;
+
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT     silppm.TBL_PENELITIAN.ID_PROPOSAL, simka.MST_KARYAWAN.NAMA, silppm.TBL_PENELITIAN.JUDUL, 
+                      silppm.REF_STATUS_PENELITIAN_PENGABDIAN.DESKRIPSI, siatmax.MST_UNIT.NAMA_UNIT AS 'FAK', MST_UNIT_1.NAMA_UNIT AS 'PRODI', 
+                      siatmax.TBL_TAHUN_AKADEMIK.TAHUN_AKADEMIK, silppm.REF_STATUS_PENELITIAN_PENGABDIAN.DESKRIPSI AS STATUS, 
+                      silppm.TBL_PENELITIAN.DANA_PRIBADI, silppm.TBL_PENELITIAN.DANA_EKSTERNAL, silppm.TBL_PENELITIAN.DANA_KERJASAMA, 
+                      silppm.TBL_PENELITIAN.DANA_UAJY, silppm.TBL_PERSONIL_PENELITIAN.NPP,
+                      case when TBL_PERSONIL_PENELITIAN.NPP = TBL_PENELITIAN.NPP then 'ketua' else 'anggota' end Peran
+FROM         siatmax.MST_UNIT INNER JOIN
+                      simka.MST_KARYAWAN ON siatmax.MST_UNIT.ID_UNIT = simka.MST_KARYAWAN.ID_UNIT INNER JOIN
+                      siatmax.MST_UNIT AS MST_UNIT_1 ON simka.MST_KARYAWAN.ID_UNIT_AKADEMIK = MST_UNIT_1.ID_UNIT INNER JOIN
+                      silppm.TBL_PENELITIAN INNER JOIN
+                      silppm.TBL_PERSONIL_PENELITIAN ON silppm.TBL_PENELITIAN.ID_PROPOSAL = silppm.TBL_PERSONIL_PENELITIAN.ID_PROPOSAL INNER JOIN
+                      silppm.REF_STATUS_PENELITIAN_PENGABDIAN ON 
+                      silppm.REF_STATUS_PENELITIAN_PENGABDIAN.ID_STATUS_PENELITIAN = silppm.TBL_PENELITIAN.ID_STATUS_PENELITIAN INNER JOIN
+                      siatmax.TBL_TAHUN_AKADEMIK ON silppm.TBL_PENELITIAN.ID_TAHUN_ANGGARAN = siatmax.TBL_TAHUN_AKADEMIK.ID_TAHUN_AKADEMIK ON 
+                      simka.MST_KARYAWAN.NPP = silppm.TBL_PERSONIL_PENELITIAN.NPP
+                      where TBL_PERSONIL_PENELITIAN.NPP =@npp ";
+
+                    var data = conn.Query<dynamic>(query, new { npp = npp }).ToList();
+
+                    output.data = data;
+
+                    return output;
+
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetHistoryPengabdian(string npp)
+        {
+
+            DBOutput output = new DBOutput();
+            output.status = true;
+
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT silppm.TBL_PENGABDIAN.ID_PROPOSAL, simka.MST_KARYAWAN.NAMA, silppm.TBL_PENGABDIAN.JUDUL_KEGIATAN JUDUL, 
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN.DESKRIPSI, siatmax.MST_UNIT.NAMA_UNIT AS 'FAK', MST_UNIT_1.NAMA_UNIT AS 'PRODI', 
+                     siatmax.TBL_TAHUN_AKADEMIK.TAHUN_AKADEMIK, silppm.REF_STATUS_PENELITIAN_PENGABDIAN.DESKRIPSI AS STATUS, 
+                     silppm.TBL_PENGABDIAN.DANA_PRIBADI, silppm.TBL_PENGABDIAN.DANA_EKSTERNAL, silppm.TBL_PENGABDIAN.DANA_KERJASAMA, 
+                     silppm.TBL_PENGABDIAN.DANA_UAJY, silppm.TBL_PERSONIL_PENGABDIAN.NPP,
+                     case when TBL_PERSONIL_PENGABDIAN.NPP = TBL_PENGABDIAN.NPP then 'ketua' else 'anggota' end Peran
+                    FROM siatmax.MST_UNIT INNER JOIN
+                     simka.MST_KARYAWAN ON siatmax.MST_UNIT.ID_UNIT = simka.MST_KARYAWAN.ID_UNIT INNER JOIN
+                     siatmax.MST_UNIT AS MST_UNIT_1 ON simka.MST_KARYAWAN.ID_UNIT_AKADEMIK = MST_UNIT_1.ID_UNIT INNER JOIN
+                     silppm.TBL_PENGABDIAN INNER JOIN
+                     silppm.TBL_PERSONIL_PENGABDIAN ON silppm.TBL_PENGABDIAN.ID_PROPOSAL = silppm.TBL_PERSONIL_PENGABDIAN.ID_PROPOSAL INNER JOIN
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN ON 
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN.ID_STATUS_PENELITIAN = silppm.TBL_PENGABDIAN.ID_STATUS INNER JOIN
+                     siatmax.TBL_TAHUN_AKADEMIK ON silppm.TBL_PENGABDIAN.ID_TAHUN_ANGGARAN = siatmax.TBL_TAHUN_AKADEMIK.ID_TAHUN_AKADEMIK ON 
+                     simka.MST_KARYAWAN.NPP = silppm.TBL_PERSONIL_PENGABDIAN.NPP
+                      where TBL_PERSONIL_PENGABDIAN.NPP =@npp";
+
+                    var data = conn.Query<dynamic>(query, new { npp = npp }).ToList();
+
+                    output.data = data;
+
+                    return output;
+
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetHistoryPengabdianByID(int id_proposal)
+        {
+
+            DBOutput output = new DBOutput();
+            output.status = true;
+
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT silppm.TBL_PENGABDIAN.ID_PROPOSAL, simka.MST_KARYAWAN.NAMA, silppm.TBL_PENGABDIAN.JUDUL_KEGIATAN JUDUL, 
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN.DESKRIPSI, siatmax.MST_UNIT.NAMA_UNIT AS 'FAK', MST_UNIT_1.NAMA_UNIT AS 'PRODI', 
+                     siatmax.TBL_TAHUN_AKADEMIK.TAHUN_AKADEMIK, silppm.REF_STATUS_PENELITIAN_PENGABDIAN.DESKRIPSI AS STATUS, 
+                     silppm.TBL_PENGABDIAN.DANA_PRIBADI, silppm.TBL_PENGABDIAN.DANA_EKSTERNAL, silppm.TBL_PENGABDIAN.DANA_KERJASAMA, 
+                     silppm.TBL_PENGABDIAN.DANA_UAJY, silppm.TBL_PERSONIL_PENGABDIAN.NPP,
+                     case when TBL_PERSONIL_PENGABDIAN.NPP = TBL_PENGABDIAN.NPP then 'ketua' else 'anggota' end Peran
+                    FROM siatmax.MST_UNIT INNER JOIN
+                     simka.MST_KARYAWAN ON siatmax.MST_UNIT.ID_UNIT = simka.MST_KARYAWAN.ID_UNIT INNER JOIN
+                     siatmax.MST_UNIT AS MST_UNIT_1 ON simka.MST_KARYAWAN.ID_UNIT_AKADEMIK = MST_UNIT_1.ID_UNIT INNER JOIN
+                     silppm.TBL_PENGABDIAN INNER JOIN
+                     silppm.TBL_PERSONIL_PENGABDIAN ON silppm.TBL_PENGABDIAN.ID_PROPOSAL = silppm.TBL_PERSONIL_PENGABDIAN.ID_PROPOSAL INNER JOIN
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN ON 
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN.ID_STATUS_PENELITIAN = silppm.TBL_PENGABDIAN.ID_STATUS INNER JOIN
+                     siatmax.TBL_TAHUN_AKADEMIK ON silppm.TBL_PENGABDIAN.ID_TAHUN_ANGGARAN = siatmax.TBL_TAHUN_AKADEMIK.ID_TAHUN_AKADEMIK ON 
+                     simka.MST_KARYAWAN.NPP = silppm.TBL_PERSONIL_PENGABDIAN.NPP
+                      where silppm.TBL_PENGABDIAN.ID_PROPOSAL =@id_proposal";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_proposal = id_proposal });
+
+                    output.data = data;
+
+                    return output;
                 }
                 catch (Exception ex)
                 {
