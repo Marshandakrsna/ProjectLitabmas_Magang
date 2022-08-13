@@ -152,6 +152,36 @@ namespace SiLPPM_New_Version.DAO
                 }
             }
         }
+        public DBOutput UpdateDanaRAB(int ID_PROPOSAL, float DANA_UAJY,float DANA_PRIBADI, float DANA_EKSTERNAL)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+
+                    string query = @"UPDATE [silppm].[TBL_PENGABDIAN] SET  [DANA_UAJY] = @DANA_UAJY  ,[DANA_PRIBADI] = @DANA_PRIBADI, [DANA_EKSTERNAL] = @DANA_EKSTERNAL
+                    WHERE id_proposal = @ID_PROPOSAL";
+
+                    var param = new { ID_PROPOSAL = ID_PROPOSAL, DANA_UAJY = DANA_UAJY , DANA_PRIBADI = DANA_PRIBADI, DANA_EKSTERNAL = DANA_EKSTERNAL };
+                    conn.Execute(query, param);
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
         public DBOutput UbahPengabdian(int ID_TAHUN_ANGGARAN, string REVIEWER1, string REVIEWER2, string JUDUL_KEGIATAN, string LANDASAN_PENELITIAN, string JENIS_PENGABDIAN, string ANGGOTA1,
              string ANGGOTA2, string MITRA, string MITRA_KEAHLIAN, string LOKASI, int JARAK_PT_LOKASI, string OUTPUT, string OUTCOME, int ID_ROAD_MAP, string AWAL, string AKHIR, string SASARAN,
              int SKS_KETUA, int SKS_ANGGOTA, string NPP, float DANA_PRIBADI, float DANA_EKSTERNAL, float DANA_KERJASAMA, float DANA_UAJY,
@@ -498,6 +528,59 @@ namespace SiLPPM_New_Version.DAO
                         MITRA_KEAHLIAN = MITRA_KEAHLIAN, LOKASI = LOKASI, JARAK_PT_LOKASI = JARAK_PT_LOKASI,OUTPUT = OUTPUT, OUTCOME = OUTCOME,ID_ROAD_MAP = ID_ROAD_MAP, AWAL = AWAL, AKHIR = AKHIR, SASARAN = SASARAN, SKS_KETUA = SKS_KETUA, SKS_ANGGOTA= SKS_ANGGOTA, NPP = NPP,
                          DANA_EKSTERNAL = DANA_EKSTERNAL, DANA_KERJASAMA=DANA_KERJASAMA, DANA_UAJY=DANA_UAJY, DANA_PRIBADI=DANA_PRIBADI, DOKUMEN=DOKUMEN
                         ,INSERT_DATE = DateTime.Now, IP_ADDRESS=IP_ADDRESS,  USER_ID = USER_ID, ID_SKIM = ID_SKIM, ID_TEMA_UNIVERSITAS = ID_TEMA_UNIVERSITAS, NO_SEMESTER = NO_SEMESTER};
+
+
+                    conn.Execute(query, param);
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
+        public DBOutput AddPengabdianAnggota1(int IS_SELESAI, string ID_PROPOSAL)
+        {
+
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"insert into silppm.TBL_PENGABDIAN (
+                  [ID_TAHUN_ANGGARAN],
+                    [ID_SUMBER],[REVIEWER1],[REVIEWER2],[JUDUL_KEGIATAN],[LANDASAN_PENELITIAN],
+                    [JENIS_PENGABDIAN],[ANGGOTA1],[ANGGOTA2],[MITRA]
+                    ,[MITRA_KEAHLIAN],[LOKASI],
+                    [JARAK_PT_LOKASI],[OUTPUT],[OUTCOME],
+                    [ID_ROAD_MAP],[AWAL],[AKHIR],
+                    [SASARAN],[SKS_KETUA],[SKS_ANGGOTA],[NPP],[DANA_EKSTERNAL]
+                    ,[DANA_KERJASAMA],[DANA_UAJY],[DANA_PRIBADI]
+                    ,[DOKUMEN],[IS_CHECKED], [IS_DROPPED], [ID_STATUS], [IS_SETUJU_PRODI]
+                    ,[IS_SETUJU_DEKAN],[IS_SETUJU_LPPM], [NPP_REVIEWER],[DANA_SETUJU]
+                    ,[INSERT_DATE],[IP_ADDRESS],[USER_ID],[ID_SKIM],[ID_TEMA_UNIVERSITAS], NO_SEMESTER)
+                    select [ID_TAHUN_ANGGARAN],
+                   0,NULL,NULL,[JUDUL_KEGIATAN],[LANDASAN_PENELITIAN],
+                    [JENIS_PENGABDIAN],@ANGGOTA1,@ANGGOTA2,[MITRA]
+                    ,[MITRA_KEAHLIAN],[LOKASI],
+                    [JARAK_PT_LOKASI],[OUTPUT],[OUTCOME],
+                    [ID_ROAD_MAP],[AWAL],[AKHIR],
+                    [SASARAN],[SKS_KETUA],[SKS_ANGGOTA],[NPP],[DANA_EKSTERNAL]
+                    ,[DANA_KERJASAMA],[DANA_UAJY],[DANA_PRIBADI]
+                    ,[DOKUMEN],0,0,1,1,1,NULL,NULL,0
+                    ,[INSERT_DATE],[IP_ADDRESS],[USER_ID],[ID_SKIM],[ID_TEMA_UNIVERSITAS], NO_SEMESTER from silppm.TBL_PENELITIAN where ID_PROPOSAL = @ID_PROPOSAL";
+
+                    var param = new { IS_SELESAI = IS_SELESAI, ID_PROPOSAL = ID_PROPOSAL };
 
 
                     conn.Execute(query, param);

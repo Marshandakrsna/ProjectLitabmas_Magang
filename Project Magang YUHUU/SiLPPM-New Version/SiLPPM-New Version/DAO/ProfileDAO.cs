@@ -995,6 +995,38 @@ on s.ID_STATUS_PENELITIAN=e.ID_STATUS where NPP =  @npp";
                 }
             }
         }
+        public DBOutput GetCountTotalReviewer(int id_proposal)
+        {
+
+            DBOutput output = new DBOutput();
+            output.status = true;
+
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT COUNT([ID_REVIEWER]) JUMLAH 
+                    FROM [PORTAL_DOSEN].[silppm].[TBL_NILAI_REVIEW_PENELITIAN] WHERE ID_PROPOSAL = @id_proposal ";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_proposal = id_proposal });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
         public DBOutput GetCountReviewer1(int id_proposal)
         {
 

@@ -53,7 +53,7 @@ namespace SiLPPM_New_Version.DAO
                     string query = @"
 SELECT [ID_TAHUN_AKADEMIK]
       ,[TAHUN_AKADEMIK]
-  FROM [PORTAL_DOSEN].siatmax.TBL_TAHUN_AKADEMIK ORDER BY TAHUN_AKADEMIK ASC";
+  FROM [PORTAL_DOSEN].siatmax.TBL_TAHUN_AKADEMIK ORDER BY TAHUN_AKADEMIK DESC";
 
                     var data = conn.Query<dynamic>(query).ToList();
 
@@ -1829,6 +1829,36 @@ and (REVIEWER1 = @NPP  or REVIEWER2 = @NPP ) and id_proposal = @id_proposal
                 }
             }
         }
+        public DBOutput UpdateDanaRAB(int ID_PROPOSAL, float DANA_UAJY, float DANA_PRIBADI, float DANA_EKSTERNAL)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+
+                    string query = @"UPDATE [silppm].[TBL_PENGABDIAN] SET  [DANA_UAJY] = @DANA_UAJY  ,[DANA_PRIBADI] = @DANA_PRIBADI, [DANA_EKSTERNAL] = @DANA_EKSTERNAL
+                    WHERE id_proposal = @ID_PROPOSAL";
+
+                    var param = new { ID_PROPOSAL = ID_PROPOSAL, DANA_UAJY = DANA_UAJY, DANA_PRIBADI = DANA_PRIBADI, DANA_EKSTERNAL = DANA_EKSTERNAL };
+                    conn.Execute(query, param);
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
         public DBOutput GetPenelitianReviewerByID(int id_proposal)
         {
             DBOutput output = new DBOutput();
@@ -1985,7 +2015,7 @@ and (REVIEWER1 = @NPP  or REVIEWER2 = @NPP ) and id_proposal = @id_proposal
                 try
                 {
                     string query = @"select DISTINCT m.NPP,m.NAMA,m.NAMA_LENGKAP_GELAR from simka.MST_KARYAWAN m join  [siatmax].[TBL_USER_ROLE] s on s.NPP=m.NPP join [siatmax].[REF_ROLE] r  
-                    on r.id_role=s.id_role where r.DESKRIPSI='Assesor' and s.ID_SISTEM_INFORMASI=8 and s.IS_ACTIVE='1'";
+                    on r.id_role=s.id_role where r.DESKRIPSI='Reviewer' and s.ID_SISTEM_INFORMASI=8 and s.IS_ACTIVE='1'";
 
                     var data = conn.Query<dynamic>(query).ToList();
 

@@ -55,15 +55,16 @@
             margin-bottom: 20px;
         }
 
-        .btn:active {
-            background-color: #ffe7ab;
-            transform: translateY(4px);
+    
+        .btn {
+            background-color: transparent;
+            border: #2573e0 2px solid;
+            color: #2573e0;
+            border-radius: 33px;
+            padding: 13px 13px;
+            font-size: 20px;
+            cursor: pointer;
         }
-
-        .btn:hover {
-            background-color: #ffe7ab;
-        }
-
         .content-wrapper {
             border-radius: 10px;
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -151,8 +152,21 @@
                             {
 
                                 <tr>
-                                    <td>
-                                        <p style="font-weight:bold"><a href="UbahRolePengelolaan?npp=@item.NPP">Ubah Role User</a></p>
+                                    <td class="text-center">
+                                        @if (item.ID_ROLE != 3)
+                                        {
+                                            <button class="btn" style="font-weight:bold; font-size:larger" title="Delete Role"><a href="UbahRolePengelolaan?npp=@item.NPP"><i class="fa fa-edit"></i></a></button>
+                                            <button disabled class="btn" style="font-weight:bold; font-size:larger" title="Tambah Role Reviewer"><a href="TambahRolePengelolaan?npp=@item.NPP"><i class="fa fa-plus-circle"></i></a></button>
+
+                                        }
+                                        else
+                                        {
+                                            <button  disabled class="btn" style="font-weight:bold; font-size:larger" title="Delete Role"><a href="UbahRolePengelolaan?npp=@item.NPP"><i class="fa fa-edit"></i></a></button>
+                                            <button  class="btn" style="font-weight:bold; font-size:larger" title="Tambah Role Reviewer"><a href="TambahRolePengelolaan?npp=@item.NPP"><i class="fa fa-plus-circle"></i></a></button>
+
+                                        }
+
+                                        @*<p class="btn" style="font-weight:bold" onclick="togModalTambahReviewer(@item.NPP)"><i class="fa fa-plus-circle"></i></p>*@
 
                                     </td>
 
@@ -171,7 +185,24 @@
 
         </div>
     </div>
-
+    @*Modal Dekan Disetujui*@
+    <div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Tambah Reviewer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah anda yakin ingin menambah data dosen menjadi reviewer?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" onclick="tambahRoleReviewer()" class="btn btn-danger">Tambah</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -180,23 +211,67 @@
 
 
     <script>
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });</script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });</script>
 
 
     <script>
-            $('#tblData').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+        var npp;
+        var tempIdUpdate;
 
-            });</script>
+        $('#tblData').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+
+        });
+        function togModalTambahReviewer(NPP) {
+            console.log(NPP)
+            npp = NPP;
+            this.tempIdUpdate = NPP;
+
+            $('#modalTambah').modal('show');
+        }
+        function closeModalTambah() {
+            $('#modalTambah').modal('hide');
+        }
+        function tambahRoleReviewer() {
+            var self = this;
+            console.log(npp);
+           
+
+            $.ajax({
+                type: "POST",
+                url: "/Pengelolaan/TambahDataReviewer?npp=" + NPP,
+                data: ({ npp: npp }),
+                success: function (data) {
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Dosen berhasil ditambahkan sebagai Reviewer!',
+                        confirmButtonText: 'Tutup',
+                    })
+                    closeModalTambah();
+                    window.location.reload();
+
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'SiLPPM said: ',
+                        text: 'Dosen gagal ditambah!',
+                    })
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
 
 
 </body>

@@ -221,7 +221,7 @@
                                 <select id="N1_JUSTIFIKASI3" name="N1_JUSTIFIKASI3" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
                                     <option value="0">Tidak ada roadmap</option>
                                     <option value="2"> Ada roadmap, keterkaitan milestone dan usulan penelitian tidak jelas </option>
-                                    <option value="6"> Ada roadmap, keterkaitan milestone dan usulan penelitian jelas</option>
+                                    <option value="5"> Ada roadmap, keterkaitan milestone dan usulan penelitian jelas</option>
                                 </select>
                             </td>
                         </tr>
@@ -312,9 +312,10 @@
         });
 
         function displayValue() {
+
             /* Untuk Value 1 --> Relevansi usulan penelitian.. */
             var value1 = document.getElementById("N1_JUSTIFIKASI1").value;
-            skorValue1 = parseInt(value1) * 20;
+            skorValue1 = parseInt(value1) * 1;
             nilaiValue1 = 7.5 * skorValue1;
             document.getElementById("N1_FIELDS1").innerHTML = skorValue1;
             temp1 = document.getElementById("nilai").innerHTML = nilaiValue1;
@@ -323,7 +324,7 @@
 
             /* Untuk Value 2 --> Kualitas dan relevansi tujuan.. */
             var value2 = document.getElementById("N1_JUSTIFIKASI2").value;
-            skorValue2 = parseInt(value2) * 10;
+            skorValue2 = parseInt(value2) * 1;
             nilaiValue2 = 37.5 * skorValue2;
             document.getElementById("N1_FIELDS2").innerHTML = skorValue2;
             temp2 = document.getElementById("nilai2").innerHTML = nilaiValue2;
@@ -332,49 +333,48 @@
 
             /* Untuk Value 3 --> Keterkaitan usulan penelitian.. */
             var value3 = document.getElementById("N1_JUSTIFIKASI3").value;
-            skorValue3 = parseInt(value3) * 10;
+            skorValue3 = parseInt(value3) * 1;
             nilaiValue3 = 12.5 * skorValue3;
             document.getElementById("N1_FIELDS3").innerHTML = skorValue3;
-            temp3 = document.getElementById("nilai3").innerHTML = parseInt(nilaiValue3);
+            temp3 = document.getElementById("nilai3").innerHTML = nilaiValue3;
             //untuk mengambil data Skor Nilai Review
             $("#N1_FIELD3").val(document.getElementById("N1_FIELDS3").innerHTML);
 
             /* Untuk Value 4 --> Kesesuaian kompetensi tim peneliti.. */
             var value4 = document.getElementById("N1_JUSTIFIKASI4").value;
-            skorValue4 = parseInt(value4) * 10;
+            skorValue4 = parseInt(value4) * 1;
             nilaiValue4 = 7.5 * skorValue4;
             document.getElementById("N1_FIELDS4").innerHTML = skorValue4;
-            temp4 = document.getElementById("nilai4").innerHTML = parseInt(nilaiValue4);
+            temp4 = document.getElementById("nilai4").innerHTML = nilaiValue4;
             //untuk mengambil data Skor Nilai Review
             $("#N1_FIELD4").val(document.getElementById("N1_FIELDS4").innerHTML);
 
             /* Untuk Value 5 --> Kewajaran metode tahapan target.. */
             var value5 = document.getElementById("N1_JUSTIFIKASI5").value;
-            skorValue5 = parseInt(value5) * 20;
+            skorValue5 = parseInt(value5) * 1;
             nilaiValue5 = 12.5 * skorValue5;
             document.getElementById("N1_FIELDS5").innerHTML = skorValue5;
-            temp5 = document.getElementById("nilai5").innerHTML = parseInt(nilaiValue5);
+            temp5 = document.getElementById("nilai5").innerHTML = nilaiValue5;
             //untuk mengambil data Skor Nilai Review
             $("#N1_FIELD5").val(document.getElementById("N1_FIELDS5").innerHTML);
 
             /* Untuk Value 6 --> Kekinian dan sumber primer.. */
             var value6 = document.getElementById("N1_JUSTIFIKASI6").value;
-            skorValue6 = parseInt(value6) * 10;
+            skorValue6 = parseInt(value6) * 1;
             nilaiValue6 = 12.5 * skorValue6;
             document.getElementById("N1_FIELDS6").innerHTML = skorValue6;
-            temp6 = document.getElementById("nilai6").innerHTML = parseInt(nilaiValue6);
+            temp6 = document.getElementById("nilai6").innerHTML = nilaiValue6;
             //untuk mengambil data Skor Nilai Review
             $("#N1_FIELD6").val(document.getElementById("N1_FIELDS6").innerHTML);
 
             /* Untuk Value 7 --> Penulisan usulan sesuai panduan.. */
             var value7 = document.getElementById("N1_JUSTIFIKASI7").value;
-            skorValue7 = parseInt(value7) * 20;
+            skorValue7 = parseInt(value7) * 1;
             nilaiValue7 = 10 * skorValue7;
             document.getElementById("N1_FIELDS7").innerHTML = skorValue7;
-            temp7 = document.getElementById("nilai7").innerHTML = parseInt(nilaiValue7);
+            temp7 = document.getElementById("nilai7").innerHTML = nilaiValue7;
             //untuk mengambil data Skor Nilai Review
             $("#N1_FIELD7").val(document.getElementById("N1_FIELDS7").innerHTML);
-
 
             //untuk menghitung total inputan skor sesuai apa yg di select
             document.getElementById("jumlahTotal").innerHTML = temp1 + temp2 + temp3 + temp4 + temp5 + temp6 + temp7;

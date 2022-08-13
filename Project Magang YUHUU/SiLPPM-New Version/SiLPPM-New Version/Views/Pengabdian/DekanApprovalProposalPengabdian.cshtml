@@ -286,15 +286,31 @@
 
                         </tr>
 
-                        <tr>
-                            <td class="style8" style="font-weight: bold;color: steelblue; line-height:50px">
-                                Dokumen
-                            </td>
-                            <td style="line-height:50px">
-                                <span class="label style"><a style="color:white" href="/PreviewFileProposalPengabdian/@Model.data.ID_PROPOSAL"><i class="fa fa-file-download"></i> Unduh Dokumen</a></span>
-                            </td>
+                        @if (Model.data.DOKUMEN != null && Model.data.DOKUMEN.Length > 0)
+                        {
+                            <tr>
+                                <td class="style8" style="font-weight: bold;color: steelblue; line-height:50px">
+                                    Dokumen
+                                </td>
+                                <td style="line-height:50px">
+                                    <span class="label style"><a style="color:white" href="/PreviewFileProposalPengabdian/@Model.data.ID_PROPOSAL"><i class="fa fa-file-download"></i> Unduh Dokumen</a></span>
+                                </td>
 
-                        </tr>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td class="style8" style="font-weight: bold;color: steelblue; line-height:50px">
+                                    Dokumen
+                                </td>
+                                <td style="line-height:50px">
+                                    <span class="label style"><a style="color:white" onclick="alert()"><i class="fa fa-file-download"></i> Unduh Dokumen</a></span>
+                                </td>
+
+                            </tr>
+                        }
+
 
 
                     </thead>
@@ -312,46 +328,62 @@
     </div>
     @*Modal Revisi*@
     <div class="modal fade" id="modalRevisi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Revisi Proposal</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Revisi Proposal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form class="formTambahFeedback " method="post" asp-action="addFeedback" asp-controller="Pengabdian" enctype="multipart/form-data" novalidate>
+                    @Html.AntiForgeryToken()
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">ID_PROPOSAL</label>
+                            <input id="ID_PROPOSAL" name="ID_PROPOSAL" type="text" class="style1" style=" word-wrap:break-word" value="@Model.data.ID_PROPOSAL" />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">NPP</label>
+                            <input id="NPP" name="NPP" type="text" class="style1" style=" word-wrap:break-word" value="@Model.data.NPP" />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Status</label>
+                            <input id="STATUS" name="STATUS" type="text" class="style1" style=" word-wrap:break-word" value="Revisi" />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label">
+                                Alasan Revisi
+                            </label>
+                            <textarea text="text" id="FEEDBACK" name="FEEDBACK" class="style1"></textarea>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Submit</button>
+                    </div>
+                </form>
             </div>
-
-            <form class="formTambahFeedback " method="post" asp-action="addFeedback" asp-controller="Pengabdian" enctype="multipart/form-data" novalidate>
-                @Html.AntiForgeryToken()
-                <div class="modal-body">
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">ID_PROPOSAL</label>
-                        <input id="ID_PROPOSAL" name="ID_PROPOSAL" type="text" class="style1" style=" word-wrap:break-word" value="@Model.data.ID_PROPOSAL" />
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">NPP</label>
-                        <input id="NPP" name="NPP" type="text" class="style1" style=" word-wrap:break-word" value="@Model.data.NPP" />
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Status</label>
-                        <input id="STATUS" name="STATUS" type="text" class="style1" style=" word-wrap:break-word" value="Revisi" />
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label">
-                            Alasan Revisi
-                        </label>
-                        <textarea text="text" id="FEEDBACK" name="FEEDBACK" class="style1"></textarea>
-
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-danger">Submit</button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
 
+    <div class="modal fade modal-error" id="modal-error" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content text-center rounded-pill">
+                <div class="modal-header card-est bg-danger rounded-pill w-75 m-auto">
+                    <div class="m-auto">
+                        <i class="fa fa-exclamation-triangle fa-3x pt-3 pb-3" aria-hidden="true"></i>
+                        <h5 class="modal-title">Ooops!</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h6 class="p-3">Tidak ada File</h6>
+                    <button type="button" class="btn btn-warning rounded-pill btn-est m-2" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
     @*Modal Dekan Disetujui*@
     <div class="modal fade" id="modalSetuju" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -408,6 +440,10 @@
         id_proposal = id;
         this.tempIdUpdate = id;
         $('#modalTolak').modal('show');
+    }
+    function alert() {
+        $('#modal-error').modal('show');
+
     }
     function togModalRevisi(id_proposal) {
         //console.log(id)

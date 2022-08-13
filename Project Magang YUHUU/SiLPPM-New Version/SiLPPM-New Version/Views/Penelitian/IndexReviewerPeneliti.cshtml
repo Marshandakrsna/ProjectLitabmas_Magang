@@ -101,26 +101,7 @@
 
     <div class="px-3 mt-3">
         <div class="content-wrapper p-3">
-            @*<div class="card-header">
 
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-
-                    </div>
-                    <h3 class="card-title">
-                        <a href="#" class="brand-link" style="background-color:lightblue">
-                            <img src="~/images/profile-user.png" alt="Profile" class="brand-image img-circle elevation-3" style="opacity: .8">
-                            <span style="color:black">Kelola Penelitian</span>
-
-                        </a>
-                        <a href="IndexPengelolaan" class="btn" style="background-color:burlywood">Kelola Reviewer Penelitian</a>
-                        <a href="IndexReviewerPeneliti" class="btn" style="background-color:burlywood">Reviewer Penelitian</a>
-
-                    </h3>
-
-                </div>*@
 
             <div class="card-header">
 
@@ -143,6 +124,7 @@
                 <div class="card-body" style="margin-left:10px">
                     <a href="KelolaReviewer" class="btn" style="background-color:sandybrown">Kelola Reviewer Penelitian</a>
                     <a href="IndexReviewerPeneliti" class="btn" style="background-color:sandybrown">Reviewer Penelitian</a>
+
                 </div>
             </div>
 
@@ -164,57 +146,64 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@{
-                                string Reviewer1 = ViewBag.tempReviewer1.ID_REVIEWER;
-                            }
                             @{
-                                string Reviewer2 = ViewBag.tempReviewer2.ID_REVIEWER;
-                            }*@
+                                string NPP = ViewBag.cekUser.username;
+                            }
+                            @*@{
+                                    string Reviewer2 = ViewBag.tempReviewer2.ID_REVIEWER;
+                                }*@
                             @foreach (var item in Model.data)
                             {
-                                @*@if (item.REVIEWER1 != Reviewer1)
-                                {*@
-                                    @*<tr>
-                                        <td> @item.ID_PROPOSAL</td>
+
+                            <tr>
+                                <td> @item.ID_PROPOSAL</td>
+
+                                @if (item.NPP == NPP)
+                                {
+                                    <td>
+                                        <p style="font-weight:bold"><a style="color: #007bff; " onclick="alertDuplicate()">Reviewer 1</a></p>
+                                        <p style="font-weight:bold"><a style="color: #007bff; " onclick="alertDuplicate()">Reviewer 2</a></p>
+
+                                    </td>
+
+                                }
+                                else
+                                {
+                                    @if (item.ID_STATUS_PENELITIAN != 15)
+                                    {
                                         <td>
-                                            <p style="font-weight:bold"><a onclick="alert()">Reviewer 1</a></p>
-                                            <p style="font-weight:bold"><a href="AdminRevPenelitian?id_proposal=@item.ID_PROPOSAL&nppReviewer2=@item.REVIEWER2&npp=@item.NPP">Reviewer 2</a></p>
+                                            <p style="font-weight:bold"><a style="color: #007bff; " onclick="alert()">Reviewer 1</a></p>
+                                            <p style="font-weight:bold"><a style="color: #007bff; " onclick="alert()">Reviewer 2</a></p>
 
                                         </td>
 
-                                        <td> @item.NAMA</td>
-                                        <td>@item.FAK</td>
-
-                                        <td>@item.PRODI</td>
-                                        <td>@item.JUDUL</td>
-                                        <td>@item.DESKRIPSI</td>
-                                        <td>@item.TAHUN_AKADEMIK</td>
-                                        <td>@item.REVIEWER1</td>
-                                        <td>@item.REVIEWER2</td>
-                                    </tr>*@
-
-                                @*}
-                                else
-                                {*@
-                                    <tr>
-                                        <td> @item.ID_PROPOSAL</td>
+                                    }
+                                    else
+                                    {
                                         <td>
                                             <p style="font-weight:bold"><a href="AdminRevPenelitian?id_proposal=@item.ID_PROPOSAL&nppReviewer1=@item.REVIEWER1&npp=@item.NPP">Reviewer 1</a></p>
                                             <p style="font-weight:bold"><a href="AdminRevPenelitian?id_proposal=@item.ID_PROPOSAL&nppReviewer2=@item.REVIEWER2&npp=@item.NPP">Reviewer 2</a></p>
 
                                         </td>
+                                    }
 
-                                        <td> @item.NAMA</td>
-                                        <td>@item.FAK</td>
 
-                                        <td>@item.PRODI</td>
-                                        <td>@item.JUDUL</td>
-                                        <td>@item.DESKRIPSI</td>
-                                        <td>@item.TAHUN_AKADEMIK</td>
-                                        <td>@item.REVIEWER1</td>
-                                        <td>@item.REVIEWER2</td>
-                                    </tr>
-                                @*}*@
+                                }
+
+
+                                <td> @item.NAMA</td>
+                                <td>@item.FAK</td>
+
+                                <td>@item.PRODI</td>
+                                <td>@item.JUDUL</td>
+                                <td>@item.DESKRIPSI</td>
+                                <td>@item.TAHUN_AKADEMIK</td>
+                                <td>@item.REVIEWER1</td>
+                                <td>@item.REVIEWER2</td>
+
+
+                            </tr>
+
                             }
                         </tbody>
                     </table>
@@ -235,7 +224,23 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <h6 class="p-3">Tidak ada File</h6>
+                    <h6 class="p-3">Proposal Sudah di review</h6>
+                    <button type="button" class="btn btn-warning rounded-pill btn-est m-2" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-errorDuplicate" id="modal-errorDuplicate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content text-center rounded-pill">
+                <div class="modal-header card-est bg-danger rounded-pill w-75 m-auto">
+                    <div class="m-auto">
+                        <i class="fa fa-exclamation-triangle fa-3x pt-3 pb-3" aria-hidden="true"></i>
+                        <h5 class="modal-title">Ooops!</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h6 class="p-3">Tidak dapat mereview proposal sendiri</h6>
                     <button type="button" class="btn btn-warning rounded-pill btn-est m-2" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
@@ -268,6 +273,10 @@
         });
         function alert() {
             $('#modal-error').modal('show');
+
+        }
+        function alertDuplicate() {
+            $('#modal-errorDuplicate').modal('show');
 
         }
     </script>

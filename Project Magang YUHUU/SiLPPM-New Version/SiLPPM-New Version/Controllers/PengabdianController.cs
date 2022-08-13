@@ -74,6 +74,8 @@ namespace SiLPPM_New_Version.Controllers
             }
             return RedirectToAction("EditListPengabdian", "Pengabdian");
         }
+
+ 
         public IActionResult DekanAddFeedbackPengabdian()
         {
             return View();
@@ -201,6 +203,11 @@ namespace SiLPPM_New_Version.Controllers
             myobj.pengesahan = pengesahan.data;
             return View(myobj);
         }
+        public JsonResult ajaxGetDetailRAB(int id_proposal)
+        {
+            var data = myprofile.GetHistoryPengabdianByID(id_proposal);
+            return Json(data);
+        }
         public IActionResult DekanApprovalProposalPengabdian(string id_proposal)
         {
             var data = dao.GetApprovalPengabdian(id_proposal);
@@ -317,12 +324,16 @@ namespace SiLPPM_New_Version.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddPengabdian(int ID_TAHUN_ANGGARAN, string REVIEWER1, string REVIEWER2, string JUDUL_KEGIATAN, string LANDASAN_PENELITIAN, string JENIS_PENGABDIAN, string ANGGOTA1,
              string ANGGOTA2, string MITRA, string MITRA_KEAHLIAN, string LOKASI, int JARAK_PT_LOKASI, string OUTPUT, string OUTCOME, int ID_ROAD_MAP, string AWAL, string AKHIR, string SASARAN,
-             int SKS_KETUA, int SKS_ANGGOTA,string NPP,  float DANA_EKSTERNAL, float DANA_KERJASAMA, float DANA_UAJY, float DANA_PRIBADI,
+             int SKS_KETUA, int SKS_ANGGOTA, string NPP, float DANA_EKSTERNAL, float DANA_KERJASAMA, float DANA_UAJY, float DANA_PRIBADI,
             IFormFile dokumenPengabdian, string INSERT_DATE, string IP_ADDRESS, string USER_ID, int ID_SKIM, int ID_TEMA_UNIVERSITAS, int NO_SEMESTER)
         {
             var propo = dao._getByteArrayFromDokumenPengabdian(dokumenPengabdian);
-  
 
+            if (ANGGOTA1 != null && ANGGOTA2 != null)
+            {
+              
+
+            }
 
             var cek = dao.AddPengabdian(ID_TAHUN_ANGGARAN, REVIEWER1, REVIEWER2, JUDUL_KEGIATAN, LANDASAN_PENELITIAN, JENIS_PENGABDIAN, ANGGOTA1,
               ANGGOTA2, MITRA, MITRA_KEAHLIAN, LOKASI, JARAK_PT_LOKASI, OUTPUT, OUTCOME, ID_ROAD_MAP, AWAL, AKHIR, SASARAN,

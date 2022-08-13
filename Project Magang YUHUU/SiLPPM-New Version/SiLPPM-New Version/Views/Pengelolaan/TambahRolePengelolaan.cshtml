@@ -79,7 +79,7 @@
                 <div>
 
                     <div class="px-3 pb-2">
-                        <form method="post" asp-action="UbahRolePengelolaan" asp-controller="Pengelolaan" enctype="multipart/form-data">
+                        <form method="post" asp-action="TambahRolePengelolaan" asp-controller="Pengelolaan" enctype="multipart/form-data">
 
                             @Html.AntiForgeryToken()
 
@@ -87,7 +87,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="basic-addon1" class="form-label">NPP</label>
-                                    <input type="text" class="form-control" id="npp" name="npp" value="@Model.data.NPP"  >
+                                    <input type="text" class="form-control" id="npp" name="npp" value="@Model.data.NPP">
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Nama</label>
                                         <div class="input-group">
@@ -99,10 +99,10 @@
 
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Role</label>
-                                        <div class="input-group">
+                                        <div class="input-group" >
 
-                                            <select name="id_role" id="id_role" style="width: 770px; height: 36px;" >
-                                                @foreach (var item in Model.data2)
+                                            <select name="id_role" id="id_role" style="width: 770px; height: 36px;">
+                                                @foreach (var item in Model.reviewer)
                                                 {
                                                     <option value="@item.ID_ROLE"> @item.DESKRIPSI</option>
 

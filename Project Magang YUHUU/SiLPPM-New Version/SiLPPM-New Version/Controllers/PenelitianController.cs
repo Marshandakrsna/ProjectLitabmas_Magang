@@ -390,6 +390,24 @@ namespace SiLPPM_New_Version.Controllers
             var data = penelitianDAO.getAutoCompleteNPPDosen(NPP);
             return Json(data.data);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UbahDanaRAB(int ID_PROPOSAL, float DANA_UAJY, float DANA_PRIBADI, float DANA_EKSTERNAL)
+        {
+
+            var cek = penelitianDAO.UpdateDanaRAB(ID_PROPOSAL, DANA_UAJY, DANA_PRIBADI, DANA_EKSTERNAL);
+
+
+            if (cek.status)
+            {
+                TempData["succ"] = "Berhasil mengubah data";
+            }
+            else
+            {
+                TempData["err"] = "Gagal mengubah data" + cek.pesan;
+            }
+            return RedirectToAction("adminListPengabdian", "Pengabdian");
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -499,15 +517,29 @@ namespace SiLPPM_New_Version.Controllers
             myobj.data = data.data;
             return View(myobj);
         }
+        public IActionResult LihatReview()
+        {
+
+            return View(myobj);
+        }
         public IActionResult IndexReviewerPeneliti(int id_proposal, string id_reviewer)
         {
+            var username = User.Claims
+          .Where(c => c.Type == "username")
+              .Select(c => c.Value).SingleOrDefault();
+
             var data = kelolaDAO.GetPenelitianReviewer();
             var reviewer1 = myprofile.GetDataNilaiReviewer1(id_proposal);
             var reviewer2 = myprofile.GetDataNilaiReviewer2(id_proposal);
+            var count = myprofile.GetCountTotalReviewer(id_proposal);
+            var cekUser = penelitianDAO.GetUserByUsername(username);
             var tempReviewer1 = myprofile.GetDataNilaiReviewer1ByID(id_reviewer);
             var tempReviewer2 = myprofile.GetDataNilaiReviewer2ByID(id_reviewer);
+            myobj.cekUser = cekUser.data;
             ViewBag.tempReviewer1 = tempReviewer1.data;
+            ViewBag.cekUser = cekUser.data;
             ViewBag.tempReviewer2 = tempReviewer2.data;
+            myobj.count = count.data;
             myobj.reviewer1 = reviewer1.data;
             myobj.reviewer2 = reviewer2.data;
             myobj.data = data.data;

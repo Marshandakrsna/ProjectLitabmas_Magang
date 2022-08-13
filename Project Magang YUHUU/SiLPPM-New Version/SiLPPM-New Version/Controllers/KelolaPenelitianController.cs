@@ -39,6 +39,8 @@ namespace SiLPPM_New_Version.Controllers
             var data = dao.GetPenelitianSetReviewerByID(id_proposal);
             return Json(data);
         }
+
+    
         public IActionResult AdminRevPenelitian(int id_proposal)
         {
             var data = dao.GetPenelitianReviewerByID(id_proposal);
