@@ -614,37 +614,37 @@
                                     </div>
 
                                     @*@{
-                    int Jenis = ViewBag.tempPenelitian.ID_JENIS_PENELITIAN;
-                }
-                <div class="mb-4">
-                    <label for="basic-addon1" class="form-label">Jenis Penelitian</label>
-                    <div class="input-group">
-                        <select style="width: 710px; height: 40px;"
-                                id="ID_JENIS_PENELITIAN"
-                                name="ID_JENIS_PENELITIAN">
-                            <option hidden style="color: lightgrey">
-                                Pilih Jenis Penelitian
-                            </option>
-                            @foreach (var item in Model.refjenis5)
-                            {
-                                @if (item.ID_JENIS_PENELITIAN == Jenis)
-                                {
-                                    <option value="@item.ID_JENIS_PENELITIAN" selected>
-                                        @item.JENIS_PENELITIAN
-                                    </option>
-                                }
-                                else
-                                {
-                                    <option value="@item.ID_JENIS_PENELITIAN">
-                                        @item.JENIS_PENELITIAN
-                                    </option>
-                                }
+                                            int Jenis = ViewBag.tempPenelitian.ID_JENIS_PENELITIAN;
+                                        }
+                                        <div class="mb-4">
+                                            <label for="basic-addon1" class="form-label">Jenis Penelitian</label>
+                                            <div class="input-group">
+                                                <select style="width: 710px; height: 40px;"
+                                                        id="ID_JENIS_PENELITIAN"
+                                                        name="ID_JENIS_PENELITIAN">
+                                                    <option hidden style="color: lightgrey">
+                                                        Pilih Jenis Penelitian
+                                                    </option>
+                                                    @foreach (var item in Model.refjenis5)
+                                                    {
+                                                        @if (item.ID_JENIS_PENELITIAN == Jenis)
+                                                        {
+                                                            <option value="@item.ID_JENIS_PENELITIAN" selected>
+                                                                @item.JENIS_PENELITIAN
+                                                            </option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@item.ID_JENIS_PENELITIAN">
+                                                                @item.JENIS_PENELITIAN
+                                                            </option>
+                                                        }
 
-                             }
-                            </select>
+                                                     }
+                                                    </select>
 
-                    </div>
-                </div>*@
+                                            </div>
+                                        </div>*@
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Lokasi Penelitian</label>
                                         <div class="input-group">
@@ -831,7 +831,7 @@
                                             Anggota Penelitian Kelompok
                                         </td>
                                         <td>
-                                            <button style="margin-left: 2px; margin-top: 5px;" class="button4" onclick="getAnggota(@Model.refpropo.ID_PROPOSAL)"><i class="fas fa-eye"></i>&nbsp; Lihat Anggota</button>
+                                            <button style="margin-left: 2px; margin-top: 5px;" class="button4" onclick="getAnggota(@Model.lihatPropo.id_proposal)"><i class="fas fa-eye"></i>&nbsp; Lihat Anggota</button>
                                         </td>
                                     </tr>
 
@@ -1152,7 +1152,7 @@
                     <form method="post" asp-action="AddAnggotaUAJY" asp-controller="Profile" enctype="multipart/form-data">
                         @Html.AntiForgeryToken()
                         <label for="basic-addon1" hidden class="form-label">ID PROPOSAL</label>
-                        <input type="text" class="form-control" id="id_proposal" hidden name="id_proposal" value="@Model.lihatPropo.id_proposal">
+                        <input type="text" class="form-control" id="id_proposal"  name="id_proposal" value="@Model.lihatPropo.id_proposal">
 
                         <table id="tableanggotaUAJY" class="table table-bordered table-striped">
                             <thead>
@@ -1165,11 +1165,11 @@
                             </thead>
                             <tbody id="data">
                                 @*<tr hidden>
-                    <td>
-                        <input type="hidden" autocomplete="off" class="form-control" name="id_proposal" id="id_proposal" value="@Model.refpropo.ID_PROPOSAL" />
-                    </td>
+                                        <td>
+                                            <input type="hidden" autocomplete="off" class="form-control" name="id_proposal" id="id_proposal" value="@Model.refpropo.ID_PROPOSAL" />
+                                        </td>
 
-                </tr>*@
+                                    </tr>*@
 
                                 @foreach (var item in Model.dataAnggota)
                                 {
@@ -1280,7 +1280,7 @@
         var distance = turf.distance(to, from, "kilometers").toPrecision(4);
 
         coordinates.style.display = "block";
-        coordinates.innerHTML = `<strong>Information Marker</strong> </br>Longitude: ${lngLat.lng} <br/>Latitude : ${lngLat.lat} 
+        coordinates.innerHTML = `<strong>Information Marker</strong> </br>Longitude: ${lngLat.lng} <br/>Latitude : ${lngLat.lat}
             <br/>Distance : ${distance} km`;
         document.getElementById("LONGITUDE").value = lngLat.lng;
         document.getElementById("LATITUDE").value = lngLat.lat;
@@ -1458,7 +1458,7 @@
             }
         })
     }
-  
+
 
     function addAnggotaPenelitianUAJY(id_proposal, nppAnggota) {
         //var self = this;

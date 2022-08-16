@@ -634,6 +634,38 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
             }
         }
 
+        public DBOutput UpdateStatusPenTungguReviewer2(string ID_PROPOSAL)
+        {
+
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"update silppm.TBL_PENELITIAN set ID_STATUS_PENELITIAN=7 where ID_PROPOSAL=@ID_PROPOSAL";
+
+                    var param = new { ID_PROPOSAL = ID_PROPOSAL };
+
+
+                    conn.Execute(query, param);
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
         public DBOutput UpdateStatusPenDitolak(int IS_CHECKED, string ID_PROPOSAL)
         {
 
@@ -2194,6 +2226,37 @@ and (REVIEWER1 = @NPP  or REVIEWER2 = @NPP ) and id_proposal = @id_proposal
                     var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_jenis_penelitian = id_jenis_penelitian });
 
                         output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+
+
+        public DBOutput GetCountPenelitian(string username)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"select count (id_proposal) NAMA from silppm.TBL_PENELITIAN where NPP = @npp";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { npp = username });
+
+                    output.data = data;
 
                     return output;
                 }

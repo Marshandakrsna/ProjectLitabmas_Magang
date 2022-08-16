@@ -236,7 +236,20 @@
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
-
+        .button4 {
+            background-color: #F2AA4C;
+            color: black;
+            border: 2px solid #F2AA4C;
+            padding: 3px 7px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 15px;
+        }
         tr:hover {
             background-color: lightblue;
         }
@@ -469,7 +482,7 @@
                                             <select name="optionPengabdian" id="optionPengabdian" class="center" onchange="location = this.value;" style=" height: 35px; border-radius: 12px;">
                                                 <option hidden> -- Pilih -- </option>
                                                 <option value="LihatProposalPenelitian?id_proposal=@item.id_proposal">Lihat Review</option>
-                                          
+
                                             </select>
                                         </td>
 
@@ -489,7 +502,10 @@
                             <img src="~/images/team.png" class="brand-image">
                             <span style="color:black; font-weight:bold">PENGABDIAN USER</span>
                         </a>
+                        <a style="/* margin-left: -4px; */margin-top: 21px;float: right;" class="button4" href="PermintaanPengabdianKelompok?npp=@Model.data.NPP"><i class="fas fa-bell"></i>&nbsp; Permintaan Pengabdian Kelompok</a>
                     </div>
+
+
                     <div class="card-body">
                         <span class="label stylePengabdian">Proposal Pengabdian yang sudah diajukan :</span>
                         <table id="datatable" class="table table-bordered table-striped" style="margin-top:30px; margin-bottom:25px">
@@ -522,6 +538,7 @@
                                                         <span class="tooltip">Edit</span>
                                                         <a href="EditDetailPengabdian?id_proposal=@item.ID_PROPOSAL" class="icon-link"><i class="fa fa-edit"></i></a>
                                                     </li>
+
                                                     @if (item.DOKUMEN != null && item.DOKUMEN.Length > 0)
                                                     {
                                                         <li class="icon icon-item download">
@@ -568,7 +585,7 @@
                                             <select name="optionPengabdian" id="optionPengabdian" class="center" onchange="location = this.value;" style=" height: 35px; border-radius: 12px;">
                                                 <option hidden> -- Pilih -- </option>
                                                 <option value="Contact.php">Lihat Review</option>
-                                            
+
                                             </select>
                                         </td>
                                     </tr>
@@ -601,33 +618,100 @@
                     </div>
                 </div>
         </div>*@
-    <div class="modal fade modal-error" id="modal-error" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-            <div class="modal-content text-center rounded-pill">
-                <div class="modal-header card-est bg-danger rounded-pill w-75 m-auto">
-                    <div class="m-auto">
-                        <i class="fa fa-exclamation-triangle fa-3x pt-3 pb-3" aria-hidden="true"></i>
-                        <h5 class="modal-title">Ooops!</h5>
-                    </div>
+
+    <div class="modal fade" id="ShowAnggota" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="overflow-y:auto">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:black; font-family:'Trebuchet MS';font-display:swap; transition:cubic-bezier()"> <i class="fas fa-clipboard"></i>&nbsp; Daftar Anggota Pengabdian Kelompok</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-body">
-                    <h6 class="p-3">Tidak ada File</h6>
-                    <button type="button" class="btn btn-warning rounded-pill btn-est m-2" data-dismiss="modal">Tutup</button>
+                <div class="modal-body" style="overflow-x:auto">
+
+                    <div class="col-md-12">
+                        <table id="tableanggota" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th>NPP</th>
+                                    <th>NAMA</th>
+                                    <th>JUDUL</th>
+                                    <th>AKSI</th>
+                               
+
+                                </tr>
+                            </thead>
+                            <tbody class="bodyanggota" id="anggota">
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="modal-footer">
+                    <button type="button" id="closeModal" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+
+                </div>
+            </div>
+
+        </div></div>
+        <div class="modal fade modal-error" id="modal-error" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content text-center rounded-pill">
+                    <div class="modal-header card-est bg-danger rounded-pill w-75 m-auto">
+                        <div class="m-auto">
+                            <i class="fa fa-exclamation-triangle fa-3x pt-3 pb-3" aria-hidden="true"></i>
+                            <h5 class="modal-title">Ooops!</h5>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <h6 class="p-3">Tidak ada File</h6>
+                        <button type="button" class="btn btn-warning rounded-pill btn-est m-2" data-dismiss="modal">Tutup</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        function previewPDF(id_proposal) {
-            $('#modal-download').modal('show');
+        <script>
+            function previewPDF(id_proposal) {
+                $('#modal-download').modal('show');
 
-        }
-        function alert() {
-            $('#modal-error').modal('show');
-            
-        }
-    </script>
+            }
+            function alert() {
+                $('#modal-error').modal('show');
+
+            }
+            function getAnggota(npp) {
+                npp = npp;
+                this.tempIdProposal = npp;
+                $('#npp').val(npp);
+                $.ajax({
+                    type: "GET",
+                    url: "/Profile/ajaxGetAnggotaKelompok",
+                    cache: false,
+                    data: { npp: npp },
+                    dataType: "json",
+                    success: function (result) {
+                        $('#ShowAnggota').modal('show');
+                        var str = '';
+                        var data = result.data;
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i].NAMA_LENGKAP_GELAR != "" && data[i].NAMA_LENGKAP_GELAR != null) {
+                                str += '<tr><td>' + data[i].NPP + '</td><td>' + data[i].NAMA_LENGKAP_GELAR + '</td><td>' +
+                                    data[i].JUDUL + '</td></tr>';
+                            }
+                        }
+                        $(".bodyanggota").html(str);
+                    }
+                })
+            }
+        </script>
 
 </body>
 </html>

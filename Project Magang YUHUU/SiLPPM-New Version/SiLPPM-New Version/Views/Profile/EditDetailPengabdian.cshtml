@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "List Review Penelitian";
+    ViewData["Title"] = "Edit Detail Pengabdian";
 }
 
 
@@ -30,6 +30,73 @@
 
         body {
             font-family: 'Karla', sans-serif;
+        }
+        .ui-autocomplete-input {
+            border: none;
+            font-size: 14px;
+            width: 300px;
+            height: 24px;
+            margin-bottom: 5px;
+            padding-top: 2px;
+            border: 1px solid #DDD !important;
+            padding-top: 0px !important;
+            z-index: 1511;
+            position: relative;
+        }
+
+        .ui-menu .ui-menu-item a {
+            font-size: 12px;
+        }
+
+        .ui-autocomplete {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1051 !important;
+            float: left;
+            display: none;
+            min-width: 160px;
+            _width: 160px;
+            padding: 4px 0;
+            margin: 2px 0 0 0;
+            list-style: none;
+            background-color: #ffffff;
+            border-color: #ccc;
+            border-color: rgba(0, 0, 0, 0.2);
+            border-style: solid;
+            border-width: 1px;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 2px;
+            -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            -webkit-background-clip: padding-box;
+            -moz-background-clip: padding;
+            background-clip: padding-box;
+            *border-right-width: 2px;
+            *border-bottom-width: 2px;
+        }
+
+        .ui-menu-item > a.ui-corner-all {
+            display: block;
+            padding: 3px 15px;
+            clear: both;
+            font-weight: normal;
+            line-height: 18px;
+            color: #555555;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .ui-state-hover, .ui-state-active {
+            color: #ffffff;
+            text-decoration: none;
+            background-color: #0088cc;
+            border-radius: 0px;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            background-image: none;
         }
 
 
@@ -88,6 +155,103 @@
         .td, th {
             vertical-align: middle;
         }
+        .td, th {
+            vertical-align: middle;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px ridge #ddd;
+        }
+        #anggota {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .button {
+            border: none;
+            color: white;
+            padding: 7px 14px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-left: 90px;
+            border-radius: 20px;
+        }
+
+        .style1 {
+            background-color: #fafafa;
+            border: 0;
+            box-shadow: 0 0 4px rgba(0,0,0,0.3);
+            transition: .3s box-shadow;
+            margin-bottom: 10px;
+            height: 30px;
+            width: 450px;
+        }
+
+            .style1:hover {
+                box-shadow: 0 0 4px rgba(0,0,0,0.5);
+            }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #261ad9;
+        }
+
+            .button1:hover {
+                background-color: #3b4efc;
+                color: white;
+            }
+
+        .button2 {
+            background-color: #129e42;
+            color: black;
+            border: 2px solid #129e42;
+        }
+
+            .button2:hover {
+                background-color: #13843a;
+                color: white;
+            }
+
+        .button3 {
+            background-color: #2535c9;
+            color: black;
+            border: 2px solid #2535c9;
+        }
+
+            .button3:hover {
+                background-color: #1a2695;
+                color: white;
+            }
+
+        .button4 {
+            background-color: #F2AA4C;
+            color: black;
+            border: 2px solid #F2AA4C;
+            padding: 3px 7px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 15px;
+        }
     </style>
 </head>
 <body>
@@ -97,7 +261,13 @@
         <div class="content-wrapper p-3" style=" background-color: white;">
 
             <h5 class="card-header font-weight-bold bg-light"><span class="text-black">Edit Detail Pengabdian</span></h5>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-data-tab" data-toggle="tab" href="#nav-data" role="tab" aria-controls="nav-data" aria-selected="true">Data Pengabdian</a>
+                    <a class="nav-item nav-link" id="nav-identitas-tab" data-toggle="tab" href="#nav-identitas" role="tab" aria-controls="nav-identitas" aria-selected="false">Pengabdian Kelompok</a>
 
+                </div>
+            </nav>
             @if (TempData["succ"] != null)
             {
                 <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color:green">
@@ -116,488 +286,747 @@
                     </button>
                 </div>
             }
-            <div class="pb-3 mt-3">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-data" role="tabpanel" aria-labelledby="nav-data-tab">
+                    <div class="pb-3 mt-3">
 
-                <div>
+                        <div>
 
-                    <div class="px-3 pb-2">
-                        <form method="post" asp-action="UbahPengabdian" asp-controller="Profile" enctype="multipart/form-data">
-                            @Html.AntiForgeryToken()
+                            <div class="px-3 pb-2">
+                                <form method="post" asp-action="UbahPengabdian" asp-controller="Profile" enctype="multipart/form-data">
+                                    @Html.AntiForgeryToken()
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label hidden for="basic-addon1" class="form-label">ID PROPOSAL</label>
-                                    <input hidden class="form-control" id="id_proposal" name="id_proposal" value="@Model.pengabdianID.ID_PROPOSAL">
-                                    <label for="basic-addon1" hidden class="form-label">NPP</label>
-                                    <input hidden class="form-control" id="NPP" name="NPP" value="@Model.dataPengabdian.NPP">
-                                    <div class="mb-4" hidden>
-                                        <div class="input-group">
-                                            <input type="text"
-                                                   autocomplete="off"
-                                                   class="form-control"
-                                                   name="USER_ID"
-                                                   id="USER_ID"
-                                                   value="@Model.cekUser.username" />
-                                        </div>
-                                    </div>
-                                    <div class="mb-4" hidden>
-                                        <div class="input-group">
-                                            <input type="text"
-                                                   autocomplete="off"
-                                                   class="form-control"
-                                                   name="username"
-                                                   id="username"
-                                                   value="@Model.cekUser.username" />
-                                        </div>
-                                    </div>
-                                    <div class="mb-4" hidden>
-                                        <div class="input-group">
-                                            <input type="hidden"
-                                                   autocomplete="off"
-                                                   class="form-control"
-                                                   name="NPP"
-                                                   id="NPP"
-                                                   value="@Model.cekUser.NPP" />
-                                        </div>
-                                    </div>
-                                    @{
-                                        int Skim = ViewBag.tempPengabdian.ID_SKIM;
-                                    }
-                                    <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Skim Pengabdian</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
-                                            <select style="width:710px" id="ID_SKIM" name="ID_SKIM">
-                                                <option hidden style="color:lightgrey">Pilih Skim Pengabdian</option>
-                                                @foreach (var item in Model.refjenis1)
-                                                {
-                                                    @if (item.ID_SKIM == Skim)
-                                                    {
-                                                        <option value="@item.ID_SKIM" selected> @item.DESKRIPSI</option>
-                                                    }
-                                                    else
-                                                    {
-                                                        <option value="@item.ID_SKIM"> @item.DESKRIPSI</option>
-                                                    }
-
-                                                }
-                                            </select>
-                                        </div>
-                                    </div>
-                                    @{
-                                        int Tahun = ViewBag.tempPengabdian.ID_TAHUN_ANGGARAN;
-                                    }
-                                    <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Tahun Akademik</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
-                                            <select style="width:710px" id="ID_TAHUN_ANGGARAN" name="ID_TAHUN_ANGGARAN">
-                                                <option hidden style="color:lightgrey">Pilih Tahun Akademik</option>
-                                                @foreach (var item in Model.refjenis2)
-                                                {
-                                                    @if (item.ID_TAHUN_AKADEMIK == Tahun)
-                                                    {
-                                                        <option value="@item.ID_TAHUN_AKADEMIK" selected>
-                                                            @item.TAHUN_AKADEMIK
-                                                        </option>
-
-                                                    }
-                                                    else
-                                                    {
-                                                        <option value="@item.ID_TAHUN_AKADEMIK">
-                                                            @item.TAHUN_AKADEMIK
-                                                        </option>
-
-                                                    }
-                                                }
-                                            </select>
-                                        </div>
-                                    </div>
-                                    @{
-                                        int Semester = ViewBag.tempPengabdian.NO_SEMESTER;
-                                    }
-                                    <div class="mb-4">
-                                        <label for="basic-addon2" class="form-label">Semester Akademik </label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon2"><i class="mdi mdi-pencil small" aria-hidden="true"> </i></span>
-                                            <select style="width:710px" id="NO_SEMESTER" name="NO_SEMESTER">
-                                                <option hidden style="color:lightgrey">Pilih Semester Akademik</option>
-                                                @foreach (var item in Model.refjenis3)
-                                                {
-                                                    @if (item.NO_SEMESTER == Semester)
-                                                    {
-                                                        <option value="@item.NO_SEMESTER" selected> @item.SEMESTER_AKADEMIK</option>
-                                                    }
-                                                    else
-                                                    {
-                                                        <option value="@item.NO_SEMESTER"> @item.SEMESTER_AKADEMIK</option>
-
-                                                    }
-                                                }
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="card alert-default">
-                                        <div class="card-header">
-                                            <i class="fas fa-file-export" aria-hidden="true"></i>
-                                            <label for="luaranOutput"
-                                                   class="col-sm-3 col-form-label col-form-label-sm">Luaran Output</label><br />
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-group row">
-                                                @*<label
-                      for="luaranOutcome"
-                      class="col-sm-3 col-form-label col-form-label-sm"
-                      >Luaran Outcome</label
-                    ><br />*@
-                                                <div class="col-sm-9 row" id="outputList">
-                                                    <div class="col-sm-6">
-                                                        @foreach (var item in Model.refjenis4)
-                                                        {
-                                                            <div class="col-sm-5 custom-control custom-checkbox ml-2 mr-2">
-                                                                <input type="checkbox" class="custom-control-input" onclick="pushOutput()" id="output_@item.ID_OUTPUT" value="@item.DESKRIPSI">
-                                                                <label class="custom-control-label font-weight-normal" for="output_@item.ID_OUTPUT">@item.DESKRIPSI</label>
-                                                            </div>
-                                                        }
-                                                        <input type="text" class="form-control form-control-sm" name="output" id="output" readonly hidden>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card alert-default">
-                                        <div class="card-header">
-                                            <i class="fas fa-file-export" aria-hidden="true"></i>
-                                            <label for="luaranOutcome"
-                                                   class="col-sm-3 col-form-label col-form-label-sm">Luaran Outcome</label><br />
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-group">
-
-                                                <div class="col-sm-9 row" id="outcomeList">
-                                                    <div class="col-sm-6">
-                                                        <label class="col-form-label col-form-label-sm">Publikasi</label>
-
-                                                        @foreach (var item in Model.refOutcome)
-                                                        {
-                                                            if(item.ID_JENIS_OUTCOME == 1)
-                                                            {
-                                                                <div class="custom-control custom-checkbox">
-                                                                    <input type="checkbox"
-                                                                           class="custom-control-input"
-                                                                           onclick="pushOutcome()"
-                                                                           id="outcome_@item.ID_OUTCOME"
-                                                                           value="@item.DESKRIPSI" />
-                                                                    <label class="custom-control-label font-weight-normal"
-                                                                           for="outcome_@item.ID_OUTCOME">@item.DESKRIPSI</label>
-                                                                    </div>
-                                                                }
-                                                            }
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label class="col-form-label col-form-label-sm">HaKI</label>
-                                                        @foreach (var item in Model.refOutcome)
-                                                        {
-                                                            if
-(item.ID_JENIS_OUTCOME == 2)
-                                                            {
-                                                                <div class="custom-control custom-checkbox">
-                                                                    <input type="checkbox"
-                                                                           class="custom-control-input"
-                                                                           onclick="pushOutcome()"
-                                                                           id="outcome_@item.ID_OUTCOME"
-                                                                           value="@item.DESKRIPSI" />
-                                                                    <label class="custom-control-label font-weight-normal"
-                                                                           for="outcome_@item.ID_OUTCOME">@item.DESKRIPSI</label>
-                                                                    </div>
-                                                                }
-                                                            }
-                                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label hidden for="basic-addon1" class="form-label">ID PROPOSAL</label>
+                                            <input  class="form-control" id="id_proposal" name="id_proposal" value="@Model.pengabdianID.ID_PROPOSAL">
+                                            <label for="basic-addon1" hidden class="form-label">NPP</label>
+                                            <input hidden class="form-control" id="NPP" name="NPP" value="@Model.dataPengabdian.NPP">
+                                            <div class="mb-4" hidden>
+                                                <div class="input-group">
                                                     <input type="text"
-                                                           class="form-control form-control-sm"
-                                                           name="outcome"
-                                                           id="outcome"
-                                                           readonly
-                                                           hidden />
+                                                           autocomplete="off"
+                                                           class="form-control"
+                                                           name="USER_ID"
+                                                           id="USER_ID"
+                                                           value="@Model.cekUser.username" />
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="card" style="border-left-width: 3px; border-left-color: #dc3545">
-                                        <div class="card-body">
-                                            <label class="pb-2" style="color: #fd7e14">Beban SKS</label>
-                                            <div class="form-group row">
-                                                <label for="SKS_KETUA" class="col-sm-3 col-form-label col-form-label-sm">SKS Ketua</label>
-                                                <div class="col-sm-3">
-                                                    <input type="number" class="form-control form-control-sm" placeholder="Beban SKS Ketua" id="SKS_KETUA" name="SKS_KETUA" value="@Model.dataPengabdian.SKS_KETUA">
-                                                </div>
-                                                <label for="SKS_ANGGOTA" class="col-sm-3 col-form-label col-form-label-sm">SKS Anggota</label>
-                                                <div class="col-sm-3">
-                                                    <input type="number" class="form-control form-control-sm" id="SKS_ANGGOTA" name="SKS_ANGGOTA" placeholder="Beban SKS Anggota" value="@Model.dataPengabdian.SKS_ANGGOTA">
+                                            <div class="mb-4" hidden>
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                           autocomplete="off"
+                                                           class="form-control"
+                                                           name="username"
+                                                           id="username"
+                                                           value="@Model.cekUser.username" />
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="card alert-default">
-                                        <div class="card-header">
-                                            <i class="fa fa-money-bill" aria-hidden="true"></i>
-                                            Pendanaan
-                                        </div>
-                                        <div class="card-body">
-                                            <label for="DANA_UAJY"
-                                                   class="col-sm-3 col-form-label col-form-label-sm"
-                                                   style="color: steelblue">Dana UAJY</label>
-                                            <div class="row col-sm-12">
-                                                <div class="col-sm-9 input-group input-group-sm">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
-                                                    </div>
-                                                    <input type="text" id="DANA_UAJY" name="DANA_UAJY" class="form-control" value="@Model.dataPengabdian.DANA_UAJY" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                                </div>
-
-                                            </div>
-                                            <label for="danaPribadi"
-                                                   class="col-sm-3 col-form-label col-form-label-sm"
-                                                   style="color: steelblue">Dana Pribadi</label>
-                                            <div class="row col-sm-12">
-                                                <div class="col-sm-9 input-group input-group-sm">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
-                                                    </div>
-                                                    <input type="text" id="DANA_PRIBADI" name="DANA_PRIBADI" class="form-control" value="@Model.dataPengabdian.DANA_PRIBADI" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                                </div>
-
-                                            </div>
-                                            <label for="danaEksternal"
-                                                   class="col-sm-3 col-form-label col-form-label-sm"
-                                                   style="color: steelblue">Dana Eksternal</label>
-                                            <div class="row col-sm-12">
-                                                <div class="col-sm-9 input-group input-group-sm">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
-                                                    </div>
-                                                    <input type="text" id="DANA_EKSTERNAL" name="DANA_EKSTERNAL" class="form-control" value="@Model.dataPengabdian.DANA_EKSTERNAL" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                                </div>
-
-                                            </div>
-                                            <label for="danaKerjasama"
-                                                   class="col-sm-3 col-form-label col-form-label-sm"
-                                                   style="color: steelblue">Dana Kerjasama</label>
-                                            <div class="row col-sm-12">
-                                                <div class="col-sm-9 input-group input-group-sm">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
-                                                    </div>
-                                                    <input type="text" id="DANA_KERJASAMA" name="DANA_KERJASAMA" class="form-control" value="@Model.dataPengabdian.DANA_KERJASAMA" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                                </div>
-
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="mb-4">
-                                        <label for="basic-addon3" class="form-label">Judul Kegiatan Pengabdian</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-home small" aria-hidden="true"> </i></span>
-                                            <input id="JUDUL_KEGIATAN" name="JUDUL_KEGIATAN" placeholder="Judul Pengabdian" value="@Model.dataPengabdian.JUDUL_KEGIATAN" style=" height: 40px; width: 710px;" />
-                                        </div>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Landasan Penelitian</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar-range small" aria-hidden="true"> </i></span>
-                                            <input type="text" class="form-control" placeholder="Landasan Penelitian" aria-label="LANDASAN_PENELITIAN" aria-describedby="basic-addon1" id="LANDASAN_PENELITIAN" value="@Model.dataPengabdian.LANDASAN_PENELITIAN" name="LANDASAN_PENELITIAN">
-                                        </div>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Sasaran</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar-range small" aria-hidden="true"> </i></span>
-                                            <input type="text" class="form-control" placeholder="Sasaran" value="@Model.dataPengabdian.SASARAN" aria-label="SASARAN" aria-describedby="basic-addon1" id="SASARAN" name="SASARAN">
-                                        </div>
-                                    </div>
-                                    @{
-                                        int Tema = ViewBag.tempPengabdian.ID_TEMA_UNIVERSITAS;
-                                    }
-                                    <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Tema  Universitas</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                                            <select style="width:710px" id="ID_TEMA_UNIVERSITAS" name="ID_TEMA_UNIVERSITAS">
-                                                <option hidden style="color:lightgrey">Pilih Tema Penelitian</option>
-                                                @foreach (var item in Model.refjenis6)
-                                                {
-                                                    @if (item.ID_TEMA_UNIVERSITAS == Tema)
-                                                    {
-                                                        <option value="@item.ID_TEMA_UNIVERSITAS" selected>
-                                                            @item.DESKRIPSI
-                                                        </option>
-
-                                                    }
-                                                    else
-                                                    {
-                                                        <option value="@item.ID_TEMA_UNIVERSITAS">
-                                                            @item.DESKRIPSI
-                                                        </option>
-                                                    }
-                                                }
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-4">
-                                        <label for="id_roadMap" class="col-sm-3 col-form-label col-form-label-sm">
-                                            Topik Sesuai Rencana
-                                            <a data-container="body" data-toggle="popover" data-placement="top" data-content="Topik sesuai dengan rencana unit">
-                                                <i class="fa fa-info-circle fa-xs text-primary"></i>
-                                            </a>
-                                        </label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
-                                            <select style="width:710px" id="ID_ROAD_MAP" name="ID_ROAD_MAP">
-                                                <option selected hidden>Pilih Topik Sesuai</option>
-                                                <option value="1">Peduli Kaum Difabel</option>
-                                                <option value="4">Pengabdian Masyarakat Wonosari</option>
-                                                <option value="5">Pengabdian Masyarakat Kulonprogo</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Jenis Pengabdian</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-
-                                            <input id="JENIS_PENGABDIAN" name="JENIS_PENGABDIAN" type="text" class="form-control" placeholder="Jenis Pengabdian" aria-describedby="basic-addon1" value="@Model.dataPengabdian.JENIS_PENGABDIAN">
-
-                                        </div>
-                                    </div>
-
-                                    <div class="card alert-default">
-                                        <div class="card-header" style="border-bottom-color:lightsteelblue; border-bottom-left-radius:10px;border-bottom-right-radius:10px">
-                                            <i class="fa fa-solid fa-clock" aria-hidden="true"></i>
-                                            Tanggal dan Durasi Penelitian
-                                        </div>
-
-                                        <div class="card-body">
-                                            <div class="form-group row">
-                                                <label for="AWAL" class="col-sm-3 col-form-label col-form-label-sm">Tanggal Mulai Penelitian</label>
-                                                <div class="col-sm-3">
-                                                    <input class="form-control form-control-sm datepicker" type="date" id="AWAL" name="AWAL" placeholder="YYYY-MM-DD">
-                                                </div>
-                                                <label for="AKHIR" class="col-sm-3 col-form-label col-form-label-sm">Tanggal Akhir Penelitian</label>
-                                                <div class="col-sm-3">
-                                                    <input class="form-control form-control-sm datepicker" type="date" id="AKHIR" name="AKHIR" placeholder="YYYY-MM-DD">
+                                            <div class="mb-4" hidden>
+                                                <div class="input-group">
+                                                    <input type="hidden"
+                                                           autocomplete="off"
+                                                           class="form-control"
+                                                           name="NPP"
+                                                           id="NPP"
+                                                           value="@Model.cekUser.NPP" />
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <label for="durasi" class="col-sm-3 col-form-label col-form-label-sm">Durasi Efektif</label>
-                                                <div class="col-sm-3">
-                                                    <select id="durasi" class="custom-select custom-select-sm" name="durasi">
-                                                        <option selected hidden>Pilih Durasi</option>
-                                                        <option value="1">1 Bulan</option>
-                                                        <option value="2">2 Bulan</option>
-                                                        <option value="3">3 Bulan</option>
-                                                        <option value="4">4 Bulan</option>
-                                                        <option value="5">5 Bulan</option>
-                                                        <option value="6">6 Bulan</option>
+                                            @{
+                                                int Skim = ViewBag.tampungPengabdian.ID_SKIM;
+                                            }
+                                            <div class="mb-4">
+                                                <label for="basic-addon1" class="form-label">Skim Pengabdian</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
+                                                    <select style="width:710px" id="ID_SKIM" name="ID_SKIM">
+                                                        <option hidden style="color:lightgrey">Pilih Skim Pengabdian</option>
+                                                        @foreach (var item in Model.refjenis1)
+                                                        {
+                                                            @if (item.ID_SKIM == Skim)
+                                                            {
+                                                                <option value="@item.ID_SKIM" selected> @item.DESKRIPSI</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@item.ID_SKIM"> @item.DESKRIPSI</option>
+                                                            }
+
+                                                        }
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                            @{
+                                                int Tahun = ViewBag.tampungPengabdian.ID_TAHUN_ANGGARAN;
+                                            }
+                                            <div class="mb-4">
+                                                <label for="basic-addon1" class="form-label">Tahun Akademik</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
+                                                    <select style="width:710px" id="ID_TAHUN_ANGGARAN" name="ID_TAHUN_ANGGARAN">
+                                                        <option hidden style="color:lightgrey">Pilih Tahun Akademik</option>
+                                                        @foreach (var item in Model.refjenis2)
+                                                        {
+                                                            @if (item.ID_TAHUN_AKADEMIK == Tahun)
+                                                            {
+                                                                <option value="@item.ID_TAHUN_AKADEMIK" selected>
+                                                                    @item.TAHUN_AKADEMIK
+                                                                </option>
 
-                                    <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Mitra Kerjasama atau Mitra Sasaran</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@item.ID_TAHUN_AKADEMIK">
+                                                                    @item.TAHUN_AKADEMIK
+                                                                </option>
 
-                                            <input type="text" class="form-control" placeholder="Nama Mitra" id="MITRA" name="MITRA" value="@Model.dataPengabdian.MITRA" aria-describedby="basic-addon1">
-                                            <input type="text" class="form-control" placeholder="Bidang Keahlian" id="MITRA_KEAHLIAN" name="MITRA_KEAHLIAN" value="@Model.dataPengabdian.MITRA_KEAHLIAN" aria-describedby="basic-addon1">
-
-                                        </div>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="basic-addon1" class="form-label">Lokasi Pengabdian</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-magnify small" aria-hidden="true"> </i></span>
-                                            <input type="text" class="form-control" placeholder="Lokasi Penelitian" aria-label="Lokasi Penelitian" value="@Model.dataPengabdian.LOKASI" aria-describedby="basic-addon1" id="LOKASI">
-
-
-                                        </div>
-                                    </div>
-
-                                    <div class="card" style="border-right-width: 3px; border-right-color:royalblue">
-                                        <div class="card-body">
-                                            <label class="pb-2" style="">
-                                                <i class="fa fa-map" aria-hidden="true"></i>
-                                                Peta Lokasi
-                                                <a data-container="body" data-toggle="popover" data-placement="top" data-content="Silakan lakukan pencarian terhadap lokasi lebih dahulu. Jika lokasi kurang tepat, lakukan drag pada marker">
-                                                    <i class="fa fa-info-circle fa-xs text-primary"></i>
-                                                </a>
-                                            </label>
-                                            <div class="form-group">
-                                                <div id="map" style="width:100%;height:300px;">
-                                                    <pre id="coordinates" class="coordinates form-group"></pre>
+                                                            }
+                                                        }
+                                                    </select>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <label for="longitude" class="col-sm-3 col-form-label col-form-label-sm">Longitude</label>
-                                                <div class="col-sm-3">
-                                                    <input type="text" readonly class="form-control form-control-sm" id="longitude" name="longitude" placeholder="0">
-                                                </div>
-                                                <label for="latitude" class="col-sm-3 col-form-label col-form-label-sm">Latitude</label>
-                                                <div class="col-sm-3">
-                                                    <input type="text" readonly class="form-control form-control-sm" id="latitude" name="latitude" placeholder="0">
+                                            @{
+                                                int Semester = ViewBag.tampungPengabdian.NO_SEMESTER;
+                                            }
+                                            <div class="mb-4">
+                                                <label for="basic-addon2" class="form-label">Semester Akademik </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon2"><i class="mdi mdi-pencil small" aria-hidden="true"> </i></span>
+                                                    <select style="width:710px" id="NO_SEMESTER" name="NO_SEMESTER">
+                                                        <option hidden style="color:lightgrey">Pilih Semester Akademik</option>
+                                                        @foreach (var item in Model.refjenis3)
+                                                        {
+                                                            @if (item.NO_SEMESTER == Semester)
+                                                            {
+                                                                <option value="@item.NO_SEMESTER" selected> @item.SEMESTER_AKADEMIK</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@item.NO_SEMESTER"> @item.SEMESTER_AKADEMIK</option>
+
+                                                            }
+                                                        }
+                                                    </select>
                                                 </div>
                                             </div>
-                                            <label class="pb-2" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color:royalblue">Jarak Lokasi dari Kampus UAJY</label>
-                                            <div class="form-group row">
-                                                <label for="jarak" class="col-sm-3 col-form-label col-form-label-sm">Jarak ke Lokasi</label>
-                                                <div class="col-sm-3 d-flex">
-                                                    <input type="text" class="form-control form-control-sm" id="jarak" name="jarak" placeholder="0">
-                                                    <span class="form-control-sm">km</span>
+
+                                            <div class="card alert-default">
+                                                <div class="card-header">
+                                                    <i class="fas fa-file-export" aria-hidden="true"></i>
+                                                    <label for="luaranOutput"
+                                                           class="col-sm-3 col-form-label col-form-label-sm">Luaran Output</label><br />
                                                 </div>
-                                                <label for="waktu" class="col-sm-3 col-form-label col-form-label-sm">Waktu</label>
-                                                <div class="col-sm-3 d-flex">
-                                                    <input type="text" class="form-control form-control-sm" id="waktu" name="waktu" placeholder="0">
-                                                    <span class="form-control-sm">jam</span>
+                                                <div class="card-body">
+                                                    <div class="form-group row">
+                                                        @*<label
+                                                              for="luaranOutcome"
+                                                              class="col-sm-3 col-form-label col-form-label-sm"
+                                                              >Luaran Outcome</label
+                                                            ><br />*@
+                                                        <div class="col-sm-9 row" id="outputList">
+                                                            <div class="col-sm-6">
+                                                                @foreach (var item in Model.refjenis4)
+                                                                {
+                                                                    <div class="col-sm-5 custom-control custom-checkbox ml-2 mr-2">
+                                                                        <input type="checkbox" class="custom-control-input" onclick="pushOutput()" id="output_@item.ID_OUTPUT" value="@item.DESKRIPSI">
+                                                                        <label class="custom-control-label font-weight-normal" for="output_@item.ID_OUTPUT">@item.DESKRIPSI</label>
+                                                                    </div>
+                                                                }
+                                                                <input type="text" class="form-control form-control-sm" name="output" id="output" readonly hidden>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="card alert-default">
+                                                <div class="card-header">
+                                                    <i class="fas fa-file-export" aria-hidden="true"></i>
+                                                    <label for="luaranOutcome"
+                                                           class="col-sm-3 col-form-label col-form-label-sm">Luaran Outcome</label><br />
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group">
+
+                                                        <div class="col-sm-9 row" id="outcomeList">
+                                                            <div class="col-sm-6">
+                                                                <label class="col-form-label col-form-label-sm">Publikasi</label>
+
+                                                                @foreach (var item in Model.refOutcome)
+                                                                {
+                                                                    if (item.ID_JENIS_OUTCOME == 1)
+                                                                    {
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input type="checkbox"
+                                                                                   class="custom-control-input"
+                                                                                   onclick="pushOutcome()"
+                                                                                   id="outcome_@item.ID_OUTCOME"
+                                                                                   value="@item.DESKRIPSI" />
+                                                                            <label class="custom-control-label font-weight-normal"
+                                                                                   for="outcome_@item.ID_OUTCOME">@item.DESKRIPSI</label>
+                                                                            </div>
+                                                                        }
+                                                                    }
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="col-form-label col-form-label-sm">HaKI</label>
+                                                                @foreach (var item in Model.refOutcome)
+                                                                {
+                                                                    if
+(item.ID_JENIS_OUTCOME == 2)
+                                                                    {
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input type="checkbox"
+                                                                                   class="custom-control-input"
+                                                                                   onclick="pushOutcome()"
+                                                                                   id="outcome_@item.ID_OUTCOME"
+                                                                                   value="@item.DESKRIPSI" />
+                                                                            <label class="custom-control-label font-weight-normal"
+                                                                                   for="outcome_@item.ID_OUTCOME">@item.DESKRIPSI</label>
+                                                                            </div>
+                                                                        }
+                                                                    }
+                                                            </div>
+                                                            <input type="text"
+                                                                   class="form-control form-control-sm"
+                                                                   name="outcome"
+                                                                   id="outcome"
+                                                                   readonly
+                                                                   hidden />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card" style="border-left-width: 3px; border-left-color: #dc3545">
+                                                <div class="card-body">
+                                                    <label class="pb-2" style="color: #fd7e14">Beban SKS</label>
+                                                    <div class="form-group row">
+                                                        <label for="SKS_KETUA" class="col-sm-3 col-form-label col-form-label-sm">SKS Ketua</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="number" class="form-control form-control-sm" placeholder="Beban SKS Ketua" id="SKS_KETUA" name="SKS_KETUA" value="@Model.dataPengabdian.SKS_KETUA">
+                                                        </div>
+                                                        <label for="SKS_ANGGOTA" class="col-sm-3 col-form-label col-form-label-sm">SKS Anggota</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="number" class="form-control form-control-sm" id="SKS_ANGGOTA" name="SKS_ANGGOTA" placeholder="Beban SKS Anggota" value="@Model.dataPengabdian.SKS_ANGGOTA">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="card alert-default">
+                                                <div class="card-header">
+                                                    <i class="fa fa-money-bill" aria-hidden="true"></i>
+                                                    Pendanaan
+                                                </div>
+                                                <div class="card-body">
+                                                    <label for="DANA_UAJY"
+                                                           class="col-sm-3 col-form-label col-form-label-sm"
+                                                           style="color: steelblue">Dana UAJY</label>
+                                                    <div class="row col-sm-12">
+                                                        <div class="col-sm-9 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
+                                                            </div>
+                                                            <input type="text" id="DANA_UAJY" name="DANA_UAJY" class="form-control" value="@Model.dataPengabdian.DANA_UAJY" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                        </div>
+
+                                                    </div>
+                                                    <label for="danaPribadi"
+                                                           class="col-sm-3 col-form-label col-form-label-sm"
+                                                           style="color: steelblue">Dana Pribadi</label>
+                                                    <div class="row col-sm-12">
+                                                        <div class="col-sm-9 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
+                                                            </div>
+                                                            <input type="text" id="DANA_PRIBADI" name="DANA_PRIBADI" class="form-control" value="@Model.dataPengabdian.DANA_PRIBADI" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                        </div>
+
+                                                    </div>
+                                                    <label for="danaEksternal"
+                                                           class="col-sm-3 col-form-label col-form-label-sm"
+                                                           style="color: steelblue">Dana Eksternal</label>
+                                                    <div class="row col-sm-12">
+                                                        <div class="col-sm-9 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
+                                                            </div>
+                                                            <input type="text" id="DANA_EKSTERNAL" name="DANA_EKSTERNAL" class="form-control" value="@Model.dataPengabdian.DANA_EKSTERNAL" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                        </div>
+
+                                                    </div>
+                                                    <label for="danaKerjasama"
+                                                           class="col-sm-3 col-form-label col-form-label-sm"
+                                                           style="color: steelblue">Dana Kerjasama</label>
+                                                    <div class="row col-sm-12">
+                                                        <div class="col-sm-9 input-group input-group-sm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
+                                                            </div>
+                                                            <input type="text" id="DANA_KERJASAMA" name="DANA_KERJASAMA" class="form-control" value="@Model.dataPengabdian.DANA_KERJASAMA" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="mb-4">
+                                                <label for="basic-addon3" class="form-label">Judul Kegiatan Pengabdian</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-home small" aria-hidden="true"> </i></span>
+                                                    <input id="JUDUL_KEGIATAN" name="JUDUL_KEGIATAN" placeholder="Judul Pengabdian" value="@Model.dataPengabdian.JUDUL_KEGIATAN" style=" height: 40px; width: 710px;" />
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="basic-addon1" class="form-label">Landasan Penelitian</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar-range small" aria-hidden="true"> </i></span>
+                                                    <input type="text" class="form-control" placeholder="Landasan Penelitian" aria-label="LANDASAN_PENELITIAN" aria-describedby="basic-addon1" id="LANDASAN_PENELITIAN" value="@Model.dataPengabdian.LANDASAN_PENELITIAN" name="LANDASAN_PENELITIAN">
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="basic-addon1" class="form-label">Sasaran</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-calendar-range small" aria-hidden="true"> </i></span>
+                                                    <input type="text" class="form-control" placeholder="Sasaran" value="@Model.dataPengabdian.SASARAN" aria-label="SASARAN" aria-describedby="basic-addon1" id="SASARAN" name="SASARAN">
+                                                </div>
+                                            </div>
+                                            @{
+                                                int Tema = ViewBag.tampungPengabdian.ID_TEMA_UNIVERSITAS;
+                                            }
+                                            <div class="mb-4">
+                                                <label for="basic-addon1" class="form-label">Tema  Universitas</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                                    <select style="width:710px" id="ID_TEMA_UNIVERSITAS" name="ID_TEMA_UNIVERSITAS">
+                                                        <option hidden style="color:lightgrey">Pilih Tema Penelitian</option>
+                                                        @foreach (var item in Model.refjenis6)
+                                                        {
+                                                            @if (item.ID_TEMA_UNIVERSITAS == Tema)
+                                                            {
+                                                                <option value="@item.ID_TEMA_UNIVERSITAS" selected>
+                                                                    @item.DESKRIPSI
+                                                                </option>
+
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@item.ID_TEMA_UNIVERSITAS">
+                                                                    @item.DESKRIPSI
+                                                                </option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label for="id_roadMap" class="col-sm-3 col-form-label col-form-label-sm">
+                                                    Topik Sesuai Rencana
+                                                    <a data-container="body" data-toggle="popover" data-placement="top" data-content="Topik sesuai dengan rencana unit">
+                                                        <i class="fa fa-info-circle fa-xs text-primary"></i>
+                                                    </a>
+                                                </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-pound small" aria-hidden="true"> </i></span>
+                                                    <select style="width:710px" id="ID_ROAD_MAP" name="ID_ROAD_MAP">
+                                                        <option selected hidden>Pilih Topik Sesuai</option>
+                                                        <option value="1">Peduli Kaum Difabel</option>
+                                                        <option value="4">Pengabdian Masyarakat Wonosari</option>
+                                                        <option value="5">Pengabdian Masyarakat Kulonprogo</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label for="basic-addon1" class="form-label">Jenis Pengabdian</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+
+                                                    <input id="JENIS_PENGABDIAN" name="JENIS_PENGABDIAN" type="text" class="form-control" placeholder="Jenis Pengabdian" aria-describedby="basic-addon1" value="@Model.dataPengabdian.JENIS_PENGABDIAN">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="card alert-default">
+                                                <div class="card-header" style="border-bottom-color:lightsteelblue; border-bottom-left-radius:10px;border-bottom-right-radius:10px">
+                                                    <i class="fa fa-solid fa-clock" aria-hidden="true"></i>
+                                                    Tanggal dan Durasi Penelitian
+                                                </div>
+
+                                                <div class="card-body">
+                                                    <div class="form-group row">
+                                                        <label for="AWAL" class="col-sm-3 col-form-label col-form-label-sm">Tanggal Mulai Penelitian</label>
+                                                        <div class="col-sm-3">
+                                                            <input class="form-control form-control-sm datepicker" type="date" id="AWAL" name="AWAL" placeholder="YYYY-MM-DD">
+                                                        </div>
+                                                        <label for="AKHIR" class="col-sm-3 col-form-label col-form-label-sm">Tanggal Akhir Penelitian</label>
+                                                        <div class="col-sm-3">
+                                                            <input class="form-control form-control-sm datepicker" type="date" id="AKHIR" name="AKHIR" placeholder="YYYY-MM-DD">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="durasi" class="col-sm-3 col-form-label col-form-label-sm">Durasi Efektif</label>
+                                                        <div class="col-sm-3">
+                                                            <select id="durasi" class="custom-select custom-select-sm" name="durasi">
+                                                                <option selected hidden>Pilih Durasi</option>
+                                                                <option value="1">1 Bulan</option>
+                                                                <option value="2">2 Bulan</option>
+                                                                <option value="3">3 Bulan</option>
+                                                                <option value="4">4 Bulan</option>
+                                                                <option value="5">5 Bulan</option>
+                                                                <option value="6">6 Bulan</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label for="basic-addon1" class="form-label">Mitra Kerjasama atau Mitra Sasaran</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+
+                                                    <input type="text" class="form-control" placeholder="Nama Mitra" id="MITRA" name="MITRA" value="@Model.dataPengabdian.MITRA" aria-describedby="basic-addon1">
+                                                    <input type="text" class="form-control" placeholder="Bidang Keahlian" id="MITRA_KEAHLIAN" name="MITRA_KEAHLIAN" value="@Model.dataPengabdian.MITRA_KEAHLIAN" aria-describedby="basic-addon1">
+
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="basic-addon1" class="form-label">Lokasi Pengabdian</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-magnify small" aria-hidden="true"> </i></span>
+                                                    <input type="text" class="form-control" placeholder="Lokasi Penelitian" aria-label="Lokasi Penelitian" value="@Model.dataPengabdian.LOKASI" aria-describedby="basic-addon1" id="LOKASI">
+
+
+                                                </div>
+                                            </div>
+
+                                            <div class="card" style="border-right-width: 3px; border-right-color:royalblue">
+                                                <div class="card-body">
+                                                    <label class="pb-2" style="">
+                                                        <i class="fa fa-map" aria-hidden="true"></i>
+                                                        Peta Lokasi
+                                                        <a data-container="body" data-toggle="popover" data-placement="top" data-content="Silakan lakukan pencarian terhadap lokasi lebih dahulu. Jika lokasi kurang tepat, lakukan drag pada marker">
+                                                            <i class="fa fa-info-circle fa-xs text-primary"></i>
+                                                        </a>
+                                                    </label>
+                                                    <div class="form-group">
+                                                        <div id="map" style="width:100%;height:300px;">
+                                                            <pre id="coordinates" class="coordinates form-group"></pre>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="longitude" class="col-sm-3 col-form-label col-form-label-sm">Longitude</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" readonly class="form-control form-control-sm" id="longitude" name="longitude" placeholder="0">
+                                                        </div>
+                                                        <label for="latitude" class="col-sm-3 col-form-label col-form-label-sm">Latitude</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" readonly class="form-control form-control-sm" id="latitude" name="latitude" placeholder="0">
+                                                        </div>
+                                                    </div>
+                                                    <label class="pb-2" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color:royalblue">Jarak Lokasi dari Kampus UAJY</label>
+                                                    <div class="form-group row">
+                                                        <label for="jarak" class="col-sm-3 col-form-label col-form-label-sm">Jarak ke Lokasi</label>
+                                                        <div class="col-sm-3 d-flex">
+                                                            <input type="text" class="form-control form-control-sm" id="jarak" name="jarak" placeholder="0">
+                                                            <span class="form-control-sm">km</span>
+                                                        </div>
+                                                        <label for="waktu" class="col-sm-3 col-form-label col-form-label-sm">Waktu</label>
+                                                        <div class="col-sm-3 d-flex">
+                                                            <input type="text" class="form-control form-control-sm" id="waktu" name="waktu" placeholder="0">
+                                                            <span class="form-control-sm">jam</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
 
-                                </div>
+                                    <hr />
+
+                                    <div class="btn">
+                                        <button type="submit" class="btn btn-primary">
+                                            Submit
+                                        </button>
+                                    </div>
+
+                                </form>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-identitas" role="tabpanel" aria-labelledby="nav-identitas-tab">
+                    <br />
 
-                            <hr />
+                    <div class="content-wrapper p-3" id="content">
 
-                            <div class="btn">
-                                <button type="submit"  class="btn btn-primary">
-                                    Submit
-                                </button>
-                            </div>
-                        
-                        </form>
+
+                        <br>
+                        <div style="width: 100%; overflow-x: auto;" class="col">
+                            <table style="text-align:left">
+                                <thead>
+                                    <tr>
+                                        <td class="style8">
+                                            NPP
+                                        </td>
+                                        <td>
+                                            @Model.data.NPP
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style8">
+                                            Nama
+                                        </td>
+                                        <td>
+                                            @Model.data.NAMA_LENGKAP_GELAR
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style8">
+                                            Jabatan Fungsional
+                                        </td>
+                                        <td>
+                                            @Model.data2.DESKRIPSI
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style8">
+                                            Pangkat/Golongan
+                                        </td>
+                                        <td>
+                                            @Model.data6.DESKRIPSI/@Model.data3.ID_REF_GOLONGAN
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="style8">
+                                            NPP/NIDN
+                                        </td>
+                                        <td>
+
+                                            @Model.data.NPP / @Model.data.NIDN
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style8">
+                                            Unit/Fakultas/Jurusan
+                                        </td>
+                                        <td>
+                                            @Model.data4.NAMA_UNIT/@Model.data5.NAMA_UNIT
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style8">
+                                            Alamat
+                                        </td>
+                                        <td>
+                                            @Model.data.ALAMAT
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="style8">
+                                            No. Telp/Faks
+                                        </td>
+                                        <td>
+                                            @Model.data.NO_TELPON_HP
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style8">
+                                            Email
+                                        </td>
+                                        <td>
+                                            @Model.data.EMAIL_INSTITUSI
+                                        </td>
+                                    </tr>
+                                    @{
+                                        string tempAnggota = ViewBag.tempPengabdian.NPP;
+
+
+                                    }
+                                    @{
+                                        string tempPersonil = ViewBag.tempPersonil.NPP;
+
+
+                                    }
+                                    @if (tempAnggota == tempPersonil)
+                                    {
+                                        <tr>
+                                            <td class="style8">
+                                                Jabatan Pengabdian Kelompok
+                                            </td>
+                                            <td>
+                                                Ketua
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="style8">
+                                                Anggota Pengabdian Kelompok
+                                            </td>
+                                            <td>
+                                                <button style="margin-left: 2px; margin-top: 5px;" class="button4" onclick="getAnggota(@Model.pengabdianID.ID_PROPOSAL)"><i class="fas fa-eye"></i>&nbsp; Lihat Anggota</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td class="style8">
+                                                Anggota Pengabdian Kelompok
+                                            </td>
+                                            <td>
+                                                <button disabled style="margin-left: 2px; margin-top: 5px;" class="button4" onclick="getAnggota(@Model.pengabdianID.ID_PROPOSAL)"><i class="fas fa-eye"></i>&nbsp; Lihat Anggota</button>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
+
+
+
         </div>
 
 
     </div>
+    <!-- Modal Dialog 2 -->
+
+    <div class="modal fade" id="ShowAnggota" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="overflow-y:auto">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:black; font-family:'Trebuchet MS';font-display:swap; transition:cubic-bezier()"> <i class="fas fa-clipboard"></i>&nbsp; Daftar Anggota Pengabdian Kelompok</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="overflow-x:auto">
+
+                    <div class="col-md-12">
+                        <table id="tableanggota" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th>NPP</th>
+                                    <th>NAMA</th>
+                                    <th>INSTITUSI</th>
+                                    <th>KEAHLIAN</th>
+                                    <th>EMAIL</th>
+                                    <th>TELFON RUMAH</th>
+                                    <th>HP</th>
+                                    <th>ALAMAT</th>
+
+                                </tr>
+                            </thead>
+                            <tbody class="bodyanggota" id="anggota">
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <button style="margin-left: 2px; margin-top: 30px;background-color:#2f3cba" class="button btn-three" onclick="addAnggotaUAJY(@Model.pengabdianID.ID_PROPOSAL)"><i class="fas fa-plus"></i>&nbsp; Tambah Anggota</button>
+
+                </div>
 
 
+
+                <div class="modal-footer">
+                    <button type="button" id="closeModal" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Modal end-->
+
+    <div class="modal fade" id="modalSearch" style="overflow-y:auto">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:black; font-family:'Trebuchet MS';font-display:swap; transition:cubic-bezier()"> <i class="fas fa-clipboard"></i>&nbsp; Tambah Anggota UAJY</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @*<form method="post" asp-action="AddAnggotaPengabdianKelompok" asp-controller="Profile" enctype="multipart/form-data">*@
+
+                    @Html.AntiForgeryToken()
+                    <div class="modal-body">
+                        <div class="col-md-12">
+
+
+                            @*<label for="basic-addon1" hidden class="form-label">ID PROPOSAL</label>
+                            <input type="text" class="form-control" id="id_proposal" hidden name="id_proposal" value="@Model.dataAnggota.ID_PROPOSAL">*@
+
+                            <label class="pb-2" style="color: #fd7e14">Anggota Kelompok</label>
+                            <div class="form-group row">
+                                <label for="ANGGOTA1" class="col-sm-3 col-form-label col-form-label-sm">Anggota 1</label>
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                    </div>
+                                    <input type="text"
+                                           class="form-control"
+                                           name="npp"
+                                           id="npp" />
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="closeModal" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="togModalTambah(@Model.dataAnggota.ID_PROPOSAL, @Model.dataAnggota.USERNAME)"id="tambahButton_">Tambah</button>
+
+                    </div>
+                @*</form>*@
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Tambah Anggota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah anda yakin ingin menambah Anggota?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" onclick="tambahAnggota()" class="btn btn-danger">Tambah</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -610,7 +1039,10 @@
         <script>
             var tblDataDaftarPengabdian;
             refreshTabelDaftarPengabdian();
-
+            var tempIdUpdate;
+            var tempIdTolak;
+            var id_proposal;
+            var NPP;
 
             //Onload handler to fire off the app.
             //google.maps.event.addDomListener(window, 'load', initialize);
@@ -699,6 +1131,35 @@
                     }
                 });
             });
+            $("#npp").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Penelitian/ajaxGetAutoCompleteNPPDosen",
+                        data: { "NPP": request.term },
+                        type: "POST",
+                        success: function (data) {
+                            console.log(data);
+                            response($.map(data, function (item) {
+                                return item.NPP;
+                            }))
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    $("#npp").val(i.item.value);
+                },
+                minLength: 1
+            });
+          
+
+            function addAnggotaUAJY(id_proposal) {
+                id_proposal = id_proposal;
+                this.tempIdProposal = id_proposal;
+                $('#ShowAnggota').modal('hide');
+                $('#modalSearch').modal('show');
+                $('#id_proposal').val(id_proposal);
+
+            }
             function pushOutput() {
                 var arrItem = [];
 
@@ -716,6 +1177,19 @@
                         document.getElementById("output").value = "";
                     }
                 })
+            }
+            function refreshTableAnggota() {
+                tableanggota = $("#tableanggota").DataTable({
+
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+
+                });
             }
 
             function pushOutcome() {
@@ -736,6 +1210,54 @@
                     }
                 })
             }
+        
+
+            function togModalTambah(id, npp) {
+                //console.log(id)
+                console.log(id)
+                id_proposal = id;
+                NPP = npp;
+                this.tempIdUpdate = id;
+                this.tempIdTolak = NPP;
+
+                console.log(npp);
+                $('#modalTambah').modal('show');
+            }
+            function closeModalTolak() {
+                $('#modalTambah').modal('hide');
+            }
+            function tambahProposal() {
+                var self = this;
+                console.log(id_proposal);
+                console.log(NPP);
+                var update = $('#tambahButton_' + this.tempIdUpdate + this.tempIdTolak);
+                var myTable = $('#datatable').DataTable();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Pengabdian/TambahAnggota?id_proposal=" + id_proposal + "&username=" + NPP,
+                    data: ({ id_proposal: id_proposal, NPP: NPP }),
+                    success: function (data) {
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Data berhasil ditambah!',
+                            confirmButtonText: 'Tutup',
+                        })
+                        /*          closeModalTolak();*/
+                        window.location.reload();
+
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'SiLPPM said: ',
+                            text: 'Data gagal ditambah!',
+                        })
+                        window.location.reload();
+                    }
+                });
+            }
 
             function refreshTabelDaftarPengabdian() {
                 tblDataDaftarPengabdian = $("#tblDataHistoryPenelitian").DataTable({
@@ -749,7 +1271,31 @@
                     "responsive": true,
                 }).buttons().container().appendTo('#tblDataHistoryPenelitian_wrapper .col-md-6:eq(0)');
             }
-
+            function getAnggota(id_proposal) {
+                id_proposal = id_proposal;
+                this.tempIdProposal = id_proposal;
+                $('#id_proposal').val(id_proposal);
+                $.ajax({
+                    type: "GET",
+                    url: "/Profile/ajaxGetPesertaPengabdian",
+                    cache: false,
+                    data: { id_proposal: id_proposal },
+                    dataType: "json",
+                    success: function (result) {
+                        $('#ShowAnggota').modal('show');
+                        var str = '';
+                        var data = result.data;
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i].NAMA_LENGKAP_GELAR != "" && data[i].NAMA_LENGKAP_GELAR != null) {
+                                str += '<tr><td>' + data[i].NPP + '</td><td>' + data[i].NAMA_LENGKAP_GELAR + '</td><td>' +
+                                    data[i].INSTITUSI_ASAL + '</td><td>' + data[i].BIDANG_KEAHLIAN_PENGABDIAN + '</td><td>' + data[i].EMAIL + '</td><td>'
+                                    + data[i].NO_TELPON_RUMAH + '</td><td>' + data[i].NO_TELPON_HP + '</td><td>' + data[i].ALAMAT + '</td></tr>';
+                            }
+                        }
+                        $(".bodyanggota").html(str);
+                    }
+                })
+            }
 
         </script>
     }

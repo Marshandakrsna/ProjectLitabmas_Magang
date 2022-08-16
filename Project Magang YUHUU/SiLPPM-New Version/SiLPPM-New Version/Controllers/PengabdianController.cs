@@ -96,7 +96,19 @@ namespace SiLPPM_New_Version.Controllers
             var cek = dao.UpdateDitolakDekan(id_proposal);
             return Json(cek);
         }
-
+        public JsonResult TolakAnggota(int id_proposal)
+        {
+            var username = User.Claims
+                .Where(c => c.Type == "username")
+                    .Select(c => c.Value).SingleOrDefault();
+            var cek = dao.HapusAnggota(id_proposal,username);
+            return Json(cek);
+        }
+        public JsonResult TambahAnggota(int id_proposal, string npp)
+        {
+            var cek = myprofile.AddAnggotaUAJYPengabdian(id_proposal, npp);
+            return Json(cek);
+        }
         public IActionResult EditListPengabdian(int id_proposal, string npp)
         {
             var username = User.Claims
@@ -166,13 +178,14 @@ namespace SiLPPM_New_Version.Controllers
             myobj.dataAnggota = dataAnggota.data;
             return View(myobj);
         }
-        public IActionResult HomePengabdian()
+        public IActionResult HomePengabdian(int id_proposal)
         {
             var username = User.Claims
                      .Where(c => c.Type == "username")
                          .Select(c => c.Value).SingleOrDefault();
 
-
+            //var tempPengabdian = dao.GetDataPengabdian(username);
+            //var tempPersonil = dao.GetDataPersonil(id_proposal);
             var refjenis = mydao.GetRefSkim();
             var refjenis2 = mydao.GetRefTahunAka();
             var refjenis3 = mydao.GetRefSemester();
@@ -180,11 +193,12 @@ namespace SiLPPM_New_Version.Controllers
             var refjenis5 = mydao.GetRefJenis();
             var refjenis6 = mydao.GetRefTema();
             var refOutcome = mydao.GetOutcome();
-
+            var pengabdian = dao.GetCountPengabdianByNPP(username);
             var refjenis7 = mydao.GetRefKategori();
 
              var refpropo = mydao.GetDataPenelitian(username);
             var cekUser = mydao.GetUserByUsername(username);
+            ViewBag.pengabdian = pengabdian.data;
             myobj.refjenis = refjenis.data;
             myobj.refjenis2 = refjenis2.data;
             myobj.cekUser = cekUser.data;

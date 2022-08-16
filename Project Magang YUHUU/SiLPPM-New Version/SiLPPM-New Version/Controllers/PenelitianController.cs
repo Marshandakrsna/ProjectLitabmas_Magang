@@ -49,8 +49,9 @@ namespace SiLPPM_New_Version.Controllers
             var refjenis7 = penelitianDAO.GetRefKategori();
             var refOutcome = penelitianDAO.GetOutcome();
             var JenisPenelitian = penelitianDAO.GetRefJenisByID(id_jenis_penelitian);
+            var penelitian = penelitianDAO.GetCountPenelitian(username);
             myobj.JenisPenelitian = JenisPenelitian.data;
-           
+            ViewBag.penelitian = penelitian.data;
             ViewBag.tempJenis = JenisPenelitian.data;
 
             //PEMANGGILAN TAMBAH PENELITIAN
@@ -604,15 +605,15 @@ namespace SiLPPM_New_Version.Controllers
                N1_JUSTIFIKASI1, N1_JUSTIFIKASI2, N1_JUSTIFIKASI3, N1_JUSTIFIKASI4, N1_JUSTIFIKASI5, N1_JUSTIFIKASI6, N1_JUSTIFIKASI7);
 
 
-            if (jumlah > 550)
-            {
-                penelitianDAO.AddPenelitianLolos(IS_SELESAI, ID_PROPOSAL);
-                penelitianDAO.UpdateStatusPenDiterima(ID_PROPOSAL);
-            }
-            else
-            {
-                penelitianDAO.UpdateStatusPenDitolak(IS_CHECKED, ID_PROPOSAL);
-            }
+            //if (jumlah > 1)
+            //{
+            //    penelitianDAO.AddPenelitianLolos(IS_SELESAI, ID_PROPOSAL);
+            //    penelitianDAO.UpdateStatusPenDiterima(ID_PROPOSAL);
+            //}
+            //else
+            //{
+            //    penelitianDAO.UpdateStatusPenDitolak(IS_CHECKED, ID_PROPOSAL);
+            //}
 
             if (cek.status == true)
 

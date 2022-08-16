@@ -202,42 +202,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="card alert-default">
-                                        <div class="card-header">
-                                            <i class="fas fa-user" aria-hidden="true"></i>
-                                            <label for="anggota"
-                                                   class="col-sm-3 col-form-label col-form-label-sm">Anggota Kelompok</label><br />
-                                        </div>
-                                        <div class="card-body">
-                                            <label class="pb-2" style="color: #fd7e14">Anggota Kelompok</label>
-                                            <div class="form-group row">
-                                                <label for="ANGGOTA1" class="col-sm-3 col-form-label col-form-label-sm">Anggota 1</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text"><i class="fas fa-search"></i></span>
-                                                    </div>
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           name="ANGGOTA1"
-                                                           id="ANGGOTA1" />
+                                 
 
-                                                </div>
-                                                <label for="ANGGOTA2" class="col-sm-3 col-form-label col-form-label-sm">Anggota 2</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text"><i class="fas fa-search"></i></span>
-                                                    </div>
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           name="ANGGOTA2"
-                                                           id="ANGGOTA2" />
-
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="card alert-default">
                                         <div class="card-header">
                                             <i class="fas fa-file-export" aria-hidden="true"></i>
@@ -247,10 +213,10 @@
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 @*<label
-                      for="luaranOutcome"
-                      class="col-sm-3 col-form-label col-form-label-sm"
-                      >Luaran Outcome</label
-                    ><br />*@
+                                                      for="luaranOutcome"
+                                                      class="col-sm-3 col-form-label col-form-label-sm"
+                                                      >Luaran Outcome</label
+                                                    ><br />*@
                                                 <div class="col-sm-9 row" id="outputList">
                                                     <div class="col-sm-6">
                                                         @foreach (var item in Model.refjenis4)
@@ -447,7 +413,7 @@
 
 
                                 </div>
-                               
+
                                 <div class="col-md-6">
                                     <div class="mb-4">
                                         <label for="basic-addon3" class="form-label">Judul Kegiatan Pengabdian</label>
@@ -471,19 +437,19 @@
                                         </div>
                                     </div>
                                     @*<div class="mb-4">
-                <label for="basic-addon1" class="form-label">Kategori Pengabdian</label>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
-                    <select style="width:710px" id="ID_KATEGORI" name="ID_KATEGORI">
-                        <option hidden style="color:lightgrey">Pilih Kategori Penelitian</option>
-                        @foreach (var item in Model.refjenis7)
-                        {
-                            <option value="@item.ID_KATEGORI"> @item.DESKRIPSI</option>
+                                            <label for="basic-addon1" class="form-label">Kategori Pengabdian</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-counter small" aria-hidden="true"> </i></span>
+                                                <select style="width:710px" id="ID_KATEGORI" name="ID_KATEGORI">
+                                                    <option hidden style="color:lightgrey">Pilih Kategori Penelitian</option>
+                                                    @foreach (var item in Model.refjenis7)
+                                                    {
+                                                        <option value="@item.ID_KATEGORI"> @item.DESKRIPSI</option>
 
-                        }
-                    </select>
-                </div>
-            </div>*@
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>*@
                                     <div class="mb-4">
                                         <label for="basic-addon1" class="form-label">Tema  Universitas</label>
                                         <div class="input-group">
@@ -640,38 +606,26 @@
                             </div>
 
                             <hr />
+                            @{
+                                int tempCount = ViewBag.pengabdian.NAMA;
 
-                            <div class="btn">
-                                <button type="submit" onclick="document.getElementById('dokumenPengabdian').disabled = false" class="btn btn-primary">
-                                    Submit
-                                </button>
-                            </div>
-                            @*<div class="card-body">
-            <table id="datatable" class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>Aksi</th>
-                        <th>Jenis Event</th>
-                        <th>Judul Event</th>
-                        <th>Tgl Event</th>
-                        <th>Teknologi</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-
-                    <tr>
-                        <td>
-                        </td>
-                        <td></td>
-                        <td></td>
-
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>*@
+                            }
+                            @if (tempCount < 2)
+                            {
+                                <div class="btn">
+                                    <button type="submit" onclick="document.getElementById('dokumenPengabdian').disabled = false" class="btn btn-primary">
+                                        Submit
+                                    </button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="btn">
+                                    <button onclick="alertJumlah()" class="btn btn-primary">
+                                        Submit
+                                    </button>
+                                </div>
+                            }
                         </form>
                     </div>
                 </div>
@@ -680,7 +634,22 @@
 
 
     </div>
-
+    <div class="modal fade modal-errorCount" id="modal-errorCount" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content text-center rounded-pill">
+                <div class="modal-header card-est bg-danger rounded-pill w-75 m-auto">
+                    <div class="m-auto">
+                        <i class="fa fa-exclamation-triangle fa-3x pt-3 pb-3" aria-hidden="true"></i>
+                        <h5 class="modal-title">Ooops!</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h6 class="p-3">Hanya boleh melakukan maksimal 2 pengabdian</h6>
+                    <button type="button" class="btn btn-warning rounded-pill btn-est m-2" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade modal-preview"
          tabindex="-1"
          role="dialog"
@@ -920,6 +889,10 @@
             },
             minLength: 1
         });
+        function alertJumlah() {
+            $('#modal-errorCount').modal('show');
+        }
+
         $("#ANGGOTA2").autocomplete({
             source: function (request, response) {
                 $.ajax({
@@ -966,7 +939,7 @@
                 document.getElementById("dokumenPengabdian").disabled = true;
             });
         });
-       
+
         $(document).ready(function () {
             $(function () {
                 $('.form-input').hide();

@@ -96,7 +96,7 @@
 
             <hr />
             <h5 class="card-header font-weight bg-light">
-                <span >Tambah Penelitian</span>
+                <span>Tambah Penelitian</span>
             </h5>
 
             @if (TempData["succ"] != null)
@@ -253,10 +253,10 @@
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 @*<label
-                      for="luaranOutcome"
-                      class="col-sm-3 col-form-label col-form-label-sm"
-                      >Luaran Outcome</label
-                    ><br />*@
+                                                      for="luaranOutcome"
+                                                      class="col-sm-3 col-form-label col-form-label-sm"
+                                                      >Luaran Outcome</label
+                                                    ><br />*@
                                                 <div class="col-sm-9 row" id="outputList">
                                                     <div class="col-sm-6">
                                                         @foreach (var item in Model.refjenis4)
@@ -273,42 +273,42 @@
                                         </div>
                                     </div>
                                     @*<div class="mb-4">
-            <label for="basic-addon1" class="form-label">Output</label>
+                                            <label for="basic-addon1" class="form-label">Output</label>
 
-            <div class="radio-checkbox" id="ID_OUTPUT">
-                @foreach (var item in Model.refjenis4)
-                {
-                    <input type="checkbox" value="@item.ID_OUTPUT" />
-                    @item.DESKRIPSI}
-            </div>
-        </div>*@
+                                            <div class="radio-checkbox" id="ID_OUTPUT">
+                                                @foreach (var item in Model.refjenis4)
+                                                {
+                                                    <input type="checkbox" value="@item.ID_OUTPUT" />
+                                                    @item.DESKRIPSI}
+                                            </div>
+                                        </div>*@
                                     @*
-        <div class="mb-4">
-          <label for="basic-addon1" class="form-label"
-            >Outcome</label
-          >
-          <div class="input-group">
-            <span class="input-group-text" id="basic-addon2">
-              <i class="mdi mdi-pencil small" aria-hidden="true">
-              </i>
-            </span>
-            <select
-              style="width: 710px"
-              id="ID_OUTCOME"
-              name="ID_OUTCOME"
-            >
-              <option hidden style="color: lightgrey">
-                Pilih Outcome
-              </option>
-              @foreach (var item in Model.refOutcome) {
-              <option value="@item.ID_OUTCOME">
-                @item.DESKRIPSI
-              </option>
+                                        <div class="mb-4">
+                                          <label for="basic-addon1" class="form-label"
+                                            >Outcome</label
+                                          >
+                                          <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon2">
+                                              <i class="mdi mdi-pencil small" aria-hidden="true">
+                                              </i>
+                                            </span>
+                                            <select
+                                              style="width: 710px"
+                                              id="ID_OUTCOME"
+                                              name="ID_OUTCOME"
+                                            >
+                                              <option hidden style="color: lightgrey">
+                                                Pilih Outcome
+                                              </option>
+                                              @foreach (var item in Model.refOutcome) {
+                                              <option value="@item.ID_OUTCOME">
+                                                @item.DESKRIPSI
+                                              </option>
 
-              }
-            </select>
-          </div>
-        </div>
+                                              }
+                                            </select>
+                                          </div>
+                                        </div>
                                     *@
                                     <div class="card alert-default">
                                         <div class="card-header">
@@ -371,19 +371,19 @@
                                     </div>
 
                                     @*<div class="mb-4">
-            <label for="basic-addon1" class="form-label">Jarak dari Kampus UAJY</label>
-            <div class="input-group">
-                <span class="input-group-text" id="basic-addon1">
-                    <i class="mdi mdi-counter small" aria-hidden="true">
-                    </i>
-                </span>
-                <input type="text"
-                       class="form-control"
-                       id="JARAK_KAMPUS_KM"
-                       placeholder="Jarak dari Kampus UAJY"
-                       aria-describedby="basic-addon1" />
-            </div>
-        </div>*@
+                                            <label for="basic-addon1" class="form-label">Jarak dari Kampus UAJY</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <i class="mdi mdi-counter small" aria-hidden="true">
+                                                    </i>
+                                                </span>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       id="JARAK_KAMPUS_KM"
+                                                       placeholder="Jarak dari Kampus UAJY"
+                                                       aria-describedby="basic-addon1" />
+                                            </div>
+                                        </div>*@
                                     <div class="card alert-default">
                                         <div class="card-header" style="border-bottom-color:lightsteelblue; border-bottom-left-radius:10px;border-bottom-right-radius:10px">
                                             <i class="fa fa-solid fa-clock" aria-hidden="true"></i>
@@ -759,12 +759,29 @@
                                 </div>
                             </div>
                             <hr />
+                            @{
+                                int tempCount = ViewBag.penelitian.NAMA;
 
-                            <div class="btn">
-                                <button type="submit" onclick="document.getElementById('dokumenProposal').disabled = false,
-                                document.getElementById('dokumenPengesahan').disabled = false"  class="btn btn-primary">Submit</button>
-                            </div>
-                        
+                            }
+                            @if (tempCount < 2)
+                            {
+                                <div class="btn">
+                                    <button type="submit" onclick="document.getElementById('dokumenProposal').disabled = false,
+                                document.getElementById('dokumenPengesahan').disabled = false" class="btn btn-primary">
+                                        Submit
+                                    </button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="btn">
+                                    <button   onclick="alertJumlah()" class="btn btn-primary">
+                                        Submit
+                                    </button>
+                                </div>
+                            }
+
+
                         </form>
                     </div>
                 </div>
@@ -805,6 +822,22 @@
                 </div>
                 <div class="modal-body">
                     <h6 class="p-3">Silakan upload file lebih dahulu!</h6>
+                    <button type="button" class="btn btn-warning rounded-pill btn-est m-2" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-errorCount" id="modal-errorCount" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content text-center rounded-pill">
+                <div class="modal-header card-est bg-danger rounded-pill w-75 m-auto">
+                    <div class="m-auto">
+                        <i class="fa fa-exclamation-triangle fa-3x pt-3 pb-3" aria-hidden="true"></i>
+                        <h5 class="modal-title">Ooops!</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h6 class="p-3">Hanya boleh melakukan maksimal 2 penelitian</h6>
                     <button type="button" class="btn btn-warning rounded-pill btn-est m-2" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
@@ -862,8 +895,8 @@
             var distance = turf.distance(to, from, "kilometers").toPrecision(4);
 
             coordinates.style.display = "block";
-            coordinates.innerHTML = `<strong>Information Marker</strong> </br>Longitude: ${lngLat.lng} <br/>Latitude : ${lngLat.lat} 
-            <br/>Distance : ${distance} km`;
+            coordinates.innerHTML = `<strong>Information Marker</strong> </br>Longitude: ${lngLat.lng} <br/>Latitude : ${lngLat.lat}
+                <br/>Distance : ${distance} km`;
             document.getElementById("LONGITUDE").value = lngLat.lng;
             document.getElementById("LATITUDE").value = lngLat.lat;
             document.getElementById("jarak").value = distance;
@@ -878,7 +911,7 @@
 
                 coordinates.style.display = "block";
                 coordinates.innerHTML = `<strong>Information Marker</strong> </br>Longitude: ${lngLat.lng} <br/>Latitude: ${lngLat.lat}
-                <br/>Distance: ${distance} km`;
+                    <br/>Distance: ${distance} km`;
                 document.getElementById("LONGITUDE").value = lngLat.lng;
                 document.getElementById("LATITUDE").value = lngLat.lat;
                 document.getElementById("jarak").value = distance;
@@ -904,9 +937,8 @@
             }
 
         }
-     
 
-       
+
         $(document).ready(function () {
             $(function () {
                 $('.form-input').hide();
@@ -917,12 +949,15 @@
                         $('.form-input').hide();
 
                     } else {
-                       
+
                         $('.form-input').show();
                     }
                 });
             });
         });
+        function alertJumlah() {
+            $('#modal-errorCount').modal('show');
+        }
 
         $(document).ready(function () {
             $("#dokumenProposal").on("change", function () {
@@ -938,7 +973,7 @@
                         }
                     }
                 }
-                
+
                 $(this).next(".custom-file-label").html(filenames.join(","));
 
                 document.getElementById("dokumenProposal").disabled = true;

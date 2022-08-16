@@ -50,6 +50,130 @@ namespace SiLPPM_New_Version.DAO
                 }
             }
         }
+        public DBOutput GetDataPengabdian(string username)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT [ID_PROPOSAL] ,[NPP] ,[ID_SUMBER] ,[ID_TAHUN_ANGGARAN] ,[REVIEWER1]
+                    ,[REVIEWER2] ,[JUDUL_KEGIATAN] ,[LANDASAN_PENELITIAN] ,[JENIS_PENGABDIAN]
+                    ,[ANGGOTA1] ,[ANGGOTA1_KEAHLIAN] ,[ANGGOTA2] ,[ANGGOTA2_KEAHLIAN] ,[MITRA]
+                    ,[MITRA_KEAHLIAN] ,[LOKASI] ,[JARAK_PT_LOKASI] ,[OUTPUT] ,[OUTCOME] ,[AWAL]
+                    ,[AKHIR] ,[SASARAN] ,[SKS_KETUA] ,[SKS_ANGGOTA] ,[ID_ROAD_MAP] ,[DANA_UAJY]
+                    ,[DANA_PRIBADI] ,[DOKUMEN] ,[IS_DROPPED] ,[ID_STATUS] ,[IS_CHECKED]
+                    ,[IS_SETUJU_PRODI] ,[IS_SETUJU_DEKAN] ,[IS_SETUJU_LPPM] ,[NPP_REVIEWER]
+                    ,[DANA_SETUJU] ,[INSERT_DATE] ,[IP_ADDRESS] ,[USER_ID] ,[ID_SKIM]
+                    ,[ID_TEMA_UNIVERSITAS] ,[NO_SEMESTER] ,[DANA_EKSTERNAL] ,[DANA_KERJASAMA] FROM
+                    [PORTAL_DOSEN].[silppm].[TBL_PENGABDIAN]where NPP = @npp";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { npp = username });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetDataPersonil(int id_proposal, string username)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT silppm.TBL_PENGABDIAN.ID_PROPOSAL, simka.MST_KARYAWAN.NAMA, silppm.TBL_PENGABDIAN.JUDUL_KEGIATAN JUDUL, 
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN.DESKRIPSI, siatmax.MST_UNIT.NAMA_UNIT AS 'FAK', MST_UNIT_1.NAMA_UNIT AS 'PRODI', 
+                     siatmax.TBL_TAHUN_AKADEMIK.TAHUN_AKADEMIK, silppm.REF_STATUS_PENELITIAN_PENGABDIAN.DESKRIPSI AS STATUS, 
+                     silppm.TBL_PENGABDIAN.DANA_PRIBADI, silppm.TBL_PENGABDIAN.DANA_EKSTERNAL, silppm.TBL_PENGABDIAN.DANA_KERJASAMA, 
+                     silppm.TBL_PENGABDIAN.DANA_UAJY, silppm.TBL_PERSONIL_PENGABDIAN.NPP, silppm.tbl_pengabdian.id_skim,
+                     case when TBL_PERSONIL_PENGABDIAN.NPP = TBL_PENGABDIAN.NPP then 'ketua' else 'anggota' end Peran
+                    FROM siatmax.MST_UNIT INNER JOIN
+                     simka.MST_KARYAWAN ON siatmax.MST_UNIT.ID_UNIT = simka.MST_KARYAWAN.ID_UNIT INNER JOIN
+                     siatmax.MST_UNIT AS MST_UNIT_1 ON simka.MST_KARYAWAN.ID_UNIT_AKADEMIK = MST_UNIT_1.ID_UNIT INNER JOIN
+                     silppm.TBL_PENGABDIAN INNER JOIN
+                     silppm.TBL_PERSONIL_PENGABDIAN ON silppm.TBL_PENGABDIAN.ID_PROPOSAL = silppm.TBL_PERSONIL_PENGABDIAN.ID_PROPOSAL INNER JOIN
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN ON 
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN.ID_STATUS_PENELITIAN = silppm.TBL_PENGABDIAN.ID_STATUS INNER JOIN
+                     siatmax.TBL_TAHUN_AKADEMIK ON silppm.TBL_PENGABDIAN.ID_TAHUN_ANGGARAN = siatmax.TBL_TAHUN_AKADEMIK.ID_TAHUN_AKADEMIK ON 
+                     simka.MST_KARYAWAN.NPP = silppm.TBL_PERSONIL_PENGABDIAN.NPP  where tbl_pengabdian.ID_PROPOSAL = @id_proposal and MST_KARYAWAN.NPP = @username";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_proposal = id_proposal , username = username });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput GetDataAnggotaPengabdian(int id_proposal, string username)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT silppm.TBL_PENGABDIAN.ID_PROPOSAL, simka.MST_KARYAWAN.NAMA, silppm.TBL_PENGABDIAN.JUDUL_KEGIATAN JUDUL, 
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN.DESKRIPSI, siatmax.MST_UNIT.NAMA_UNIT AS 'FAK', MST_UNIT_1.NAMA_UNIT AS 'PRODI', 
+                     siatmax.TBL_TAHUN_AKADEMIK.TAHUN_AKADEMIK, silppm.REF_STATUS_PENELITIAN_PENGABDIAN.DESKRIPSI AS STATUS, 
+                     silppm.TBL_PENGABDIAN.DANA_PRIBADI, silppm.TBL_PENGABDIAN.DANA_EKSTERNAL, silppm.TBL_PENGABDIAN.DANA_KERJASAMA, 
+                     silppm.TBL_PENGABDIAN.DANA_UAJY,  TBL_PENGABDIAN.NPP, silppm.tbl_pengabdian.id_skim,
+                     case when TBL_PERSONIL_PENGABDIAN.NPP = TBL_PENGABDIAN.NPP then 'ketua' else 'anggota' end Peran
+                    FROM siatmax.MST_UNIT INNER JOIN
+                     simka.MST_KARYAWAN ON siatmax.MST_UNIT.ID_UNIT = simka.MST_KARYAWAN.ID_UNIT INNER JOIN
+                     siatmax.MST_UNIT AS MST_UNIT_1 ON simka.MST_KARYAWAN.ID_UNIT_AKADEMIK = MST_UNIT_1.ID_UNIT INNER JOIN
+                     silppm.TBL_PENGABDIAN INNER JOIN
+                     silppm.TBL_PERSONIL_PENGABDIAN ON silppm.TBL_PENGABDIAN.ID_PROPOSAL = silppm.TBL_PERSONIL_PENGABDIAN.ID_PROPOSAL INNER JOIN
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN ON 
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN.ID_STATUS_PENELITIAN = silppm.TBL_PENGABDIAN.ID_STATUS INNER JOIN
+                     siatmax.TBL_TAHUN_AKADEMIK ON silppm.TBL_PENGABDIAN.ID_TAHUN_ANGGARAN = siatmax.TBL_TAHUN_AKADEMIK.ID_TAHUN_AKADEMIK ON 
+                     simka.MST_KARYAWAN.NPP = silppm.TBL_PERSONIL_PENGABDIAN.NPP where tbl_pengabdian.ID_PROPOSAL = @id_proposal and MST_KARYAWAN.NPP = @username";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { id_proposal = id_proposal, username = username});
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
         public DBOutput GetCountPengabdian(string username)
         {
             DBOutput output = new DBOutput();
@@ -122,7 +246,35 @@ namespace SiLPPM_New_Version.DAO
                 }
             }
         }
+        public DBOutput GetCountPengabdianByNPP(string username)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"select count (id_proposal) NAMA from silppm.TBL_PENGABDIAN where NPP = @npp";
 
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { npp = username });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
         public DBOutput GetDokumenFile(int id_proposal)
         {
             DBOutput output = new DBOutput();
@@ -271,6 +423,40 @@ namespace SiLPPM_New_Version.DAO
 
 
                     var param = new { id_proposal = id_proposal };
+
+
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, param);
+
+                    output.data = data;
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput HapusAnggota(int id_proposal, string username)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"DELETE FROM [silppm].[TBL_PERSONIL_PENGABDIAN]
+      WHERE ID_PROPOSAL = @id_proposal and NPP = @npp";
+
+
+                    var param = new { id_proposal = id_proposal, npp = username };
 
 
 
@@ -548,6 +734,49 @@ namespace SiLPPM_New_Version.DAO
             }
         }
 
+        public DBOutput GetListPengabdianByUsername(string username)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"SELECT silppm.TBL_PENGABDIAN.ID_PROPOSAL, simka.MST_KARYAWAN.NAMA, silppm.TBL_PENGABDIAN.JUDUL_KEGIATAN JUDUL, 
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN.DESKRIPSI, siatmax.MST_UNIT.NAMA_UNIT AS 'FAK', MST_UNIT_1.NAMA_UNIT AS 'PRODI', 
+                     siatmax.TBL_TAHUN_AKADEMIK.TAHUN_AKADEMIK, silppm.REF_STATUS_PENELITIAN_PENGABDIAN.DESKRIPSI AS STATUS, 
+                     silppm.TBL_PENGABDIAN.DANA_PRIBADI, silppm.TBL_PENGABDIAN.DANA_EKSTERNAL, silppm.TBL_PENGABDIAN.DANA_KERJASAMA, 
+                     silppm.TBL_PENGABDIAN.DANA_UAJY, silppm.TBL_PERSONIL_PENGABDIAN.NPP,
+                     case when TBL_PERSONIL_PENGABDIAN.NPP = TBL_PENGABDIAN.NPP then 'ketua' else 'anggota' end Peran
+                    FROM siatmax.MST_UNIT INNER JOIN
+                     simka.MST_KARYAWAN ON siatmax.MST_UNIT.ID_UNIT = simka.MST_KARYAWAN.ID_UNIT INNER JOIN
+                     siatmax.MST_UNIT AS MST_UNIT_1 ON simka.MST_KARYAWAN.ID_UNIT_AKADEMIK = MST_UNIT_1.ID_UNIT INNER JOIN
+                     silppm.TBL_PENGABDIAN INNER JOIN
+                     silppm.TBL_PERSONIL_PENGABDIAN ON silppm.TBL_PENGABDIAN.ID_PROPOSAL = silppm.TBL_PERSONIL_PENGABDIAN.ID_PROPOSAL INNER JOIN
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN ON 
+                     silppm.REF_STATUS_PENELITIAN_PENGABDIAN.ID_STATUS_PENELITIAN = silppm.TBL_PENGABDIAN.ID_STATUS INNER JOIN
+                     siatmax.TBL_TAHUN_AKADEMIK ON silppm.TBL_PENGABDIAN.ID_TAHUN_ANGGARAN = siatmax.TBL_TAHUN_AKADEMIK.ID_TAHUN_AKADEMIK ON 
+                     simka.MST_KARYAWAN.NPP = silppm.TBL_PERSONIL_PENGABDIAN.NPP where simka.MST_KARYAWAN.USERNAME = @username";
+
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { username = username });
+
+                    output.data = data;
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new { };
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
         public DBOutput AddPengabdianAnggota1(int IS_SELESAI, string ID_PROPOSAL)
         {
 

@@ -53,6 +53,18 @@ namespace SiLPPM_New_Version.Controllers
             return File(fileContent, "application/pdf", "Lembar Pengesahan.pdf");
         }
       
+        public IActionResult PermintaanPengabdianKelompok()
+        {
+            var username = User.Claims
+                 .Where(c => c.Type == "username")
+                     .Select(c => c.Value).SingleOrDefault();
+            var data = dao.GetDataAnggotaPengabdianKelompok(username);
+            var dataAnggota = dao.GetDataAnggotaPengabdianKelompokByUser(username);
+            myobj.data = data.data;
+            myobj.dataAnggota = dataAnggota.data;
+
+            return View(myobj);
+        }
         public IActionResult Profile(int id_proposal, int tempPenelitianDiterima, int tempPenelitianDiajukan)
         {
 
@@ -62,6 +74,7 @@ namespace SiLPPM_New_Version.Controllers
             var npp = User.Claims
                        .Where(c => c.Type == "npp")
                            .Select(c => c.Value).SingleOrDefault();
+            var tempPengabdian = dao.GetDataPropoPengabdianByID(id_proposal);
             var countDokumen = penelitianDAO.GetCountDokumenPenelitian(id_proposal);
             var data = dao.GetDataUser(username);
             var data2 = dao.GetPangkatByUsername(username);
@@ -79,6 +92,7 @@ namespace SiLPPM_New_Version.Controllers
             var countPengabdianDiterima = dao.GetCountPengabdianDiterima(npp);
             var countPenelitianDiajukan = dao.GetCountPenelitianDiajukan(npp);
             var countPengabdianDiajukan = dao.GetCountPengabdianDiajukan(npp);
+            ViewBag.tempPengabdian = tempPengabdian.data;
             myobj.countPenelitianDiterima = countPenelitianDiterima.data;
             myobj.countPengabdianDiterima = countPengabdianDiterima.data; 
             myobj.countPenelitianDiajukan = countPenelitianDiajukan.data;
@@ -489,8 +503,6 @@ namespace SiLPPM_New_Version.Controllers
             myobj.refpropo2 = refpropo2.data;
             myobj.dataAnggota = dataAnggota.data;
 
-        
-
             return View(myobj);
         }
 
@@ -587,8 +599,12 @@ namespace SiLPPM_New_Version.Controllers
             var refjenis7 = penelitianDAO.GetRefKategori();
             var refOutcome = penelitianDAO.GetOutcome();
             var dataPengabdian = penelitianDAO.GetDataPengabdian(id_proposal);
-
-            ViewBag.tempPengabdian = dataPengabdian.data;
+            var tampungPengabdian = dao.GetDataPropoPengabdianByID(id_proposal);
+            var tempPengabdian = pengabdianDAO.GetDataAnggotaPengabdian(id_proposal,username);
+            var tempPersonil = pengabdianDAO.GetDataPersonil(id_proposal, username);
+            ViewBag.tempPengabdian = tempPengabdian.data;
+            ViewBag.tempPersonil = tempPersonil.data;
+            ViewBag.tampungPengabdian = tampungPengabdian.data;
             //PEMANGGILAN TAMBAH PENELITIAN
             myobj.cekUser = cekUser.data;
             myobj.history = history.data;
@@ -670,11 +686,11 @@ namespace SiLPPM_New_Version.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddAnggotaUAJY( int id_proposal, string npp )
+        public IActionResult AddAnggotaUAJY(int id_proposal, string npp)
         {
 
 
-            var cek = dao.AddAnggotaUAJY(id_proposal,npp);
+            var cek = dao.AddAnggotaUAJY(id_proposal, npp);
             if (cek.status)
             {
                 TempData["succ"] = "Berhasil menambahkan data";
@@ -684,6 +700,23 @@ namespace SiLPPM_New_Version.Controllers
                 TempData["err"] = "Gagal menambahkan data, " + cek.pesan;
             }
             return RedirectToAction("EditDetailPenelitian");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddAnggotaPengabdianKelompok(int id_proposal, string npp)
+        {
+
+
+            var cek = dao.AddAnggotaUAJYPengabdian(id_proposal, npp);
+            if (cek.status)
+            {
+                TempData["succ"] = "Berhasil menambahkan data";
+            }
+            else
+            {
+                TempData["err"] = "Gagal menambahkan data, " + cek.pesan;
+            }
+            return RedirectToAction("EditDetailPengabdian");
         }
 
         //INPUT DATA JURNAL PENELITIAN
@@ -741,8 +774,22 @@ namespace SiLPPM_New_Version.Controllers
             var data = dao.GetDataAnggotaPenelitian(id_proposal);
             return Json(data);
         }
+        public JsonResult ajaxGetPesertaPengabdian(int id_proposal)
+        {
+            var data = dao.GetDataAnggotaPengabdian(id_proposal);
+            return Json(data);
+        }
+        public JsonResult ajaxGetAnggotaKelompok()
+        {
+            var username = User.Claims
+                  .Where(c => c.Type == "username")
+                      .Select(c => c.Value).SingleOrDefault();
 
-        [HttpPost]
+            var data = dao.GetDataAnggotaPengabdianKelompok(username);
+            return Json(data);
+        }
+
+          [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult addAnggPenelitianNonUAJY(string npp, string nama_lengkap_gelar, string email, string no_telpon_rumah, string no_telpon_hp,
             string npwp, string nip_pns, string nidn, string alamat_kota, string alamat, string alamat_provinsi, string alamat_kodepos, int id_proposal)

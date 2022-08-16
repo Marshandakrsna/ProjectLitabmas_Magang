@@ -475,3 +475,4 @@ E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New V
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\SiLPPM-New Version.MvcApplicationPartsAssemblyInfo.cs
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengabdian\DekanAddFeedbackPengabdian.cshtml.g.cs
 E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Pengelolaan\TambahRolePengelolaan.cshtml.g.cs
+E:\Kuliah\SEMESTER 6\Magang\Project Magang YUHUU\SiLPPM-New Version\SiLPPM-New Version\obj\Debug\net5.0\Razor\Views\Profile\PermintaanPengabdianKelompok.cshtml.g.cs
