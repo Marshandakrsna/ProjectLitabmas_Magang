@@ -451,6 +451,7 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                 return cek;
             }
         }
+      
         public byte[] _getByteArrayFromPengesahan(IFormFile dokumenPengesahan)
         {
             using (var target = new MemoryStream())
@@ -460,6 +461,7 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                 return cek;
             }
         }
+
      
         //Menambahkan data penelitian
         public DBOutput AddPenelitian(int ID_TAHUN_ANGGARAN, int NO_SEMESTER, int ID_KATEGORI, int ID_ROAD_MAP_PENELITIAN, int ID_SKIM, 
@@ -520,7 +522,7 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
             }
         }
      
-        public DBOutput AddNilaiReviewPenelitian(string ID_PROPOSAL, string ID_REVIEWER, int COUNT_REVISI, int N1_FIELD1, int N1_FIELD2, int N1_FIELD3, int N1_FIELD4, int N1_FIELD5, int N1_FIELD6, int N1_FIELD7, 
+        public DBOutput AddNilaiReviewPenelitian(string ID_PROPOSAL, string ID_REVIEWER, int COUNT_REVISI, string N1_FIELD1, string N1_FIELD2, string N1_FIELD3, string N1_FIELD4, string N1_FIELD5, string N1_FIELD6, string N1_FIELD7, 
               string N1_JUSTIFIKASI1, string N1_JUSTIFIKASI2, string N1_JUSTIFIKASI3, string N1_JUSTIFIKASI4, string N1_JUSTIFIKASI5, string N1_JUSTIFIKASI6, string N1_JUSTIFIKASI7)
         {
            
@@ -562,7 +564,7 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
             }
         }
 
-          public DBOutput AddPenelitianLolos(int IS_SELESAI, string ID_PROPOSAL)
+          public DBOutput AddPenelitianLolos(string ID_PROPOSAL)
         {
            
             DBOutput output = new DBOutput();
@@ -580,9 +582,9 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                     select ID_PROPOSAL,NPP,JENIS,ID_TAHUN_ANGGARAN,IS_CHECKED,REVIEWER1,REVIEWER2,JUDUL,ID_KATEGORI,
                     LOKASI,BEBAN_SKS,ID_STATUS_PENELITIAN,DANA_USUL,AWAL,AKHIR,DOKUMEN,IS_DROPPED,KEYWORD,JARAK_KAMPUS_KM,
                     JARAK_KAMPUS_JAM,ID_ROAD_MAP_PENELITIAN,OUTCOME,DANA_PRIBADI,LONGITUDE,LATITUDE,NPP1,NPP2,IS_SETUJU_PRODI,
-                    IS_SETUJU_DEKAN,BEBAN_SKS_ANGGOTA,IS_SETUJU_LPPM,NPP_REVIEWER,DANA_SETUJU,NULL,NULL,0,NULL,@IS_SELESAI,NULL, getdate(),IP_ADDRESS, USER_ID from silppm.TBL_PENELITIAN where ID_PROPOSAL = @ID_PROPOSAL";
+                    IS_SETUJU_DEKAN,BEBAN_SKS_ANGGOTA,IS_SETUJU_LPPM,NPP_REVIEWER,DANA_SETUJU,NULL,NULL,0,NULL,0,NULL, getdate(),IP_ADDRESS, USER_ID from silppm.TBL_PENELITIAN where ID_PROPOSAL = @ID_PROPOSAL";
 
-                    var param = new { IS_SELESAI = IS_SELESAI, ID_PROPOSAL = ID_PROPOSAL };
+                    var param = new {  ID_PROPOSAL = ID_PROPOSAL };
 
 
                     conn.Execute(query, param);
@@ -602,7 +604,7 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                 }
             }
         }
-        public DBOutput UpdateStatusPenDiterima(string ID_PROPOSAL)
+        public DBOutput UpdateStatusPenDiterima(int ID_PROPOSAL)
         {
 
             DBOutput output = new DBOutput();
@@ -665,8 +667,43 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
                 }
             }
         }
+        public DBOutput AddFeedbackPenelitian(int ID_PROPOSAL, string NPP, string FEEDBACK, string TANGGAL, string STATUS)
+        {
+            DBOutput output = new DBOutput();
+            output.status = true;
+            using (SqlConnection conn = new SqlConnection(DBKoneksi.connectDB))
+            {
+                try
+                {
+                    string query = @"insert into silppm.TBL_FEEDBACK_PENELITIAN  ([ID_PROPOSAL]
+           ,[NPP]
+           ,[FEEDBACK]
+           ,[TANGGAL]
+           ,[STATUS]) values (@ID_PROPOSAL, @NPP, @FEEDBACK, @TANGGAL, @STATUS);";
 
-        public DBOutput UpdateStatusPenDitolak(int IS_CHECKED, string ID_PROPOSAL)
+
+                    var param = new { ID_PROPOSAL = ID_PROPOSAL, NPP = NPP, FEEDBACK = FEEDBACK, TANGGAL = DateTime.Now, STATUS = STATUS };
+
+
+
+                    conn.Execute(query, param);
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    output.status = false;
+                    output.pesan = ex.Message;
+                    output.data = new List<string>();
+                    return output;
+                }
+                finally
+                {
+                    conn.Dispose();
+                }
+            }
+        }
+        public DBOutput UpdateStatusPenDitolak(int ID_PROPOSAL)
         {
 
             DBOutput output = new DBOutput();
@@ -675,7 +712,7 @@ WHERE     (NOT (simka.MST_KARYAWAN.NPP IN (N'00.00.001', N'xx.xx.001'))) and MST
             {
                 try
                 {
-                    string query = @"update silppm.TBL_Penelitian set IS_CHECKED=@IS_CHECKED,ID_STATUS_PENELITIAN=11,IS_DROPPED=1 where id_proposal = @ID_PROPOSAL";
+                    string query = @"update silppm.TBL_Penelitian set IS_CHECKED=0,ID_STATUS_PENELITIAN=11,IS_DROPPED=1 where id_proposal = @ID_PROPOSAL";
 
                     var param = new { ID_PROPOSAL = ID_PROPOSAL };
 
@@ -1458,7 +1495,7 @@ and (REVIEWER1 = @NPP  or REVIEWER2 = @NPP ) and id_proposal = @id_proposal
                     siatmax.TBL_TAHUN_AKADEMIK ON silppm.TBL_PENELITIAN.ID_TAHUN_ANGGARAN = siatmax.TBL_TAHUN_AKADEMIK.ID_TAHUN_AKADEMIK
                     where REVIEWER1 is not null and REVIEWER2 is not null and ID_PROPOSAL = @id_proposal and TBL_PENELITIAN.NPP = @npp ";
 
-                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { npp = npp, id_proposal = id_proposal });
+                    var data = conn.QueryFirstOrDefault<dynamic>(query, new { npp = npp,id_proposal = id_proposal });
 
                     output.data = data;
 

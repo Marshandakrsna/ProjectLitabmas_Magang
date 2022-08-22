@@ -263,13 +263,7 @@ namespace SiLPPM_New_Version.Controllers
 
         }
 
-        public byte[] PreviewFile(int ID_PROPOSAL)
-        {
-            var preview = penelitianDAO.GetDokumen(ID_PROPOSAL);
-            byte[] fileContent = preview.DOKUMEN;
-
-            return fileContent;
-        }
+    
         public IActionResult adminListPenelitian()
         {
             var data = penelitianDAO.GetPenelitianSetReviewer();
@@ -279,6 +273,234 @@ namespace SiLPPM_New_Version.Controllers
 
             return View(myobj);
 
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult addFeedback(int ID_PROPOSAL, string NPP, string FEEDBACK, string TANGGAL, string STATUS)
+        {
+
+
+            var cek = penelitianDAO.AddFeedbackPenelitian(ID_PROPOSAL, NPP, FEEDBACK, TANGGAL, STATUS);
+            if (cek.status)
+            {
+                TempData["succ"] = "Berhasil menambahkan data Feedback";
+            }
+            else
+            {
+                TempData["err"] = "Gagal menambahkan data Feedback, " + cek.pesan;
+            }
+            return RedirectToAction("LihatReviewProposal", "Penelitian");
+        }
+        public IActionResult LihatReviewProposal(int id_proposal, string npp)
+        {
+            var username = User.Claims
+                  .Where(c => c.Type == "username")
+                      .Select(c => c.Value).SingleOrDefault();
+            var lihatReview = myprofile.GetDataReview(id_proposal);
+            var nppReviewer = penelitianDAO.GetPenelitianReviewerByID(id_proposal);
+            var lihatPropo = myprofile.GetDataPropoByID(id_proposal);
+            var data = myprofile.GetFeedbackProdi(id_proposal);
+            var feedbackProdi = penelitianDAO.CekSetujuProdi(id_proposal);
+            var feedbackDekan = penelitianDAO.CekSetujuDekan(id_proposal);
+            var feedbackLPPM = penelitianDAO.CekSetujuLPPM(id_proposal);
+            var refpropo = myprofile.GetListPenelitianByUsername(username);
+            var kriteria = penelitianDAO.GetKriteriaPenilaian();
+            var countReviewer1 = myprofile.GetCountReviewer1(id_proposal);
+            var countReviewer2 = myprofile.GetCountReviewer2(id_proposal);
+            var count = myprofile.GetCountNilaiReview(id_proposal);
+            var review = myprofile.GetDataReviewByID(id_proposal);
+            var reviewer1 = myprofile.GetDataNilaiReviewer1(id_proposal);
+            var reviewer2 = myprofile.GetDataNilaiReviewer2(id_proposal);
+            myobj.review = review.data;
+            myobj.countReviewer2 = countReviewer2.data;
+            myobj.countReviewer1 = countReviewer1.data;
+            myobj.data = data.data;
+            myobj.count = count.data;
+            myobj.lihatReview = lihatReview.data;
+            myobj.reviewer1 = reviewer1.data;
+            myobj.reviewer2 = reviewer2.data;
+            myobj.nppReviewer = nppReviewer.data;
+            myobj.kriteria = kriteria.data;
+            myobj.feedbackProdi = feedbackProdi.data;
+            myobj.feedbackDekan = feedbackDekan.data;
+            myobj.lihatPropo = lihatPropo.data;
+            myobj.feedbackLPPM = feedbackLPPM.data;
+            myobj.refpropo = refpropo.data;
+
+            // untuk menampilkan justifikasi nilai ke-1 pada Reviewer 1
+            int tempJustifRev1;
+            if (countReviewer1.data.JUMLAH == 0 || countReviewer1.data.JUMLAH == null)
+            {
+                tempJustifRev1 = 0;
+            }
+            else
+            {
+                tempJustifRev1 = Convert.ToInt32(reviewer1.data.N1_JUSTIFIKASI1);
+            }
+            ViewBag.justifikasi1 = tempJustifRev1;
+
+            // untuk menampilkan justifikasi nilai ke-2 pada Reviewer 1
+            int tempJustifRev2;
+            if (countReviewer1.data.JUMLAH == 0 || countReviewer1.data.JUMLAH == null)
+            {
+                tempJustifRev2 = 0;
+            }
+            else
+            {
+                tempJustifRev2 = Convert.ToInt32(reviewer1.data.N1_JUSTIFIKASI2);
+            }
+            ViewBag.justifikasi2 = tempJustifRev2;
+
+            // untuk menampilkan justifikasi nilai ke-3  pada Reviewer 1
+            int tempJustifRev3;
+            if (countReviewer1.data.JUMLAH == 0 || countReviewer1.data.JUMLAH == null)
+            {
+                tempJustifRev3 = 0;
+            }
+            else
+            {
+                tempJustifRev3 = Convert.ToInt32(reviewer1.data.N1_JUSTIFIKASI3);
+            }
+            ViewBag.justifikasi3 = tempJustifRev3;
+
+            // untuk menampilkan justifikasi  nilai ke-4 pada  Reviewer 1
+            int tempJustifRev4;
+            if (countReviewer1.data.JUMLAH == 0 || countReviewer1.data.JUMLAH == null)
+            {
+                tempJustifRev4 = 0;
+            }
+            else
+            {
+                tempJustifRev4 = Convert.ToInt32(reviewer1.data.N1_JUSTIFIKASI4);
+            }
+            ViewBag.justifikasi4 = tempJustifRev4;
+
+            // untuk menampilkan justifikasi nilai ke-5 pada Reviewer 1
+            int tempJustifRev5;
+            if (countReviewer1.data.JUMLAH == 0 || countReviewer1.data.JUMLAH == null)
+            {
+                tempJustifRev5 = 0;
+            }
+            else
+            {
+                tempJustifRev5 = Convert.ToInt32(reviewer1.data.N1_JUSTIFIKASI5);
+            }
+            ViewBag.justifikasi5 = tempJustifRev5;
+
+            // untuk menampilkan justifikasi nilai ke-6 pada Reviewer 1
+            int tempJustifRev6;
+            if (countReviewer1.data.JUMLAH == 0 || countReviewer1.data.JUMLAH == null)
+            {
+                tempJustifRev6 = 0;
+            }
+            else
+            {
+                tempJustifRev6 = Convert.ToInt32(reviewer1.data.N1_JUSTIFIKASI6);
+            }
+            ViewBag.justifikasi6 = tempJustifRev6;
+
+
+            // untuk menampilkan justifikasi nilai ke-7 pada Reviewer 1
+            int tempJustifRev7;
+            if (countReviewer1.data.JUMLAH == 0 || countReviewer1.data.JUMLAH == null)
+            {
+                tempJustifRev7 = 0;
+            }
+            else
+            {
+                tempJustifRev7 = Convert.ToInt32(reviewer1.data.N1_JUSTIFIKASI7);
+            }
+            ViewBag.justifikasi7 = tempJustifRev7;
+
+
+
+            // untuk menampilkan justifikasi nilai ke-1 pada Reviewer 2
+            int tempJustif1;
+            if (countReviewer2.data.JUMLAH == 0 || countReviewer2.data.JUMLAH == null)
+            {
+                tempJustif1 = 0;
+            }
+            else
+            {
+                tempJustif1 = Convert.ToInt32(reviewer2.data.N1_JUSTIFIKASI1);
+
+            }
+            ViewBag.justifikasi1Rev2 = tempJustif1;
+
+            // untuk menampilkan justifikasi nilai ke-2 pada Reviewer 2
+            int tempJustif2;
+            if (countReviewer2.data.JUMLAH == 0 || countReviewer2.data.JUMLAH == null)
+            {
+                tempJustif2 = 0;
+            }
+            else
+            {
+                tempJustif2 = Convert.ToInt32(reviewer2.data.N1_JUSTIFIKASI2);
+            }
+            ViewBag.justifikasi2Rev2 = tempJustif2;
+
+            // untuk menampilkan justifikasi nilai ke-3  pada Reviewer 2
+            int tempJustif3;
+            if (countReviewer2.data.JUMLAH == 0 || countReviewer2.data.JUMLAH == null)
+            {
+                tempJustif3 = 0;
+            }
+            else
+            {
+                tempJustif3 = Convert.ToInt32(reviewer2.data.N1_JUSTIFIKASI3);
+            }
+            ViewBag.justifikasi3Rev2 = tempJustif3;
+
+            // untuk menampilkan justifikasi  nilai ke-4 pada  Reviewer 2
+            int tempJustif4;
+            if (countReviewer2.data.JUMLAH == 0 || countReviewer2.data.JUMLAH == null)
+            {
+                tempJustif4 = 0;
+            }
+            else
+            {
+                tempJustif4 = Convert.ToInt32(reviewer2.data.N1_JUSTIFIKASI4);
+            }
+            ViewBag.justifikasi4Rev2 = tempJustif4;
+
+            // untuk menampilkan justifikasi nilai ke-5 pada Reviewer 2
+            int tempJustif5;
+            if (countReviewer2.data.JUMLAH == 0 || countReviewer2.data.JUMLAH == null)
+            {
+                tempJustif5 = 0;
+            }
+            else
+            {
+                tempJustif5 = Convert.ToInt32(reviewer2.data.N1_JUSTIFIKASI5);
+            }
+            ViewBag.justifikasi5Rev2 = tempJustif5;
+
+            // untuk menampilkan justifikasi nilai ke-6 pada Reviewer 2
+            int tempJustif6;
+            if (countReviewer2.data.JUMLAH == 0 || countReviewer2.data.JUMLAH == null)
+            {
+                tempJustif6 = 0;
+            }
+            else
+            {
+                tempJustif6 = Convert.ToInt32(reviewer2.data.N1_JUSTIFIKASI6);
+            }
+            ViewBag.justifikasi6Rev2 = tempJustif6;
+
+
+            // untuk menampilkan justifikasi nilai ke-7 pada Reviewer 2
+            int tempJustif7;
+            if (countReviewer2.data.JUMLAH == 0 || countReviewer2.data.JUMLAH == null)
+            {
+                tempJustif7 = 0;
+            }
+            else
+            {
+                tempJustif7 = Convert.ToInt32(reviewer2.data.N1_JUSTIFIKASI7);
+            }
+
+            ViewBag.justifikasi7Rev2 = tempJustif7;
+            return View(myobj);
         }
 
         //INPUT DATA PROSIDING
@@ -445,6 +667,8 @@ namespace SiLPPM_New_Version.Controllers
                 return dt;
             }
         }
+
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddPenelitian(int ID_TAHUN_ANGGARAN, int NO_SEMESTER, int ID_KATEGORI, int ID_ROAD_MAP_PENELITIAN, int ID_SKIM, 
@@ -555,7 +779,7 @@ namespace SiLPPM_New_Version.Controllers
             var data = kelolaDAO.GetPenelitianSetReviewerByID(id_proposal);
             return Json(data);
         }
-        public IActionResult AdminRevPenelitian(int id_proposal, string npp)
+        public IActionResult AdminReviewer1Penelitian(int id_proposal, string npp)
         {
             var username = User.Claims
                .Where(c => c.Type == "username")
@@ -579,7 +803,40 @@ namespace SiLPPM_New_Version.Controllers
             myobj.kriteria = kriteria.data;
             return View(myobj);
         }
+        public IActionResult AdminReviewer2Penelitian(int id_proposal, string npp)
+        {
+            var username = User.Claims
+               .Where(c => c.Type == "username")
+                   .Select(c => c.Value).SingleOrDefault();
+            var listReview = penelitianDAO.GetListReviewPenelitian(username);
 
+            var nppReviewer = penelitianDAO.GetNPPReviewer(npp, id_proposal);
+            var refpropo = myprofile.GetListPenelitianByUsername(username);
+            var cekUser = penelitianDAO.GetUserByUsername(username);
+
+            var review = penelitianDAO.GetListReviewPenelitianByID(username, id_proposal);
+            myobj.listReview = listReview.data;
+            myobj.review = review.data;
+            myobj.refpropo = refpropo.data;
+
+            myobj.nppReviewer = nppReviewer.data;
+            myobj.cekUser = cekUser.data;
+            var data = kelolaDAO.GetPenelitianReviewerByID(id_proposal);
+            var kriteria = kelolaDAO.GetRefKelolaReviewer();
+            myobj.data = data.data;
+            myobj.kriteria = kriteria.data;
+            return View(myobj);
+        }
+        public JsonResult UpdateStatusProposalDisetujui(int id_proposal)
+        {
+            var cek = penelitianDAO.UpdateStatusPenDiterima(id_proposal);
+            return Json(cek);
+        }
+        public JsonResult UpdateStatusProposalDitolak(int id_proposal)
+        {
+            var cek = penelitianDAO.UpdateStatusPenDitolak(id_proposal);
+            return Json(cek);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult addKelolaReviewer(int id_proposal, string reviewer1, string reviewer2)
@@ -598,16 +855,16 @@ namespace SiLPPM_New_Version.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult addNilaiReview(string ID_PROPOSAL, string ID_REVIEWER, int COUNT_REVISI, int N1_FIELD1, int N1_FIELD2, int N1_FIELD3, int N1_FIELD4, int N1_FIELD5, int N1_FIELD6, int N1_FIELD7,
+        public IActionResult addNilaiReview(string ID_PROPOSAL, string ID_REVIEWER, int COUNT_REVISI, string N1_FIELD1, string N1_FIELD2, string N1_FIELD3, string N1_FIELD4, string N1_FIELD5, string N1_FIELD6, string N1_FIELD7,
               string N1_JUSTIFIKASI1, string N1_JUSTIFIKASI2, string N1_JUSTIFIKASI3, string N1_JUSTIFIKASI4, string N1_JUSTIFIKASI5, string N1_JUSTIFIKASI6, string N1_JUSTIFIKASI7, int IS_SELESAI, int jumlah, int IS_CHECKED)
         {
             var cek = penelitianDAO.AddNilaiReviewPenelitian(ID_PROPOSAL, ID_REVIEWER, COUNT_REVISI, N1_FIELD1, N1_FIELD2, N1_FIELD3, N1_FIELD4, N1_FIELD5, N1_FIELD6, N1_FIELD7,
                N1_JUSTIFIKASI1, N1_JUSTIFIKASI2, N1_JUSTIFIKASI3, N1_JUSTIFIKASI4, N1_JUSTIFIKASI5, N1_JUSTIFIKASI6, N1_JUSTIFIKASI7);
-
+            //var Total = Convert.ToInt32(N1_FIELD1 + N1_FIELD2 + N1_FIELD3 + N1_FIELD4 + N1_FIELD5 + N1_FIELD6 + N1_FIELD7);
 
             //if (jumlah > 1)
             //{
-            //    penelitianDAO.AddPenelitianLolos(IS_SELESAI, ID_PROPOSAL);
+            //    penelitianDAO.AddPenelitianLolos( ID_PROPOSAL);
             //    penelitianDAO.UpdateStatusPenDiterima(ID_PROPOSAL);
             //}
             //else
@@ -626,5 +883,7 @@ namespace SiLPPM_New_Version.Controllers
             }
             return RedirectToAction("IndexReviewerPeneliti");
         }
+
+
     }
 }

@@ -1,0 +1,983 @@
+﻿@{ ViewData["Title"] = "Profile "; }
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/@@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+
+
+    <!-- Data Table-->
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">*@
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Karla', sans-serif;
+        }
+
+        .label {
+            color: white;
+            border-radius: 5px;
+            border-spacing: 20px;
+            padding: 5px;
+            margin-top: 50px;
+            margin-bottom: 60px;
+        }
+
+        .penelitianDiajukan {
+            background-color: chocolate;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .propoPenelitian {
+            background-color: darkcyan;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .propoPengabdian {
+            background-color: darkcyan;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .content-wrapper {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 10px;
+            min-height: 402px !important;
+            background-color: #ffffff;
+            background-repeat: no-repeat;
+            background-position: right top;
+        }
+
+        .title-card {
+            color: #FFFFFF;
+            background-color: #F2AA4C;
+            padding: 15px;
+            border-radius: 10px 10px 0px 0px;
+            min-width: inherit;
+        }
+
+        .blue-color {
+            background-color: #1d84C6 !important;
+        }
+
+        .green-color {
+            background-color: #1CB394 !important;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="px-3 mt-3">
+        <div class="content-wrapper p-3">
+            <div class="card-header">
+                <a href="#" class="brand-link" style="background-color:azure">
+                    <img src="~/images/documents.png" class="brand-image" style="opacity: .8">
+                    <span style="color:black; font-weight:bold">Proposal Penelitian yang perlu di Review</span>
+                </a>
+            </div>
+
+            <br />
+            @if (Model.countReviewer1.JUMLAH == 0)
+            {
+                <button type="button" class="btn btn-success" style=" margin-bottom: 30px; margin-left: 53px;" onclick="togValidasiReviewer1()" id="tolakButton_"><i class="fa fa-check"></i> Setujui Proposal</button>
+                <button type="button" class="btn btn-danger" style=" margin-bottom: 30px; margin-left: 53px;" onclick="togValidasiTolakReviewer1()" id="tolakButton_"><i class="fa fa-check"></i> Tolak Proposal</button>
+
+            }
+            else
+            {
+                @if (Model.countReviewer2.JUMLAH == 0)
+                {
+                    <button type="button" class="btn btn-success" style=" margin-bottom: 30px; margin-left: 53px;" onclick="togValidasiReviewer2()" id="tolakButton_"><i class="fa fa-check"></i> Setujui Proposal</button>
+                    <button type="button" class="btn btn-danger" style=" margin-bottom: 30px; margin-left: 20px;" onclick="togValidasiTolakReviewer2()" id="tolakButton_"><i class="fa fa-check"></i> Tolak Proposal</button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-success" style=" margin-bottom: 30px; margin-left: 53px;" onclick="togModalSetujuProposal(@Model.nppReviewer.ID_PROPOSAL)" id="tolakButton_"><i class="fa fa-check"></i> Setujui Proposal</button>
+                    <button type="button" class="btn btn-danger" style=" margin-bottom: 30px; margin-left: 20px;" onclick="togModalTolakProposal(@Model.nppReviewer.ID_PROPOSAL)" id="tolakButton_"><i class="fa fa-check"></i> Tolak Proposal</button>
+
+                }
+            }
+            <!-- Untuk Penilaian Reviewer 1 -->
+            <div class="card alert-default " style=" border-left-width: 7px; margin-left: 57px; border-left-color:steelblue">
+                <div class="card-header" style=" border-bottom-color: #7199cd; font-family:Georgia, 'Times New Roman', Times, serif; font-weight: bolder; border-bottom-right-radius: 10px;">
+                    <i class="fa fa-solid fa-user-check" aria-hidden="true"></i>
+                    Reviewer 1
+                </div>
+            </div>
+            <table class="table table-striped table-bordered table-hover dt-responsive nowrap" style="width:fit-content; line-height:20px;  margin-left:60px; ">
+                <thead>
+                    <tr class="text-center align-middle">
+                        <th style="width:30%; background-color:lightblue">Kriteria Penilaian</th>
+                        <th style="background-color:lightblue">Nilai</th>
+                        <th style="width: 30%; background-color: lightblue">Justifikasi Penilaian</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center align-middle">
+                        <td> Relevansi usulan penelitian terhadap bidang fokus, tema, dan topik dengan tema penelitian Universitas dan Unit</td>
+
+                        @if (Model.countReviewer1.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+
+                            <td id="N1_FIELD1" name="N1_FIELD1"> @Model.reviewer1.N1_FIELD1 </td>
+                        }
+
+
+                        @if (Model.countReviewer1.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+                            @if (ViewBag.justifikasi1 == 0)
+                            {
+
+                                <td> Tidak Relevan/Topik Lainnya</td>
+                            }
+                            else
+                            {
+                                <td> Relevan </td>
+                            }
+                        }
+                    </tr>
+                    <tr class="text-center align-middle">
+                        <td> Kualitas dan relevansi tujuan, permasalahan, state of the art, metode, dan kebaruan penelitian</td>
+                        @if (Model.countReviewer1.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+
+                            <td id="N1_FIELD2" name="N1_FIELD2"> @Model.reviewer1.N1_FIELD2 </td>
+                        }
+
+
+                        @if (Model.countReviewer1.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+                            @if (ViewBag.justifikasi2 == 0)
+                            {
+
+                                <td> Tidak ada </td>
+                            }
+                            @if (ViewBag.justifikasi2 == 5)
+                            {
+                                <td> Kurang Signifikan </td>
+                            }
+                            @if (ViewBag.justifikasi2 == 10)
+                            {
+                                <td> Cukup Signifikan </td>
+                            }
+                            @if (ViewBag.justifikasi2 == 15)
+                            {
+                                <td> Sangat Signifikan </td>
+                            }
+
+                        }
+                    </tr>
+                    <tr class="text-center align-middle">
+                        <td> Keterkaitan usulan penelitian terhadap hasil penelitian yang didapat sebelumnya dan rencana kedepan (roadmap penelitian)</td>
+                        @if (Model.countReviewer1.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+
+                            <td id="N1_FIELD3" name="N1_FIELD3"> @Model.reviewer1.N1_FIELD3 </td>
+                        }
+
+
+                        @if (Model.countReviewer1.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+                            @if (ViewBag.justifikasi3 == 0)
+                            {
+
+                                <td> Tidak ada roadmap</td>
+                            }
+                            @if (ViewBag.justifikasi3 == 2)
+                            {
+                                <td> Ada roadmap, keterkaitan milestone dan usulan penelitian tidak jelas  </td>
+                            }
+                            @if (ViewBag.justifikasi3 == 6)
+                            {
+                                <td> Ada roadmap, keterkaitan milestone dan usulan penelitian jelas </td>
+                            }
+
+
+                        }
+                    </tr>
+                    <tr class="text-center align-middle">
+                        <td> Kesesuaian kompetensi tim peneliti dan pembagian tugas</td>
+                        @if (Model.countReviewer1.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+
+                            <td id="N1_FIELD4" name="N1_FIELD4"> @Model.reviewer1.N1_FIELD4 </td>
+                        }
+
+
+                        @if (Model.countReviewer1.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+                            @if (ViewBag.justifikasi4 == 1)
+                            {
+
+                                <td> Tidak kompeten, tugas tidak jelas</td>
+                            }
+                            @if (ViewBag.justifikasi4 == 2)
+                            {
+                                <td> Cukup kompeten, tugas cukup jelas  </td>
+                            }
+                            @if (ViewBag.justifikasi4 == 3)
+                            {
+                                <td> Sangat kompeten, tugas sangat jelas</td>
+                            }
+                        }
+                    </tr>
+                    <tr class="text-center align-middle">
+                        <td> Kewajaran metode tahapan target capaian luaran wajib penelitian</td>
+                        @if (Model.countReviewer1.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+
+                            <td id="N1_FIELD5" name="N1_FIELD5"> @Model.reviewer1.N1_FIELD5 </td>
+                        }
+
+
+                        @if (Model.countReviewer1.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+                            @if (ViewBag.justifikasi5 == 1)
+                            {
+
+                                <td> Tidak Jelas </td>
+                            }
+                            @if (ViewBag.justifikasi5 == 3)
+                            {
+                                <td> Kurang Jelas </td>
+                            }
+                            @if (ViewBag.justifikasi5 == 5)
+                            {
+                                <td> Sangat Jelas </td>
+                            }
+
+
+                        }
+                    </tr>
+
+                    <tr class="text-center align-middle">
+                        <td> Kekinian dan sumber primer pengacuan pustaka</td>
+                        @if (Model.countReviewer1.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+
+                            <td id="N1_FIELD6" name="N1_FIELD6"> @Model.reviewer1.N1_FIELD6 </td>
+                        }
+
+
+                        @if (Model.countReviewer1.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+                            @if (ViewBag.justifikasi6 == 0)
+                            {
+
+                                <td> Tidak ada rujukan primer  </td>
+                            }
+                            @if (ViewBag.justifikasi6 == 1)
+                            {
+                                <td> Rujukan primer dan mutakhir 1-50% </td>
+                            }
+                            @if (ViewBag.justifikasi6 == 3)
+                            {
+                                <td> Rujukan primer dan mutakhir 51-80% </td>
+                            }
+                            @if (ViewBag.justifikasi6 == 5)
+                            {
+                                <td> Rujukan primer dan mutakhir >80%</td>
+                            }
+
+
+                        }
+                    </tr>
+                    <tr class="text-center align-middle">
+                        <td> Penulisan usulan sesuai panduan (jumlah kata per bagian, isi dokumen pendukung)</td>
+                        @if (Model.countReviewer1.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+
+                            <td id="N1_FIELD7" name="N1_FIELD7"> @Model.reviewer1.N1_FIELD7 </td>
+                        }
+
+
+                        @if (Model.countReviewer1.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+                            @if (ViewBag.justifikasi7 == 0)
+                            {
+
+                                <td> Tidak   </td>
+                            }
+                            else
+                            {
+                                <td> Ya </td>
+                            }
+
+                        }
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group row " style=" margin-right: 21px; margin-bottom: 26px;">
+                <div class="card alert-default " style="border-left-width: 7px; margin-left: 65px; margin-top: 28px; width: fit-content; background-color: #f6f6f6; border-left-color: #e8a184; border-top-right-radius: 8px; border-bottom-right-radius: 8px; ">
+                    <div class="card-header" style=" font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bolder; border-right: inset; border-left-style: outset; border-bottom-right-radius: 10px;">
+                        Total Nilai Reviewer 1 : <p style="float:right" id="jumlahTotal" name="jumlahTotal"> </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Untuk Penilaian Reviewer 2 -->
+            <div class="card alert-default " style=" border-left-width: 7px; margin-left: 57px; border-left-color:steelblue">
+                <div class="card-header" style=" border-bottom-color: #7199cd; font-family:Georgia, 'Times New Roman', Times, serif; font-weight: bolder; border-bottom-right-radius: 10px;">
+                    <i class="fa fa-solid fa-plus" aria-hidden="true"></i>
+                    Reviewer 2
+                </div>
+            </div>
+            <table class="table table-striped table-bordered table-hover dt-responsive nowrap" style="width:fit-content; line-height:20px;  margin-left:60px; ">
+                <thead>
+                    <tr class="text-center align-middle">
+                        <th style="width:30%; background-color:lightblue">Kriteria Penilaian</th>
+                        <th style="background-color:lightblue">Nilai</th>
+                        <th style="width: 30%; background-color: lightblue">Justifikasi Penilaian</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center align-middle">
+                        <td> Relevansi usulan penelitian terhadap bidang fokus, tema, dan topik dengan tema penelitian Universitas dan Unit</td>
+
+                        @if (Model.countReviewer2.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+
+                            <td id="N1_FIELD1_Rev2" name="N1_FIELD1_Rev2"> @Model.reviewer2.N1_FIELD1 </td>
+                        }
+
+
+                        @if (Model.countReviewer2.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+                            @if (ViewBag.justifikasi1Rev2 == 0 || ViewBag.justifikasi1Rev2 != null)
+                            {
+
+                                <td> Tidak Relevan/Topik Lainnya</td>
+                            }
+                            else
+                            {
+                                <td> Relevan </td>
+                            }
+                        }
+                    </tr>
+                    <tr class="text-center align-middle">
+                        <td> Kualitas dan relevansi tujuan, permasalahan, state of the art, metode, dan kebaruan penelitian</td>
+                        @if (Model.countReviewer2.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+
+                            <td id="N1_FIELD2_Rev2" name="N1_FIELD2_Rev2"> @Model.reviewer2.N1_FIELD2 </td>
+                        }
+
+
+                        @if (Model.countReviewer2.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+                            @if (ViewBag.justifikasi2Rev2 == 0)
+                            {
+
+                                <td> Tidak ada </td>
+                            }
+                            @if (ViewBag.justifikasi2Rev2 == 5)
+                            {
+                                <td> Kurang Signifikan </td>
+                            }
+                            @if (ViewBag.justifikasi2Rev2 == 10)
+                            {
+                                <td> Cukup Signifikan </td>
+                            }
+                            @if (ViewBag.justifikasi2Rev2 == 15)
+                            {
+                                <td> Sangat Signifikan </td>
+                            }
+
+                        }
+                    </tr>
+                    <tr class="text-center align-middle">
+                        <td> Keterkaitan usulan penelitian terhadap hasil penelitian yang didapat sebelumnya dan rencana kedepan (roadmap penelitian)</td>
+                        @if (Model.countReviewer2.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+
+                            <td id="N1_FIELD3_Rev2" name="N1_FIELD3_Rev2"> @Model.reviewer2.N1_FIELD3 </td>
+                        }
+
+
+                        @if (Model.countReviewer2.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+                            @if (ViewBag.justifikasi3Rev2 == 0)
+                            {
+
+                                <td> Tidak ada roadmap</td>
+                            }
+                            @if (ViewBag.justifikasi3Rev2 == 2)
+                            {
+                                <td> Ada roadmap, keterkaitan milestone dan usulan penelitian tidak jelas  </td>
+                            }
+                            @if (ViewBag.justifikasi3Rev2 == 6)
+                            {
+                                <td> Ada roadmap, keterkaitan milestone dan usulan penelitian jelas </td>
+                            }
+
+
+                        }
+                    </tr>
+                    <tr class="text-center align-middle">
+                        <td> Kesesuaian kompetensi tim peneliti dan pembagian tugas</td>
+                        @if (Model.countReviewer2.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+
+                            <td id="N1_FIELD4_Rev2" name="N1_FIELD4_Rev2"> @Model.reviewer2.N1_FIELD4 </td>
+                        }
+
+
+                        @if (Model.countReviewer2.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+                            @if (ViewBag.justifikasi4Rev2 == 1)
+                            {
+
+                                <td> Tidak kompeten, tugas tidak jelas</td>
+                            }
+                            @if (ViewBag.justifikasi4Rev2 == 2)
+                            {
+                                <td> Cukup kompeten, tugas cukup jelas  </td>
+                            }
+                            @if (ViewBag.justifikasi4Rev2 == 3)
+                            {
+                                <td> Sangat kompeten, tugas sangat jelas</td>
+                            }
+
+                        }
+                    </tr>
+                    <tr class="text-center align-middle">
+                        <td> Kewajaran metode tahapan target capaian luaran wajib penelitian</td>
+                        @if (Model.countReviewer2.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+
+                            <td id="N1_FIELD5_Rev2" name="N1_FIELD5_Rev2"> @Model.reviewer2.N1_FIELD5 </td>
+                        }
+
+
+                        @if (Model.countReviewer2.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+                            @if (ViewBag.justifikasi5Rev2 == 1)
+                            {
+
+                                <td> Tidak Jelas </td>
+                            }
+                            @if (ViewBag.justifikasi5Rev2 == 3)
+                            {
+                                <td> Kurang Jelas </td>
+                            }
+                            @if (ViewBag.justifikasi5Rev2 == 5)
+                            {
+                                <td> Sangat Jelas </td>
+                            }
+
+
+                        }
+                    </tr>
+
+                    <tr class="text-center align-middle">
+                        <td> Kekinian dan sumber primer pengacuan pustaka</td>
+                        @if (Model.countReviewer2.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+
+                            <td id="N1_FIELD6_Rev2" name="N1_FIELD6_Rev2"> @Model.reviewer2.N1_FIELD6 </td>
+                        }
+
+
+                        @if (Model.countReviewer2.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+                            @if (ViewBag.justifikasi6Rev2 == 0)
+                            {
+
+                                <td> Tidak ada rujukan primer  </td>
+                            }
+                            @if (ViewBag.justifikasi6Rev2 == 1)
+                            {
+                                <td> Rujukan primer dan mutakhir 1-50% </td>
+                            }
+                            @if (ViewBag.justifikasi6Rev2 == 3)
+                            {
+                                <td> Rujukan primer dan mutakhir 51-80% </td>
+                            }
+                            @if (ViewBag.justifikasi6Rev2 == 5)
+                            {
+                                <td> Rujukan primer dan mutakhir >80%</td>
+                            }
+
+
+                        }
+                    </tr>
+                    <tr class="text-center align-middle">
+                        <td> Penulisan usulan sesuai panduan (jumlah kata per bagian, isi dokumen pendukung)</td>
+                        @if (Model.countReviewer2.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+
+                            <td id="N1_FIELD7_Rev2" name="N1_FIELD7_Rev2"> @Model.reviewer2.N1_FIELD7 </td>
+                        }
+
+
+                        @if (Model.countReviewer2.JUMLAH == 0)
+                        {
+                            <td> - </td>
+                        }
+                        else
+                        {
+                            @if (ViewBag.justifikasi7Rev2 == 0)
+                            {
+
+                                <td> Tidak   </td>
+                            }
+                            else
+                            {
+                                <td> Ya </td>
+                            }
+
+                        }
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+            <div class="form-group row " style=" margin-right: 21px; margin-bottom: 26px;">
+                <div class="card alert-default " style="border-left-width: 7px; margin-left: 65px; margin-top: 28px; width: fit-content; background-color: #f6f6f6; border-left-color: #e8a184; border-top-right-radius: 8px; border-bottom-right-radius: 8px; ">
+                    <div class="card-header" style=" font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bolder; border-right: inset; border-left-style: outset; border-bottom-right-radius: 10px;">
+                        Total Nilai Reviewer 2 : <p style="float:right" id="jumlahTotalRev2" name="jumlahTotalRev2"> </p>
+                    </div>
+                </div>
+                <div class="card alert-default " style="border-left-width: 7px; margin-left: 19px; margin-top: 28px; width: fit-content; background-color:darkslategray; border-left-color: #e8a184; border-top-right-radius: 8px; border-bottom-right-radius: 8px; ">
+                    <div class="card-header" style=" font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bolder; border-right: inset; border-left-style: outset; border-bottom-right-radius: 10px;">
+                        Rata-Rata  : <p style="float:right" id="rataNilai" name="rataNilai"> </p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="modal fade modal-errorCount" id="modal-errorCount" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content text-center rounded-pill">
+                <div class="modal-header card-est bg-danger rounded-pill w-75 m-auto">
+                    <div class="m-auto">
+                        <i class="fa fa-exclamation-triangle fa-3x pt-3 pb-3" aria-hidden="true"></i>
+                        <h5 class="modal-title">Ooops!</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h6 class="p-3">Reviewer 1 belum melakukan review proposal</h6>
+                    <button type="button" class="btn btn-warning rounded-pill btn-est m-2" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-errorCount" id="modal-errorCount2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content text-center rounded-pill">
+                <div class="modal-header card-est bg-danger rounded-pill w-75 m-auto">
+                    <div class="m-auto">
+                        <i class="fa fa-exclamation-triangle fa-3x pt-3 pb-3" aria-hidden="true"></i>
+                        <h5 class="modal-title">Ooops!</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h6 class="p-3">Reviewer 2 belum melakukan review proposal</h6>
+                    <button type="button" class="btn btn-warning rounded-pill btn-est m-2" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Feedback*@
+    <div class="modal fade" id="modalFeedbackSetuju" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Feedback Proposal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form id="formTambahFeedbackSetuju" class="formTambahFeedback " method="post" asp-action="addFeedback" asp-controller="Penelitian" enctype="multipart/form-data" novalidate>
+                    @Html.AntiForgeryToken()
+                    <div class="modal-body">
+                        @*<div class="form-group row">
+                            <label class="col-sm-3 col-form-label">ID_PROPOSAL</label>
+                            <input type="hidden" class="form-control" id="id_proposal" name="id_proposal" value="@Model.nppReviewer.ID_PROPOSAL">
+                        </div>*@
+                        @*<div class="form-group row">
+                            <label class="col-sm-3 col-form-label">NPP</label>
+                            <input id="NPP" name="NPP" type="text" class="style1" style=" word-wrap:break-word" value="@Model.data.NPP" />
+                        </div>*@
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Status</label>
+                            <input id="STATUS" name="STATUS" type="text" class="style1" style=" word-wrap:break-word" value="Menyetujui Proposal" />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label">
+                                Alasan Setuju
+                            </label>
+                            <textarea text="text" id="FEEDBACK" name="FEEDBACK" class="style1"></textarea>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @*Modal Feedback*@
+    <div class="modal fade" id="modalFeedbackTolak" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Feedback Proposal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form  id="formTambahFeedbackTolak"class="formTambahFeedback " method="post" asp-action="addFeedback" asp-controller="Penelitian" enctype="multipart/form-data" novalidate>
+                    @Html.AntiForgeryToken()
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">ID_PROPOSAL</label>
+                            <input type="hidden" class="form-control" id="id_proposal" name="id_proposal" value="@Model.nppReviewer.ID_PROPOSAL">
+                        </div>
+                        @*<div class="form-group row">
+                            <label class="col-sm-3 col-form-label">NPP</label>
+                            <input id="NPP" name="NPP" type="text" class="style1" style=" word-wrap:break-word" value="@Model.data.NPP" />
+                        </div>*@
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Status</label>
+                            <input id="STATUS" name="STATUS" type="text" class="style1" style=" word-wrap:break-word" value="Tolak Proposal" />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label">
+                                Alasan Tolak Proposal
+                            </label>
+                            <textarea text="text" id="FEEDBACK" name="FEEDBACK" class="style1"></textarea>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @*Modal Disetujui*@
+    <div class="modal fade" id="modalSetuju" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Menyetujui Proposal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah anda yakin ingin menyetujui proposal ini?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" onclick="setujuiProposal()" class="btn btn-danger">Setujui</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Ditolak*@
+    <div class="modal fade" id="modalTolak" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Menyetujui Proposal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah anda yakin ingin menolak proposal ini?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" onclick="tolakProposal()" class="btn btn-danger">Tolak</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        function togValidasiReviewer1() {
+            $('#modal-errorCount').modal('show');
+        }
+        function togValidasiReviewer2() {
+            $('#modal-errorCount2').modal('show');
+        }
+        function togValidasiTolakReviewer1() {
+            $('#modal-errorCount').modal('show');
+        }
+        function togValidasiTolakReviewer2() {
+            $('#modal-errorCount2').modal('show');
+        }
+        function togModalSetujuProposal(id) {
+            id_proposal = id;
+            this.tempIdUpdate = id;
+            $('#modalSetuju').modal('show');
+        }
+        function togModalTolakProposal(id) {
+            id_proposal = id;
+            this.tempIdUpdate = id;
+            $('#modalTolak').modal('show');
+        }
+        function setujuiProposal() {
+            var self = this;
+            console.log(id_proposal);
+            var update = $('#tolakButton_' + this.tempIdDelete);
+            var myTable = $('#datatable').DataTable();
+            if (parseInt(document.getElementById("rataNilai").innerHTML) > 550) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Penelitian/UpdateStatusProposalDisetujui?id_proposal=" + id_proposal,
+                    data: ({ id_proposal: id_proposal }),
+                    success: function (data) {
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Data berhasil disetujui!',
+                            confirmButtonText: 'Tutup',
+                        })
+                        $('#modalSetuju').modal('hide');
+                        $('#modalFeedbackSetuju').modal('show');
+                        window.location.reload();
+
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'SiLPPM said: ',
+                            text: 'Data gagal disetujui!',
+                        })
+                        window.location.reload();
+                    }
+                });
+            }
+            else {
+                alert("Tidak dapat menyetujui Proposal, Nilai Rata-rata < 550")
+            }
+           
+        }
+
+        function tolakProposal() {
+            var self = this;
+            console.log(id_proposal);
+            var update = $('#tolakButton_' + this.tempIdDelete);
+            var myTable = $('#datatable').DataTable();
+            if (parseInt(document.getElementById("rataNilai").innerHTML) < 550) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Penelitian/UpdateStatusProposalDitolak?id_proposal=" + id_proposal,
+                    data: ({ id_proposal: id_proposal }),
+                    success: function (data) {
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Data berhasil ditolak!',
+                            confirmButtonText: 'Tutup',
+                        })
+                        $('#modalTolak').modal('hide');
+                        $('#modalFeedbackTolak').modal('show');
+                        window.location.reload();
+
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'SiLPPM said: ',
+                            text: 'Data gagal ditolak!',
+                        })
+                        window.location.reload();
+                    }
+                });
+            }
+            else {
+                alert("Tidak dapat menolak Proposal, Nilai Rata-rata > 550")
+            }
+        }
+
+        //Reviewer1
+        var field1Reviewer1 = document.getElementById("N1_FIELD1").innerHTML;
+        convert1 = parseInt(field1Reviewer1);
+        var field2Reviewer1 = document.getElementById("N1_FIELD2").innerHTML;
+        convert2 = parseInt(field2Reviewer1);
+        var field3Reviewer1 = document.getElementById("N1_FIELD3").innerHTML;
+        convert3 = parseInt(field3Reviewer1)
+        var field4Reviewer1 = document.getElementById("N1_FIELD4").innerHTML;
+        convert4 = parseInt(field4Reviewer1)
+        var field5Reviewer1 = document.getElementById("N1_FIELD5").innerHTML;
+        convert5 = parseInt(field5Reviewer1)
+        var field6Reviewer1 = document.getElementById("N1_FIELD6").innerHTML;
+        convert6 = parseInt(field6Reviewer1)
+        var field7Reviewer1 = document.getElementById("N1_FIELD7").innerHTML;
+        convert7 = parseInt(field7Reviewer1)
+        document.getElementById("jumlahTotal").innerHTML = parseInt(convert1) + parseInt(convert2) + parseInt(convert3) + parseInt(convert4) + parseInt(convert5) + parseInt(convert6) + parseInt(convert7);
+
+        //Reviewer2
+        var field1Reviewer2 = document.getElementById("N1_FIELD1_Rev2").innerHTML;
+        temp1 = parseInt(field1Reviewer2);
+        var field2Reviewer2 = document.getElementById("N1_FIELD2_Rev2").innerHTML;
+        temp2 = parseInt(field2Reviewer2);
+        var field3Reviewer2 = document.getElementById("N1_FIELD3_Rev2").innerHTML;
+        temp3 = parseInt(field3Reviewer2)
+        var field4Reviewer2 = document.getElementById("N1_FIELD4_Rev2").innerHTML;
+        temp4 = parseInt(field4Reviewer2)
+        var field5Reviewer2 = document.getElementById("N1_FIELD5_Rev2").innerHTML;
+        temp5 = parseInt(field5Reviewer2)
+        var field6Reviewer2 = document.getElementById("N1_FIELD6_Rev2").innerHTML;
+        temp6 = parseInt(field6Reviewer2)
+        var field7Reviewer2 = document.getElementById("N1_FIELD7_Rev2").innerHTML;
+        temp7 = parseInt(field7Reviewer2)
+        document.getElementById("jumlahTotalRev2").innerHTML = parseInt(temp1) + parseInt(temp2) + parseInt(temp3) + parseInt(temp4) + parseInt(temp5) + parseInt(temp6) + parseInt(temp7);
+        document.getElementById("rataNilai").innerHTML = (parseInt(document.getElementById("jumlahTotal").innerHTML) + parseInt(document.getElementById("jumlahTotalRev2").innerHTML)) / 2;
+
+    </script>
+
+
+
+
+</body>
+</html>

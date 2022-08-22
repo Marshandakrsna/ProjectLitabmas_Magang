@@ -102,6 +102,40 @@
     <div class="px-3 mt-3">
         <div class="content-wrapper p-3">
 
+            @if (TempData["succ"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show"
+                     role="alert"
+                     style="background-color: green">
+                    <strong>
+                        <i class="fas fa-bell"
+                           style="font-size: 22px; color: floralwhite"></i>&nbsp; @TempData["succ"].ToString()
+                    </strong>
+                    <button type="button"
+                            class="close"
+                            data-dismiss="alert"
+                            aria-label="Close">
+                        <span aria-hidden="true" style="color: white">&times;</span>
+                    </button>
+                </div>
+            } 
+            @if (TempData["err"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show"
+                     role="alert">
+                    <strong>
+                        <i class="fas fa-exclamation-triangle"
+                           style="font-size: 22px; color: floralwhite"></i>&nbsp;@TempData["err"].ToString()
+                    </strong>
+                    <button type="button"
+                            class="close"
+                            data-dismiss="alert"
+                            aria-label="Close">
+                        <span aria-hidden="true" style="color: white">&times;</span>
+                    </button>
+                </div>
+            }
+
 
             <div class="card-header">
 
@@ -133,7 +167,7 @@
                     <table id="tblData" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>ID PROPOSAL</th>
+
                                 <th style="width: 121px">INPUT NILAI</th>
                                 <th>NAMA DOSEN</th>
                                 <th>FAKULTAS</th>
@@ -143,6 +177,7 @@
                                 <th>PERIODE</th>
                                 <th>REVIEWER1</th>
                                 <th>REVIEWER2</th>
+                                <th>AKSI</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -150,59 +185,80 @@
                                 string NPP = ViewBag.cekUser.username;
                             }
                             @*@{
-                                    string Reviewer2 = ViewBag.tempReviewer2.ID_REVIEWER;
-                                }*@
+                            string Reviewer2 = ViewBag.tempReviewer2.ID_REVIEWER;
+                        }*@
                             @foreach (var item in Model.data)
                             {
 
-                            <tr>
-                                <td> @item.ID_PROPOSAL</td>
+                                <tr>
 
-                                @if (item.NPP == NPP)
-                                {
-                                    <td>
-                                        <p style="font-weight:bold"><a style="color: #007bff; " onclick="alertDuplicate()">Reviewer 1</a></p>
-                                        <p style="font-weight:bold"><a style="color: #007bff; " onclick="alertDuplicate()">Reviewer 2</a></p>
 
-                                    </td>
-
-                                }
-                                else
-                                {
-                                    @if (item.ID_STATUS_PENELITIAN != 15)
+                                    @if (item.NPP == NPP)
                                     {
                                         <td>
-                                            <p style="font-weight:bold"><a style="color: #007bff; " onclick="alert()">Reviewer 1</a></p>
-                                            <p style="font-weight:bold"><a style="color: #007bff; " onclick="alert()">Reviewer 2</a></p>
+                                            <p style="font-weight:bold"><a style="color: #007bff; " onclick="alertDuplicate()">Reviewer 1</a></p>
+                                            <p style="font-weight:bold"><a style="color: #007bff; " onclick="alertDuplicate()">Reviewer 2</a></p>
 
                                         </td>
 
                                     }
                                     else
                                     {
-                                        <td>
-                                            <p style="font-weight:bold"><a href="AdminRevPenelitian?id_proposal=@item.ID_PROPOSAL&nppReviewer1=@item.REVIEWER1&npp=@item.NPP">Reviewer 1</a></p>
-                                            <p style="font-weight:bold"><a href="AdminRevPenelitian?id_proposal=@item.ID_PROPOSAL&nppReviewer2=@item.REVIEWER2&npp=@item.NPP">Reviewer 2</a></p>
+                                        @if (item.ID_STATUS_PENELITIAN == 15)
+                                        {
+                                            <td>
+                                                <p style="font-weight:bold"><a href="AdminReviewer1Penelitian?id_proposal=@item.ID_PROPOSAL&nppReviewer1=@item.REVIEWER1&npp=@item.NPP">Reviewer 1</a></p>
+                                                <p style="font-weight:bold"><a href="AdminReviewer2Penelitian?id_proposal=@item.ID_PROPOSAL&nppReviewer2=@item.REVIEWER2&npp=@item.NPP">Reviewer 2</a></p>
 
-                                        </td>
+                                            </td>
+
+
+                                        }
+                                        else
+                                        {
+                                            @if (item.ID_STATUS_PENELITIAN == 6)
+                                            {
+                                                <td>
+                                                    <p style="font-weight:bold"><a href="AdminReviewer1Penelitian?id_proposal=@item.ID_PROPOSAL&nppReviewer1=@item.REVIEWER1&npp=@item.NPP">Reviewer 1</a></p>
+                                                    <p style="font-weight:bold"><a href="AdminReviewer2Penelitian?id_proposal=@item.ID_PROPOSAL&nppReviewer2=@item.REVIEWER2&npp=@item.NPP">Reviewer 2</a></p>
+
+                                                </td>
+
+
+                                            }
+                                            else
+                                            {
+
+
+                                                <td>
+                                                    <p style="font-weight:bold"><a style="color: #007bff; " onclick="alert()">Reviewer 1</a></p>
+                                                    <p style="font-weight:bold"><a style="color: #007bff; " onclick="alert()">Reviewer 2</a></p>
+
+                                                </td>
+                                            }
+                                        }
+
+
                                     }
 
 
-                                }
+                                    <td> @item.NAMA</td>
+                                    <td>@item.FAK</td>
+
+                                    <td>@item.PRODI</td>
+                                    <td>@item.JUDUL</td>
+                                    <td>@item.DESKRIPSI</td>
+                                    <td>@item.TAHUN_AKADEMIK</td>
+                                    <td>@item.REVIEWER1</td>
+                                    <td>@item.REVIEWER2</td>
+                                    <td>
+                                        <p style="font-weight:bold"><a href="LihatReviewProposal?id_proposal=@item.ID_PROPOSAL&nppReviewer1=@item.REVIEWER1&nppReviewer2=@item.REVIEWER2">Lihat Review</a></p>
+
+                                    </td>
 
 
-                                <td> @item.NAMA</td>
-                                <td>@item.FAK</td>
 
-                                <td>@item.PRODI</td>
-                                <td>@item.JUDUL</td>
-                                <td>@item.DESKRIPSI</td>
-                                <td>@item.TAHUN_AKADEMIK</td>
-                                <td>@item.REVIEWER1</td>
-                                <td>@item.REVIEWER2</td>
-
-
-                            </tr>
+                                </tr>
 
                             }
                         </tbody>

@@ -1,4 +1,4 @@
-﻿@{ ViewData["Title"] = "Profile "; }
+﻿@{ ViewData["Title"] = "Admin Reviewer 1 "; }
 
 <!DOCTYPE html>
 
@@ -140,8 +140,9 @@
 
 
                 <div style="width: 100%; overflow-x: auto; margin-top:50px" class="col">
-                    <input type="hidden"  class="form-control" id="id_proposal" name="id_proposal" value="@Model.nppReviewer.ID_PROPOSAL">
-                    @*<input type="hidden"  class="form-control" id="ID_REVIEWER" name="ID_REVIEWER" value="@Model.">*@
+                    <input type="hidden" class="form-control" id="id_proposal" name="id_proposal" value="@Model.nppReviewer.ID_PROPOSAL">
+                    
+                    <input type="text"  class="form-control" id="ID_REVIEWER" name="ID_REVIEWER" value="@Model.nppReviewer.REVIEWER1">
                     <table class="table table-striped table-bordered table-hover dt-responsive nowrap">
                         <thead>
                             <tr>
@@ -164,8 +165,8 @@
                             <tr class="text-center align-middle">
                                 <td> Relevansi usulan penelitian terhadap bidang fokus, tema, dan topik dengan tema penelitian Universitas dan Unit</td>
                                 <td>7.5</td>
-                                <td id="N1_FIELDS1" name="N1_FIELDS1" value="">0</td>
-                                <td id="nilai">0</td>
+                                <td id="nilai" value="">0</td>
+                                <td id="N1_FIELDS1" name="N1_FIELDS1">0</td>
                                 <td>
                                     <select id="N1_JUSTIFIKASI1" name="N1_JUSTIFIKASI1" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
                                         <option value="0">Tidak relevan/topik lainnya</option>
@@ -176,8 +177,8 @@
                             <tr class="text-center align-middle">
                                 <td> Kualitas dan relevansi tujuan, permasalahan, state of the art, metode, dan kebaruan penelitian</td>
                                 <td>37.5</td>
-                                <td id="N1_FIELDS2" name="N1_FIELDS2" value="">0</td>
-                                <td id="nilai2">0</td>
+                                <td id="nilai2" value="">0</td>
+                                <td id="N1_FIELDS2" name="N1_FIELDS2">0</td>
                                 <td>
                                     <select id="N1_JUSTIFIKASI2" name="N1_JUSTIFIKASI2" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
                                         <option value="0">Tidak ada</option>
@@ -191,8 +192,8 @@
                             <tr class="text-center align-middle">
                                 <td> Keterkaitan usulan penelitian terhadap hasil penelitian yang didapat sebelumnya dan rencana kedepan (roadmap penelitian)</td>
                                 <td>12.5</td>
-                                <td id="N1_FIELDS3" name="N1_FIELDS3" value="">0</td>
-                                <td id="nilai3">0</td>
+                                <td id="nilai3" value="">0</td>
+                                <td id="N1_FIELDS3" name="N1_FIELDS3">0</td>
                                 <td>
                                     <select id="N1_JUSTIFIKASI3" name="N1_JUSTIFIKASI3" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
                                         <option value="0">Tidak ada roadmap</option>
@@ -204,8 +205,8 @@
                             <tr class="text-center align-middle">
                                 <td> Kesesuaian kompetensi tim peneliti dan pembagian tugas</td>
                                 <td>7.5</td>
-                                <td id="N1_FIELDS4" name="N1_FIELDS4" value="">0</td>
-                                <td id="nilai4">0</td>
+                                <td id="nilai4" value="">0</td>
+                                <td id="N1_FIELDS4" name="N1_FIELDS4">0</td>
                                 <td>
                                     <select id="N1_JUSTIFIKASI4" name="N1_JUSTIFIKASI4" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
                                         <option value="1">Tidak kompeten, tugas tidak jelas</option>
@@ -217,8 +218,8 @@
                             <tr class="text-center align-middle">
                                 <td> Kewajaran metode tahapan target capaian luaran wajib penelitian</td>
                                 <td>12.5</td>
-                                <td id="N1_FIELDS5" name="N1_FIELDS5" value="">0</td>
-                                <td id="nilai5">0</td>
+                                <td id="nilai5" value="">0</td>
+                                <td id="N1_FIELDS5" name="N1_FIELDS5">0</td>
                                 <td>
                                     <select id="N1_JUSTIFIKASI5" name="N1_JUSTIFIKASI5" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
                                         <option value="1">Tidak jelas</option>
@@ -231,8 +232,8 @@
                             <tr class="text-center align-middle">
                                 <td> Kekinian dan sumber primer pengacuan pustaka</td>
                                 <td>12.5</td>
-                                <td id="N1_FIELDS6" name="N1_FIELDS6" value="">0</td>
-                                <td id="nilai6">0</td>
+                                <td id="nilai6" value="">0</td>
+                                <td id="N1_FIELDS6" name="N1_FIELDS6">0</td>
                                 <td>
                                     <select id="N1_JUSTIFIKASI6" name="N1_JUSTIFIKASI6" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
                                         <option value="0">Tidak ada rujukan primer</option>
@@ -245,8 +246,8 @@
                             <tr class="text-center align-middle">
                                 <td> Penulisan usulan sesuai panduan (jumlah kata per bagian, isi dokumen pendukung)</td>
                                 <td>10</td>
-                                <td id="N1_FIELDS7" name="N1_FIELDS7" value="">0</td>
-                                <td id="nilai7">0</td>
+                                <td id="nilai7" value="">0</td>
+                                <td id="N1_FIELDS7" name="N1_FIELDS7">0</td>
                                 <td>
                                     <select id="N1_JUSTIFIKASI7" name="N1_JUSTIFIKASI7" onchange="displayValue()" style="height:34px; width:514px; border-radius:9px">
                                         <option value="0">Tidak</option>
@@ -269,14 +270,14 @@
                 </div>
 
                 <!-- Input penampung data untuk insert data -->
-                <input type="hidden" name="N1_FIELD1" id="N1_FIELD1" />
-                <input type="hidden" name="N1_FIELD2" id="N1_FIELD2" />
-                <input type="hidden" name="N1_FIELD3" id="N1_FIELD3" />
-                <input type="hidden" name="N1_FIELD4" id="N1_FIELD4" />
-                <input type="hidden" name="N1_FIELD5" id="N1_FIELD5" />
-                <input type="hidden" name="N1_FIELD6" id="N1_FIELD6" />
-                <input type="hidden" name="N1_FIELD7" id="N1_FIELD7" />
-                <input type="hidden" name="jumlah" id="jumlah" />
+                <input type="text" name="N1_FIELD1" id="N1_FIELD1" />
+                <input type="text" name="N1_FIELD2" id="N1_FIELD2" />
+                <input type="text" name="N1_FIELD3" id="N1_FIELD3" />
+                <input type="text" name="N1_FIELD4" id="N1_FIELD4" />
+                <input type="text" name="N1_FIELD5" id="N1_FIELD5" />
+                <input type="text" name="N1_FIELD6" id="N1_FIELD6" />
+                <input type="text" name="N1_FIELD7" id="N1_FIELD7" />
+                <input type="text" name="jumlah" id="jumlah" />
             </form>
         </div>
     </div>
@@ -292,71 +293,78 @@
             var value1 = document.getElementById("N1_JUSTIFIKASI1").value;
             skorValue1 = parseInt(value1) * 1;
             nilaiValue1 = 7.5 * skorValue1;
-            document.getElementById("N1_FIELDS1").innerHTML = skorValue1;
-            temp1 = document.getElementById("nilai").innerHTML = nilaiValue1;
+            document.getElementById("nilai").innerHTML = skorValue1;
+            document.getElementById("N1_FIELDS1").innerHTML = nilaiValue1;
             //untuk mengambil data Skor Nilai Review
             $("#N1_FIELD1").val(document.getElementById("N1_FIELDS1").innerHTML);
+            temp1 = document.getElementById("N1_FIELDS1").innerHTML = nilaiValue1;
 
             /* Untuk Value 2 --> Kualitas dan relevansi tujuan.. */
             var value2 = document.getElementById("N1_JUSTIFIKASI2").value;
             skorValue2 = parseInt(value2) * 1;
             nilaiValue2 = 37.5 * skorValue2;
-            document.getElementById("N1_FIELDS2").innerHTML = skorValue2;
-            temp2 = document.getElementById("nilai2").innerHTML = nilaiValue2;
+            document.getElementById("nilai2").innerHTML = skorValue2;
+            document.getElementById("N1_FIELDS2").innerHTML = nilaiValue2;
             //untuk mengambil data Skor Nilai Review
             $("#N1_FIELD2").val(document.getElementById("N1_FIELDS2").innerHTML);
+            temp2 = document.getElementById("N1_FIELDS2").innerHTML = nilaiValue2;
 
             /* Untuk Value 3 --> Keterkaitan usulan penelitian.. */
             var value3 = document.getElementById("N1_JUSTIFIKASI3").value;
             skorValue3 = parseInt(value3) * 1;
             nilaiValue3 = 12.5 * skorValue3;
-            document.getElementById("N1_FIELDS3").innerHTML = skorValue3;
-            temp3 = document.getElementById("nilai3").innerHTML = nilaiValue3;
+            document.getElementById("nilai3").innerHTML = skorValue3;
+            document.getElementById("N1_FIELDS3").innerHTML = nilaiValue3;
             //untuk mengambil data Skor Nilai Review
             $("#N1_FIELD3").val(document.getElementById("N1_FIELDS3").innerHTML);
+            temp3 = document.getElementById("N1_FIELDS3").innerHTML = nilaiValue3;
 
             /* Untuk Value 4 --> Kesesuaian kompetensi tim peneliti.. */
             var value4 = document.getElementById("N1_JUSTIFIKASI4").value;
             skorValue4 = parseInt(value4) * 1;
             nilaiValue4 = 7.5 * skorValue4;
-            document.getElementById("N1_FIELDS4").innerHTML = skorValue4;
-            temp4 = document.getElementById("nilai4").innerHTML = nilaiValue4;
+            document.getElementById("nilai4").innerHTML = skorValue4;
+            document.getElementById("N1_FIELDS4").innerHTML = nilaiValue4;
             //untuk mengambil data Skor Nilai Review
             $("#N1_FIELD4").val(document.getElementById("N1_FIELDS4").innerHTML);
+            temp4 = document.getElementById("N1_FIELDS4").innerHTML = nilaiValue4;
 
             /* Untuk Value 5 --> Kewajaran metode tahapan target.. */
             var value5 = document.getElementById("N1_JUSTIFIKASI5").value;
             skorValue5 = parseInt(value5) * 1;
             nilaiValue5 = 12.5 * skorValue5;
-            document.getElementById("N1_FIELDS5").innerHTML = skorValue5;
-            temp5 = document.getElementById("nilai5").innerHTML = nilaiValue5;
+            document.getElementById("nilai5").innerHTML = skorValue5;
+            document.getElementById("N1_FIELDS5").innerHTML = nilaiValue5;
             //untuk mengambil data Skor Nilai Review
             $("#N1_FIELD5").val(document.getElementById("N1_FIELDS5").innerHTML);
+            temp5 = document.getElementById("N1_FIELDS5").innerHTML = nilaiValue5;
 
             /* Untuk Value 6 --> Kekinian dan sumber primer.. */
             var value6 = document.getElementById("N1_JUSTIFIKASI6").value;
             skorValue6 = parseInt(value6) * 1;
             nilaiValue6 = 12.5 * skorValue6;
-            document.getElementById("N1_FIELDS6").innerHTML = skorValue6;
-            temp6 = document.getElementById("nilai6").innerHTML = nilaiValue6;
+            document.getElementById("nilai6").innerHTML = skorValue6;
+            document.getElementById("N1_FIELDS6").innerHTML = nilaiValue6;
             //untuk mengambil data Skor Nilai Review
             $("#N1_FIELD6").val(document.getElementById("N1_FIELDS6").innerHTML);
+            temp6 = document.getElementById("N1_FIELDS6").innerHTML = nilaiValue6;
 
             /* Untuk Value 7 --> Penulisan usulan sesuai panduan.. */
             var value7 = document.getElementById("N1_JUSTIFIKASI7").value;
             skorValue7 = parseInt(value7) * 1;
             nilaiValue7 = 10 * skorValue7;
-            document.getElementById("N1_FIELDS7").innerHTML = skorValue7;
-            temp7 = document.getElementById("nilai7").innerHTML = nilaiValue7;
+            document.getElementById("nilai7").innerHTML = skorValue7;
+            document.getElementById("N1_FIELDS7").innerHTML = nilaiValue7;
             //untuk mengambil data Skor Nilai Review
             $("#N1_FIELD7").val(document.getElementById("N1_FIELDS7").innerHTML);
+            temp7 = document.getElementById("N1_FIELDS7").innerHTML = nilaiValue7;
 
 
             //untuk menghitung total inputan skor sesuai apa yg di select
             document.getElementById("jumlahTotal").innerHTML = temp1 + temp2 + temp3 + temp4 + temp5 + temp6 + temp7;
             var x = document.getElementById("jumlahTotal").innerHTML;
             $("#jumlah").val(document.getElementById("jumlahTotal").innerHTML);
-            
+
 
         }
 
@@ -372,8 +380,11 @@
                     else {
                         event.preventDefault();
                         let html = document.getElementById("jumlahTotal").innerHTML;
-                        if (html > 550) {
+                        if (html > 1) {
                             form.submit();
+                        }
+                        else {
+                            alert("Nilai Review tidak boleh Kosong!")
                         }
                         console.log(html);
 
