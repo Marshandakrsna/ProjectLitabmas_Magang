@@ -1,5 +1,5 @@
 ﻿
-@{ ViewData["Title"] = "Lihat Detail Proposal Penelitian "; }
+@{ ViewData["Title"] = "Lihat Detail Proposal Pengabdian "; }
 
 <!DOCTYPE html>
 
@@ -189,7 +189,7 @@
 
     <div class="px-3 mt-3">
         <div class="content-wrapper p-3">
-            <span style=" background-color:aliceblue; font-weight:bolder; margin-bottom: 20px;"><i class="fas fa-edit" style="margin-right: 20px;"></i> DETAIL PROPOSAL PENELITIAN</span>
+            <span style=" background-color:aliceblue; font-weight:bolder; margin-bottom: 20px;"><i class="fas fa-edit" style="margin-right: 20px;"></i> DETAIL PROPOSAL PENGABDIAN</span>
             <hr />
 
             <nav>
@@ -227,10 +227,10 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="basic-addon1" class="form-label">ID PROPOSAL</label>
-                                    <input class="form-control" id="id_proposal" name="id_proposal" value="@Model.pengabdianID.ID_PROPOSAL">
-                                    <label for="basic-addon1" class="form-label">NPP</label>
-                                    <input class="form-control" id="NPP" name="NPP" value="@Model.dataPengabdian.NPP">
+                                    <label for="basic-addon1" hidden class="form-label">ID PROPOSAL</label>
+                                    <input class="form-control" hidden id="id_proposal" name="id_proposal" value="@Model.pengabdianID.ID_PROPOSAL">
+                                    <label for="basic-addon1" hidden class="form-label">NPP</label>
+                                    <input class="form-control" hidden id="NPP" name="NPP" value="@Model.dataPengabdian.NPP">
                                     <div class="mb-4" hidden>
                                         <div class="input-group">
                                             <input type="text"

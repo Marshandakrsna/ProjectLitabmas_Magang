@@ -367,7 +367,7 @@
                                                                 <label class="custom-control-label font-weight-normal" for="output_@item.ID_OUTPUT">@item.DESKRIPSI</label>
                                                             </div>
                                                         }
-                                                        <input type="text" class="form-control form-control-sm" name="output" id="output">
+                                                        <input type="hidden" class="form-control form-control-sm" name="output" id="output">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1152,7 +1152,7 @@
                     <form method="post" asp-action="AddAnggotaUAJY" asp-controller="Profile" enctype="multipart/form-data">
                         @Html.AntiForgeryToken()
                         <label for="basic-addon1" hidden class="form-label">ID PROPOSAL</label>
-                        <input type="text" class="form-control" id="id_proposal"  name="id_proposal" value="@Model.lihatPropo.id_proposal">
+                        <input type="hidden" class="form-control" id="id_proposal"  name="id_proposal" value="@Model.lihatPropo.id_proposal">
 
                         <table id="tableanggotaUAJY" class="table table-bordered table-striped">
                             <thead>
